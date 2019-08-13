@@ -1,15 +1,11 @@
-// pages/my/my.js
+// pages/productDetail/productDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userList:[
-      {
-        
-      }
-    ]
+
   },
 
   /**

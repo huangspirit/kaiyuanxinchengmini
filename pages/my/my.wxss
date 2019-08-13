@@ -1,1 +1,193 @@
 /* pages/my/my.wxss */
+
+.mayTop {
+  height: 217rpx;
+  padding: 44rpx 52rpx;
+  box-sizing: border-box;
+  background: linear-gradient(68deg, rgba(228, 206, 158, 1) 0%, rgba(221, 199, 150, 1) 100%);
+  display: flex;
+  position: relative;
+}
+
+.mayTop image {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+
+.mayTop>view {
+  margin-left: 48rpx;
+}
+
+.mayTop>view>text {
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 600;
+  color: rgba(51, 51, 51, 1);
+  line-height: 42rpx;
+  display: block;
+}
+
+.mayTop>view .toplevel {
+  font-size: 20rpx;
+  color: rgba(170, 157, 135, 1);
+  line-height: 28rpx;
+  display: block;
+  margin: 11rpx 0;
+}
+
+.mayTop>view .topMoney {
+  font-size: 22rpx;
+  color: rgba(102, 102, 102, 1);
+  line-height: 30rpx;
+}
+
+.mayTop>view .topMoney text {
+  font-size: 22rpx;
+  color: rgba(228, 47, 47, 1);
+  line-height: 30rpx;
+}
+
+.mayTop .topMerchant {
+  width: 158rpx;
+  height: 56rpx;
+  text-align: center;
+  background: linear-gradient(90deg, rgba(66, 67, 68, 1) 0%, rgba(71, 65, 74, 1) 100%);
+  border-radius: 28rpx 0 0 28rpx;
+  position: absolute;
+  right: 0;
+  top: 80rpx;
+}
+
+.mayTop .topMerchant text {
+  font-size: 22rpx;
+  color: rgba(170, 157, 135, 1);
+  line-height: 56rpx;
+}
+
+.userCenter {
+  width: 690rpx;
+  height: 559rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 1rpx 10rpx 2rpx rgba(0, 0, 0, 0.04);
+  border-radius: 11rpx;
+  margin: 50rpx 30rpx;
+}
+
+.userCenter .userTitle {
+  display: block;
+  height: 82rpx;
+  line-height: 82rpx;
+  width: 100%;
+  background: #fff;
+  padding: 0 24rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: rgba(51, 51, 51, 1);
+}
+
+.userCenter .userList .listItem {
+  height: 157rpx;
+  width: 228rpx;
+  text-align: center;
+  background: #fff;
+  float: left;
+  border-top: 1px solid #979797;
+  border-right: 1px solid #979797;
+}
+
+.userCenter .userList .listItem:nth-of-type(1) {
+  border-top: none;
+}
+
+.userCenter .userList .listItem:nth-of-type(2) {
+  border-top: none;
+}
+
+.userCenter .userList .listItem:nth-of-type(3) {
+  border-top: none;
+  border-right: none;
+}
+
+.userCenter .userList .listItem:nth-of-type(9) {
+  border-right: none;
+}
+
+.userCenter .userList .listItem:nth-of-type(6) {
+  border-right: none;
+}
+
+.userCenter .userList .listItem image {
+  height: 44rpx;
+  width: 43rpx;
+  margin-top: 35rpx;
+}
+
+.userCenter .userList .listItem text {
+  font-size: 22rpx;
+  color: rgba(54, 54, 54, 1);
+  line-height: 30rpx;
+  margin-top: 18rpx;
+  display: block;
+}
+
+.myCenter {
+  width: 690rpx;
+  height: 242rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 1rpx 10rpx 2rpx rgba(0, 0, 0, 0.04);
+  border-radius: 11rpx;
+  margin: 50rpx 30rpx;
+}
+
+.myCenter .myTitle {
+  display: block;
+  height: 82rpx;
+  line-height: 82rpx;
+  width: 642rpx;
+  background: #fff;
+  padding: 0 24rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: rgba(51, 51, 51, 1);
+  border-bottom: 1rpx solid #979797;
+}
+
+.myCenter .myList .listItem {
+  height: 157rpx;
+  width: 228rpx;
+  text-align: center;
+  background: #fff;
+  float: left;
+}
+
+.myCenter .myList .listItem image {
+  height: 44rpx;
+  width: 43rpx;
+  margin-top: 35rpx;
+}
+
+.myCenter .myList .listItem text {
+  font-size: 22rpx;
+  color: rgba(54, 54, 54, 1);
+  line-height: 30rpx;
+  margin-top: 18rpx;
+  display: block;
+}
+
+.myBtn {
+  width: 690rpx;
+  height: 86rpx;
+  background: rgba(216, 216, 216, 1);
+  box-shadow: 4px 1px 6px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 11px;
+  text-align: center;
+  line-height: 86rpx;
+  margin: 0 30rpx 40rpx 30rpx;
+}
+
+.myBtn button {
+  font-size: 22rpx;
+  color: rgba(102, 102, 102, 1);
+  line-height: 86rpx;
+}

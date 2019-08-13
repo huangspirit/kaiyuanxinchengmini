@@ -9,6 +9,7 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log(res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
@@ -34,6 +35,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
+    version: '1.0.0',
+    host: 'https://api.113ic.com',
   }
 })

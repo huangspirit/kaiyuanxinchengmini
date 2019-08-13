@@ -1,15 +1,12 @@
-// pages/my/my.js
+// pages/special/special.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userList:[
-      {
-        
-      }
-    ]
+    statusBarHeight: app.globalData.statusBarHeight,
   },
 
   /**

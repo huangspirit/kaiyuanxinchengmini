@@ -1,0 +1,45 @@
+<!--pages/brandDetail/brandDetail.wxml-->
+<view class="brandPic">
+  <image src='{{brandDetail.imageUrl}}'></image>
+  <!-- <view class="brandName">
+    <text></text>
+    <text></text>
+  </view> -->
+</view>
+<view class="brandComponey">
+  <view class="brandTitle">公司简介</view>
+  <view class="brandDetail">
+    <text>公司名称：{{brandDetail.name}}</text>
+    <text>公司网址：{{brandDetail.brandWeb}}</text>
+    <text class="{{descHeight?'descText':''}}">{{brandDetail.brandDesc}}</text>
+    <text bindtap="descShow">{{descText}}</text>
+  </view>
+</view>
+<view class="brandComponey">
+  <view class="brandTitle">经营品类</view>
+  <view class="category">
+    <view wx:for="{{catetoryList}}" wx:key="index">
+      <image bindtap="subCateList" data-item='{{item}}' src="{{item.catergoryUrl}}"></image>
+      <text>{{item.catergoryName}}（{{item.summaryTotal}}）</text>
+    </view>
+    <view class="cateNull" wx:if="{{catetoryList.length%3==1}}"></view> 
+    <view class="cateNull" wx:if="{{catetoryList.length%3==1}}"></view>
+    <view class="cateNull" wx:if="{{catetoryList.length%3==2}}"></view>
+  </view>
+</view>
+<view class="brandComponey">
+  <view class="brandTitle">品牌热卖</view>
+  <view class="brandHot" wx:for="{{hotSaleList}}" wx:key="index">
+    <view class='list_left'>
+      <image src='{{item.imageUrl}}'></image>
+    </view>
+    <view class='list_right'>
+      <text bindtap="toproductDetail" class='speciStatus'>{{item.productno}}</text>
+      <text>品牌：{{item.brand}}</text>
+      <text>描述：{{item.productdesc}}</text>
+      <view>
+        <text>暂无供应商报价</text>
+      </view>
+    </view>
+  </view>
+</view>

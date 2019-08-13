@@ -1,0 +1,133 @@
+/* pages/brandDetail/brandDetail.wxss */
+
+.brandPic {
+  width: 100%;
+  height: 375rpx;
+  display: flex;
+  padding: 20rpx;
+}
+
+.brandPic >image {
+  width: 100%;
+  height: 100%;
+}
+
+.brandComponey {
+  margin-bottom: 10rpx;
+}
+
+.brandComponey .brandTitle {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  padding: 0 20rpx;
+  background: #fff;
+  margin-bottom: 2rpx;
+}
+
+.brandDetail {
+  background: #fff;
+  padding: 10rpx 20rpx;
+}
+
+.brandDetail>text {
+  display: block;
+  margin: 20rpx 0;
+}
+
+.brandDetail>text:nth-of-type(3) {
+  text-indent: 32rpx;
+}
+
+.brandDetail>.descText {
+  text-indent: 32rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.brandDetail>text:nth-of-type(4) {
+  text-align: right;
+}
+
+.category {
+  display: flex;
+  padding: 20rpx;
+  background: #fff;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.category>view {
+  height: 157rpx;
+  width: 228rpx;
+  text-align: center;
+  padding: 15rpx 0;
+  margin-right:5rpx; 
+  margin-top: 15rpx;
+  box-shadow: 0 0 10rpx 2rpx #000;
+}
+.category>.cateNull {
+  height: 157rpx;
+  width: 228rpx;
+  text-align: center;
+  padding: 15rpx 0;
+  margin-right:5rpx; 
+  box-shadow: 0 0 10rpx 2rpx #fff;
+}
+.category>view>image {
+  width: 100rpx;
+  height: 80rpx;
+}
+
+.category>view>text {
+  display: block;
+  text-align: center;
+}
+
+.brandHot {
+  display: flex;
+  margin-bottom: 15rpx;
+  background: #fff;
+}
+
+.brandHot .list_left image {
+  width: 220rpx;
+  height: 210rpx;
+  background: rgba(243, 243, 243, 1);
+  border-radius: 8px;
+}
+
+.brandHot .list_right {
+  margin-left: 27rpx;
+  width: 100%;
+}
+
+.brandHot .list_right>text {
+  display: block;
+  line-height: 50rpx;
+}
+
+.brandHot .list_right>.speciStatus {
+  display: block;
+  line-height: 64rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: rgba(227, 99, 70, 1);
+}
+
+.brandHot .list_right>view {
+  display: flex;
+  justify-content: space-between;
+}
+
+.brandHot .list_right>view text:nth-of-type(1) {
+  font-size: 16rpx;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  line-height: 25rpx;
+}

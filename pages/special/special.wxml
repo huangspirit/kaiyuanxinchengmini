@@ -1,0 +1,28 @@
+<!--pages/special/special.wxml-->
+<view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
+  <view class='navInput'>
+    <input placeholder='搜索你想要的内容' placeholder-class='none' placeholder-style='color:#b3b3b3;font-size:22rpx;'></input>
+  </view>
+</view>
+<view class="empty_custom">
+  <view class='specialList'>
+    <view class='listContent' wx:for="{{3}}" wx:key="{{index}}">
+      <view class='list_left'>
+        <image src='../../img/banner.png'></image>
+      </view>
+      <view class='list_right'>
+        <text>CAY25256VI-CT3</text>
+        <text>MOQ:2000 MAP:1000 
+      预计于2019年7月8日 香港交货</text>
+        <view class='speciStatus'>
+          <text>现 货</text>
+        </view>
+        <text>￥0.268</text>
+        <view>
+          <text>距特价结束：0天1小时3分4秒</text>
+          <text>当前剩余6000只</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

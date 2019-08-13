@@ -1,2 +1,34 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<view class='mayTop'>
+  <image src='../../img/banner.png'></image>
+  <view>
+    <text>用户名</text>
+    <view class='toplevel'>我的等级：
+      <text>A</text> </view>
+    <view class='topMoney'>押金：
+      <text>$0</text> </view>
+  </view>
+  <view class='topMerchant'>
+    <text>商家入驻</text>
+  </view>
+</view>
+<view class='userCenter'>
+  <text class='userTitle'>买家中心</text>
+  <view class='userList'>
+    <view class='listItem' wx:for="{{9}}" wx:key="index">
+      <image src='../../img/我的订单.png'></image>
+      <text>我的订单</text>
+    </view>
+  </view>
+</view>
+<view class='myCenter'>
+  <text class='myTitle'>个人中心</text>
+  <view class='myList'>
+    <view class='listItem' wx:for="{{3}}" wx:key="index">
+      <image src='../../img/我的订单.png'></image>
+      <text>我的订单</text>
+    </view>
+  </view>
+</view>
+<view class='myBtn'>
+<button>切换账号</button></view>
