@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "商品详情",
+  "backgroundTextStyle": "light",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff",
+  "usingComponents": {
+    "countDown": "../../components/countDown/countDown"
+  }
 }

@@ -30,12 +30,13 @@
 
 .searchList {
   margin-top: 2rpx;
-  min-height: calc(100% - 130rpx);
+  height: 100%;
   width: 100%;
   background: #fff;
   padding: 0 20rpx;
+  overflow-y: scroll;
 }
-.searchList>text {
+.searchList>view {
   display: block;
   line-height: 45px;
   padding: 0 20rpx;

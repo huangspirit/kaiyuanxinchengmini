@@ -1,0 +1,54 @@
+<!--pages/direct/direct.wxml-->
+
+
+<view class="page-slidebar">
+  <view class="page-content">
+    <view class="wc">
+      <text>品牌</text>
+      <view class="typeList">
+        <text wx:for="{{factoryData}}" wx:key="index">{{item.brand}}</text>
+      </view>
+    </view>
+    <view class="wc" wx:for="{{propertyList}}" wx:key="index">
+      <text>{{item.propertyName}}</text>
+      <view class="typeList">
+        <text bindtap="typeChoose" class="{{item.typeKey == k?'typeActive':''}}" data-item="{{item}}" data-index="{{index}}" data-k="{{k}}" wx:for="{{item.childList}}" wx:for-index="k" wx:for-item="subItem" wx:key="k">{{subItem}}</text>
+        <text wx:if="{{item.childList.length<=0}}">暂无选项</text>
+      </view>
+    </view>
+    <view class="typeBtn">
+      <text bindtap="reset">重置</text>
+      <text bindtap="confirm">确认</text>
+    </view>
+  </view>
+</view>
+<view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top {{silderOpen ? ['c-state','cover'] : ''}} ">
+
+  <view class="direct">
+    <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+      <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+        <view class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" data-item="{{navItem}}" bindtap="switchNav">{{navItem.text}}</view>
+      </block>
+    </scroll-view>
+    <view class="choose" bindtap="tap_ch">
+      <text>筛选</text>
+    </view>
+  </view>
+  <view class="productList" wx:if="{{hotSaleList.length>0}}">
+    <view class="brandHot" wx:for="{{hotSaleList}}" wx:key="index">
+      <view class='list_left'>
+        <image wx:if="{{item.imageUrl!='-'}}" src='{{item.imageUrl}}'></image>
+        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+      </view>
+      <view class='list_right' bindtap="toproductDetail" data-item="{{item}}">
+        <text class='speciStatus'>{{item.productno}}</text>
+        <text>品牌：{{item.brand}}</text>
+        <text>描述：{{item.productdesc}}</text>
+        <view>
+          <text>暂无供应商报价</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="prompt" wx:else>暂无热卖</view>
+</view>

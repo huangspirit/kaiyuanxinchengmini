@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -74,6 +74,20 @@
 					"id": -1,
 					"name": "brand详情",
 					"pathName": "pages/brandDetail/brandDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "二级类商品",
+					"pathName": "pages/direct/direct",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
 					"scene": null
 				}
 			]

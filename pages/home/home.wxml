@@ -1,72 +1,17 @@
 <!--pages/home/home.wxml-->
 <view class='homeTop'>
+  <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key>
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </swiper-item>
+  </swiper>
   <view class='hometopContent'>
-    <view class='homeTopImage'>
-      <image src='../../img/classcation.png'></image>
-      <text>分类</text>
-    </view>
+    <text>{{brandTotal}}个厂商 {{catergoryTotal}}个品类 {{productTotal}}个产品</text>
+    <text>数百家厂商的选择，芯手网值得您信赖</text>
     <view class='homeInput'>
       <image src='../../img/search.png'></image>
       <input type='text' placeholder="搜索你想要的内容" bindfocus='toSearch' placeholder-style='color:#999999;font-size:24rpx;' />
-    </view>
-  </view>
-  <view class='hometopBanner'>
-    <text>{{brandTotal }}个厂商 {{catergoryTotal }}个品类 {{productTotal}}个产品</text>
-  </view>
-</view>
-<view class='specialList'>
-  <view class='listHead'>
-    <text>现货特价</text>
-    <view bindtap='specialSearch'>
-      <text>更多</text>
-      <image src='../../img/more.png'></image>
-    </view>
-  </view>
-  <view class='listContent' wx:for="{{specialList}}" wx:key="{{id}}">
-    <view class='list_left'>
-      <image src='{{item.goodsImageUrl}}'></image>
-    </view>
-    <view class='list_right'>
-      <text>{{item.goods_name}}</text>
-      <text>{{item.goodsDesc}}</text>
-      <view class='speciStatus'>
-        <text wx:if="{{item.goods_type == true}}">现 货</text>
-        <text wx:if="{{item.goods_type == false}}">期 货</text>
-      </view>
-      <text wx:if="{{item.priceType == true}}">￥{{item.priceLevel}}</text>
-      <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
-      <view>
-        <text>距特价结束：0天1小时3分4秒</text>
-        <text>当前剩余{{item.goodsStockCount}}只</text>
-      </view>
-    </view>
-  </view>
-</view>
-<view class='specialList'>
-  <view class='listHead'>
-    <text>特价跟单区</text>
-    <view bindtap='specialSearch'>
-      <text>更多</text>
-      <image src='../../img/more.png'></image>
-    </view>
-  </view>
-  <view class='listContent' wx:for="{{specialList}}" wx:key="{{id}}">
-    <view class='list_left'>
-      <image src='{{item.goodsImageUrl}}'></image>
-    </view>
-    <view class='list_right'>
-      <text>{{item.goods_name}}</text>
-      <text>{{item.goodsDesc}}</text>
-      <view class='speciStatus'>
-        <text wx:if="{{item.goods_type == true}}">现 货</text>
-        <text wx:if="{{item.goods_type == false}}">期 货</text>
-      </view>
-      <text wx:if="{{item.priceType == true}}">￥{{item.priceLevel}}</text>
-      <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
-      <view>
-        <text>距特价结束：0天1小时3分4秒</text>
-        <text>当前剩余{{item.goodsStockCount}}只</text>
-      </view>
     </view>
   </view>
 </view>
@@ -75,13 +20,41 @@
   <view class='listHead'>
     <text>产品分类</text>
     <view>
+      <text wx:for="{{classList}}" class="{{calssIndex == index?'classSelect':''}}" bindtap="getSubClassList" wx:index="index" wx:item="item" data-index="{{index}}" data-item="{{item}}" wx:key="index">{{item.name}}</text>
+    </view>
+  </view>
+  <view class='listContent'>
+    <view>
+      <text wx:for="{{subClassList}}" bindtap="subClssRouter" data-item="{{item}}" wx:key="index">{{item.name}}</text>
+    </view>
+  </view>
+</view>
+<view class='specialList'>
+  <view class='listHead'>
+    <text>特价直通车</text>
+    <view bindtap='specialSearch'>
       <text>更多</text>
       <image src='../../img/more.png'></image>
     </view>
   </view>
-  <view class='listContent'>
-    <view style='background-color: {{item.bacgroundColor}};color:{{item.textColor}}' wx:for="{{productList}}" wx:key="{{index}}">
-      {{item.name}}
+  <view class='listContent' wx:for="{{specialList}}" wx:key="{{id}}">
+    <view class='list_left'>
+      <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
+      <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+    </view>
+    <view class='list_right'>
+      <text>{{item.goods_name}}</text>
+      <text>{{item.goodsDesc}}</text>
+      <view class='speciStatus'>
+        <text wx:if="{{item.goods_type == true}}">现 货</text>
+        <text wx:if="{{item.goods_type == false}}">期 货</text>
+      </view>
+      <text wx:if="{{item.priceType == true}}">￥{{item.priceLevel}}</text>
+      <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
+      <view>
+        <text>距特价结束：0天1小时3分4秒</text>
+        <text>当前剩余{{item.goodsStockCount}}只</text>
+      </view>
     </view>
   </view>
 </view>
@@ -89,7 +62,8 @@
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{imgUrls}}" wx:key="index">
       <swiper-item>
-        <image src="{{item.imgurl}}" class="slide-image" width="230" height="93" />
+        <image wx:if="{{item.imgurl!='http://brand.113ic.com/--'}}" src="{{item.imgurl}}" class="slide-image" width="230" height="93" />
+        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
       </swiper-item>
     </block>
   </swiper>

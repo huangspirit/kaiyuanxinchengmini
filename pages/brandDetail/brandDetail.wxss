@@ -104,12 +104,11 @@
 
 .brandHot .list_right {
   margin-left: 27rpx;
-  width: 100%;
 }
 
 .brandHot .list_right>text {
   display: block;
-  line-height: 50rpx;
+  line-height: 45rpx;
 }
 
 .brandHot .list_right>.speciStatus {

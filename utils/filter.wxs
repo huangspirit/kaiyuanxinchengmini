@@ -1,0 +1,54 @@
+/** 
+ * 时间戳转化为年 月 日 时 分 秒 
+ * number: 传入时间戳 
+ * format：返回格式，支持自定义，但参数必须与formateArr里保持一致 
+ */
+function formatDate(number) {
+  var date = getDate(number);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate()
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+  var timeDate = [year, month, day].join('-') + " " + [hour, minute, second].join(':')
+  console.log(timeDate)
+  return timeDate
+}
+
+function countDown(newTime, endDate) {
+  // var date = getDate(nowdate);
+  // var year = date.getFullYear();
+  // var month = date.getMonth() + 1;
+  // var day = date.getDate()
+  // var hour = date.getHours()
+  // var minute = date.getMinutes()
+  // var second = date.getSeconds()
+  // var newTime  = [year, month, day].join('-') + " " + [hour, minute, second].join(':')
+  // let countDownArr = [];
+  setTimeout(function (newTime, endDate) {
+    // 如果活动未结束，对时间进行处理
+    if (endTime - newTime > 0) {
+      let time = (endTime - newTime) / 1000;
+      // 获取天、时、分、秒
+      let day = parseInt(time / (60 * 60 * 24));
+      let hou = parseInt(time % (60 * 60 * 24) / 3600);
+      let min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+      let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+      return [day].join('天') + [hou].join('时') + [min].join('分') + [sec].join('秒')
+
+    } else { //活动已结束，全部设置为'00'
+      let day = '00';
+      let hou = '00';
+      let min = '00';
+      let sec = '00';
+      return [day].join('天') + [hou].join('时') + [min].join('分') + [sec].join('秒')
+    }
+  }, 1000);
+
+}
+
+module.exports = {
+  formatDate: formatDate,
+  countDown: countDown
+}

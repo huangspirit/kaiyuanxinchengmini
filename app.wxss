@@ -1,13 +1,23 @@
 /**app.wxss**/
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
-page{
-  min-height:100%;
+@import "wxParse/wxParse.wxss";
+
+page {
+  min-height: 100%;
   box-sizing: border-box;
 }
-view,text{
-  font-family:PingFangSC-Regular;
+
+.prompt {
+  width: 100%;
+  text-align: center;
+  line-height: 90rpx;
 }
+
+view, text {
+  font-family: PingFangSC-Regular;
+}
+
 .container {
   height: 100%;
   display: flex;
@@ -16,4 +26,4 @@ view,text{
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}

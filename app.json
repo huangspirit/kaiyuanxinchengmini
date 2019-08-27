@@ -7,7 +7,8 @@
     "pages/special/special",
     "pages/search/search",
     "pages/brandDetail/brandDetail",
-    "pages/productDetail/productDetail"
+    "pages/productDetail/productDetail",
+    "pages/direct/direct"
   ],
   "window": {
     "backgroundTextStyle": "light",

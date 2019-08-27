@@ -1,11 +1,17 @@
 <!--pages/search/search.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
 <view class="custom flex_center">
   <view class='navInput'>
     <input placeholder='搜索你想要的内容' placeholder-class='none' bindinput='search' placeholder-style='color:#b3b3b3;font-size:22rpx;'></input>
   </view>
 </view>
 <view class='searchList' wx:if="{{searchList.length>0}}">
-  <block wx:for="{{searchList}}" wx:key="index">
-    <text bindtap='toDetail' data-item="{{item}}" >{{item.name}}</text>
-  </block>
+  <view bindtap="toDetail" wx:for="{{searchList}}" data-item="{{item}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+    <block wx:for="{{item.nameLight}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+      <text wx:if="{{subItem.key == true}}" style="color:red;">{{subItem.str}}</text>
+      <text wx:else>{{subItem.str}}</text>
+    </block>
+  </view>
+
+
 </view>

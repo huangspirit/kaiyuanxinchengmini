@@ -10,7 +10,6 @@ const request = (url, options) => {
         'Content-Type': 'application/json; charset=UTF-8'
       },
       success(request) {
-        console.log(request,'22222')
         if (request.statusCode === 200) {
           resolve(request.data)
         } else {
@@ -25,7 +24,7 @@ const request = (url, options) => {
   })
 }
 
-const get = (url, options = {}) => {
+const get = (url, options) => {
   return request(url, { method: 'GET', data: options })
 }
 

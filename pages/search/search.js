@@ -1,43 +1,104 @@
 // pages/search/search.js
 const app = getApp()
 import api from '../../api/api'
+const WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    searchList: []
+    searchList: [],
+    textData: []
   },
   search(val) {
-    api.get('/api-g/gods-anon/searchIndex', {
-      name: val.detail.value,
-      start: 0,
-      length: 10
-    }).then(res => {
+    if (val.detail.value == '') {
       this.setData({
-        searchList: res.data.data
+        searchList: [],
       })
-    })
+    } else {
+      api.get('/api-g/gods-anon/searchIndex', {
+        name: val.detail.value,
+        start: 0,
+        length: 10
+      }).then(res => {
+        this.setData({
+          searchList: res.data.data,
+        })
+        for (let i = 0; i < this.data.searchList.length; i++) {
+          this.data.searchList[i].nick_name = this.data.searchList[i].nick_name.replace('<font color="red">', "")
+          this.data.searchList[i].nick_name = this.data.searchList[i].nick_name.replace('</font>', "")
+          this.data.searchList[i]['nameLight'] = this.hilight_word(val.detail.value, this.data.searchList[i].nick_name)
+        }
+        this.setData({
+          searchList: this.data.searchList,
+        })
+      })
+    }
+
+  },
+  // 根据搜索字分割字符
+  hilight_word: function(key, word) {
+    let idx = word.indexOf(key.toUpperCase()),
+      t = [];
+    if (idx > -1) {
+      if (idx == 0) {
+        t = this.hilight_word(key, word.substr(key.length));
+        t.unshift({
+          key: true,
+          str: key
+        });
+        return t;
+      }
+
+      if (idx > 0) {
+        t = this.hilight_word(key, word.substr(idx));
+        t.unshift({
+          key: false,
+          str: word.substring(0, idx)
+        });
+        return t;
+      }
+    }
+    return [{
+      key: false,
+      str: word
+    }];
   },
   toDetail(val) {
     console.log(val, '555555')
     var tag = val.currentTarget.dataset['item']
-    let obj = JSON.stringify(tag)
+    let obj = {}
+    obj['documentid'] = tag.documentid
+    obj['name'] = tag.name
+    obj['tag'] = tag.tag
     if (tag.tag == 'brand') {
+      obj = JSON.stringify(obj)
       wx: wx.navigateTo({
         url: '../brandDetail/brandDetail?brandList=' + obj,
         success: function(res) {},
         fail: function(res) {},
         complete: function(res) {},
       })
-    }
-    else if (tag.tag == 'direct') {
-
+    } else if (tag.tag == 'direct') {
+      obj['brandId'] = ''
+      obj = JSON.stringify(obj)
+      wx: wx.navigateTo({
+        url: '../direct/direct?params=' + obj,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
     } else if (tag.tag == 'undirect') {
 
     } else if (tag.tag == 'goodsinfo') {
-
+      obj = JSON.stringify(obj)
+      wx: wx.navigateTo({
+        url: '../productDetail/productDetail?params=' + obj,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
     }
 
   },
