@@ -1,0 +1,88 @@
+/* pages/classCation/classCation.wxss */
+page {
+
+}
+.classCationWarp{
+  height: 100%;
+  background: #fff;
+  margin-top: 2rpx;
+}
+/*总体主盒子*/  
+.classCation {
+  width: 100%; 
+  height: 100%;
+  background-color: #fff; 
+  margin-top: 2rpx; 
+  color: #939393;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+ /*左侧栏主盒子*/  
+.nav_left{
+  width: 25%;
+  /*主盒子设置背景色为灰色*/  
+  background: #f5f5f5;  
+  text-align: center;
+}  
+/*左侧栏list的item*/  
+.nav_left .nav_left_items{  
+  /*每个高30px*/  
+  height: 80rpx;  
+  /*垂直居中*/  
+  line-height: 50rpx;  
+  /*再设上下padding增加高度，总高42px*/  
+  padding: 12rpx 0;  
+  box-sizing: border-box;
+  /*只设下边线*/  
+  border-bottom: 1px solid #dedede;  
+  /*文字14px*/  
+  font-size: 28rpx; 
+}  
+/*左侧栏list的item被选中时*/  
+.nav_left .nav_left_items.active{  
+  /*背景色变成白色*/  
+  background: #fff;  
+  color: #f40;
+}  
+/*右侧栏主盒子*/  
+.nav_right{  
+  /*宽度75%，高度占满，并使用百分比布局*/  
+  width: 75%;    
+  padding: 20rpx;  
+  box-sizing: border-box;  
+  background: #fff;  
+  flex: 1;
+}  
+/*右侧栏list的item*/  
+.nav_right .nav_right_items{  
+  /*浮动向左*/  
+  float: left;  
+  /*每个item设置宽度是33.33%*/  
+  width: 33.33%;  
+  height: 240rpx;  
+  text-align: center;  
+}  
+.nav_right .nav_right_items image{  
+  /*被图片设置宽高*/  
+  width: 120rpx;  
+  height: 120rpx;  
+  margin-top: 30rpx;  
+}  
+.nav_right .nav_right_items text{  
+  /*给text设成块级元素*/  
+  display: block;  
+  margin-top: 30rpx;  
+  font-size: 28rpx;  
+  color: black;
+  /*设置文字溢出部分为...*/  
+  overflow: hidden;  
+  white-space: nowrap;  
+  text-overflow: ellipsis;  
+} 
+.nodata_text
+{
+  color: black;
+  font-size: 28rpx;  
+  text-align: center;  
+}

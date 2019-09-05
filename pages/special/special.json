@@ -2,6 +2,5 @@
   "navigationBarTitleText": "特价搜索",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
-  "backgroundTextStyle": "light",
-  "navigationStyle": "custom"
+  "backgroundTextStyle": "light"
 }

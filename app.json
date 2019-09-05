@@ -8,10 +8,34 @@
     "pages/search/search",
     "pages/brandDetail/brandDetail",
     "pages/productDetail/productDetail",
-    "pages/direct/direct"
+    "pages/direct/direct",
+    "components/dialog/dialog",
+    "pages/goodsDetail/goodsDetail",
+    "pages/shopCart/shopCart",
+    "pages/classCation/classCation",
+    "pages/factoryDirect/factoryDirect",
+    "pages/address/address",
+    "pages/order/order",
+    "pages/classSearch/classSearch",
+    "pages/my/myFocus/myFocus",
+    "pages/my/myInquiry/myInquiry",
+    "pages/my/myInquiry/components/allInquiry/allInquiry",
+    "pages/my/myInquiry/components/waitInquiry/waitInquiry",
+    "pages/my/myInquiry/components/alredyInquiry/alredyInquiry",
+    "pages/my/myInquiry/components/alredyAdov/alredyAdov",
+    "pages/my/myInquiry/components/alredyOrder/alredyOrder",
+    "pages/my/myInquiry/components/waitDetail/waitDetail",
+    "pages/my/myInquiry/components/alredyInquiryDetail/alredyInquiryDetail",
+    "pages/my/myOrder/myOrder",
+    "pages/my/myOrder/components/allOrder/allOrder",
+    "pages/my/myOrder/components/waitConfirm/waitConfirm",
+    "pages/my/myOrder/components/waitPay/waitPay",
+    "pages/my/myOrder/components/abnormalOrder/abnormalOrder",
+    "pages/my/myOrder/components/waitDelivery/waitDelivery",
+    "pages/my/myOrder/components/alredyEnd/alredyEnd"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
@@ -22,20 +46,32 @@
     "borderStyle": "black",
     "list": [
       {
-        "selectedIconPath": "./img/homeSelect.png",
-        "iconPath": "./img/home.png",
+        "selectedIconPath": "./img/home/homedianji.png",
+        "iconPath": "./img/home/home.png",
         "pagePath": "pages/home/home",
         "text": "首 页"
       },
       {
-        "selectedIconPath": "./img/specialSelect.png",
-        "iconPath": "./img/special.png",
+        "selectedIconPath": "./img/home/fenleidianji.png",
+        "iconPath": "./img/home/fenlei.png",
+        "pagePath": "pages/classCation/classCation",
+        "text": "分 类"
+      },
+      {
+        "selectedIconPath": "./img/home/zhaotejiadianji.png",
+        "iconPath": "./img/home/zhaotejia.png",
         "pagePath": "pages/special/special",
         "text": "特 价"
       },
       {
-        "selectedIconPath": "./img/mySelect.png",
-        "iconPath": "./img/my.png",
+        "selectedIconPath": "./img/home/gouwuchedianji.png",
+        "iconPath": "./img/home/gouwuche.png",
+        "pagePath": "pages/shopCart/shopCart",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "./img/home/wdedianji.png",
+        "iconPath": "./img/home/wde.png",
         "pagePath": "pages/my/my",
         "text": "我 的"
       }

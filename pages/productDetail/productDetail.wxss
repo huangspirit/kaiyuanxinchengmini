@@ -23,6 +23,7 @@
   padding: 0 20rpx;
   background: #fff;
   margin-bottom: 2rpx;
+  text-align: center;
 }
 
 .brandDetail {
@@ -33,40 +34,242 @@
 .brandDetail>text {
   display: block;
   margin: 20rpx 0;
-}
-
-.brandDetail>.productEdit {
-  display: flex;
-  justify-content: space-between;
-}
-
-.brandDetail>.productEdit>text {
-  font-size: 36rpx;
-  font-weight: bold;
-  color: #f40;
-}
-
-.brandDetail>.productEdit .productFocus {
-  width: 30%;
-  display: flex;
-  justify-content: space-around;
+  font-size: 28rpx;
+  color: #999;
 }
 
 .brandDetail>text:nth-of-type(1) {
   font-size: 32rpx;
-  font-weight: 500;
+  font-weight: bold;
   color: #333;
 }
+
 .brandDetail .goodsLabel {
   padding: 5rpx 0;
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 85rpx;
+  line-height: 85rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2rpx dashed #bcbcbc;
 }
-.brandDetail .goodsLabel>text {
-  border: 1px solid #f40;
-  padding: 5rpx 15rpx;
-  margin-right: 15rpx;
-  border-radius: 30rpx;
+
+.brandDetail .goodsLabel>.labelList {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.brandDetail .goodsLabel>.labelList>text {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  border-radius: 8rpx;
+  background: #df3f2f;
+  display: block;
+  color: #fff;
+}
+
+.brandDetail .goodsLabel .productFocus {
+  display: flex;
+  padding: 0 15rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus {
+  margin-right: 52rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus>image {
+  width: 40rpx;
+  height: 35rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus>text {
+  font-size: 16rpx;
+  color: #333;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.brandDetail .goodsLabel .productFocus>.share {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>text {
+  font-size: 16rpx;
+  color: #333;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button {
+  height: 38rpx;
+  background: #fff;
+  padding: 0;
+  line-height: 45rpx;
+  border-radius: 0;
+  font-size: 15rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button::after {
+  border: none;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button>image {
+  width: 33rpx;
+  height: 34rpx;
+}
+
+.brandDetail .seller1 {
+  height: 65rpx;
+  line-height: 65rpx;
+}
+
+.brandDetail .seller1>text:nth-of-type(1) {
+  font-size: 21rpx;
+  color: #df3d2e;
+}
+
+.brandDetail .seller1>text:nth-of-type(2) {
+  font-size: 21rpx;
+  color: #343434;
+}
+
+.specile {
+}
+
+.specile .specileTitle {
+  text-align: center;
+  line-height: 120rpx;
+  font-size: 34rpx;
+  color: #333;
+}
+
+.specile .specileList {
+  margin-bottom: 15rpx;
+}
+
+.specile .specileList .listContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.specile .specileList .listContent>.listTitle {
+  display: flex;
+  justify-content: space-between;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 2rpx dashed #bcbcbc;
+}
+
+.specile .specileList .listContent>.listTitle>view {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.specile .specileList .listContent>.listTitle>view>text:nth-of-type(2) {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 0 13rpx;
+  margin-left: 10rpx;
+  background: #df3f2f;
+  border-radius: 8rpx;
+  color: #fff;
+}
+
+.specile .specileList .listContent>.listTitle>view>image {
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: middle;
+  margin-right: 20rpx;
+  border-radius: 50rpx;
+}
+
+.specile .specileList .listContent .listDetail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.specile .specileList .listContent .listDetail .listLeft {
+  font-size: 26rpx;
+  color: #989898;
+  width: 70%;
+  white-space: wrap;
+  line-height: 50rpx;
+}
+
+.specile .specileList .listContent .listDetail .listLeft>text {
+  color: #e13f32;
+  font-size: 28rpx;
+  display: block;
+}
+
+.specile .specileList .listContent .listDetail .listRight {
+  display: flex;
+  flex-direction: column;
+  align-content: left;
+  text-align: right;
+  padding: 15rpx 0;
+}
+
+.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(1) {
+  color: #df3d2e;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(2) {
+  color: #df3d2e;
+  font-size: 18rpx;
+  margin: 5rpx 0 45rpx 0;
+}
+
+.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(3) {
+  width: 150rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  background: #df3f2f;
+  color: #fff;
+  border-radius: 8rpx;
+  font-weight: bold;
+}
+.specile .specileList .listMore {
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 100%;
+  font-size: 28rpx;
+  color: #999;
+  overflow: hidden;
+}
+.specile .specileList .listMore>view {
+   width: 305rpx;
+   height: 3rpx;
+   background: #999;
+   margin:67rpx auto;
+   position: relative;
+}
+.specile .specileList .listMore>view>text {
+  position: absolute;
+  top: -55rpx;
+  left: 48rpx;
+  width: 209rpx;
+  background: #f5f5f5;
+  text-align: center;
+}
+.specile  .listNone {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background: #fff;
+  margin-bottom: 15rpx;
 }
 
 .merChantList {
@@ -171,8 +374,9 @@
 }
 
 .cu-bar.tabbar .action [class*="icon"] {
-    width:38rpx;
+  width: 38rpx;
 }
+
 .canui-xzwz {
   overflow: hidden;
   text-overflow: ellipsis;

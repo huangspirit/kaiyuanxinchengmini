@@ -6,14 +6,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
+    specialSider:[
+      {
+        name:'最新发布',
+        id:'0'
+      }, {
+        name: '即将结束',
+        id: '1'
+      }, {
+        name: '现货',
+        id: '2'
+      }, {
+        name: '订货',
+        id: '3'
+      }, {
+        name: '呆料',
+        id: '4'
+      },
+    ],
+    siderIndex:0
   },
-
+  siderChange(val) {
+    console.log(val)
+    this.setData({
+      siderIndex: val.currentTarget.dataset.index
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     
   },
 
   /**

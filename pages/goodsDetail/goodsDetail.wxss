@@ -1,0 +1,397 @@
+/* pages/goodsDeatil/goodsDetail.wxss */
+
+/* pages/productDetail/productDetail.wxss */
+
+.productDetailPic {
+  width: 100%;
+  height: 375rpx;
+}
+
+.productDetailPic >image {
+  width: 100%;
+  height: 100%;
+}
+
+.priceStyle {
+  height: 140rpx;
+  display: flex;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.priceStyle>view:nth-of-type(1) {
+  color: #fff;
+  background: linear-gradient(#fc4097, #f92057);
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  width: 60%;
+}
+
+.priceStyle>view:nth-of-type(1)>text:nth-of-type(1) {
+  font-size: 45rpx;
+  font-weight: bold;
+}
+
+.priceStyle>view:nth-of-type(1)>text:nth-of-type(2) {
+  font-size: 24rpx;
+}
+
+.priceStyle>view:nth-of-type(2) {
+  color: #fb2e6f;
+  background: #fefd4b;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  text-align: right;
+  width: 40%;
+  height: 120rpx;
+  margin-top: 20rpx;
+}
+
+.priceStyle>view:nth-of-type(2)>text:nth-of-type(1) {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.pricelevStyle {
+  height: 140rpx;
+  display: flex;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.pricelevStyle .levLeft {
+  color: #fff;
+  background: linear-gradient(#fc4097, #f92057);
+  display: flex;
+  padding: 20rpx;
+  width: 60%;
+}
+
+.pricelevStyle .levLeft .levLeftLeft {
+  width: 50%;
+}
+
+.pricelevStyle .levLeft .levLeftLeft>view {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10rpx;
+  font-size: 24rpx;
+}
+
+.pricelevStyle .levLeft .levLeftRight {
+  width: 50%;
+  padding: 34rpx 0 0 0;
+}
+
+.pricelevStyle .levLeft .levLeftRight>text {
+  display: block;
+  text-align: right;
+}
+
+.pricelevStyle .levLeft .levLeftRight>text:nth-of-type(1) {
+  font-size: 24rpx;
+}
+
+.pricelevStyle .levLeft .levLeftRight>text:nth-of-type(2) {
+  font-size: 18rpx;
+}
+
+.pricelevStyle .levRight {
+  color: #fb2e6f;
+  background: #fefd4b;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  text-align: right;
+  width: 40%;
+  height: 120rpx;
+  margin-top: 20rpx;
+}
+
+.brandComponey {
+  margin-bottom: 10rpx;
+}
+
+.brandComponey .brandTitle {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  padding: 0 20rpx;
+  background: #fff;
+  margin-bottom: 2rpx;
+  text-align: center;
+}
+
+.brandDetail {
+  background: #fff;
+  padding: 10rpx 20rpx;
+}
+
+.brandDetail>text {
+  display: block;
+  margin: 20rpx 0;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.brandDetail>text:nth-of-type(1) {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.brandDetail .goodsLabel {
+  padding: 5rpx 0;
+  height: 75rpx;
+  line-height: 75rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.brandDetail .goodsLabel>.labelList {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.brandDetail .goodsLabel>.labelList>text {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  border-radius: 8rpx;
+  background: #df3f2f;
+  display: block;
+  color: #fff;
+}
+
+.brandDetail .goodsLabel .productFocus {
+  display: flex;
+  padding: 0 15rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus {
+  margin-right: 52rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus>image {
+  width: 40rpx;
+  height: 35rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.focus>text {
+  font-size: 16rpx;
+  color: #333;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.brandDetail .goodsLabel .productFocus>.share {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>text {
+  font-size: 16rpx;
+  color: #333;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button {
+  height: 38rpx;
+  background: #fff;
+  padding: 0;
+  line-height: 45rpx;
+  border-radius: 0;
+  font-size: 15rpx;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button::after {
+  border: none;
+}
+
+.brandDetail .goodsLabel .productFocus>.share>button>image {
+  width: 33rpx;
+  height: 34rpx;
+}
+
+.brandDetail .goodsDesc {
+  width: 100%;
+  height: 80rpx;
+  background: #fdebeb;
+  line-height: 80rpx;
+  margin-top: 15rpx;
+  padding: 0 15rpx;
+}
+
+.brandDetail .goodsDesc>text {
+  color: #343434;
+  font-size: 24rpx;
+}
+
+.brandDetail .seller {
+  width: 100%;
+  border-bottom: 2rpx dashed #bcbcbc;
+  height: 65rpx;
+  line-height: 65rpx;
+  display: flex;
+}
+
+.brandDetail .seller>text {
+  color: #df3f2f;
+}
+
+.brandDetail .seller .userHead>image {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 0 15rpx;
+  border-radius: 100%;
+  vertical-align: middle;
+}
+
+.brandDetail .seller .userHead>text:nth-of-type(1) {
+  font-size: 22rpx;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.brandDetail .seller .userHead>text:nth-of-type(2) {
+  font-size: 22rpx;
+  color: #df3e2c;
+}
+
+.brandDetail .seller1 {
+  height: 65rpx;
+  line-height: 65rpx;
+}
+
+.brandDetail .seller1>text:nth-of-type(1) {
+  font-size: 21rpx;
+  color: #df3d2e;
+}
+
+.brandDetail .seller1>text:nth-of-type(2) {
+  font-size: 21rpx;
+  color: #343434;
+}
+
+.merChantList {
+  width: 100%;
+  background: #fff;
+}
+
+.merChantList .merchantTitle {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 20rpx;
+  background: #d5d5d5;
+}
+
+.merChantList .merchantTitle>image {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 5rpx 20rpx 0 0;
+  float: left;
+  border-radius: 50%;
+}
+
+.merChantList .merchantTitle>text:nth-child(2) {
+  float: left;
+}
+
+.merChantList .merchantTitle>text:nth-child(3) {
+  float: right;
+  background: #f40;
+  color: #fff;
+  font-size: 25rpx;
+  padding: 4rpx 15rpx;
+  border-radius: 10rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  margin-top: 21rpx;
+}
+
+.merChantList .merchantDetail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.merChantList .merchantDetail:nth-child(2n) {
+  background: #fafafa;
+}
+
+.merChantList .merchantDetail>text {
+  width: 50%;
+  border-left: 1px solid #ebeef5;
+  border-bottom: 1px solid #ebeef5;
+  min-height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+}
+
+.merChantList .merchantDetail>view {
+  width: 50%;
+  border-left: 1px solid #ebeef5;
+  border-bottom: 1px solid #ebeef5;
+  min-height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+}
+
+.productParams {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.productParams:nth-child(2n) {
+  background: #fafafa;
+}
+
+.productParams>text {
+  width: 50%;
+  border-left: 1px solid #ebeef5;
+  border-bottom: 1px solid #ebeef5;
+  min-height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+}
+
+.cu-bar.tabbar.shop .action {
+  width: 100rpx;
+}
+
+.cu-bar.tabbar .action {
+  font-size: 20rpx;
+}
+
+.cu-bar.tabbar .action [class*="icon"] {
+  width: 38rpx;
+}
+
+.canui-xzwz {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.canui-foor-fixed {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.canui-tabbar-bottom {
+  padding-bottom: 20rpx;
+  min-height: 150rpx;
+}

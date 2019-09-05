@@ -1,0 +1,59 @@
+<!--pages/my/myInquiry/components/alredyInquiryDetail/alredyInquiryDetail.wxml-->
+<view class="allInquiry">
+  <view class="allList" bindtap="waitDetail">
+    <view class="listTitle">
+      <view class="titleLeft">
+        申请编号：IDHEBND2013698552
+      </view>
+      <view class="titleRight">
+        <text class="alredyStatus">已批复</text>
+      </view>
+    </view>
+    <view class="listContent">
+      <view class="listLeft">
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="listRight">
+        <view class="rightRight">
+          <text>申请人：晶源电子</text>
+          <text>SUISDFJHIUFHSDIOF1564564</text>
+          <text>品牌：SDFHSDDF</text>
+          <text>描述：hsudgfsdgfduyfg</text>
+        </view>
+        <view class="rightLeft">
+          <text>申请价格</text>
+          <text>￥ 3.5</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="waitDetail">
+    <text>公司名称：北京市中关村</text>
+    <text>提交日期：2019-06-01 0:0:0</text>
+    <text>年采购量：1000</text>
+    <text>竞争型号：【sdfsd4564】</text>
+    <text>备注说明：大量采购</text>
+    <text>申请有效期：2019-06-01 0:0:0</text>
+  </view>
+  <view class="inquiryDetail">
+    <view class="listLeft">
+      <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      <view class="leftLeft">
+        <text>三星电子厂商</text>
+        <text class="yuan">原厂厂商</text>
+        <text class="daili">代理厂商</text>
+      </view>
+      <view class="rightLeft">
+          <text>批复价格</text>
+          <text>￥ 3.5</text>
+        </view>
+    </view>
+    <view class="listBottom">
+      <text>回复日期：2019-06-01 0:0:0</text>
+      <text>MOQ：10</text>
+      <text>MPQ：10</text>
+      <text>交付周期：180天</text>
+      <text>价格有效期：2019-06-01 0:0:0</text>
+    </view>
+  </view>
+</view>

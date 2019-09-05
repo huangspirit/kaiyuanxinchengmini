@@ -1,8 +1,16 @@
 <!--pages/search/search.wxml-->
-<import src="../../wxParse/wxParse.wxml" />
 <view class="custom flex_center">
+  <view class="searchBanner">
+    <image src="../../img/home/searchBanner.jpg"></image>
+    <view class='searchContent'>
+      <text>{{brandTotal}}个厂商 {{catergoryTotal}}个品类 {{productTotal}}个产品</text>
+      <text>数百家厂商的选择，芯手网值得您信赖</text>
+    </view>
+  </view>
+
   <view class='navInput'>
-    <input placeholder='搜索你想要的内容' placeholder-class='none' bindinput='search' placeholder-style='color:#b3b3b3;font-size:22rpx;'></input>
+    <input placeholder='搜索你想要的内容' placeholder-class='none' bindinput='search' placeholder-style='color:#999999;font-size:23rpx;'></input>
+    <image src="../../img/image/sousuo.png"></image>
   </view>
 </view>
 <view class='searchList' wx:if="{{searchList.length>0}}">
@@ -12,6 +20,27 @@
       <text wx:else>{{subItem.str}}</text>
     </block>
   </view>
+</view>
 
+<view class="oldSearch">
+  <text>最近搜索</text>
+  <view class="oldList">
+    <text wx:for="{{6}}" wx:key="index">最近搜索</text>
+  </view>
+</view>
 
+<view class="hotSearch">
+  <view class="hotTitle">
+    <text>热搜榜</text>
+    <view>
+      <image src="../../img/image/shuaxin.png"></image>
+      <text>换一批</text>
+    </view>
+  </view>
+  <view class="oldList">
+    <view wx:for="{{6}}" wx:key="index">
+      <image wx:if="{{index==0||index==1}}" src="../../img/image/hot.png"></image>
+      <text>最近搜索</text>
+    </view>
+  </view>
 </view>

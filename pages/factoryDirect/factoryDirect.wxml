@@ -1,0 +1,30 @@
+<!--pages/factoryDirect/factoryDirect.wxml-->
+<!--pages/special/special.wxml-->
+<view class="custom flex_center" style="padding-top:{{statusBarHeight}}px;background:red; ">
+  <view class='navInput'>
+    <input placeholder='搜索你想要的内容' placeholder-class='none' placeholder-style='color:#b3b3b3;font-size:22rpx;'></input>
+  </view>
+</view>
+<view class="empty_custom">
+  <view class='specialList'>
+    <view class='listContent' wx:for="{{facdirect}}" wx:key="{{index}}">
+      <view class='list_left'>
+        <image src='{{item.goodsImageUrl}}'></image>
+      </view>
+      <view class='list_right'>
+        <text>{{item.goods_name}}</text>
+        <text>{{item.brandName}}</text>
+        <view class='speciStatus'>
+          <text>MOQ: {{item.moq}}</text>
+          <text>MPQ: {{item.mpq}}</text>
+        </view>
+        <text>{{item.day_interval}}天后{{item.diliverPlace}}交货</text>
+        <view>
+          <text>当前剩余{{item.goodsStockCount}}</text>
+          <text wx:if="{{item.priceType}}">{{item.priceLevel}}</text>
+          <text wx:if="{{!item.priceType}}">一口价： ￥{{item.goodsPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

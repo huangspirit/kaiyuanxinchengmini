@@ -1,0 +1,98 @@
+<!--pages/home/myFocus/myFocus.wxml-->
+<view class='myFocus'>
+  <!--Tab布局-->
+  <view class='title'>
+    <view class='titleSel' bindtap='titleClick' data-idx='0'>
+      <text class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}">关注的器件</text>
+    </view>
+
+    <view class='titleSel' bindtap='titleClick' data-idx='1'>
+      <text class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} ">关注的商家</text>
+    </view>
+  </view>
+
+  <!--内容布局-->
+  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+    <swiper-item class='swiper'>
+      <view class="focusGoods" wx:if="{{focusList.length>0}}">
+        <view class="focusGoddsTop">
+          <view>
+            共
+            <text>{{goodsNum}}</text> 件商品
+          </view>
+          <text bindtap="editGoods">{{editText}}</text>
+        </view>
+        <view class="focusGoddsList">
+          <view class="listDetail" wx:for="{{focusList}}" wx:key="index">
+            <view wx:if="{{editShow}}" class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
+              <image wx:if="{{item.checked}}" src="../../../img/image/xuanzhong.png"></image>
+              <image wx:else src="../../../img/image/weixuanzhong.png"></image>
+            </view>
+            <view class="listLeft">
+              <image wx:if="{{item.goodsBase.imageUrl!='-'}}" src="{{item.goodsBase.imageUrl}}"></image>
+              <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+            </view>
+            <view class="listRight">
+              <text>{{item.goodsBase.productno}}</text>
+
+              <text>品牌：{{item.goodsBase.brand}}</text>
+              <text>{{item.goodsBase.productdesc}}</text>
+              <view class="goodsPrice">
+                <text>￥ 3.5</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{editShow}}" class="goodsFooter">
+          <view bindtap="allChecked">
+            <image wx:if="{{allShow}}" src="../../../img/image/xuanzhong.png"></image>
+            <image wx:else src="../../../img/image/weixuanzhong.png"></image>
+            <text>全选</text>
+          </view>
+          <text bindtap="deteleFoucs">取消收藏</text>
+        </view>
+      </view>
+      <view wx:else class="prompt">你还没有关注的商品</view>
+    </swiper-item>
+    <swiper-item class='swiper' class='swiper'>
+      <view class="focusGoods">
+        <view class="focusGoddsTop">
+          <view>
+            共
+            <text>{{goodsNum}}</text> 件商品
+          </view>
+          <text bindtap="merchanEdit">{{merchanText}}</text>
+        </view>
+        <view class="focusmerchansList">
+          <view class="listDetail" wx:for="{{2}}" wx:key="index">
+
+            <view class="listLeft">
+              <view wx-if="{{editmerShow}}" class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
+                <image wx:if="{{item.checked}}" src="../../../img/image/xuanzhong.png"></image>
+                <image wx:else src="../../../img/image/weixuanzhong.png"></image>
+              </view>
+              <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+              <view class="merchanDetail">
+                <text>三星电子厂商</text>
+                <text class="yuan">原厂</text>
+                <text class="daili">代理商</text>
+              </view>
+              <text>进入厂商</text>
+            </view>
+            <view class="listRight">
+              原厂上新,你可以去查看您是否有需要
+            </view>
+          </view>
+        </view>
+        <view wx-if="{{editmerShow}}" class="goodsFooter">
+          <view bindtap="allChecked">
+            <image wx:if="{{allShow}}" src="../../../img/image/xuanzhong.png"></image>
+            <image wx:else src="../../../img/image/weixuanzhong.png"></image>
+            <text>全选</text>
+          </view>
+          <text>取消收藏</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

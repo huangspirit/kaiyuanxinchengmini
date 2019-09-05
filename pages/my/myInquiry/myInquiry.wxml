@@ -1,0 +1,13 @@
+<!--pages/my/myInquiry/myInquiry.wxml-->
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-red cur':''}}" wx:for="{{navList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+      {{item}}
+    </view>
+  </view>
+</scroll-view>
+<allInquiry wx:if="{{TabCur == 0}}" id="allInquiry"></allInquiry>
+<waitInquiry wx:if="{{TabCur == 1}}" id="waitInquiry"></waitInquiry>
+<alredyInquiry wx:if="{{TabCur == 2}}" id="alredyInquiry"></alredyInquiry>
+<alredyOrder wx:if="{{TabCur == 3}}" id="alredyOrder"></alredyOrder>
+<alredyAdov wx:if="{{TabCur == 4}}" id="alredyAdov"></alredyAdov>

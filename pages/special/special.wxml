@@ -1,26 +1,32 @@
 <!--pages/special/special.wxml-->
-<view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
+<view class="custom flex_center">
   <view class='navInput'>
-    <input placeholder='搜索你想要的内容' placeholder-class='none' placeholder-style='color:#b3b3b3;font-size:22rpx;'></input>
+    <text class="cuIcon-search"></text>
+    <input placeholder='搜索你想要的商品' placeholder-class='none'></input>
   </view>
 </view>
-<view class="empty_custom">
-  <view class='specialList'>
-    <view class='listContent' wx:for="{{3}}" wx:key="{{index}}">
-      <view class='list_left'>
-        <image src='../../img/banner.png'></image>
-      </view>
-      <view class='list_right'>
-        <text>CAY25256VI-CT3</text>
-        <text>MOQ:2000 MAP:1000 
-      预计于2019年7月8日 香港交货</text>
-        <view class='speciStatus'>
-          <text>现 货</text>
+<view class="specialContent">
+  <view class="flex  p-xs margin-bottom-sm mb-sm">
+    <view class="radius specialSider">
+      <text wx:for="{{specialSider}}" class="{{siderIndex == index?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" wx:key="index">{{item.name}}</text>
+    </view>
+    <view class="flex-twice padding-sm margin-xs radius rightContent">
+      <view class="specialList" wx:for="{{6}}" wx:key="index">
+        <view class="listLeft">
+          <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
         </view>
-        <text>￥0.268</text>
-        <view>
-          <text>距特价结束：0天1小时3分4秒</text>
-          <text>当前剩余6000只</text>
+        <view class="listRight">
+          <text>546456456ui456456456tyyiyiuyio465</text>
+          <view class="listContent">
+            <view>
+              <text>品牌：sierf</text>
+              <text>订货|代理</text>
+              <text>剩余 7 小时 8分 28秒</text>
+            </view>
+            <view>
+              <text>￥3050</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>

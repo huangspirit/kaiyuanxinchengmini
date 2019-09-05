@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -88,6 +88,84 @@
 					"id": -1,
 					"name": "index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "商品详情有特价",
+					"pathName": "pages/goodsDetail/goodsDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类",
+					"pathName": "pages/classCation/classCation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "原厂直供",
+					"pathName": "pages/factoryDirect/factoryDirect",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/shopCart/shopCart",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品详情无特价",
+					"pathName": "pages/productDetail/productDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分类搜索",
+					"pathName": "pages/classSearch/classSearch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的关注",
+					"pathName": "pages/my/myFocus/myFocus",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的询价",
+					"pathName": "pages/my/myInquiry/myInquiry",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "待批复详情",
+					"pathName": "pages/my/myInquiry/components/waitDetail/waitDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "已批复详情",
+					"pathName": "pages/my/myInquiry/components/alredyInquiryDetail/alredyInquiryDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单中心",
+					"pathName": "pages/my/myOrder/myOrder",
+					"query": "",
 					"scene": null
 				}
 			]

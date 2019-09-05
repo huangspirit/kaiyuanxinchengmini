@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -16,6 +17,44 @@
   color: #aaa;
 }
 
-.usermotto {
-  margin-top: 200px;
+#dialog .section .phoneIpt {
+  height: 80rpx;
+  padding: 0 40rpx;
+  text-align: left;
+}
+
+#dialog .section .phoneIpt input {
+  height: 100%;
+  border: 1px solid #dcdfe6;
+  padding: 0 15rpx;
+  border-radius: 10rpx;
+}
+
+#dialog .section .phoneCode {
+  height: 80rpx;
+  padding: 0 40rpx;
+  text-align: left;
+  display: flex;
+  margin-top: 15rpx;
+}
+
+#dialog .section .phoneCode input {
+  height: 100%;
+  width: 70%;
+  padding: 0 15rpx;
+  border: 1px solid #dcdfe6;
+  border-radius: 10rpx 0 0 10rpx;
+}
+
+#dialog .section .phoneCode input:focus {
+  border: 1px solid #0068db;
+}
+
+#dialog .section .phoneCode text {
+  height: 100%;
+  line-height: 80rpx;
+  background: #0068db;
+  padding: 0 2%;
+  color: #fff;
+  border-radius: 0 10rpx 10rpx 0;
 }

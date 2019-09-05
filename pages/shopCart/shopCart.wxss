@@ -1,0 +1,407 @@
+.shoppingCart {
+  padding: 0 20rpx 100rpx 20rpx;
+  overflow: hidden;
+}
+
+.shoppingCart .cartTop {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #fff;
+  padding: 0 20rpx;
+  margin: 20rpx 0 10rpx 0;
+}
+
+.shoppingCart .cartTop>view {
+  float: left;
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shoppingCart .cartTop>view>image {
+  width: 26rpx;
+  height: 35rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.shoppingCart .cartTop>view>text {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.shoppingCart .cartTop>text {
+  float: right;
+  font-size: 30rpx;
+  color: #999;
+}
+
+.shopList {
+  width: 100%;
+}
+
+.listContent {
+  width: 100%;
+  background: #fff;
+  padding: 20rpx 26rpx;
+  box-sizing: border-box;
+  margin-bottom: 15rpx;
+}
+
+.listContent .shopSeller {
+  height: 97rpx;
+  margin-bottom: 30rpx;
+}
+
+.listContent .shopSeller .action-checkbox {
+  float: left;
+  margin-top: 22rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 40rpx;
+}
+
+.listContent .shopSeller .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.listContent .shopSeller>text {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.listContent .sellerList {
+  height: 180rpx;
+  border-bottom: 2rpx dashed #bbb;
+}
+
+.listContent .sellerList .action-checkbox {
+  float: left;
+  margin-top: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 40rpx;
+}
+
+.listContent .sellerList .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.listContent .sellerList .listDetail {
+  float: left;
+  width: calc(100% - 52rpx);
+  display: flex;
+}
+
+.listContent .sellerList .listDetail .listLeft {
+  width: 148rpx;
+  height: 148rpx;
+  float: left;
+  border: 2rpx solid #e5e5e5;
+  margin: 0 20rpx;
+}
+
+.listContent .sellerList .listDetail .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.listContent .sellerList .listDetail .listRight {
+  float: left;
+}
+
+.listContent .sellerList .listDetail .listRight>text {
+  display: block;
+}
+
+.listContent .sellerList .listDetail .listRight>text:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 418rpx;
+  color: #333;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+
+.listContent .sellerList .listDetail .listRight>text:nth-of-type(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 418rpx;
+  color: #999;
+  margin: 8rpx 0;
+  font-size: 24rpx;
+}
+
+.listContent .sellerList .listDetail .listRight>text:nth-of-type(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 418rpx;
+  color: #333;
+  font-size: 18rpx;
+  margin-bottom: 10rpx;
+}
+
+.listContent .sellerList .listDetail .listRight .goodsPrice {
+  display: flex;
+  justify-content: space-between;
+  width: 418rpx;
+}
+
+.listContent .sellerList .listDetail .listRight .goodsPrice>text {
+  font-weight: bold;
+  color: #df3f2f;
+  line-height: 40rpx;
+  flex: 1;
+}
+
+.listContent .sellerList .listDetail .listRight .goodsPrice>view {
+  display: flex;
+  flex: 0.7;
+}
+
+.listContent .sellerList .listDetail .listRight .goodsPrice>view .cu-btn {
+  height: 40rpx;
+  width: 40rpx;
+  padding: 0 12rpx;
+  border-radius: 0;
+}
+
+.listContent .sellerList .listDetail .listRight .goodsPrice>view>input {
+  background: #f5f5f5;
+  margin: 0 8rpx;
+  height: 100%;
+  text-align: center;
+}
+
+.shopFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.shopFooter .footerLeft {
+  display: flex;
+  justify-content: space-between;
+  width: 71%;
+  padding: 0 25rpx 0 45rpx;
+  line-height: 100rpx;
+  background: #fff;
+}
+
+.shopFooter .footerLeft>view {
+  display: flex;
+}
+
+.shopFooter .footerLeft .action-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 40rpx;
+  margin-top: 10rpx;
+  margin-right: 10rpx;
+}
+
+.shopFooter .footerLeft .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.shopFooter .footerRight {
+  display: flex;
+  flex-direction: column;
+  width: 29%;
+  background: #df3f2f;
+  color: #fff;
+  text-align: center;
+  padding: 14rpx 0;
+}
+
+.shopFooter .footerRight>text:nth-of-type(1) {
+  font-size: 30rpx;
+}
+
+.shopFooter .footerRight>text:nth-of-type(2) {
+  font-size: 22rpx;
+}
+
+.shopFooter1 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.shopFooter1 .footerLeft {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  padding: 0 25rpx 0 45rpx;
+  line-height: 100rpx;
+  background: #fff;
+}
+
+.shopFooter1 .footerLeft>view {
+  display: flex;
+}
+
+.shopFooter1 .footerLeft .action-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 40rpx;
+  margin-top: 10rpx;
+  margin-right: 10rpx;
+}
+
+.shopFooter1 .footerLeft .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.shopFooter1 .footerRight {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 60%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.shopFooter1 .footerRight>text:nth-of-type(1) {
+  font-size: 30rpx;
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  border: 2rpx solid #dcdcdc;
+}
+
+.shopFooter1 .footerRight>text:nth-of-type(2) {
+  font-size: 30rpx;
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  background: #df3f2f;
+  color: #fff;
+  margin-right: 20rpx;
+}
+
+.shopingCarEmpty {
+  width: 100%;
+  text-align: center;
+  padding: 135rpx 0;
+}
+
+.shopingCarEmpty>image {
+  width: 295rpx;
+  height: 255rpx;
+}
+
+.shopingCarEmpty>view {
+  display: block;
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 75rpx;
+}
+
+.shopingCarEmpty .wantTitle {
+  position: relative;
+}
+
+.shopingCarEmpty .wantTitle>image {
+  width: 100%;
+  height: 18rpx;
+  padding: 0 20rpx;
+}
+
+.shopingCarEmpty .wantTitle>text {
+  font-size: 18rpx;
+  color: #999;
+  position: absolute;
+  z-index: 1;
+  left: 44%;
+  top: 10rpx;
+}
+
+.shopingCarEmpty .wantList {
+  width: 100%;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.shopingCarEmpty .wantList .listDetail {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.shopingCarEmpty .wantList .listDetail .listLeft {
+  width: 148rpx;
+  height: 148rpx;
+  border: 2rpx solid #e5e5e5;
+  margin: 0 45rpx 0 20rpx;
+}
+
+.shopingCarEmpty .wantList .listDetail .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.shopingCarEmpty .wantList .listDetail .listRight {
+  border-bottom: 2rpx solid #dddddd;
+  width: calc(100% - 148rpx);
+  text-align: left;
+  padding-bottom: 25rpx;
+}
+
+.shopingCarEmpty .wantList .listDetail .listRight>text {
+  display: block;
+}
+
+.shopingCarEmpty .wantList .listDetail .listRight>text:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+
+.shopingCarEmpty .wantList .listDetail .listRight>text:nth-of-type(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999;
+  margin: 8rpx 0;
+  font-size: 24rpx;
+}
+
+.shopingCarEmpty .wantList .listDetail .listRight>text:nth-of-type(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 18rpx;
+  margin-bottom: 10rpx;
+}
+.shopingCarEmpty .wantList .listDetail .listRight .goodsPrice>text {
+  font-weight: bold;
+  color: #df3f2f;
+  line-height: 40rpx;
+}

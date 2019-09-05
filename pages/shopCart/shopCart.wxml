@@ -1,0 +1,105 @@
+<!--pages/shopCart/shopCart.wxml-->
+<view class="shoppingCart" wx:if="{{cartList.length>0}}">
+  <view class="cartTop">
+    <view>
+      <image src="../../img/image/weizhi_hui.png"></image>
+      <text bindtap="changeAdress">北京市大兴区北京市大兴区北京市大兴区</text>
+    </view>
+    <text bindtap="editGoods">{{editText}}</text>
+  </view>
+
+  <view class="shopList">
+    <view class="listContent" wx:for="{{cartList}}" wx:key="index" wx:for-item="item" wx:for-index="index">
+      <view class="shopSeller">
+        <view class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
+          <image wx:if="{{item.checked}}" src="../../img/image/xuanzhong.png"></image>
+          <image wx:else src="../../img/image/weixuanzhong.png"></image>
+        </view>
+        <view class="cu-avatar lg round margin-left margin-right">
+          <image style="width:100%;height:100%;border-radius:100%;" src="{{item.sellerUrl}}"></image>
+        </view>
+        <text>{{item.sellerName}} ></text>
+      </view>
+      <view class="sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+        <view class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
+          <image wx:if="{{subItem.checked}}" src="../../img/image/xuanzhong.png"></image>
+          <image wx:else src="../../img/image/weixuanzhong.png"></image>
+        </view>
+        <view class="listDetail">
+          <view class="listLeft">
+            <image src="{{subItem.goodsImageUrl}}"></image>
+          </view>
+          <view class="listRight">
+            <text>{{subItem.goods_name}}</text>
+            <text>{{subItem.goodsDesc}}</text>
+            <text>{{subItem.diliverPlace}}</text>
+            <view class="goodsPrice">
+              <text>{{subItem.priceUnit?'$':'￥'}} {{subItem.goodsPrice}}</text>
+              <view>
+                <button class='cu-btn' bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
+                <input class='ca-sum' name='input' value="{{subItem.goodsNum}}"></input>
+                <button class='cu-btn' bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="shopFooter" wx:if="{{cartList.length>0&&!editgoodsShow}}">
+  <view class="footerLeft">
+    <view>
+      <view class='action-checkbox'>
+        <image bindtap="allChecked" wx:if="{{allChecked}}" src="../../img/image/xuanzhong.png"></image>
+        <image bindtap="allChecked" wx:else src="../../img/image/weixuanzhong.png"></image>
+      </view>
+      全选
+    </view>
+    <text>总计：￥{{goodsAllPrice}}</text>
+  </view>
+  <view class="footerRight">
+    <text bindtap="toPay">结算</text>
+    <text>({{goodsAllNum}}件)</text>
+  </view>
+</view>
+<view class="shopFooter1" wx:if="{{editgoodsShow}}">
+  <view class="footerLeft">
+    <view>
+      <view class='action-checkbox'>
+        <image bindtap="allChecked" wx:if="{{allChecked}}" src="../../img/image/xuanzhong.png"></image>
+        <image bindtap="allChecked" wx:else src="../../img/image/weixuanzhong.png"></image>
+      </view>
+      全选
+    </view>
+  </view>
+  <view class="footerRight">
+    <text bindtap="delete">删除</text>
+    <text bindtap="addFocus">移至收藏</text>
+  </view>
+</view>
+<view class="shopingCarEmpty" wx:if="{{cartList.length<=0}}">
+  <image src="../../img/image/gouwuchekong.png"></image>
+  <view>购物车空空如也，
+    <text>去逛逛</text>吧 ~
+  </view>
+  <view class="wantTitle">
+    <image src="../../img/image/gouwuchexian.png"></image>
+    <text>可能你想要</text>
+  </view>
+  <view class="wantList">
+    <view class="listDetail" wx:for="{{3}}" wx:key="index">
+      <view class="listLeft">
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="listRight">
+        <text>商品名称</text>
+        <text>商品描述</text>
+        <text>商品地址</text>
+        <view class="goodsPrice">
+          <text>￥2.330</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,276 @@
+/* pages/home/myFocus/myFocus.wxss */
+
+.myFocus {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.myFocus .title {
+  width: 100%;
+  height: 88rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.myFocus .titleSel {
+  color: #333;
+  font-size: 32rpx;
+}
+
+.myFocus .headerLineSel {
+  color: #df3f2f;
+}
+
+.myFocus.headerLineUnsel {
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+
+.myFocus .swiper {
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 88rpx);
+  overflow: scroll;
+}
+
+.myFocus .recordItem {
+  margin-top: 10rpx;
+  background-color: white;
+  padding-bottom: 20rpx;
+  padding-top: 20rpx;
+}
+
+.focusGoods {
+  width: 100%;
+}
+
+.focusGoods .focusGoddsTop {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.focusGoods .focusGoddsTop>view {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.focusGoods .focusGoddsTop>view>text {
+  color: #df3f2f;
+  font-weight: bold;
+}
+
+.focusGoods .focusGoddsTop>text {
+  color: #999;
+}
+
+.focusGoddsList {
+  width: 100%;
+}
+
+.focusGoddsList .listDetail {
+  display: flex;
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+}
+
+.focusGoddsList .listDetail .action-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 60rpx;
+}
+
+.focusGoddsList .listDetail .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.focusGoddsList .listDetail .listLeft {
+  width: 148rpx;
+  height: 148rpx;
+  border: 2rpx solid #e5e5e5;
+  margin: 0 45rpx 0 20rpx;
+}
+
+.focusGoddsList .listDetail .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.focusGoddsList .listDetail .listRight {
+  width: calc(100% - 253rpx);
+  text-align: left;
+  padding-bottom: 25rpx;
+}
+
+.focusGoddsList .listDetail .listRight>text {
+  display: block;
+}
+
+.focusGoddsList .listDetail .listRight>text:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+
+.focusGoddsList .listDetail .listRight>text:nth-of-type(2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #999;
+  margin: 8rpx 0;
+  font-size: 24rpx;
+}
+
+.focusGoddsList .listDetail .listRight>text:nth-of-type(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 18rpx;
+  margin-bottom: 10rpx;
+}
+
+.focusGoddsList .listDetail .listRight .goodsPrice>text {
+  font-weight: bold;
+  color: #df3f2f;
+  line-height: 40rpx;
+}
+
+.goodsFooter {
+  height: 100rpx;
+  line-height: 60rpx;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  padding: 20rpx;
+  justify-content: space-between;
+}
+
+.goodsFooter>view {
+  padding: 0 20rpx;
+}
+
+.goodsFooter>view>image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.goodsFooter>text {
+  width: 180rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  background: #df3f2f;
+  color: #fff;
+  border-radius: 4rpx;
+}
+
+.focusmerchansList {
+  width: 100%;
+}
+
+.focusmerchansList .listDetail {
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 20rpx 20rpx 0 20rpx;
+}
+
+.focusmerchansList .listDetail .listLeft {
+  width: 100%;
+  display: flex;
+  height: 150rpx;
+  border-bottom: 2rpx solid #e5e5e5;
+}
+
+.focusmerchansList .listDetail .listLeft .action-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 50rpx;
+}
+
+.focusmerchansList .listDetail .listLeft .action-checkbox>image {
+  width: 100%;
+  height: 100%;
+}
+
+.focusmerchansList .listDetail .listLeft>image {
+  width: 190rpx;
+  height: 56rpx;
+  margin-right: 25rpx;
+  margin-top: 40rpx;
+}
+
+.focusmerchansList .listDetail .listLeft>.merchanDetail {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 35rpx 0;
+}
+
+.focusmerchansList .listDetail .listLeft>.merchanDetail>text:nth-of-type(1) {
+  color: #333;
+  font-size: 28rpx;
+}
+
+.focusmerchansList .listDetail .listLeft>.merchanDetail .yuan {
+  width: 80rpx;
+  height: 34rpx;
+  text-align: center;
+  line-height: 34rpx;
+  color: #fff;
+  background: #df3f2f;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 4rpx;
+}
+
+.focusmerchansList .listDetail .listLeft>.merchanDetail .daili {
+  width: 80rpx;
+  height: 34rpx;
+  text-align: center;
+  line-height: 34rpx;
+  color: #fff;
+  background: #004098;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 4rpx;
+}
+
+.focusmerchansList .listDetail .listLeft>text {
+  width: 170rpx;
+  height: 50rpx;
+  background: #df3f2f;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 50rpx;
+  color: #fff;
+  margin-top: 45rpx;
+}
+
+.focusmerchansList .listDetail .listRight {
+  color: #333;
+  font-size: 22rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}

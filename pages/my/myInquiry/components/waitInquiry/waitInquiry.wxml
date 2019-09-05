@@ -1,0 +1,30 @@
+<!--pages/my/myInquiry/components/waitInquiry/waitInquiry.wxml-->
+<view class="allInquiry">
+  <view class="allList" bindtap="waitDetail" wx:for="{{3}}" wx:key="index">
+    <view class="listTitle">
+      <view class="titleLeft">
+        申请编号：IDHEBND2013698552
+      </view>
+      <view class="titleRight">
+        <text class="waitStatus">待批复</text>
+      </view>
+    </view>
+    <view class="listContent">
+      <view class="listLeft">
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="listRight">
+        <view class="rightRight">
+          <text>申请人：晶源电子</text>
+          <text>SUISDFJHIUFHSDIOF1564564</text>
+          <text>品牌：SDFHSDDF</text>
+          <text>距离结束时间：265天08时24分23秒</text>
+        </view>
+        <view class="rightLeft">
+          <text>申请价格</text>
+          <text>￥ 3.5</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

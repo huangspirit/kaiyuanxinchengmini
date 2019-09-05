@@ -1,0 +1,80 @@
+/* pages/my/myOrder/components/abnormalOrder/abnormalOrder.wxss */
+
+.myOrder {
+  width: 100%;
+  padding: 20rpx;
+}
+
+.myOrder .orderList {
+  width: 100%;
+  background: #fff;
+  padding-top: 20rpx;
+}
+
+.myOrder .orderList .listTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  padding: 0 20rpx;
+}
+
+.myOrder .orderList .listTitle>text {
+  color: #333;
+}
+
+.myOrder .orderList .listTitle>text:nth-of-type(1) {
+  font-weight: bold;
+}
+
+.myOrder .orderList .listContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx 30rpx;
+}
+
+.myOrder .orderList .listContent>view:nth-of-type(1) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.myOrder .orderList .listContent>view>image {
+  width: 119rpx;
+  height: 119rpx;
+  border: 2rpx solid #e5e5e5;
+  margin-right: 10rpx;
+}
+
+.myOrder .orderList .listContent>view:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  padding: 50rpx 0 0 0;
+}
+
+.myOrder .orderList .listContent>view:nth-of-type(2)>text:nth-of-type(1) {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: bold;
+  line-height: 45rpx;
+}
+
+.myOrder .orderList .listContent>view:nth-of-type(2)>text:nth-of-type(2) {
+  font-size: 24rpx;
+  color: #e5e5e5;
+}
+
+.myOrder .orderList .listFooter {
+  height: 89rpx;
+  border-top: 2rpx solid #e5e5e5;
+  padding: 0 20rpx;
+}
+
+.myOrder .orderList .listFooter .abnormalOrder {
+  padding: 14rpx 23rpx;
+  float: right;
+  background: #c0211b;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 6rpx;
+  margin-top: 13rpx;
+}

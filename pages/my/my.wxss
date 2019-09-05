@@ -1,193 +1,389 @@
-/* pages/my/my.wxss */
-
 .mayTop {
-  height: 217rpx;
-  padding: 44rpx 52rpx;
-  box-sizing: border-box;
-  background: linear-gradient(68deg, rgba(228, 206, 158, 1) 0%, rgba(221, 199, 150, 1) 100%);
-  display: flex;
+  height: 265rpx;
+  width: 100%;
   position: relative;
 }
 
-.mayTop image {
-  width: 128rpx;
-  height: 128rpx;
-  border-radius: 50%;
-}
-
-.mayTop>view {
-  margin-left: 48rpx;
-}
-
-.mayTop>view>text {
-  font-size: 30rpx;
-  font-family: PingFangSC-Medium;
-  font-weight: 600;
-  color: rgba(51, 51, 51, 1);
-  line-height: 42rpx;
-  display: block;
-}
-
-.mayTop>view .toplevel {
-  font-size: 20rpx;
-  color: rgba(170, 157, 135, 1);
-  line-height: 28rpx;
-  display: block;
-  margin: 11rpx 0;
-}
-
-.mayTop>view .topMoney {
-  font-size: 22rpx;
-  color: rgba(102, 102, 102, 1);
-  line-height: 30rpx;
-}
-
-.mayTop>view .topMoney text {
-  font-size: 22rpx;
-  color: rgba(228, 47, 47, 1);
-  line-height: 30rpx;
-}
-
-.mayTop .topMerchant {
-  width: 158rpx;
-  height: 56rpx;
-  text-align: center;
-  background: linear-gradient(90deg, rgba(66, 67, 68, 1) 0%, rgba(71, 65, 74, 1) 100%);
-  border-radius: 28rpx 0 0 28rpx;
+.mayTop>image {
   position: absolute;
-  right: 0;
-  top: 80rpx;
-}
-
-.mayTop .topMerchant text {
-  font-size: 22rpx;
-  color: rgba(170, 157, 135, 1);
-  line-height: 56rpx;
-}
-
-.userCenter {
-  width: 690rpx;
-  height: 559rpx;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 1rpx 10rpx 2rpx rgba(0, 0, 0, 0.04);
-  border-radius: 11rpx;
-  margin: 50rpx 30rpx;
-}
-
-.userCenter .userTitle {
-  display: block;
-  height: 82rpx;
-  line-height: 82rpx;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  background: #fff;
-  padding: 0 24rpx;
-  font-size: 26rpx;
-  font-weight: 600;
-  color: rgba(51, 51, 51, 1);
+  z-index: -1;
 }
 
-.userCenter .userList .listItem {
-  height: 157rpx;
-  width: 228rpx;
-  text-align: center;
-  background: #fff;
-  float: left;
-  border-top: 1px solid #979797;
-  border-right: 1px solid #979797;
+.mayTop>text {
+  display: block;
+  padding: 30rpx 20rpx 0;
+  text-align: right;
+  color: #fff;
+  font-size: 27rpx;
 }
 
-.userCenter .userList .listItem:nth-of-type(1) {
-  border-top: none;
+.mayTop>.myDetail {
+  padding: 0 40rpx;
+  display: flex;
 }
 
-.userCenter .userList .listItem:nth-of-type(2) {
-  border-top: none;
+.mayTop>.myDetail>image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  margin-right: 22rpx;
 }
 
-.userCenter .userList .listItem:nth-of-type(3) {
-  border-top: none;
-  border-right: none;
+.mayTop>.myDetail .myInfo {
+  color: #fff;
+  padding: 25rpx 0;
 }
 
-.userCenter .userList .listItem:nth-of-type(9) {
-  border-right: none;
+.mayTop>.myDetail .myInfo .myName {
+  display: flex;
 }
 
-.userCenter .userList .listItem:nth-of-type(6) {
-  border-right: none;
+.mayTop>.myDetail .myInfo .myName>text {
+  margin-right: 10rpx;
 }
 
-.userCenter .userList .listItem image {
-  height: 44rpx;
-  width: 43rpx;
-  margin-top: 35rpx;
+.mayTop>.myDetail .myInfo .myName>image {
+  width: 23rpx;
+  height: 24rpx;
+  margin-top: 6rpx;
+  vertical-align: middle;
 }
 
-.userCenter .userList .listItem text {
-  font-size: 22rpx;
-  color: rgba(54, 54, 54, 1);
+.mayTop>.myDetail .myInfo .myName>view {
+  width: 80rpx;
+  background: #bf4c3a;
+  margin-left: 10rpx;
+  padding: 7rpx 10rpx;
+  line-height: 20rpx;
+  border-radius: 30rpx;
+}
+
+.mayTop>.myDetail .myInfo .myName>view>text {
+  font-size: 17rpx;
+}
+
+.mayTop>.myDetail .myInfo .myName>view>image {
+  width: 17rpx;
+  height: 17rpx;
+  vertical-align: middle;
+  margin-right: 5rpx;
+}
+
+.mayTop>.myDetail .myInfo>.myPosition>text {
+  padding: 7rpx 10rpx;
+  height: 30rpx;
+  background: #bf4c3a;
   line-height: 30rpx;
-  margin-top: 18rpx;
-  display: block;
+  text-align: center;
+  font-size: 17rpx;
+  border-radius: 30rpx;
 }
 
-.myCenter {
-  width: 690rpx;
-  height: 242rpx;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 1rpx 10rpx 2rpx rgba(0, 0, 0, 0.04);
-  border-radius: 11rpx;
-  margin: 50rpx 30rpx;
+.mayTop .selectUser {
+  width: 100%;
+  text-align: center;
+  color: #fff;
 }
 
-.myCenter .myTitle {
-  display: block;
-  height: 82rpx;
-  line-height: 82rpx;
-  width: 642rpx;
-  background: #fff;
-  padding: 0 24rpx;
-  font-size: 26rpx;
-  font-weight: 600;
-  color: rgba(51, 51, 51, 1);
-  border-bottom: 1rpx solid #979797;
+.mayTop .selectUser .list-msg2 {
+  height: 60rpx;
+  width: 160rpx;
+  display: inline-block;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.myCenter .myList .listItem {
-  height: 157rpx;
-  width: 228rpx;
+.mayTop .selectUser .list-msg2>text {
+  margin-right: 10rpx;
+}
+
+.mayTop .selectUser .select_box {
+  background-color: #bf4c3a;
+  padding: 0 10rpx 10rpx 10rpx;
+  width: 21%;
+  position: absolute;
+  top: 235rpx;
+  z-index: 1;
+  overflow: hidden;
+  animation: myfirst 0.5s;
+  left: 365rpx;
+}
+
+@keyframes myfirst {
+  from {
+    height: 0rpx;
+  }
+
+  to {
+    height: 130rpx;
+  }
+}
+
+.mayTop .selectUser .select_one {
+  height: 60rpx;
+  line-height: 60rpx;
+  border-bottom: 1px solid #ccc;
+}
+.content {
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+.myContent {
+  width: 100%;
+}
+
+.myContent .myeditList {
+  width: 100%;
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.myContent .myeditList .editLeft {
+  display: flex;
+  width: 100%;
+}
+
+.myContent .myeditList .editLeft1 {
+  display: flex;
+  width: 100%;
+}
+
+.myContent .myeditList1 .editLeft {
+  display: flex;
+  width: 100%;
+}
+
+.myContent .myeditList .editLeft>view {
+  flex: 1;
   text-align: center;
   background: #fff;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.myContent .myeditList .editLeft>view>view {
+  height: 46rpx;
+}
+.myContent .myeditList .editLeft1>view {
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+
+.myContent .myeditList .editLeft view:nth-of-type(1) image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.myContent .myeditList .editLeft view:nth-of-type(2) image {
+  width: 44rpx;
+  height: 32rpx;
+}
+
+.myContent .myeditList .editLeft view:nth-of-type(3) image {
+  width: 42rpx;
+  height: 29rpx;
+}
+
+.myContent .myeditList .editLeft view:nth-of-type(4) image {
+  width: 37rpx;
+  height: 39rpx;
+}
+
+.myContent .myeditList .editLeft view>text {
+  display: block;
+  color: #999;
+  margin-top: 12rpx;
+}
+
+.myContent .myeditList .editLeft1 view>text {
+  display: block;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.myContent .myeditList .editLeft1 view:nth-of-type(1) image {
+  width: 38rpx;
+  height: 42rpx;
+}
+
+.myContent .myeditList .editLeft1 view:nth-of-type(2) image {
+  width: 38rpx;
+  height: 42rpx;
+}
+
+.myContent .myeditList .editLeft1 view:nth-of-type(3) image {
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.myContent .myeditList .editLeft1 view:nth-of-type(4) image {
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.myContent .myeditList .editRight {
+  text-align: center;
+  width: 175rpx;
+  height: 140rpx;
+  background: #fff;
+  margin-left: 4rpx;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.myContent .myeditList:nth-of-type(1) .editRight>image {
+  width: 31rpx;
+  height: 36rpx;
+}
+
+.myContent .myeditList:nth-of-type(2) .editRight>image {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.myContent .myeditList .editRight text {
+  display: block;
+  color: #999;
+  margin-top: 12rpx;
+}
+
+.myContent .myeditList .editRight text:nth-of-type(2) {
+  position: absolute;
+  background: #dd402d;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 24rpx;
+  top: -2rpx;
+  right: 36rpx;
+  font-size: 13rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 24rpx;
+}
+
+.delivery {
+  width: 100%;
+  margin-top: 20rpx;
+  padding: 20rpx 16rpx 20rpx 32rpx;
+  background: #fff;
+  height: 160rpx;
+}
+
+.delivery .deliveryLeft {
+  width: 120rpx;
+  height: 120rpx;
   float: left;
 }
 
-.myCenter .myList .listItem image {
-  height: 44rpx;
-  width: 43rpx;
-  margin-top: 35rpx;
+.delivery .deliveryLeft>image {
+  width: 100%;
+  height: 100%;
 }
 
-.myCenter .myList .listItem text {
+.delivery .deliveryRight {
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  float: left;
+  width: calc(100% - 120rpx);
+}
+
+.delivery .deliveryRight>text {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.delivery .deliveryRight>text:nth-of-type(1) {
+  color: #df3f2f;
+  font-size: 28rpx;
+}
+
+.delivery .deliveryRight>text:nth-of-type(2) {
+  color: #323232;
+  font-size: 27rpx;
+  margin: 10rpx 0;
+}
+
+.delivery .deliveryRight>text:nth-of-type(3) {
+  color: #999;
   font-size: 22rpx;
-  color: rgba(54, 54, 54, 1);
-  line-height: 30rpx;
-  margin-top: 18rpx;
+}
+
+.myFocus {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.myFocus >view {
+  text-align: center;
+  background: #fff;
+  flex: 1;
+  padding: 33rpx 0;
+}
+
+.myFocus >view:nth-of-type(3) {
+  margin-left: 4rpx;
+}
+
+.myFocus >view>text {
   display: block;
 }
 
-.myBtn {
-  width: 690rpx;
-  height: 86rpx;
-  background: rgba(216, 216, 216, 1);
-  box-shadow: 4px 1px 6px 0px rgba(0, 0, 0, 0.05);
-  border-radius: 11px;
-  text-align: center;
-  line-height: 86rpx;
-  margin: 0 30rpx 40rpx 30rpx;
+.myFocus >view>text:nth-of-type(1) {
+  color: #e03e31;
+  font-size: 26rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
 }
 
-.myBtn button {
+.myFocus >view>text:nth-of-type(2) {
+  color: #323232;
   font-size: 22rpx;
-  color: rgba(102, 102, 102, 1);
-  line-height: 86rpx;
+}
+
+.myFocus >view>image {
+  width: 46rpx;
+  height: 39rpx;
+}
+
+.myFocus >view:nth-of-type(3)>text {
+  color: #999;
+  font-size: 22rpx;
+  margin-bottom: 0;
+}
+
+.mylistContent {
+  white-space: nowrap;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+
+.mylistContent .list_left {
+  min-width: 166rpx;
+  height: 166rpx;
+  margin-right: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  border-radius: 10rpx;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.mylistContent .list_left>image {
+  width: 100%;
+  height: 100%;
+  background: rgba(243, 243, 243, 1);
+  border-radius: 8px;
 }

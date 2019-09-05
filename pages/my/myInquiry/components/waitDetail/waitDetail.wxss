@@ -1,0 +1,113 @@
+/* pages/my/myInquiry/components/waitDetail/waitDetail.wxss */
+.waitTime{
+  width: 100%;
+  background: #fcebea;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding: 0 30rpx;
+}
+.allInquiry {
+  padding: 20rpx;
+}
+
+.allInquiry .allList {
+  width: 100%;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.allInquiry .allList .listTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.allInquiry .allList .listTitle .titleLeft {
+  color: #333;
+  font-size: 24rpx;
+}
+
+.allInquiry .allList .listTitle .titleRight .waitStatus {
+  color: #df3f2f;
+  font-size: 24rpx;
+}
+
+.allInquiry .allList .listContent {
+  width: 100%;
+  display: flex;
+}
+
+.allInquiry .allList .listContent .listLeft {
+  width: 146rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+}
+
+.allInquiry .allList .listContent .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.allInquiry .allList .listContent .listRight {
+  display: flex;
+  justify-content: space-between;
+  width: 488rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight {
+  width: 326rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text {
+  display: block;
+  line-height: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(1) {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(2) {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(3) {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(4) {
+  font-size: 18rpx;
+  color: #999;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft>text {
+  color: #df3f2f;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft>text:nth-of-type(2) {
+  font-weight: bold;
+}
+.allInquiry .waitDetail{
+  width: 100%;
+  border-top: 2rpx dashed #bbb;
+  background: #fff;
+  padding: 20rpx;
+}
+.allInquiry .waitDetail>text {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+}

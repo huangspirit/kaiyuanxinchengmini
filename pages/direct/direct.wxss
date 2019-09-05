@@ -141,7 +141,7 @@
   background: #fff;
 }
 .brandHot .list_left {
-  width: 65%;
+  width: 30%;
   padding: 15rpx;
   box-sizing: border-box;
 }

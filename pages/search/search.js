@@ -1,7 +1,6 @@
 // pages/search/search.js
 const app = getApp()
 import api from '../../api/api'
-const WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -9,7 +8,10 @@ Page({
    */
   data: {
     searchList: [],
-    textData: []
+    textData: [],
+    brandTotal:"",
+    catergoryTotal:"",
+    productTotal:""
   },
   search(val) {
     if (val.detail.value == '') {
@@ -106,7 +108,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 统计厂商产品总数的接口
+    api.get("/api-g/gods-anon/querySummaryHome", {}).then(res => {
 
+      this.setData({
+        brandTotal: res.brandTotal,
+        catergoryTotal: res.catergoryTotal,
+        productTotal: res.productTotal
+      })
+      if (res.resultCode == "200") {
+        this.setData({
+          specialList: res.data.data
+        })
+        console.log(this.data.specialList)
+      }
+    })
   },
 
   /**

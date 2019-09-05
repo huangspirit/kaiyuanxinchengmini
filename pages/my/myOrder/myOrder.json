@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "allOrder":"./components/allOrder/allOrder",
+    "waitConfirm":"./components/waitConfirm/waitConfirm",
+    "waitPay":"./components/waitPay/waitPay",
+    "abnormalOrder":"./components/abnormalOrder/abnormalOrder",
+    "waitDelivery":"./components/waitDelivery/waitDelivery",
+    "alredyEnd":"./components/alredyEnd/alredyEnd"
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "订单中心",
+  "navigationBarTextStyle": "black"
+}

@@ -1,0 +1,196 @@
+/* pages/my/myInquiry/components/alredyInquiryDetail/alredyInquiryDetail.wxss */
+
+.allInquiry {
+  padding: 20rpx;
+}
+
+.allInquiry .allList {
+  width: 100%;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.allInquiry .allList .listTitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.allInquiry .allList .listTitle .titleLeft {
+  color: #333;
+  font-size: 24rpx;
+}
+
+.allInquiry .allList .listTitle .titleRight .alredyStatus {
+  color: #25c13b;
+  font-size: 24rpx;
+}
+
+.allInquiry .allList .listContent {
+  width: 100%;
+  display: flex;
+}
+
+.allInquiry .allList .listContent .listLeft {
+  width: 146rpx;
+  height: 100rpx;
+  margin-right: 30rpx;
+}
+
+.allInquiry .allList .listContent .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.allInquiry .allList .listContent .listRight {
+  display: flex;
+  justify-content: space-between;
+  width: 488rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight {
+  width: 326rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text {
+  display: block;
+  line-height: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(1) {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(2) {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(3) {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(4) {
+  font-size: 18rpx;
+  color: #999;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft>text {
+  color: #df3f2f;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+
+.allInquiry .allList .listContent .listRight .rightLeft>text:nth-of-type(2) {
+  font-weight: bold;
+}
+
+.allInquiry .waitDetail {
+  width: 100%;
+  border-top: 2rpx dashed #bbb;
+  background: #fff;
+  padding: 20rpx;
+}
+
+.allInquiry .waitDetail>text {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+}
+
+.inquiryDetail .listLeft {
+  width: 100%;
+  display: flex;
+  height: 150rpx;
+  padding: 0 20rpx;
+}
+
+.inquiryDetail .listLeft>image {
+  width: 190rpx;
+  height: 56rpx;
+  margin-right: 25rpx;
+  margin-top: 40rpx;
+}
+
+.inquiryDetail .listLeft>view {
+  width: 46%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 35rpx 0;
+}
+
+.inquiryDetail {
+  background: #fff;
+  margin-top: 10rpx;
+}
+
+.inquiryDetail .listLeft>.leftLeft>text:nth-of-type(1) {
+  color: #333;
+  font-size: 28rpx;
+}
+
+.inquiryDetail .listLeft>.leftLeft .yuan {
+  width: 100rpx;
+  height: 34rpx;
+  text-align: center;
+  line-height: 34rpx;
+  color: #fff;
+  background: #df3f2f;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 4rpx;
+}
+
+.inquiryDetail .listLeft>.leftLeft .daili {
+  width: 100rpx;
+  height: 34rpx;
+  text-align: center;
+  line-height: 34rpx;
+  color: #fff;
+  background: #004098;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+  border-radius: 4rpx;
+}
+
+.inquiryDetail .listLeft .rightLeft {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40rpx;
+}
+
+.inquiryDetail .listLeft>.rightLeft>text {
+  color: #df3f2f;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+
+.inquiryDetail .listLeft .rightLeft>text:nth-of-type(2) {
+  font-weight: bold;
+}
+
+.inquiryDetail .listBottom {
+  width: 100%;
+  border-top: 2rpx dashed #bbb;
+  background: #fff;
+  padding: 20rpx;
+}
+
+.inquiryDetail .listBottom>text {
+  display: block;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 50rpx;
+}

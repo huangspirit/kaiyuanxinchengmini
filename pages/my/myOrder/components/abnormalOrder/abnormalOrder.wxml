@@ -1,0 +1,23 @@
+<!--pages/my/myOrder/components/abnormalOrder/abnormalOrder.wxml-->
+<view class="myOrder">
+  <view class="orderList">
+    <view class="listTitle">
+      <text>订单编号：2019100398225</text>
+      <text>下单日期：2019-09-25</text>
+    </view>
+    <view class="listContent">
+      <view>
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view>
+        <text>$23584.25</text>
+        <text>共9种器件 18000只</text>
+      </view>
+    </view>
+    <view class="listFooter">
+      <text class="abnormalOrder">异常订单</text>
+    </view>
+  </view>
+</view>

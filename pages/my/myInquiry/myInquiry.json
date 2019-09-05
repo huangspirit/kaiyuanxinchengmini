@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "allInquiry":"./components/allInquiry/allInquiry",
+    "waitInquiry": "./components/waitInquiry/waitInquiry",
+    "alredyInquiry":"./components/alredyInquiry/alredyInquiry",
+    "alredyAdov":"./components/alredyAdov/alredyAdov",
+    "alredyOrder":"./components/alredyOrder/alredyOrder"
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的询价",
+  "navigationBarTextStyle": "black"
+}

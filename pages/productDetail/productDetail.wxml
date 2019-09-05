@@ -6,91 +6,76 @@
 </view>
 <view class="brandComponey">
   <view wx:if="{{productDetail.productno}}" class="brandDetail">
-    <view class="productEdit">
-      <text>￥{{productDetail.price}}</text>
-      <view class="productFocus">
-        <button wx:if="{{!productDetail.focus}}" class="cu-btn round sm bg-red" bindtap="addFocus" data-item="{{productDetail}}">关注</button>
-         <button wx:if="{{productDetail.focus}}" class="cu-btn round sm bg-gray" data-item="{{productDetail}}">已关注</button>
-        <button class="cu-btn round sm bg-orange">分享</button>
-      </view>
-    </view>
     <text>{{productDetail.productno}}</text>
     <text>{{productDetail.productdesc}}</text>
-    <text>品牌：{{productDetail.brand}}</text>
+    <text>品牌：{{productDetail.branda}}</text>
     <view class="goodsLabel">
-      <text>原厂已入驻</text>
-      <text>原装正品</text>
+      <view class="labelList">
+        <text wx:if="{{specialData.tag == 1}}">原厂</text>
+        <text wx:if="{{specialData.tag == 2}}">代理商</text>
+        <text wx:if="{{specialData.goods_type}}">现货</text>
+        <text wx:if="{{!specialData.goods_type}}">期货</text>
+      </view>
+      <view class="productFocus">
+        <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
+          <image src="../../img/image/guanzhu.png"></image>
+          <text>关注</text>
+        </view>
+        <view wx:if="{{productDetail.focus}}" class="focus">
+          <image src="../../img/image/yiguanzhu.png"></image>
+          <text>已关注</text>
+        </view>
+
+        <view class="share">
+          <button open-type="share">
+            <image src="../../img/image/fenxiang.png"></image>
+          </button>
+          <text>分享</text>
+        </view>
+
+      </view>
     </view>
-    <text>供应商负责发货 不支持七天无理由退款 满1000包邮</text>
+    <view class="seller1">
+      <text>原装正品</text> |
+      <text>供应商负责发货&售后。不支持七天无理由退款。满1000包邮</text>
+    </view>
   </view>
   <view class="prompt" wx:else>暂无详情</view>
 </view>
-<view class="brandComponey">
-  <view class="brandTitle">特价共享区</view>
-  <view wx:if="{{merchantsData.length>0}}">
-    <view>*标注现货字样的需要付全款购买，发货日期大于当前购买日期七天的按照用户信用额度进行百分比预付款，以订单支付日期为准</view>
-    <view class="merChantList" wx:for="{{merchantsData}}" wx:key="index">
-      <view class="merchantTitle">
-        <image src="{{item.userImgeUrl}}"></image>
-        <text>{{item.sellerName}}</text>
-        <text wx:if="{{item.tag == 2}}">代理商户</text>
-      </view>
-      <view class="merchantDetail">
-        <text>MOQ</text>
+<view class="specile">
+  <view class="specileTitle">可共享的特价</view>
+  <view class="specileList" wx:if="{{specialList.length>0}}">
+    <view class="listContent" wx:for="{{specialList}}">
+      <view class="listTitle">
         <view>
-          <text>{{item.moq}}</text>
+          <image src="{{item.userImgeUrl}}"></image>
+          <text>{{item.sellerName}}</text>
+          <text wx:if="{{item.tag==1}}">代理商</text>
+          <text wx:if="{{item.tag==2}}">原厂</text>
+        </view>
+        <view>查看商品图</view>
+      </view>
+      <view class="listDetail">
+        <view class="listLeft">
+          剩余数量：{{item.goodsStockCount}}只 | 批号 1912+ 订货 | 预计于2019-10-25 | {{item.diliverPlace}}发货 起订量：{{item.moq}}只
+          <text>距离此特价结束：7天23时15分34秒</text>
+        </view>
+        <view class="listRight">
+          <text>{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
+          <text>含13%增值税</text>
+          <text>购买</text>
         </view>
       </view>
-      <view class="merchantDetail">
-        <text>MPQ</text>
-        <view>
-          <text>{{item.mpq}}</text>
-        </view>
+    </view>
+    <view class="listMore">
+      <view>
+        <text>查看更多特价</text>
       </view>
-      <view class="merchantDetail">
-        <text>库存</text>
-        <view>
-          <text>{{item.goodsStockCount}}</text>
-        </view>
-
-      </view>
-      <view class="merchantDetail">
-        <text>状态</text>
-        <view>
-          <text wx:if="{{item.goods_type}}">现货</text>
-          <text wx:if="{{!item.goods_type}}">期货</text>
-        </view>
-
-      </view>
-      <view class="merchantDetail">
-        <text>预计交期</text>
-        <view>
-          <text style="display:block">地点：{{item.diliverPlace}}</text>
-          <text style="display:block" wx:if="{{item.seller_always}}">交期：{{item.day_interval}}天后交货</text>
-          <text style="display:block" wx:if="{{!item.seller_always}}">交期：{{filter.formatDate(item.deliverTime) }}</text>
-        </view>
-      </view>
-      <view class="merchantDetail">
-        <text>价格</text>
-        <view>
-          <text style="display:block">{{item.goodsPrice}}</text>
-          <!-- <text style="display:block">{{filter.countDown(item.currentTime,item.expireTime)}}</text> -->
-        </view>
-
-      </view>
-      <view class="merchantDetail">
-        <text>操作</text>
-        <view>
-          <text class="productEdit">购买</text>
-          <text class="productEdit">加入购物车</text>
-        </view>
-
-      </view>
-
     </view>
   </view>
-  <view class="prompt" wx:if="{{merchantsData.length<=0}}">暂无商家提供特价</view>
+  <view wx:if="{{specialList.length<=0}}" class="listNone">暂无特价</view>
 </view>
+
 <view class="brandComponey" style="padding-bottom:100rpx;">
   <view class="brandTitle">技术参数</view>
   <view class="productParams">
@@ -104,17 +89,17 @@
 </view>
 
 <view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
-<button class="action text-grey">
+  <button class="action text-grey" bindtap="toHome">
     <view class='cuIcon-home text-red'></view> 首页
   </button>
   <view class="action text-grey">
     <view class='cuIcon-shop'></view> 店铺
   </view>
-  <view class="action text-grey">
+  <view class="action text-grey" bindtap="toCart">
     <view class='cuIcon-cart'></view> 购物车
   </view>
   <view class='btn-group'>
-    <button class='cu-btn bg-orange round shadow-blur'>加入购物车</button>
+    <button class='cu-btn bg-orange round shadow-blur'>申请特价</button>
     <button class='cu-btn bg-red round shadow-blur'>发布特价</button>
   </view>
 </view>

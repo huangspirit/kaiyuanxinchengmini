@@ -1,0 +1,36 @@
+<!--pages/classCation/classCation.wxml-->
+<!--主盒子-->
+<view class="cu-bar bg-white search" :style="[{top:CustomBar + 'px'}]">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索" confirm-type="search"></input>
+  </view>
+</view>
+<view class="classCationWarp">
+  <view class="classCation">
+    <!--左侧栏-->
+    <view class="nav_left">
+      <block wx:for="{{classList}}" wx:key="id">
+        <!--当前项的id等于item项的id，那个就是当前状态-->
+        <!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用-->
+        <view class="nav_left_items {{calssIndex == index ? 'active' : ''}}" bindtap="getSubClassList" data-index="{{index}}" data-item="{{item}}">{{item.name}}</view>
+      </block>
+    </view>
+    <!--右侧栏-->
+    <view class="nav_right">
+      <!--如果有数据，才遍历项-->
+      <view wx:if="{{subClassList}}">
+        <block wx:for="{{subClassList}}" wx:key="id">
+          <view class="nav_right_items" bindtap="subClssRouter" data-item = "{{item}}">
+            <!--界面跳转 -->
+            <image wx:if="{{item.imgUrl&&item.imgUrl!='-'}}" src="{{item.imgUrl}}"></image>
+            <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+            <text>{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+      <!--如果无数据，则显示数据-->
+      <view class="nodata_text" wx:else>该分类暂无数据</view>
+    </view>
+  </view>
+</view>

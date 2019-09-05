@@ -9,8 +9,8 @@ Page({
   data: {
     productParams: "",
     productDetail: {},
-    merchantsData: [],
     TabbarBot: app.globalData.tabbar_bottom,
+    specialList:[]
   },
   getProductDetail() {
     api.get('/api-g/gods-anon/searchResult', {
@@ -21,20 +21,20 @@ Page({
       console.log('商品详情', res)
       if (res.resultCode == "200") {
         this.setData({
-          productDetail: res.data.goodsinfo
+          productDetail: res.data.goodsinfo,
         })
-        api.get('/api-g/gods-anon/queryDirectGoods', {
-          goods_id: this.data.productParams.documentid,
-          status: '1',
+        //直通车正在售卖列表
+        api.get("/api-g/gods-anon/queryDirectGoods", {
           start: 0,
-          length: 10
+          length: 6,
+          goods_id: this.data.productDetail.id,
+          status: 1
         }).then(res => {
-          console.log('商品商户列表', res)
-          if (res.resultCode == '200') {
+          console.log('特价', res)
+          if (res.resultCode == "200") {
             this.setData({
-              merchantsData: res.data.data
+              specialList: res.data.data
             })
-            console.log(this.data.merchantsData)
           }
         })
       }
@@ -61,6 +61,32 @@ Page({
         })
         this.getProductDetail()
       }
+    })
+  },
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {}
+    return {
+      title: '分享',
+      path: '/pages/productDetail/productDetail',
+      success: function(res) {
+        console.log('成功', res)
+      }
+    }
+  },
+  toHome() {
+    wx: wx.switchTab({
+      url: '../home/home',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+  toCart() {
+    wx: wx.switchTab({
+      url: '../shopCart/shopCart',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
   /**
