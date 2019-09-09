@@ -5,9 +5,13 @@
 
 .allInquiry .allList {
   width: 100%;
-  padding: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.allInquiry .allList>view {
   background: #fff;
   margin-bottom: 10rpx;
+  padding: 20rpx;
 }
 
 .allInquiry .allList .listTitle {

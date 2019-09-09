@@ -6,9 +6,13 @@
 
 .allInquiry .allList {
   width: 100%;
-  padding: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.allInquiry .allList>view {
   background: #fff;
   margin-bottom: 10rpx;
+  padding: 20rpx;
 }
 
 .allInquiry .allList .listTitle {
@@ -16,66 +20,92 @@
   justify-content: space-between;
   margin-bottom: 15rpx;
 }
+
 .allInquiry .allList .listTitle .titleLeft {
-color: #333;
+  color: #333;
   font-size: 24rpx;
 }
+
 .allInquiry .allList .listTitle .titleRight .waitStatus {
   color: #df3f2f;
   font-size: 24rpx;
 }
+
+.allInquiry .allList .listTitle .titleRight .alredyAdv {
+  color: #b3b3b3;
+  font-size: 24rpx;
+}
+
+.allInquiry .allList .listTitle .titleRight .alredyStatus {
+  color: #25c13b;
+  font-size: 24rpx;
+}
+
 .allInquiry .allList .listContent {
   width: 100%;
   display: flex;
+  border-bottom: 2rpx solid #f7f7f7;
 }
+
 .allInquiry .allList .listContent .listLeft {
   width: 146rpx;
   height: 100rpx;
   margin-right: 30rpx;
 }
-.allInquiry .allList .listContent .listLeft>image{
+
+.allInquiry .allList .listContent .listLeft>image {
   width: 100%;
   height: 100%;
 }
+
 .allInquiry .allList .listContent .listRight {
   display: flex;
   justify-content: space-between;
   width: 488rpx;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight {
   width: 326rpx;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight>text {
   display: block;
   line-height: 40rpx;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(1) {
   font-size: 22rpx;
-  color:#333;
+  color: #333;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(2) {
   font-size: 22rpx;
-  color:#333;
+  color: #333;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(3) {
   font-size: 22rpx;
-  color:#999;
+  color: #999;
 }
+
 .allInquiry .allList .listContent .listRight .rightRight>text:nth-of-type(4) {
   font-size: 18rpx;
-  color:#999;
+  color: #999;
 }
+
 .allInquiry .allList .listContent .listRight .rightLeft {
   text-align: right;
   display: flex;
   flex-direction: column;
-  padding-top:40rpx; 
+  padding-top: 40rpx;
 }
+
 .allInquiry .allList .listContent .listRight .rightLeft>text {
   color: #df3f2f;
   font-size: 24rpx;
   line-height: 40rpx;
 }
+
 .allInquiry .allList .listContent .listRight .rightLeft>text:nth-of-type(2) {
   font-weight: bold;
 }

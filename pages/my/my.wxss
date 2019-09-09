@@ -82,7 +82,7 @@
   border-radius: 30rpx;
 }
 
-.mayTop .selectUser {
+/* .mayTop .selectUser {
   width: 100%;
   text-align: center;
   color: #fff;
@@ -126,7 +126,7 @@
   height: 60rpx;
   line-height: 60rpx;
   border-bottom: 1px solid #ccc;
-}
+} */
 .content {
   box-sizing: border-box;
   padding: 0 20rpx;

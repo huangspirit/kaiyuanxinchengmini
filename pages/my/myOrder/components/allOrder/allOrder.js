@@ -1,4 +1,5 @@
 // pages/my/myOrder/components/allOrder/allOrder.js
+import api from '../../../../../api/api.js'
 Component({
   options: {
     // multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -7,14 +8,14 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    allOrder:[]
   },
 
   /**
@@ -22,7 +23,17 @@ Component({
    */
   methods: {
     getAllOrder() {
-      console.log('全部')
+      api.get("/api-order/customerCenter/queryOrderPersonal", {
+        start: 0,
+        length: 10
+      }).then(res => {
+        console.log('全部订单', res)
+        if (res.resultCode == "200") {
+          this.setData({
+            allOrder: res.data.data
+          })
+        }
+      })
     }
   }
 })

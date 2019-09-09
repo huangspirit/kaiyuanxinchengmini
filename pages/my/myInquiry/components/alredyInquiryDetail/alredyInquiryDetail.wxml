@@ -1,9 +1,10 @@
 <!--pages/my/myInquiry/components/alredyInquiryDetail/alredyInquiryDetail.wxml-->
+<wxs src="../../../../../utils/filter.wxs" module="filter" />
 <view class="allInquiry">
   <view class="allList" bindtap="waitDetail">
     <view class="listTitle">
       <view class="titleLeft">
-        申请编号：IDHEBND2013698552
+        申请编号：{{applyDetail.inquirySheetNo}}
       </view>
       <view class="titleRight">
         <text class="alredyStatus">已批复</text>
@@ -15,45 +16,46 @@
       </view>
       <view class="listRight">
         <view class="rightRight">
-          <text>申请人：晶源电子</text>
-          <text>SUISDFJHIUFHSDIOF1564564</text>
-          <text>品牌：SDFHSDDF</text>
-          <text>描述：hsudgfsdgfduyfg</text>
+          <text>申请人：{{applyDetail.contactName}}</text>
+          <text>{{applyDetail.goodsName}}</text>
+          <text>品牌：{{applyDetail.brandName}}</text>
+          <text>描述：{{applyDetail.goodsDesc}}</text>
         </view>
         <view class="rightLeft">
           <text>申请价格</text>
-          <text>￥ 3.5</text>
+          <text>{{applyDetail.acceptUnit?'$':'￥'}} {{applyDetail.acceptPrice}}</text>
         </view>
       </view>
     </view>
   </view>
   <view class="waitDetail">
-    <text>公司名称：北京市中关村</text>
-    <text>提交日期：2019-06-01 0:0:0</text>
-    <text>年采购量：1000</text>
-    <text>竞争型号：【sdfsd4564】</text>
-    <text>备注说明：大量采购</text>
-    <text>申请有效期：2019-06-01 0:0:0</text>
+    <text>公司名称：{{applyDetail.companyName}}</text>
+    <text>提交日期：{{filter.formatDate(applyDetail.sheetCreatime)}}</text>
+    <text>年采购量：{{applyDetail.projectEau}}</text>
+    <text>竞争型号：{{applyDetail.insteadNo}}</text>
+    <text>备注说明：{{applyDetail.remark}}</text>
+    <text>申请有效期：{{filter.formatDate(applyDetail.effectEndTime)}}</text>
   </view>
   <view class="inquiryDetail">
     <view class="listLeft">
-      <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      <image src="{{applyDetail.sellerInfoMap.headImgUrl}}"></image>
       <view class="leftLeft">
-        <text>三星电子厂商</text>
-        <text class="yuan">原厂厂商</text>
-        <text class="daili">代理厂商</text>
+        <text>{{applyDetail.sellerInfoMap.nickname}}</text>
+        <text wx:if="{{applyDetail.sellerInfoMap.tag == 1}}" class="yuan">原厂厂商</text>
+        <text wx:else class="daili">代理厂商</text>
       </view>
       <view class="rightLeft">
-          <text>批复价格</text>
-          <text>￥ 3.5</text>
-        </view>
+        <text>批复价格</text>
+        <text wx:if="applyDetail.priceType == false"> {{applyDetail.priceUnit?'$':'￥'}} {{applyDetail.seckilPrice}}</text>
+        <text wx:else>{{applyDetail.priceUnit?'$':'￥'}}  {{applyDetail.priceLevel}}</text>
+      </view>
     </view>
     <view class="listBottom">
-      <text>回复日期：2019-06-01 0:0:0</text>
-      <text>MOQ：10</text>
-      <text>MPQ：10</text>
-      <text>交付周期：180天</text>
-      <text>价格有效期：2019-06-01 0:0:0</text>
+      <text>回复日期：{{filter.formatDate(applyDetail.replyTime)}}</text>
+      <text>MOQ：{{applyDetail.moq}}</text>
+      <text>MPQ：{{applyDetail.mpq}}</text>
+      <text>交付周期：{{applyDetail.diliverIntervalDay}}天</text>
+      <text>价格有效期：{{filter.formatDate(applyDetail.priceExpireTime)}}</text>
     </view>
   </view>
 </view>

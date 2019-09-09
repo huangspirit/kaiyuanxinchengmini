@@ -1,0 +1,21 @@
+/* pages/personalInfo/personalInfo.wxss */
+.personalFooter {
+  padding: 20rpx;
+}
+.personalFooter>text {
+  display: block;
+  width: 100%;
+  height: 90rpx;
+  background: #df3f2f;
+  text-align: center;
+  line-height: 90rpx;
+  color: #fff;
+}
+.cu-form-group>view>image {
+  width: 80rpx;
+  height:80rpx;
+  vertical-align: middle;
+}
+.cu-form-group>view .cuIcon-right {
+  margin-left: 15rpx;
+}

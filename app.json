@@ -32,7 +32,10 @@
     "pages/my/myOrder/components/waitPay/waitPay",
     "pages/my/myOrder/components/abnormalOrder/abnormalOrder",
     "pages/my/myOrder/components/waitDelivery/waitDelivery",
-    "pages/my/myOrder/components/alredyEnd/alredyEnd"
+    "pages/my/myOrder/components/alredyEnd/alredyEnd",
+    "pages/myEdit/myEdit",
+    "pages/editAdress/editAdress",
+    "pages/personalInfo/personalInfo"
   ],
   "window": {
     "backgroundTextStyle": "dark",

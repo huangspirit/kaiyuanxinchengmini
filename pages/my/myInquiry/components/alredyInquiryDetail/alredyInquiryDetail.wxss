@@ -116,9 +116,10 @@
 }
 
 .inquiryDetail .listLeft>image {
-  width: 190rpx;
+  width: 56rpx;
   height: 56rpx;
   margin-right: 25rpx;
+  border-radius: 56rpx;
   margin-top: 40rpx;
 }
 

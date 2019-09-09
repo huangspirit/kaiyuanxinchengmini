@@ -1,0 +1,30 @@
+<!--pages/personalInfo/personalInfo.wxml-->
+<view class="cu-form-group" bindtap="changeAvatar">
+  <view class="title">头像</view>
+  <view>
+    <image src="{{userDetail.headImgUrl}}"></image>
+    <text class="cuIcon-right text-gray"></text>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">昵称</view>
+  <input style="text-align:right" bindinput="nameChange" value="{{userDetail.nickname}}"></input>
+  <text class="cuIcon-right text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">性别</view>
+  <view>
+    <text>{{userDetail.sex == '1'?'男':'女'}}</text>
+    <text class="cuIcon-right text-gray"></text>
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="title">等级</view>
+  <view>
+    <text>{{userDetail.userTagMap.userLevel}}</text>
+    <text class="cuIcon-right text-gray"></text>
+  </view>
+</view>
+<view class="personalFooter">
+  <text>保存</text>
+</view>

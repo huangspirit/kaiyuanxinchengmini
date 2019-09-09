@@ -1,4 +1,5 @@
 // pages/my/myInquiry/components/alredyAdov/alredyAdov.js
+import api from '../../../../../api/api.js'
 Component({
   options: {
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -25,7 +26,19 @@ Component({
    */
   methods: {
     getAdvInquiry() {
-      console.log('已失效')
+      api.get("/api-g/ic/queryInquirySheetList", {
+        start: 0,
+        length: 6,
+        type: false,
+        sheet_effective: false
+      }).then(res => {
+        console.log('已失效', res)
+        if (res.resultCode == "200") {
+          this.setData({
+            advInquiryList: res.data.data
+          })
+        }
+      })
     }
   }
 })

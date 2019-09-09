@@ -1,2 +1,17 @@
 <!--pages/address/address.wxml-->
-<text>收货地址</text>
+<view class="addressList" wx:for="{{addressList}}" wx:key="index">
+  <view class="listContent">
+    <view>
+      <text>{{item.receivingName}}</text>
+      <text>{{item.phone}}</text>
+    </view>
+    <view>
+      <text>标签</text>
+      {{item.address}}
+    </view>
+  </view>
+  <view class="btnEdit" bindtap="btnEdit" data-item="{{item}}">编辑</view>
+</view>
+<view class="addAdress">
+  <text bindtap="addNewAdress">新增收货地址</text>
+</view>

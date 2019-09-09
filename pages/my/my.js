@@ -1,4 +1,5 @@
 // pages/my/my.js
+import api from '../../api/api'
 Page({
 
   /**
@@ -40,7 +41,8 @@ Page({
         img: '../../img/my/yishixiao.png',
         name: "已失效"
       },
-    ]
+    ],
+    userDetail:{}
   },
 
   bindShowMsg() {
@@ -85,11 +87,32 @@ Page({
       complete: function (res) { },
     })
   },
+  userInfo() {
+    wx.navigateTo({
+      url: '../myEdit/myEdit',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  getUsrInfo() {
+    api.get("/api-u/users/current", {}).then(res => {
+      console.log('个人信息', res)
+      this.setData({
+        userDetail:res
+      })
+      // if (res.resultCode == "200") {
+      //   this.setData({
+      //     specialList: res.data.data
+      //   })
+      // }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getUsrInfo()
   },
 
   /**

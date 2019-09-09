@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 21,
 			"list": [
 				{
 					"id": -1,
@@ -166,6 +166,33 @@
 					"name": "订单中心",
 					"pathName": "pages/my/myOrder/myOrder",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "资料编辑",
+					"pathName": "pages/myEdit/myEdit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "地址管理",
+					"pathName": "pages/address/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新增收货地址",
+					"pathName": "pages/editAdress/editAdress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人信息",
+					"pathName": "pages/personalInfo/personalInfo",
 					"scene": null
 				}
 			]

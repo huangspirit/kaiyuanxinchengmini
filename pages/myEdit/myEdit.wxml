@@ -1,0 +1,50 @@
+<!--pages/myEdit/myEdit.wxml-->
+<view class="userInfo" bindtap="personalInfo">
+  <view class="userInfoDetail">
+    <image src="{{userDetail.headImgUrl}}"></image>
+    <view>
+      <text>{{userDetail.nickname}}</text>
+      <view>
+        <view>
+          <text>信用等级 {{userDetail.userTagMap.userLevel}}</text>
+        </view>
+        <text wx:if="{{userDetail.userTagMap.tag==1}}">原厂</text>
+        <text wx:if="{{userDetail.userTagMap.tag==2}}">代理商</text>
+        <text wx:if="{{userDetail.userTagMap.tag==3}}">认证商</text>
+      </view>
+    </view>
+  </view>
+  <image src="../../img/image/youjiantouda.png"></image>
+</view>
+<view class="userInfoList">
+  <view>
+    <text>账号管理</text>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+  <view bindtap="addressEdit">
+    <text>地址管理</text>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+  <view>
+    <text>修改手机号</text>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+  <view>
+    <text>增票资质</text>
+    <view>
+      <text>添加增票资质</text>
+      <image src="../../img/image/youjiantouxiao.png"></image>
+    </view>
+  </view>
+  <view>
+    <text>关于开元芯城</text>
+    <view>
+      <text>1.1.0</text>
+      <image src="../../img/image/youjiantouxiao.png"></image>
+    </view>
+
+  </view>
+</view>
+<view class="userInfoFooter">
+  <text>退出账号</text>
+</view>

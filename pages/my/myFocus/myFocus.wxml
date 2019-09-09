@@ -38,7 +38,7 @@
               <text>品牌：{{item.goodsBase.brand}}</text>
               <text>{{item.goodsBase.productdesc}}</text>
               <view class="goodsPrice">
-                <text>￥ 3.5</text>
+                <text wx:if="{{item.goodsBase.map && item.goodsBase.map.totalSeller}}">{{item.goodsBase.map.minPrice}}</text>
               </view>
             </view>
           </view>
