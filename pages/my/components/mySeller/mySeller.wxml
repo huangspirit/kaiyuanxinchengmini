@@ -6,30 +6,63 @@
       <text>押金</text>
       <text>售卖额度=押金*10+基础额度</text>
       <view>
-        <text>充值</text>
+        <text>充值</text> |
         <text>明细</text>
       </view>
     </view>
     <view>
+      <view class='progress_box'>
+        <canvas class="progress_bg" canvas-id="canvasProgressbg"> </canvas>
+        <canvas class="progress_canvas" canvas-id="canvasProgress"> </canvas>
+        <view class="progress_text">
+          <text class='progress_info'> {{progress_txt}}</text>
+        </view>
+      </view>
       <text>售卖额度：50000</text>
       <text>剩余额度：50000</text>
+      <text>明细</text>
     </view>
   </view>
   <view class="sellerClass">
     <view>
+      <view>
+        <image src="../../../../img/image/zaishou.png"></image>
+      </view>
+
       <text>在售商品</text>
     </view>
     <view>
+      <view>
+        <image src="../../../../img/image/yixiajia.png"></image>
+      </view>
+
       <text>已下架商品</text>
     </view>
     <view>
+      <view>
+        <image src="../../../../img/my/daishouhuo.png"></image>
+      </view>
+
       <text>代发货订单数</text>
     </view>
     <view>
+      <view>
+        <image src="../../../../img/my/shouhou.png"></image>
+      </view>
+
       <text>待结算货款</text>
     </view>
   </view>
-  <view>
-    <view></view>
+  <view class="sellerList">
+    <view class="listContent" wx:for="{{3}}" wx:key="index">
+      <view class="listLeft">
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="listRight">
+        <text>代发货</text>
+        <text>SDFSDFSDF等物件商品</text>
+        <text>你的订单卖家已经由深圳发往【深圳之间中心哦i你】强先擦回收</text>
+      </view>
+    </view>
   </view>
 </view>
