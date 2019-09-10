@@ -35,7 +35,11 @@
     "pages/my/myOrder/components/alredyEnd/alredyEnd",
     "pages/myEdit/myEdit",
     "pages/editAdress/editAdress",
-    "pages/personalInfo/personalInfo"
+    "pages/personalInfo/personalInfo",
+    "pages/accountManage/accountManage",
+    "pages/mySeller/mySeller",
+    "pages/my/components/my/my",
+    "pages/my/components/mySeller/mySeller"
   ],
   "window": {
     "backgroundTextStyle": "dark",

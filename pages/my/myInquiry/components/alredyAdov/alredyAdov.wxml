@@ -31,4 +31,5 @@
       </view>
     </view>
   </view>
+  <view class="prompt" wx:if="{{advInquiryList.length<=0}}">暂无数据</view>
 </view>

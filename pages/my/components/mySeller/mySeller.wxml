@@ -1,0 +1,35 @@
+<!--pages/my/components/mySeller/mySeller.wxml-->
+<view class="mySeller">
+  <view class="sellerTop">
+    <view>
+      <text>0.00</text>
+      <text>押金</text>
+      <text>售卖额度=押金*10+基础额度</text>
+      <view>
+        <text>充值</text>
+        <text>明细</text>
+      </view>
+    </view>
+    <view>
+      <text>售卖额度：50000</text>
+      <text>剩余额度：50000</text>
+    </view>
+  </view>
+  <view class="sellerClass">
+    <view>
+      <text>在售商品</text>
+    </view>
+    <view>
+      <text>已下架商品</text>
+    </view>
+    <view>
+      <text>代发货订单数</text>
+    </view>
+    <view>
+      <text>待结算货款</text>
+    </view>
+  </view>
+  <view>
+    <view></view>
+  </view>
+</view>

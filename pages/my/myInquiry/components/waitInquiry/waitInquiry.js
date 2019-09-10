@@ -34,9 +34,15 @@ Component({
       }).then(res => {
         console.log('待批复', res)
         if (res.resultCode == "200") {
-          this.setData({
-            waitInquiryList: res.data.data
-          })
+          if (res.data != null) {
+            this.setData({
+              waitInquiryList: res.data.data
+            })
+          } else {
+            this.setData({
+              waitInquiryList: []
+            })
+          }
         }
       })
     },

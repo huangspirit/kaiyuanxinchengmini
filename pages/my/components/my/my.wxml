@@ -1,0 +1,64 @@
+<!--pages/my/components/my/my.wxml-->
+<view class="content">
+  <view class="myContent">
+    <view class="myeditList">
+      <view class="editLeft">
+        <view wx:for="{{orderList}}" wx:key="index" bindtap="myOrder" data-index="{{index}}">
+          <view>
+            <image src="{{item.img}}"></image>
+          </view>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="editRight" bindtap="myOrder" data-index="4">
+        <image src="../../../../img/my/quanbudingdan.png"></image>
+        <text>全部订单</text>
+      </view>
+    </view>
+    <view class="myeditList">
+      <view class="editLeft1">
+        <view wx:for="{{orderList1}}" wx:key="index" bindtap="myInquiry" data-index="{{index}}">
+          <view>
+            <image src="{{item.img}}"></image>
+          </view>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="editRight" bindtap="myInquiry" data-index="4">
+        <image src="../../../../img/my/wdexunjia.png"></image>
+        <text>我的询价</text>
+        <text>1</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="delivery">
+    <view class="deliveryLeft">
+      <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+    </view>
+    <view class="deliveryRight">
+      <text>已发货</text>
+      <text>对方是否水电费等五种器件</text>
+      <text>你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家</text>
+    </view>
+  </view>
+  <view class="myFocus">
+    <view bindtap="myFocus" data-index="1">
+      <text>{{userInfoDetail.fgoods}}</text>
+      <text>关注的器件</text>
+    </view>
+    <view bindtap="myFocus" data-index="2">
+      <text>{{userInfoDetail.ssller}}</text>
+      <text>关注的商家</text>
+    </view>
+    <view bindtap="myFocus" data-index="1">
+      <image src="../../../../img/my/wdeguanzhu.png"></image>
+      <text>我的关注</text>
+    </view>
+  </view>
+  <scroll-view scroll-x="true" class='mylistContent'>
+    <view class='list_left' wx:for="{{6}}" wx:key="{{index}}">
+      <image src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+    </view>
+  </scroll-view>
+</view>

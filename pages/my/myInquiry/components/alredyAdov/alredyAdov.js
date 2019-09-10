@@ -34,9 +34,15 @@ Component({
       }).then(res => {
         console.log('已失效', res)
         if (res.resultCode == "200") {
-          this.setData({
-            advInquiryList: res.data.data
-          })
+          if (res.data != null) {
+            this.setData({
+              advInquiryList: res.data.data
+            })
+          } else {
+            this.setData({
+              advInquiryList: []
+            })
+          }
         }
       })
     }

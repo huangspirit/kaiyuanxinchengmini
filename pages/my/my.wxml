@@ -1,98 +1,34 @@
 <!--pages/my/my.wxml-->
 <view class='mayTop'>
   <image src='../../img/home/homebg.png'></image>
-  <text bindtap="userInfo" wx:if="{{userDetail.userTagMap.seller}}">我是卖家</text>
-  <text bindtap="userInfo" wx:if="{{!userDetail.userTagMap.seller}}">我是买家</text>
+  <text wx:if="{{select}}" bindtap="userInfo">我是买家</text>
+  <text wx:if="{{!select}}" bindtap="userInfo">我是卖家</text>
   <view class="myDetail">
     <image src='{{userDetail.headImgUrl}}'></image>
     <view class="myInfo">
-      <view class="myName">
+      <view class="myName" bindtap="editUser">
         <text>{{userDetail.nickname}}</text>
         <image src='../../img/my/bianji.png'></image>
-        <view>
-          <image src='../../img/my/zuanshi.png'></image>
-          <text>钻石</text>
-        </view>
       </view>
       <view class="myPosition">
+        <text>信用等级 {{userDetail.userTagMap.userLevel}}</text>
         <text wx:if="{{userDetail.userTagMap.tag == 1}}">原厂</text>
         <text wx:if="{{userDetail.userTagMap.tag == 2}}">代理商</text>
+        <text wx:if="{{userDetail.userTagMap.tag==3}}">认证商</text>
       </view>
     </view>
   </view>
-  <!-- <view class="selectUser">
-    <text>身份切换：</text>
-    <view class='list-msg2' bindtap='bindShowMsg'>
-      <text>{{tihuoWay}}</text>
-      <image style='height:20rpx;width:20rpx;' src='../../img/my/gengduo.png'></image>
-    </view>
-    <view class="select_box" wx:if="{{select}}">
-      <view class="select_one" bindtap="mySelect" data-name="我是卖家">我是卖家</view>
-      <view class="select_one" bindtap="mySelect" data-name="我是买家">我是买家</view>
-    </view>
-  </view> -->
-</view>
-<view class="content">
-  <view class="myContent">
-    <view class="myeditList">
-      <view class="editLeft">
-        <view wx:for="{{orderList}}" wx:key="index" bindtap="myOrder" data-index="{{index}}">
-          <view>
-            <image src="{{item.img}}"></image>
-          </view>
+  <view class="moneyDetail">
 
-          <text>{{item.name}}</text>
-        </view>
-      </view>
-      <view class="editRight" bindtap="myOrder" data-index="4">
-        <image src="../../img/my/quanbudingdan.png"></image>
-        <text>全部订单</text>
-      </view>
-    </view>
-    <view class="myeditList">
-      <view class="editLeft1">
-        <view wx:for="{{orderList1}}" wx:key="index" bindtap="myInquiry" data-index="{{index}}">
-          <view>
-            <image src="{{item.img}}"></image>
-          </view>
-          <text>{{item.name}}</text>
-        </view>
-      </view>
-      <view class="editRight" bindtap="myInquiry" data-index="4">
-        <image src="../../img/my/wdexunjia.png"></image>
-        <text>我的询价</text>
-        <text>1</text>
+    <view>
+      <image src="../../img/image/subanner.png"></image>
+      <view> 钱包余额：00.00 元 </view>
+      <view>
+        <text>提现管理</text> |
+        <text>明细</text>
       </view>
     </view>
   </view>
-
-  <view class="delivery">
-    <view class="deliveryLeft">
-      <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
-    </view>
-    <view class="deliveryRight">
-      <text>已发货</text>
-      <text>对方是否水电费等五种器件</text>
-      <text>你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家</text>
-    </view>
-  </view>
-  <view class="myFocus">
-    <view bindtap="myFocus" data-index="1">
-      <text>1000</text>
-      <text>关注的器件</text>
-    </view>
-    <view bindtap="myFocus" data-index="2">
-      <text>12</text>
-      <text>关注的商家</text>
-    </view>
-    <view bindtap="myFocus" data-index="1">
-      <image src="../../img/my/wdeguanzhu.png"></image>
-      <text>我的关注</text>
-    </view>
-  </view>
-  <scroll-view scroll-x="true" class='mylistContent'>
-    <view class='list_left' wx:for="{{6}}" wx:key="{{index}}">
-      <image src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
-    </view>
-  </scroll-view>
 </view>
+<my wx:if="{{select}}"></my>
+<mySeller wx:if="{{!select}}"></mySeller>

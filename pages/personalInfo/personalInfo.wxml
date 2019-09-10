@@ -11,7 +11,7 @@
   <input style="text-align:right" bindinput="nameChange" value="{{userDetail.nickname}}"></input>
   <text class="cuIcon-right text-gray"></text>
 </view>
-<view class="cu-form-group">
+<view class="cu-form-group" bindtap="sexChange">
   <view class="title">性别</view>
   <view>
     <text>{{userDetail.sex == '1'?'男':'女'}}</text>
@@ -26,5 +26,5 @@
   </view>
 </view>
 <view class="personalFooter">
-  <text>保存</text>
+  <text bindtap="confirm">保存</text>
 </view>

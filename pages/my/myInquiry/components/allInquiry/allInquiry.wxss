@@ -109,3 +109,9 @@
 .allInquiry .allList .listContent .listRight .rightLeft>text:nth-of-type(2) {
   font-weight: bold;
 }
+
+.allInquiry .prompt {
+  width: 100%;
+  text-align: center;
+  line-height: 90rpx;
+}

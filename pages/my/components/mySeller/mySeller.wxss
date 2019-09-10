@@ -1,0 +1,11 @@
+/* pages/my/components/mySeller/mySeller.wxss */
+.mySeller {
+  padding: 20rpx;
+}
+.mySeller .sellerTop {
+  display: flex;
+  justify-content: space-between;
+}
+.mySeller .sellerTop>view>text {
+  display: block;
+}

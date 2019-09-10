@@ -17,7 +17,7 @@
   <image src="../../img/image/youjiantouda.png"></image>
 </view>
 <view class="userInfoList">
-  <view>
+  <view bindtap="accountChange">
     <text>账号管理</text>
     <image src="../../img/image/youjiantouxiao.png"></image>
   </view>
@@ -27,7 +27,11 @@
   </view>
   <view>
     <text>修改手机号</text>
-    <image src="../../img/image/youjiantouxiao.png"></image>
+    <view>
+      <text>{{userDetail.phone}}</text>
+      <image src="../../img/image/youjiantouxiao.png"></image>
+    </view>
+
   </view>
   <view>
     <text>增票资质</text>
@@ -46,5 +50,5 @@
   </view>
 </view>
 <view class="userInfoFooter">
-  <text>退出账号</text>
+  <text bindtap="loginOut">退出账号</text>
 </view>

@@ -30,9 +30,16 @@ Component({
       }).then(res => {
         console.log('全部批复', res)
         if (res.resultCode == "200") {
-          this.setData({
-            allInquiryList: res.data.data
-          })
+          if (res.data!=null) {
+            this.setData({
+              allInquiryList: res.data.data
+            })
+          } else {
+            this.setData({
+              allInquiryList: []
+            })
+          }
+          
         }
       })
     },

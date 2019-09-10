@@ -75,7 +75,18 @@ const post = (url, options) => {
     })
   }
 }
+const put = (url, options)=> {
+  return request(url, {
+    method: 'PUT',
+    data: options,
+    header: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Authorization": "Bearer " + wx.getStorageSync('token')
+    }
+  })
+}
 module.exports = {
   get,
-  post
+  post,
+  put
 }

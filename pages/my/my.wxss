@@ -10,11 +10,12 @@
   left: 0;
   width: 100%;
   z-index: -1;
+  height: 260rpx;
 }
 
 .mayTop>text {
   display: block;
-  padding: 30rpx 20rpx 0;
+  padding: 15rpx 20rpx 0;
   text-align: right;
   color: #fff;
   font-size: 27rpx;
@@ -30,6 +31,7 @@
   height: 120rpx;
   border-radius: 60rpx;
   margin-right: 22rpx;
+  background: #fff;
 }
 
 .mayTop>.myDetail .myInfo {
@@ -48,7 +50,7 @@
 .mayTop>.myDetail .myInfo .myName>image {
   width: 23rpx;
   height: 24rpx;
-  margin-top: 6rpx;
+  margin-top: 9rpx;
   vertical-align: middle;
 }
 
@@ -80,310 +82,31 @@
   text-align: center;
   font-size: 17rpx;
   border-radius: 30rpx;
-}
-
-/* .mayTop .selectUser {
-  width: 100%;
-  text-align: center;
-  color: #fff;
-}
-
-.mayTop .selectUser .list-msg2 {
-  height: 60rpx;
-  width: 160rpx;
-  display: inline-block;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mayTop .selectUser .list-msg2>text {
   margin-right: 10rpx;
 }
 
-.mayTop .selectUser .select_box {
-  background-color: #bf4c3a;
-  padding: 0 10rpx 10rpx 10rpx;
-  width: 21%;
-  position: absolute;
-  top: 235rpx;
-  z-index: 1;
-  overflow: hidden;
-  animation: myfirst 0.5s;
-  left: 365rpx;
-}
-
-@keyframes myfirst {
-  from {
-    height: 0rpx;
-  }
-
-  to {
-    height: 130rpx;
-  }
-}
-
-.mayTop .selectUser .select_one {
-  height: 60rpx;
-  line-height: 60rpx;
-  border-bottom: 1px solid #ccc;
-} */
-.content {
-  box-sizing: border-box;
+.mayTop .moneyDetail {
   padding: 0 20rpx;
-}
-.myContent {
-  width: 100%;
+  height: 90rpx;
 }
 
-.myContent .myeditList {
-  width: 100%;
+.mayTop .moneyDetail>view {
   display: flex;
-  margin-top: 20rpx;
+  justify-content: space-around;
+   position: relative;
+   height: 100%;
+  overflow: hidden;
 }
 
-.myContent .myeditList .editLeft {
-  display: flex;
-  width: 100%;
-}
-
-.myContent .myeditList .editLeft1 {
-  display: flex;
-  width: 100%;
-}
-
-.myContent .myeditList1 .editLeft {
-  display: flex;
-  width: 100%;
-}
-
-.myContent .myeditList .editLeft>view {
-  flex: 1;
-  text-align: center;
-  background: #fff;
-  padding: 20rpx 0;
-  box-sizing: border-box;
-}
-.myContent .myeditList .editLeft>view>view {
-  height: 46rpx;
-}
-.myContent .myeditList .editLeft1>view {
-  flex: 1;
-  text-align: center;
-  background: #fff;
-  padding: 20rpx 0;
-  box-sizing: border-box;
-}
-
-.myContent .myeditList .editLeft view:nth-of-type(1) image {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.myContent .myeditList .editLeft view:nth-of-type(2) image {
-  width: 44rpx;
-  height: 32rpx;
-}
-
-.myContent .myeditList .editLeft view:nth-of-type(3) image {
-  width: 42rpx;
-  height: 29rpx;
-}
-
-.myContent .myeditList .editLeft view:nth-of-type(4) image {
-  width: 37rpx;
-  height: 39rpx;
-}
-
-.myContent .myeditList .editLeft view>text {
-  display: block;
-  color: #999;
-  margin-top: 12rpx;
-}
-
-.myContent .myeditList .editLeft1 view>text {
-  display: block;
-  color: #999;
-  margin-top: 8rpx;
-}
-
-.myContent .myeditList .editLeft1 view:nth-of-type(1) image {
-  width: 38rpx;
-  height: 42rpx;
-}
-
-.myContent .myeditList .editLeft1 view:nth-of-type(2) image {
-  width: 38rpx;
-  height: 42rpx;
-}
-
-.myContent .myeditList .editLeft1 view:nth-of-type(3) image {
-  width: 42rpx;
-  height: 42rpx;
-}
-
-.myContent .myeditList .editLeft1 view:nth-of-type(4) image {
-  width: 42rpx;
-  height: 42rpx;
-}
-
-.myContent .myeditList .editRight {
-  text-align: center;
-  width: 175rpx;
-  height: 140rpx;
-  background: #fff;
-  margin-left: 4rpx;
-  padding: 20rpx 0;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.myContent .myeditList:nth-of-type(1) .editRight>image {
-  width: 31rpx;
-  height: 36rpx;
-}
-
-.myContent .myeditList:nth-of-type(2) .editRight>image {
-  width: 36rpx;
-  height: 36rpx;
-}
-
-.myContent .myeditList .editRight text {
-  display: block;
-  color: #999;
-  margin-top: 12rpx;
-}
-
-.myContent .myeditList .editRight text:nth-of-type(2) {
+.mayTop .moneyDetail>view>image {
   position: absolute;
-  background: #dd402d;
-  width: 24rpx;
-  height: 24rpx;
-  border-radius: 24rpx;
-  top: -2rpx;
-  right: 36rpx;
-  font-size: 13rpx;
-  color: #fff;
-  text-align: center;
-  line-height: 24rpx;
-}
-
-.delivery {
+  top: 0rpx;
+  left: 0rpx;
+  z-index: -1;
   width: 100%;
-  margin-top: 20rpx;
-  padding: 20rpx 16rpx 20rpx 32rpx;
-  background: #fff;
-  height: 160rpx;
+  height: 90rpx;
 }
-
-.delivery .deliveryLeft {
-  width: 120rpx;
-  height: 120rpx;
-  float: left;
-}
-
-.delivery .deliveryLeft>image {
-  width: 100%;
-  height: 100%;
-}
-
-.delivery .deliveryRight {
-  box-sizing: border-box;
-  padding-left: 20rpx;
-  float: left;
-  width: calc(100% - 120rpx);
-}
-
-.delivery .deliveryRight>text {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.delivery .deliveryRight>text:nth-of-type(1) {
-  color: #df3f2f;
+.mayTop .moneyDetail>view>view {
+  color: #ffea00;
   font-size: 28rpx;
-}
-
-.delivery .deliveryRight>text:nth-of-type(2) {
-  color: #323232;
-  font-size: 27rpx;
-  margin: 10rpx 0;
-}
-
-.delivery .deliveryRight>text:nth-of-type(3) {
-  color: #999;
-  font-size: 22rpx;
-}
-
-.myFocus {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20rpx;
-}
-
-.myFocus >view {
-  text-align: center;
-  background: #fff;
-  flex: 1;
-  padding: 33rpx 0;
-}
-
-.myFocus >view:nth-of-type(3) {
-  margin-left: 4rpx;
-}
-
-.myFocus >view>text {
-  display: block;
-}
-
-.myFocus >view>text:nth-of-type(1) {
-  color: #e03e31;
-  font-size: 26rpx;
-  font-weight: bold;
-  margin-bottom: 12rpx;
-}
-
-.myFocus >view>text:nth-of-type(2) {
-  color: #323232;
-  font-size: 22rpx;
-}
-
-.myFocus >view>image {
-  width: 46rpx;
-  height: 39rpx;
-}
-
-.myFocus >view:nth-of-type(3)>text {
-  color: #999;
-  font-size: 22rpx;
-  margin-bottom: 0;
-}
-
-.mylistContent {
-  white-space: nowrap;
-  padding: 20rpx 0;
-  box-sizing: border-box;
-}
-
-.mylistContent .list_left {
-  min-width: 166rpx;
-  height: 166rpx;
-  margin-right: 20rpx;
-  padding: 20rpx;
-  box-sizing: border-box;
-  display: inline-block;
-  text-align: center;
-  border-radius: 10rpx;
-  background: #fff;
-  overflow: hidden;
-  position: relative;
-}
-
-.mylistContent .list_left>image {
-  width: 100%;
-  height: 100%;
-  background: rgba(243, 243, 243, 1);
-  border-radius: 8px;
 }

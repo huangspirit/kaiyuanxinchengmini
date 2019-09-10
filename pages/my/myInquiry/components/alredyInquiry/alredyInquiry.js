@@ -35,9 +35,15 @@ Component({
       }).then(res => {
         console.log('已批复', res)
         if (res.resultCode == "200") {
-          this.setData({
-            alredyInquiryList: res.data.data
-          })
+          if (res.data != null) {
+            this.setData({
+              alredyInquiryList: res.data.data
+            })
+          } else {
+            this.setData({
+              alredyInquiryList: []
+            })
+          }
         }
       })
     },
