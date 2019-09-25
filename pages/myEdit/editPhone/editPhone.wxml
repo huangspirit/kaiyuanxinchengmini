@@ -1,0 +1,6 @@
+<!--pages/myEdit/editPhone/editPhone.wxml-->
+<dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="取消" confirmText="确认" title="验证当前手机号">
+  <view slot="content" class="section">
+
+  </view>
+</dialog>

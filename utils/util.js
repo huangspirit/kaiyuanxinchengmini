@@ -35,13 +35,7 @@ const getFormat = msec => {
   mm = mm > 9 ? mm : `0${mm}`;
   hh = hh > 9 ? hh : `0${hh}`;
   day = day > 9 ? day : `0${day}`;
-  return {
-    ms,
-    ss,
-    mm,
-    hh,
-    day
-  };
+  return day + "天" + hh + "时" + mm + "分" + ss + "秒"
 }
 module.exports = {
   formatTime: formatTime,

@@ -2,7 +2,7 @@
 
 .productDetailPic {
   width: 100%;
-  height: 375rpx;
+  height: 520rpx;
 }
 
 .productDetailPic >image {

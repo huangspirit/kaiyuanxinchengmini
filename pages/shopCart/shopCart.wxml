@@ -1,19 +1,28 @@
 <!--pages/shopCart/shopCart.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="shoppingCart" wx:if="{{cartList.length>0}}">
   <view class="cartTop">
     <view>
       <image src="../../img/image/weizhi_hui.png"></image>
-      <text bindtap="changeAdress">北京市大兴区北京市大兴区北京市大兴区</text>
+      <picker wx:if="{{adressList.length>0}}" bindchange="bindPickerChange" value="{{addressindex}}" range="{{adressList}}" range-key="{{'address'}}">
+        <view class="picker">
+          {{adressList[addressindex].address}}
+        </view>
+      </picker>
+      <text wx:if="{{adressList.length<=0}}" bindtap="addAdress">新增地址</text>
     </view>
     <text bindtap="editGoods">{{editText}}</text>
   </view>
 
   <view class="shopList">
-    <view class="listContent" wx:for="{{cartList}}" wx:key="index" wx:for-item="item" wx:for-index="index">
+    <view class="listContent {{!item.isenable?'listNosell':''}}" wx:for="{{cartList}}" wx:key="index" wx:for-item="item" wx:for-index="index">
       <view class="shopSeller">
-        <view class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
+        <view wx:if="{{item.isenable}}" class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
           <image wx:if="{{item.checked}}" src="../../img/image/xuanzhong.png"></image>
           <image wx:else src="../../img/image/weixuanzhong.png"></image>
+        </view>
+        <view wx:if="{{!item.isenable}}" class='action-checkbox'>
+          <image src="../../img/image/weixuanzhong.png"></image>
         </view>
         <view class="cu-avatar lg round margin-left margin-right">
           <image style="width:100%;height:100%;border-radius:100%;" src="{{item.sellerUrl}}"></image>
@@ -21,25 +30,31 @@
         <text>{{item.sellerName}} ></text>
       </view>
       <view class="sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
-        <view class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
+        <view wx:if="{{subItem.isenable}}" class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
           <image wx:if="{{subItem.checked}}" src="../../img/image/xuanzhong.png"></image>
           <image wx:else src="../../img/image/weixuanzhong.png"></image>
         </view>
-        <view class="listDetail">
-          <view class="listLeft">
-            <image src="{{subItem.goodsImageUrl}}"></image>
-          </view>
-          <view class="listRight">
-            <text>{{subItem.goods_name}}</text>
-            <text>{{subItem.goodsDesc}}</text>
-            <text>{{subItem.diliverPlace}}</text>
-            <view class="goodsPrice">
-              <text>{{subItem.priceUnit?'$':'￥'}} {{subItem.goodsPrice}}</text>
-              <view>
-                <button class='cu-btn' bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
-                <input class='ca-sum' name='input' value="{{subItem.goodsNum}}"></input>
-                <button class='cu-btn' bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
-              </view>
+        <view wx:if="{{!subItem.isenable}}" class='action-checkbox'>
+          <image src="../../img/image/weixuanzhong.png"></image>
+      </view>
+      <view class="listDetail">
+        <view class="listLeft">
+          <image wx:if="{{subItem.goodsImageUrl!='-'}}" src="{{subItem.goodsImageUrl}}"></image>
+          <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        </view>
+        <view class="listRight">
+          <text>{{subItem.goods_name}}</text>
+          <text>{{subItem.goodsDesc}}</text>
+          <text>{{subItem.diliverPlace}}</text>
+          <view class="goodsPrice">
+            <text>
+                {{subItem.priceUnit?'$':'￥'}} {{subItem.priceType?subItem.minPrice:subItem.goodsPrice}}
+              </text>
+
+            <view>
+              <button class='cu-btn' disabled="{{subItem.delbtnShow}}" bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
+              <input class='ca-sum' name='input' value="{{subItem.goodsNum}} "></input>
+              <button class='cu-btn' disabled="{{subItem.addbtnShow}}" bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
             </view>
           </view>
         </view>
@@ -47,7 +62,8 @@
     </view>
   </view>
 </view>
-<view class="shopFooter" wx:if="{{cartList.length>0&&!editgoodsShow}}">
+</view>
+<view class="shopFooter " wx:if="{{cartList.length>0&&!editgoodsShow}}">
   <view class="footerLeft">
     <view>
       <view class='action-checkbox'>
@@ -56,10 +72,14 @@
       </view>
       全选
     </view>
-    <text>总计：￥{{goodsAllPrice}}</text>
+    <text>总计：￥{{goodsAlltypePrice}}</text>
   </view>
-  <view class="footerRight">
-    <text bindtap="toPay">结算</text>
+  <view wx:if="{{payBtnShow}}" class="footerRight" bindtap="toPay">
+    <text>结算</text>
+    <text>({{goodsAllNum}}件)</text>
+  </view>
+  <view wx:if="{{!payBtnShow}}" class="footerRightsub">
+    <text>结算</text>
     <text>({{goodsAllNum}}件)</text>
   </view>
 </view>
@@ -81,9 +101,9 @@
 <view class="shopingCarEmpty" wx:if="{{cartList.length<=0}}">
   <image src="../../img/image/gouwuchekong.png"></image>
   <view>购物车空空如也，
-    <text>去逛逛</text>吧 ~
+    <text bindtap="tohome">去逛逛</text>吧 ~
   </view>
-  <view class="wantTitle">
+  <!-- <view class="wantTitle">
     <image src="../../img/image/gouwuchexian.png"></image>
     <text>可能你想要</text>
   </view>
@@ -101,5 +121,5 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
 </view>

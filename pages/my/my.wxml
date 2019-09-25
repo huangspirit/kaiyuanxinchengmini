@@ -1,4 +1,8 @@
 <!--pages/my/my.wxml-->
+<view class="myHeader">
+  <image bindtap="notice" src="../../img/image/notice.png"></image>
+  <text>我的</text>
+</view>
 <view class='mayTop'>
   <image src='../../img/image/banner.png'></image>
   <text wx:if="{{select}}" bindtap="userInfo">我是买家</text>
@@ -20,13 +24,13 @@
   </view>
   <view class="moneyDetail">
     <view>
-      <view> 钱包余额：00.00 元 </view>
+      <view> 钱包余额：{{userDetail.userTagMap.wallet}} 元 </view>
       <view>
-        <text>提现管理</text> |
-        <text>明细</text>
+        <text bindtap="withDraw">提现管理</text> |
+        <text bindtap="walletDetail">明细</text>
       </view>
     </view>
   </view>
 </view>
 <my wx:if="{{select}}"></my>
-<mySeller wx:if="{{!select}}"></mySeller>
+<mySeller wx:if="{{!select}}" userDetail="{{userDetail}}"></mySeller>

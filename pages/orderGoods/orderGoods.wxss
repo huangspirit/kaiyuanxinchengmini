@@ -1,0 +1,105 @@
+/* pages/orderGoods/orderGoods.wxss */
+
+.spotSpecial {
+  width: 100%;
+  display: flex;
+}
+
+.Left {
+  width: 180rpx;
+  padding: 20rpx 0;
+}
+
+.Left>text {
+  display: block;
+  line-height: 80rpx;
+  margin-bottom: 40rpx;
+  padding: 0 10rpx;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.Left .siderActive {
+  color: #e03e31;
+}
+
+.Right {
+  width: calc(100% - 180rpx);
+  background: #fff;
+}
+
+.Right .specialList {
+  border-bottom: 2rpx dashed #e6e6e6;
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+  height: 225rpx;
+  display: flex;
+}
+
+.Right .specialList .listLeft {
+  width: 120rpx;
+  height: 120rpx;
+  border: 2rpx solid #e6e6e6;
+  margin-right: 22rpx;
+}
+
+.Right .specialList .listLeft>image {
+  width: 100%;
+  height: 100%;
+}
+
+.Right .specialList .listRight {
+  width: calc(100% - 142rpx);
+}
+
+.Right .specialList .listRight>text {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.Right .specialList .listRight .listContent>view {
+  float: left;
+}
+
+.Right .specialList .listRight .listContent>view:nth-of-type(2) {
+  float: right;
+  text-align: right;
+  margin-top: 35rpx;
+}
+
+.Right .specialList .listRight .listContent>view>text {
+  display: block;
+  margin-top: 10rpx;
+}
+
+.Right .specialList .listRight .listContent>view>text:nth-of-type(1) {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.Right .specialList .listRight .listContent>view>text:nth-of-type(2) {
+  color: #333;
+  font-size: 24rpx;
+}
+
+.Right .specialList .listRight .listContent>view>text:nth-of-type(3) {
+  color: #333;
+  font-size: 24rpx;
+}
+
+.Right .specialList .listRight .listContent>view>image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.Right .specialList .listRight .listContent>view:nth-of-type(2)>text {
+  color: #e03e31;
+  font-size: 30rpx;
+  font-weight: bold;
+}

@@ -1,5 +1,6 @@
 // pages/productDetail/productDetail.js
 import api from '../../api/api'
+import utils from '../../utils/util.js'
 const app = getApp();
 Page({
 
@@ -10,7 +11,9 @@ Page({
     productParams: "",
     productDetail: {},
     TabbarBot: app.globalData.tabbar_bottom,
-    specialList:[]
+    specialList: [],
+    countTimeData: [],
+    timer: ""
   },
   getProductDetail() {
     api.get('/api-g/gods-anon/searchResult', {
@@ -35,10 +38,39 @@ Page({
             this.setData({
               specialList: res.data.data
             })
+            if (res.data.data.length > 0) {
+              this.data.countTimeData = []
+              for (var i = 0; i < this.data.speciaList.length; i++) {
+                let countdownTime = this.data.speciaList[i].expireTime - this.data.speciaList[i].currentTime
+                this.data.countTimeData.push({
+                  remainTime: countdownTime,
+                  countDown: ""
+                })
+              }
+              this.setCountDown(this.data.countTimeData)
+            }
           }
         })
       }
     })
+  },
+  setCountDown(val) {
+    let time = 1000
+    let list = val.map((v, i) => {
+      if (v.remainTime <= 0) {
+        v.remainTime = 0;
+      }
+      let formatTime = utils.getFormat(v.remainTime);
+      v.remainTime -= time;
+      v.countDown = formatTime;
+      return v;
+    })
+    this.setData({
+      countTimeData: list
+    });
+    this.data.timer = setTimeout(() => {
+      this.setCountDown(list)
+    }, time)
   },
   addFocus(val) {
     console.log(val)
@@ -89,6 +121,11 @@ Page({
       complete: function(res) {},
     })
   },
+  releaseSale() {
+    wx.navigateTo({
+      url: '../releaseSale/releaseSale',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -117,7 +154,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearTimeout(this.data.timer)
   },
 
   /**

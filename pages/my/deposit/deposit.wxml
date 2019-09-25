@@ -1,0 +1,15 @@
+<!--pages/my/deposit/deposit.wxml-->
+<view style="padding:20rpx;">
+  <view class="deposit">
+    <text class="topupTitle">充值金额</text>
+    <view class="topupNum">
+      <text>￥</text>
+      <input></input>
+    </view>
+    <view class="topupBtn">充值</view>
+    <view class="topupList">
+      <text wx:for="{{depositList}}" wx:key="index" bindtap="amountChange" data-index="{{index}}" class="{{numIndex==index?'active':''}}">{{item.credit}}</text>
+    </view>
+    <text class="topupDetail" bindtap="topupDetail">充值明细</text>
+  </view>
+</view>

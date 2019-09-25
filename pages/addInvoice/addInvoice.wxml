@@ -1,0 +1,40 @@
+<!--pages/addInvoice/addInvoice.wxml-->
+<view class="listContent">
+  <view class="cu-form-group">
+    <view class="title">公司名称</view>
+    <input placeholder="请输入公司名称" bindinput="corporatename" value="{{invoiceDetail.corporatename}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">税号/统一信用代码证号</view>
+    <input placeholder="请输入税号"  bindinput="billno" value="{{invoiceDetail.billno}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">开户银行</view>
+    <input placeholder="请输入开户银行"  bindinput="openingbank" value="{{invoiceDetail.openingbank}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">银行账号</view>
+    <input placeholder="请输入银行账号"  bindinput="bankaccount" value="{{invoiceDetail.bankaccount}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">开票电话</view>
+    <input placeholder="请输入开票电话"  bindinput="registeredphone" value="{{invoiceDetail.registeredphone}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">开票地址</view>
+    <input placeholder="请输入开票地址"  bindinput="registeredaddress" value="{{invoiceDetail.registeredaddress}}" name="input"></input>
+    <text class='cuIcon-close text-gray'></text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">设为默认</view>
+    <switch bindchange="SetShadow" checked="{{invoiceDetail.isdefault}}" color="#39B54A"></switch>
+  </view>
+</view>
+<view class="invoiceBtn">
+  <text bindtap="confirm">确定</text>
+</view>

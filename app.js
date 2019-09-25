@@ -1,15 +1,12 @@
 //app.js
-
 App({
   onReady: function() {
 
   },
-  onLaunch: function() {
-    console.log('111111')
+  onLaunch: function(options) {
     // 展示本地存储能力
     wx.setStorageSync('isBuyer', true)
-
-    // 登录
+    // // 登录
     wx.login({
       success: res => {
         console.log('授权登录', res)
@@ -21,12 +18,10 @@ App({
     // 获取用户信息
     wx.getSetting({
         success: res => {
-          console.log('获取用户信息', res)
           if (res.authSetting['scope.userInfo']) {
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
             wx.getUserInfo({
               success: res => {
-                console.log('获取用户登录信息', res)
                 // 可以将 res 发送给后台解码出 unionId
                 this.globalData.userInfo = res.userInfo
                 this.globalData.usercode['iv'] = res.iv
@@ -36,6 +31,15 @@ App({
                 if (this.userInfoReadyCallback) {
                   this.userInfoReadyCallback(res)
                 }
+              }
+            })
+          } else {
+            wx.openSetting({
+              success: res => {
+                console.log(res)
+              },
+              fail: res => {
+                console.log(res)
               }
             })
           }
@@ -56,12 +60,12 @@ App({
       })
   },
 
-
   globalData: {
     userInfo: null,
     usercode: {},
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     version: '1.0.0',
+    classType:0,
     host: 'https://api.113ic.com'
   }
 })

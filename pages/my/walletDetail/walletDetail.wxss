@@ -1,0 +1,36 @@
+/* pages/my/walletDetail/walletDetail.wxss */
+
+.userInfoList {
+  width: 100%;
+}
+
+.userInfoList>view {
+  display: flex;
+  width: 100%;
+  padding: 0 20rpx;
+  height: 99rpx;
+  line-height: 99rpx;
+  color: #333;
+  font-size: 28rpx;
+  background: #fff;
+  margin-bottom: 10rpx;
+  justify-content: space-between;
+}
+
+.userInfoList>view>image {
+  width: 15rpx;
+  height: 26rpx;
+  margin-top: 35rpx;
+}
+
+.userInfoList>view>view>text {
+  margin-right: 15rpx;
+  color: #bbb;
+}
+
+.userInfoList>view>view>image {
+  width: 15rpx;
+  height: 26rpx;
+  vertical-align: middle;
+  margin-top: -5rpx;
+}

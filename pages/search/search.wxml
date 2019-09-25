@@ -22,25 +22,18 @@
   </view>
 </view>
 
-<view class="oldSearch">
-  <text>最近搜索</text>
-  <view class="oldList">
-    <text wx:for="{{6}}" wx:key="index">最近搜索</text>
-  </view>
-</view>
-
 <view class="hotSearch">
   <view class="hotTitle">
     <text>热搜榜</text>
-    <view>
+    <!-- <view>
       <image src="../../img/image/shuaxin.png"></image>
       <text>换一批</text>
-    </view>
+    </view> -->
   </view>
   <view class="oldList">
-    <view wx:for="{{6}}" wx:key="index">
+    <view wx:for="{{specialList}}" wx:key="index">
       <image wx:if="{{index==0||index==1}}" src="../../img/image/hot.png"></image>
-      <text>最近搜索</text>
+      <text bindtap="toDetail" data-item="{{item}}">{{item.name}}</text>
     </view>
   </view>
 </view>

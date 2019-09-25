@@ -10,14 +10,16 @@
   background: #fff;
   padding: 0 20rpx;
   margin: 20rpx 0 10rpx 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .shoppingCart .cartTop>view {
-  float: left;
   width: 400rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
 }
 
 .shoppingCart .cartTop>view>image {
@@ -25,9 +27,10 @@
   height: 35rpx;
   vertical-align: middle;
   margin-right: 10rpx;
+  margin-top: 22rpx;
 }
 
-.shoppingCart .cartTop>view>text {
+.shoppingCart .cartTop>view>picker {
   font-size: 30rpx;
   color: #999;
 }
@@ -49,7 +52,13 @@
   box-sizing: border-box;
   margin-bottom: 15rpx;
 }
-
+.listNosell{
+  width: 100%;
+  background: #e5e5e5;
+  padding: 20rpx 26rpx;
+  box-sizing: border-box;
+  margin-bottom: 15rpx;
+}
 .listContent .shopSeller {
   height: 97rpx;
   margin-bottom: 30rpx;
@@ -158,13 +167,14 @@
 .listContent .sellerList .listDetail .listRight .goodsPrice>text {
   font-weight: bold;
   color: #df3f2f;
-  line-height: 40rpx;
+  line-height: 15rpx;
   flex: 1;
 }
 
 .listContent .sellerList .listDetail .listRight .goodsPrice>view {
   display: flex;
   flex: 0.7;
+  height: 40rpx;
 }
 
 .listContent .sellerList .listDetail .listRight .goodsPrice>view .cu-btn {
@@ -177,7 +187,8 @@
 .listContent .sellerList .listDetail .listRight .goodsPrice>view>input {
   background: #f5f5f5;
   margin: 0 8rpx;
-  height: 100%;
+  height: 40rpx;
+  min-height: 40rpx;
   text-align: center;
 }
 
@@ -226,6 +237,16 @@
   color: #fff;
   text-align: center;
   padding: 14rpx 0;
+}
+
+.shopFooter .footerRightsub {
+  display: flex;
+  flex-direction: column;
+  width: 29%;
+  color: #fff;
+  text-align: center;
+  padding: 14rpx 0;
+  background: #dcdcdc;
 }
 
 .shopFooter .footerRight>text:nth-of-type(1) {
@@ -320,7 +341,12 @@
   color: #333;
   margin-top: 75rpx;
 }
-
+.shopingCarEmpty>view>text {
+  color: blue;
+}
+.shopingCarEmpty>view>text:active {
+  color: rgba(0,0,255,.8)
+}
 .shopingCarEmpty .wantTitle {
   position: relative;
 }
@@ -364,7 +390,7 @@
 }
 
 .shopingCarEmpty .wantList .listDetail .listRight {
-  border-bottom: 2rpx solid #dddddd;
+  border-bottom: 2rpx solid #ddd;
   width: calc(100% - 148rpx);
   text-align: left;
   padding-bottom: 25rpx;
@@ -400,6 +426,7 @@
   font-size: 18rpx;
   margin-bottom: 10rpx;
 }
+
 .shopingCarEmpty .wantList .listDetail .listRight .goodsPrice>text {
   font-weight: bold;
   color: #df3f2f;

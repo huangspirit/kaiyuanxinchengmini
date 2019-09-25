@@ -1,0 +1,29 @@
+<!--pages/my/withDraw/addWithdraw/addWithdraw.wxml-->
+<!--pages/editAdress/editAdress.wxml-->
+<view class="cu-form-group">
+  <view class="title">开户银行</view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'name'}}">
+    <view class="picker">
+      {{array[index].name}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">持卡人</view>
+  <input placeholder="持卡人姓名" bindinput="bankName" value="{{bindDetail.bankName}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group" wx:if="{{bandAdressShow}}">
+  <view class="title">开户行地址</view>
+  <input placeholder="请输入地址" bindinput="bankAdress" value="{{bindDetail.bankAdress}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">卡号</view>
+  <input placeholder="请输入银行卡号" bindinput="bankCard" value="{{bindDetail.bankCard}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="editFooter">
+  <text bindtap="confirm">确定</text>
+  <text bindtap="cancel">取消</text>
+</view>

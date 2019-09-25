@@ -32,7 +32,8 @@
   <view wx:if="{{hotSaleList.length>0}}">
     <view class="brandHot" wx:for="{{hotSaleList}}" wx:key="index">
       <view class='list_left'>
-        <image src='{{item.imageUrl}}'></image>
+        <image wx:if="{{item.imageUrl!='-'}}" src='{{item.imageUrl}}'></image>
+        <image wx:else src='{{item.imageUrl}}'></image>
       </view>
       <view class='list_right' bindtap="toproductDetail" data-item="{{item}}">
         <text class='speciStatus'>{{item.productno}}</text>

@@ -1,11 +1,21 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <view class="authorization" wx:if="{{!hasUserInfo && canIUse}}">
+      <text>你需要授权才能使用</text>
+      <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 立即授权 </button>
+    </view>
+
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="desc">近期你已经授权以上账号登陆开元芯城</text>
+      <text class="desc">点击确认可自动登陆</text>
+      <text class="confirm" bindtap="bindViewTap">确认</text>
     </block>
+  </view>
+  <view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">登陆中...</view>
   </view>
   <dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="取消" confirmText="确认" title="绑定手机号">
     <view slot="content" class="section">
@@ -14,7 +24,8 @@
       </view>
       <view class="phoneCode">
         <input type="number" bindinput="bindCodeInput" placeholder="请输入验证码" />
-        <text bindtap="getphoneCode">获取验证码</text>
+        <text wx:if="{{btnShow}}" class="getCode" bindtap="getphoneCode">{{getcodeText}}</text>
+        <text wx:if="{{!btnShow}}" class="waitTime">{{getcodeText}}</text>
       </view>
     </view>
   </dialog>

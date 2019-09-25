@@ -1,0 +1,48 @@
+/* pages/my/withDraw/addWithdraw/addWithdraw.wxss */
+
+.cu-form-group .title {
+  width: 200rpx;
+}
+
+.cu-form-group picker .picker {
+  text-align: left;
+}
+
+.cu-form-group .adressLabel {
+  display: flex;
+  width: calc(100% - 155rpx);
+}
+
+.cu-form-group .adressLabel>text {
+  padding: 5rpx 10rpx;
+  border: 2rpx solid #bbb;
+  margin-right: 10rpx;
+  border-radius: 8rpx;
+}
+
+.editFooter {
+  padding: 20rpx;
+}
+
+.editFooter>text:nth-of-type(1) {
+  display: block;
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  background: #df3f2f;
+  color: #fff;
+  border-radius: 8rpx;
+}
+
+.editFooter>text:nth-of-type(2) {
+  display: block;
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  background: #fff;
+  color: #333;
+  border-radius: 8rpx;
+  margin-top: 15rpx;
+}

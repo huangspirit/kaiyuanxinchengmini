@@ -64,7 +64,8 @@ page {
    padding: 0 40rpx;
 }
 .specialContent .specialSider .siderActive{
-  color: #e03e31
+  color: #e03e31;
+  background: #fff;
 }
 .specialContent .rightContent {
   height: 100%;
@@ -100,11 +101,12 @@ page {
   font-size: 28rpx;
   color: #333333;
 }
-.specialContent .specialList .listRight .listContent>view{
-float: left;
+.specialContent .specialList .listRight .listContent{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rpx;
 }
 .specialContent .specialList .listRight .listContent>view:nth-of-type(2){
-float: right;
 text-align: right;
 margin-top: 35rpx;
 }
@@ -133,4 +135,14 @@ margin-top: 10rpx;
   color: #e03e31;
   font-size: 30rpx;
   font-weight: bold;
+}
+.specialContent .specialList .listRight .saleStatus{
+   display: flex;
+   justify-content: space-between;
+}
+.specialContent .specialList .listRight .saleStatus>text:nth-of-type(1) {
+  color: #e03e31;
+}
+.specialContent .specialList .listRight .saleStatus>text:nth-of-type(2) {
+  color: #e5e5e5;
 }

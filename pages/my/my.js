@@ -21,6 +21,8 @@ Page({
   getUsrInfo() {
     api.get("/api-u/users/current", {}).then(res => {
       console.log('个人信息', res)
+      let UserInforma = JSON.stringify(res)
+      wx.setStorageSync('UserInforma', UserInforma)
       this.setData({
         userDetail: res
       })
@@ -31,11 +33,26 @@ Page({
       url: '../personalInfo/personalInfo',
     })
   },
+  withDraw() {
+    wx.navigateTo({
+      url: './withDraw/withDraw',
+    })
+  },
+  walletDetail() {
+    wx.navigateTo({
+      url: './walletDetail/walletDetail',
+    })
+  },
+  notice() {
+    wx.navigateTo({
+      url: './notice/notice',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getUsrInfo()
+
 
   },
 
@@ -54,6 +71,7 @@ Page({
     this.setData({
       select: this.data.select
     })
+    this.getUsrInfo()
   },
 
   /**

@@ -1,0 +1,16 @@
+<!--pages/my/deposit/depositDetail/depositDetail.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<!--  -->
+<view class="bankList">
+  <view>
+    <text>银行桩长</text>
+    <text>{{filter.formatDate(152347885641)[1]}}</text>
+  </view>
+
+  <view>
+    <text>372.39</text>
+  </view>
+</view>
+<view class="bankNo">
+  <text>暂无充值记录</text>
+</view>

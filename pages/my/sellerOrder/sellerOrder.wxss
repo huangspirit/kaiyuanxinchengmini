@@ -1,0 +1,20 @@
+/* pages/my/sellerOrder/sellerOrder.wxss */
+
+.orderInput {
+  background: #fff;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.orderInput>input {
+  background: #f1f1f1;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+  border-radius: 60rpx;
+  margin-bottom: 19rpx;
+}
+
+.nav .cu-item {
+  padding: 0 10rpx;
+}

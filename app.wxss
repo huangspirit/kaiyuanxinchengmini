@@ -28,3 +28,13 @@ view, text {
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+
+.cu-load.load-modal {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.cu-load.load-modal::after {
+  width: 120rpx;
+  height: 120rpx;
+}

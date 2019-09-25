@@ -1,5 +1,9 @@
 /* pages/home/home.wxss */
 
+page {
+  min-height: calc(100% - 185rpx);
+}
+
 .homeTop {
   width: 100%;
   position: relative;
@@ -121,6 +125,8 @@
 .specialList .listHead {
   height: 80rpx;
   line-height: 80rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 .specialList .listHead>text {
@@ -129,16 +135,25 @@
   color: rgba(0, 0, 0, 1);
 }
 
+.specialList .listHead>view>image {
+  width: 15rpx;
+  height: 26rpx;
+  vertical-align: middle;
+  margin-top: -5rpx;
+  margin-left: 15rpx;
+}
+
 .specialList .listContent {
   display: flex;
   width: 100%;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .specialList .listContent .list_left {
-  min-width: 340rpx;
+  width: 49%;
   height: 300rpx;
-  margin-right: 30rpx;
+  margin-right: 2%;
   padding: 0 20rpx;
   box-sizing: border-box;
   display: inline-block;
@@ -147,6 +162,11 @@
   background: #fff;
   overflow: hidden;
   position: relative;
+  margin-bottom: 15rpx;
+}
+
+.specialList .listContent .list_left:nth-of-type(even) {
+  margin-right: 0;
 }
 
 .specialList .listContent .list_left image {
@@ -160,7 +180,11 @@
   display: block;
   text-align: left;
 }
-
+.specialList .listContent .list_left>text:nth-of-type(1) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .specialList .listContent .list_left>text:nth-of-type(2) {
   color: #dd4031;
 }

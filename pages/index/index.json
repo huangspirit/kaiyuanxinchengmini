@@ -1,5 +1,9 @@
 {
   "usingComponents": {
     "dialog": "../../components/dialog/dialog"
-  }
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "登陆",
+  "navigationBarTextStyle": "black"
 }

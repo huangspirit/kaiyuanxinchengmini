@@ -1,5 +1,6 @@
 // pages/home/home.js
 import api from '../../api/api'
+const app = getApp();
 Page({
 
   /**
@@ -8,6 +9,7 @@ Page({
   data: {
     specialList: [],
     facdirect: [],
+    material: [], //呆料
     brandTotal: 0,
     catergoryTotal: 0,
     productTotal: 0,
@@ -92,12 +94,52 @@ Page({
     })
   },
   classSearch() {
-    wx: wx.navigateTo({
-      url: '../classSearch/classSearch',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+    // wx: wx.navigateTo({
+    //   url: '../classSearch/classSearch',
+    //   success: function(res) {},
+    //   fail: function(res) {},
+    //   complete: function(res) {},
+    // })
+    wx.switchTab({
+      url: '../classCation/classCation',
     })
+  },
+  classList(val) {
+    console.log(val)
+    let index = val.currentTarget.dataset.index
+    if (index == 0) {
+      wx.navigateTo({
+        url: '../factoryDirect/factoryDirect',
+      })
+    } else if (index == 1) {
+      wx.navigateTo({
+        url: '../spotSpecial/spotSpecial',
+      })
+    } else if (index == 2) {
+      wx.navigateTo({
+        url: '../orderGoods/orderGoods',
+      })
+    } else if (index == 3) {
+      wx.navigateTo({
+        url: '../material/material',
+      })
+    } else {
+      console.log(app)
+      if (index == 4) {
+        app.globalData.classType = 1
+      } else if (index == 5) {
+        app.globalData.classType = 4
+      } else if (index == 6) {
+        app.globalData.classType = 3
+      } else if (index == 7) {
+        app.globalData.classType = 2
+      }
+
+      wx.switchTab({
+        url: '../classCation/classCation',
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -165,6 +207,21 @@ Page({
       if (res.resultCode == "200") {
         this.setData({
           facdirect: res.data.data
+        })
+      }
+    })
+
+    //获取呆料掘金
+    api.get("/api-g/gods-anon/queryDirectGoods", {
+      start: 0,
+      length: 100,
+      is_old_product: true,
+      status: 1
+    }).then(res => {
+      console.log('获取呆料掘金列表', res)
+      if (res.resultCode == "200") {
+        this.setData({
+          material: res.data.data
         })
       }
     })

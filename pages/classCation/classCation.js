@@ -1,5 +1,6 @@
 // pages/classCation/classCation.js
 import api from '../../api/api'
+const app = getApp();
 Page({
 
   /**
@@ -10,9 +11,13 @@ Page({
     calssIndex: 0,
     classList: [],
     subClassList: [],
-    directObj:{}
+    directObj: {},
+    loadModal: false
   },
   getSubClassList(val) {
+    this.setData({
+      loadModal: true
+    })
     console.log(val)
     var cateInfo = ""
     if (val.id) {
@@ -30,9 +35,9 @@ Page({
       console.log('分类', res)
       if (res.resultCode == "200") {
         this.setData({
-          subClassList: res.data
+          subClassList: res.data,
+          loadModal: false
         })
-
       }
     })
 
@@ -60,21 +65,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // //获取分类列表
-    api.get("/api-g/gods-anon/queryCatergoryHomePage", {
-      catergory_id: 0,
-      flag: true
-    }).then(res => {
-      console.log('获取分类列表', res)
-      if (res.resultCode == '200') {
-        this.setData({
-          classList: res.data
-        })
-        this.getSubClassList(res.data[0])
-      }
+
+  },
+  toSearch() {
+    wx: wx.navigateTo({
+      url: '../search/search',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -86,7 +86,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    // //获取分类列表
+    api.get("/api-g/gods-anon/queryCatergoryHomePage", {
+      catergory_id: 0,
+      flag: true
+    }).then(res => {
+      console.log('获取分类列表', res)
 
+      if (res.resultCode == '200') {
+        this.setData({
+          classList: res.data,
+          calssIndex: app.globalData.classType
+        })
+        this.getSubClassList(res.data[this.data.calssIndex])
+      }
+    })
   },
 
   /**

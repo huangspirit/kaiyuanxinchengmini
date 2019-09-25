@@ -1,0 +1,196 @@
+<!--pages/releaseSale/releaseSale.wxml-->
+<view style="padding:20rpx 0">
+  <view class="cu-form-group">
+    <view class="title">器件型号</view>
+    <input placeholder="请输入商品详细型号" name="input"></input>
+  </view>
+  <radio-group class="block" bindchange="RadioChange">
+    <view class="cu-form-group">
+      <view class="title">器件状态</view>
+      <view class="radioSquare">
+        <view>
+          <radio class="checked" checked="{{goods_type=='true'?true:false}}" value="true"></radio>
+          <text>现货</text>
+        </view>
+        <view>
+          <radio class="checked" checked="{{goods_type=='false'?true:false}}" value="false"></radio>
+          <text>订货</text>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+  <view class="cu-form-group" wx:if="{{goods_type=='true'}}">
+    <view class="title">批号</view>
+    <input placeholder="请输入产品批号" name="input"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">交货地点</view>
+    <picker bindchange="bindPickerChange" value="{{addressindex}}" range="{{diliverPlace}}" range-key="{{'name'}}">
+      <view class="picker" style="text-align:left">
+        {{diliverPlace[addressindex].name}}
+      </view>
+    </picker>
+  </view>
+  <radio-group class="block" wx:if="{{goods_type=='true'}}" bindchange="isoldproductChange">
+    <view class="cu-form-group">
+      <view class="title">是否为呆料</view>
+      <view class="radioSquare">
+        <view>
+          <radio class="checked" checked="{{is_old_product=='true'?true:false}}" value="true"></radio>
+          <text>是</text>
+        </view>
+        <view>
+          <radio class="checked" checked="{{is_old_product=='false'?true:false}}" value="false"></radio>
+          <text>否</text>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+
+  <radio-group class="block" wx:if="{{goods_type=='true'}}" bindchange="cludebillChange">
+    <view class="cu-form-group">
+      <view class="title">是否含税价</view>
+      <view class="radioSquare">
+        <view>
+          <radio class="checked" checked="{{clude_bill=='true'?true:false}}" value="true"></radio>
+          <text>含13%增值税</text>
+        </view>
+        <view>
+          <radio class="checked" checked="{{clude_bill=='false'?true:false}}" value="false"></radio>
+          <text>不含税价</text>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+  <radio-group class="block" bindchange="pricetypeChange">
+    <view class="cu-form-group">
+      <view class="title">出价方式</view>
+      <view class="radioSquare">
+        <view wx:if="{{goods_type == 'true'}}">
+          <radio class="checked" checked="{{price_type=='true'?true:false}}" value="true"></radio>
+          <text>阶梯价</text>
+        </view>
+        <view>
+          <radio class="checked" checked="{{price_type=='false'?true:false}}" value="false"></radio>
+          <text>一口价</text>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+
+  <view class="cu-form-group" wx:if="{{price_type=='false'}}">
+    <view class="title">一口价</view>
+    <input placeholder="请输入价格" name="input"></input>
+  </view>
+
+
+  <view class="cu-form-group" wx:if="{{price_type=='true'}}">
+    <view class="title">阶梯价</view>
+    <view class="leverPrice">
+      <view class="leverList">
+        <view>
+          <view>
+            <text>数量</text>
+            <input></input>
+          </view>
+          <view>
+            <text>价格</text>
+            <input></input>
+          </view>
+        </view>
+        <view>
+          <view>
+            <text>数量</text>
+            <input></input>
+          </view>
+          <view>
+            <text>价格</text>
+            <input></input>
+          </view>
+        </view>
+        <view>
+          <view>
+            <text>数量</text>
+            <input></input>
+          </view>
+          <view>
+            <text>价格</text>
+            <input></input>
+          </view>
+        </view>
+      </view>
+      <view class="leverReset">重置阶梯价</view>
+    </view>
+
+  </view>
+
+
+
+
+  <view class="cu-form-group">
+    <view class="title">最小订购量</view>
+    <input placeholder="请输入数量" name="input"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">最小增量</view>
+    <input placeholder="请输入数量" name="input"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">可卖数量</view>
+    <input placeholder="请输入数量" name="input"></input>
+  </view>
+
+  <radio-group class="block" bindchange="selleralwaysChange">
+    <view class="cu-form-group">
+      <view class="title">售卖期限</view>
+      <view class="radioSquare">
+        <view wx:if="{{goods_type == 'true'}}">
+          <radio class="checked" checked="{{seller_always=='true'?true:false}}" value="true"></radio>
+          <text>长期卖</text>
+        </view>
+        <view>
+          <radio class="checked" checked="{{seller_always=='false'?true:false}}" value="false"></radio>
+          <text>限时卖</text>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+
+  <view class="cu-form-group">
+    <view class="title">开始时间</view>
+    <view class="radioSquare">
+      <picker mode="multiSelector" value="{{startTime}}" bindchange="changestartTime" bindcolumnchange="changestartTimeColumn" range="{{startTimeArray}}">
+        <view class="tui-picker-detail">
+          {{startTimeArray[0][startTime[0]]}}-{{startTimeArray[1][startTime[1]]}}-{{startTimeArray[2][startTime[2]]}} {{startTimeArray[3][startTime[3]]}}:{{startTimeArray[4][startTime[4]]}}:{{startTimeArray[5][startTime[5]]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">结束时间</view>
+    <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+      <view class="tui-picker-detail">
+        {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}:{{dateTimeArray[5][dateTime[5]]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">上传实物照片</view>
+    <view class="radioSquare">
+      <view class="grid col-4 grid-square flex-sub">
+        <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" :data-url="item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="cu-tag bg-red" bindtap="DelImg" :data-index="{{index}}">
+            <text class='cuIcon-close'></text>
+          </view>
+        </view>
+        <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+          <text class='cuIcon-cameraadd'></text>
+        </view>
+      </view>
+      <!-- <text>必选项，有利于您的商品销售</text>
+      <text>文件大小在1M以内，支持png,jpg,gif格式</text> -->
+    </view>
+  </view>
+  <view class="footerBtn">立即发布</view>
+</view>

@@ -15,3 +15,10 @@
 <abnormalOrder wx:if="{{TabCur == 3}}" id="abnormalOrder"></abnormalOrder>
 <waitDelivery wx:if="{{TabCur == 4}}" id="waitDelivery"></waitDelivery>
 <alredyEnd wx:if="{{TabCur == 5}}" id="alredyEnd"></alredyEnd>
+
+<!-- // 全部订单 "allOrder"
+//未发货 "waitConfirm"
+//已发货 "waitPay"
+//已逾期"abnormalOrder"
+//在售商品 "waitDelivery"
+//已下架商品 "alredyEnd" -->

@@ -3,7 +3,7 @@
 <view class="cu-bar bg-white search" :style="[{top:CustomBar + 'px'}]">
   <view class="search-form round">
     <text class="cuIcon-search"></text>
-    <input type="text" placeholder="搜索" confirm-type="search"></input>
+    <input type="text" placeholder="搜索" bindtap='toSearch' confirm-type="search"></input>
   </view>
 </view>
 <view class="classCationWarp">
@@ -21,7 +21,7 @@
       <!--如果有数据，才遍历项-->
       <view wx:if="{{subClassList}}">
         <block wx:for="{{subClassList}}" wx:key="id">
-          <view class="nav_right_items" bindtap="subClssRouter" data-item = "{{item}}">
+          <view class="nav_right_items" bindtap="subClssRouter" data-item="{{item}}">
             <!--界面跳转 -->
             <image wx:if="{{item.imgUrl&&item.imgUrl!='-'}}" src="{{item.imgUrl}}"></image>
             <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
@@ -31,6 +31,9 @@
       </view>
       <!--如果无数据，则显示数据-->
       <view class="nodata_text" wx:else>该分类暂无数据</view>
+      <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">加载中...</view>
+      </view>
     </view>
   </view>
 </view>

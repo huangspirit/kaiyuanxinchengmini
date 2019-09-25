@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 39,
 			"list": [
 				{
 					"id": -1,
@@ -128,13 +128,6 @@
 				},
 				{
 					"id": -1,
-					"name": "分类搜索",
-					"pathName": "pages/classSearch/classSearch",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "我的关注",
 					"pathName": "pages/my/myFocus/myFocus",
 					"query": "",
@@ -162,8 +155,8 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "订单中心",
+					"id": 17,
+					"name": "卖家订单中心",
 					"pathName": "pages/my/myOrder/myOrder",
 					"query": "",
 					"scene": null
@@ -193,6 +186,139 @@
 					"id": -1,
 					"name": "个人信息",
 					"pathName": "pages/personalInfo/personalInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "买家订单中心",
+					"pathName": "pages/my/sellerOrder/sellerOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单结算",
+					"pathName": "pages/pay/pay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发票信息",
+					"pathName": "pages/invoiceType/invoiceType",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加发票信息",
+					"pathName": "pages/addInvoice/addInvoice",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "现货直通车",
+					"pathName": "pages/spotSpecial/spotSpecial",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订货跟单",
+					"pathName": "pages/orderGoods/orderGoods",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现管理",
+					"pathName": "pages/my/withDraw/withDraw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "增加提现方式",
+					"pathName": "pages/my/withDraw/addWithdraw/addWithdraw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "更改提现密码",
+					"pathName": "pages/my/withDraw/changePassword/changePassword",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "钱包明细",
+					"pathName": "pages/my/walletDetail/walletDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消费明细",
+					"pathName": "pages/my/walletDetail/saleDetail/saleDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现明细",
+					"pathName": "pages/my/walletDetail/drawDetail/drawDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "选择收货地址",
+					"pathName": "pages/pay/adress/adress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现操作",
+					"pathName": "pages/my/withDraw/drawMoney/drawMoney",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消费说明",
+					"pathName": "pages/my/walletDetail/saleDesc/saleDesc",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "充值",
+					"pathName": "pages/my/deposit/deposit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "充值明细",
+					"pathName": "pages/my/deposit/depositDetail/depositDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发布特价",
+					"pathName": "pages/releaseSale/releaseSale",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息中心",
+					"pathName": "pages/my/notice/notice",
 					"scene": null
 				}
 			]

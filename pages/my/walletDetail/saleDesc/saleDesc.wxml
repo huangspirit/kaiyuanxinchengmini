@@ -1,0 +1,20 @@
+<!--pages/my/walletDetail/saleDesc/saleDesc.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="detailTop">
+  <text>金额</text>
+  <text>{{saleDetail.amount}}</text>
+</view>
+<view class="detailDesc">
+  <view>
+    <text>单号</text>
+    <text>{{saleDetail.orderNo}}</text>
+  </view>
+  <view>
+    <text>描述</text>
+    <text>{{saleDetail.payDesc}}</text>
+  </view>
+  <view>
+    <text>时间</text>
+    <text>{{filter.formatDate(saleDetail.createTime)[1]}}</text>
+  </view>
+</view>

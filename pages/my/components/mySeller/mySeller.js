@@ -8,13 +8,17 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    userDetail: {
+      type: Object
+    }
   },
   lifetimes: {
     // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
     attached: function() {
       this.drawProgressbg();
-      this.drawCircle(1)
+      this.drawCircle(1);
+      this.getSellerDetail()
+      console.log(this.data.userDetail)
     },
     moved: function() {},
     detached: function() {},
@@ -37,7 +41,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    progress_txt:"50%"
+    progress_txt: "50%",
+    sellerDetail: {}
   },
 
   /**
@@ -71,6 +76,52 @@ Component({
       context.arc(22.5, 22.5, 18.5, -Math.PI / 2, step * Math.PI - Math.PI / 2, false);
       context.stroke();
       context.draw()
+    },
+    getSellerDetail() {
+      // undiliver 代发货订单数
+      // uncheck 代结算货款
+      // noSelling 已下架商品
+      // isSelling 在售商品
+      api.get('/api-order/selllerCenter/querySellerCenterSummary', {}).then((res) => {
+        console.log(res)
+        this.setData({
+          sellerDetail: res.data
+        })
+      })
+    },
+    orderManage() {
+      wx.navigateTo({
+        url: './myOrder/myOrder?params=' + 4,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    },
+    noseller() {
+      wx.navigateTo({
+        url: './myOrder/myOrder?params=' + 5,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    },
+    isseller() {
+      wx.navigateTo({
+        url: './myOrder/myOrder?params=' + 2,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    },
+    topUp() {
+      wx.navigateTo({
+        url: '../../../deposit/deposit',
+      })
+    },
+    topupDetail() {
+      wx.navigateTo({
+        url: '../../../deposit/depositDetail/depositDetail',
+      })
     }
   }
 })

@@ -10,29 +10,42 @@ Page({
     phone: "",
     phoneCode: "",
     phoneKey: "",
-    phoneState: ""
+    phoneState: "",
+    btnShow: true,
+    getcodeText: "获取验证码",
+    loadModal: false
   },
   //事件处理函数
   bindViewTap: function() {
     console.log(app.globalData)
+    this.setData({
+      loadModal: true
+    })
+
+
     api.get('/api-u/wechat/smart/smartback', app.globalData.usercode).then(res => {
       console.log(res)
       this.setData({
         phoneState: res.data.state
       })
-      if (res.data.id != null) {
-        api.post('/sys/login-wechat?' + `openid=${res.data.unionid}&state=${res.data.state}`, {
-          openid: res.data.unionid,
-          state: res.data.state
+      this.setData({
+        loadModal: false
+      })
+      if (res.data.userId != null) {
+        var openid = res.data.unionid
+        var state = encodeURIComponent(res.data.state)
+        api.post('/sys/login-wechat?' + `openid=${openid}&state=${state}`, {
+          openid: openid,
+          state: decodeURIComponent(state)
         }).then(res => {
           console.log(res)
           wx.setStorageSync('token', res.access_token)
           wx.setStorageSync('refreshToken', res.refresh_token)
           wx: wx.switchTab({
             url: '../home/home',
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
           })
         })
       } else {
@@ -59,6 +72,22 @@ Page({
         complete: function(res) {},
       })
     } else {
+      var count = 60
+      var that = this
+      var timer = setInterval(() => {
+        that.setData({
+          getcodeText: count + "秒后重新发送",
+          btnShow: false
+        })
+        count--
+        if (count == 0) {
+          clearInterval(timer)
+          that.setData({
+            getcodeText: "获取验证码",
+            btnShow: true
+          })
+        }
+      }, 1000)
       api.get('/api-n/notification-anon/codes', {
         phone: this.data.phone,
         type: 1
@@ -107,7 +136,7 @@ Page({
         var that = this
         wx: wx.showModal({
           title: '提示',
-          content: '当前手机号已经被绑定,用户昵称为:诺诺 是否合并',
+          content: res.message,
           showCancel: true,
           cancelText: '取消',
           cancelColor: '',
@@ -128,12 +157,14 @@ Page({
           complete: function(res) {},
         })
       } else if (res.resultCode === "200") {
-        api.get('/sys/login-wechat', {
+        var state = encodeURIComponent(res.data.state)
+        api.post('/sys/login-wechat?' + `openid=${res.data.openid}&state=${state}`, {
           openid: res.data.openid,
-          state: res.data.state
+          state: decodeURIComponent(state)
         }).then(res => {
           console.log(res)
-          wx.setStorageSync('token', res.data.token)
+          wx.setStorageSync('token', res.access_token)
+          wx.setStorageSync('refreshToken', res.refresh_token)
           wx: wx.switchTab({
             url: '../home/home',
             success: function(res) {},
@@ -145,6 +176,58 @@ Page({
     })
   },
   onLoad: function() {
+    wx.login({
+      success: res => {
+        console.log('授权登录', res)
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.errMsg == 'login:ok')
+          app.globalData.usercode['code'] = res.code
+        wx.getSetting({
+          success: res => {
+            console.log('5555555', res)
+            if (res.authSetting['scope.userInfo'] == true) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+              wx.getUserInfo({
+                success: res => {
+                  // 可以将 res 发送给后台解码出 unionId
+                  app.globalData.userInfo = res.userInfo
+                  app.globalData.usercode['iv'] = res.iv
+                  app.globalData.usercode['encryptedData'] = res.encryptedData
+                  this.getUserInfo(res)
+                }
+              })
+            } else if (res.authSetting['scope.userInfo'] == false) {
+              wx.openSetting({
+                success: res => {
+                  console.log(res)
+                },
+                fail: res => {
+                  console.log(res)
+                }
+              })
+            } else {
+              wx.getUserInfo({
+                success: res => {
+                  console.log(res)
+                  this.getUserInfo(res)
+                },
+                fail: res => {
+                  console.log(res)
+                  wx.openSetting({
+                    success: res => {
+                      console.log(res)
+                    },
+                    fail: res => {
+                      console.log(res)
+                    }
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -164,6 +247,8 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          app.globalData.usercode['iv'] = res.iv
+          app.globalData.usercode['encryptedData'] = res.encryptedData
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -177,12 +262,35 @@ Page({
   },
   getUserInfo: function(e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    app.globalData.usercode['iv'] = e.detail.iv
-    app.globalData.usercode['encryptedData'] = e.detail.encryptedData
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
+    if (e.detail) {
+      if (e.detail.errMsg == "getUserInfo:ok") {
+        app.globalData.userInfo = e.detail.userInfo
+        app.globalData.usercode['iv'] = e.detail.iv
+        app.globalData.usercode['encryptedData'] = e.detail.encryptedData
+        this.setData({
+          userInfo: e.detail.userInfo,
+          hasUserInfo: true
+        })
+        this.bindViewTap()
+      } else {
+        wx: wx.switchTab({
+          url: '../home/home',
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
+        })
+      }
+
+    } else if (e.errMsg == "getUserInfo:ok") {
+      app.globalData.userInfo = e.userInfo
+      app.globalData.usercode['iv'] = e.iv
+      app.globalData.usercode['encryptedData'] = e.encryptedData
+      this.setData({
+        userInfo: e.userInfo,
+        hasUserInfo: true
+      })
+    }
+
   }
 })

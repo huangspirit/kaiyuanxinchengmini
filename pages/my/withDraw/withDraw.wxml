@@ -1,0 +1,42 @@
+<!--pages/my/withDraw/withDraw.wxml-->
+<wxs src="../../../utils/filter.wxs" module="filter" />
+<view style="padding:20rpx">
+  <view class="bankList" wx:for="{{bankList}}" wx:key="index">
+    <view>
+      <text>{{filter.bankType(item.bankCode)}}</text>
+      <text bindtap="toDraw" data-item = "{{item.id}}">提现</text>
+    </view>
+    <view>
+      <text>{{item.bankNumber}}</text>
+    </view>
+    <view>
+      <text>账户人:</text>
+      <text>{{item.cnname}}</text>
+    </view>
+
+    <view>
+      <view>
+        <text>开户行地址:</text>
+        <text>{{item.bankName}}</text>
+      </view>
+      <text bindtap="delBank" data-item="{{item.id}}" wx:if="{{bankList.length>0}}">解绑</text>
+    </view>
+  </view>
+  <view class="bankNo" wx:if="{{bankList.length<=0}}">
+    <text>你还没有绑定银行卡</text>
+  </view>
+  <view class="bantBtn">
+    <text bindtap="addWithdraw">新增提现方式</text>
+    <text bindtap="changePass">{{drawText}}</text>
+  </view>
+</view>
+<dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="取消" confirmText="确认" title="提现密码">
+  <view slot="content" class="section">
+    <input placeholder="请输入提现密码" bindinput="drawPass"></input>
+  </view>
+</dialog>
+<dialog id="dialog1" bind:cancelEvent="cancel" bind:confirmEvent="confirm" cancelText="取消" confirmText="确认" title="设置提现密码">
+  <view slot="content" class="section">
+    <input placeholder="请设置提现密码" bindinput="drawPass"></input>
+  </view>
+</dialog>

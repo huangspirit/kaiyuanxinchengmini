@@ -1,0 +1,63 @@
+<!--pages/invoiceType/invoiceType.wxml-->
+<view class="invoiceNotice">
+  提醒：订单提交后不可更改！如有疑问或其他需求请先联系客服人员，否则相关损失由客户自行承担。
+</view>
+<view class="invoiceType">
+  <text>发票类型</text>
+  <view wx:for="{{invoiceList}}" wx:key="index" bindtap="invoiceChange" data-index="{{index}}" data-id="{{item.id}}">
+    <image wx:if="{{item.checked}}" src="../../img/image/xuanzhong.png"></image>
+    <image wx:if="{{!item.checked}}" src="../../img/image/weixuanzhong.png"></image>
+    <text>{{item.name}}</text>
+  </view>
+</view>
+
+<view class="invoiceInfo">
+  <view class="invoiceTitle">
+    <text>发票信息</text>
+    <text bindtap="addInvoice">添加发票信息</text>
+  </view>
+  <view class="listContent {{item.checked?'changeInvoice':''}}" wx:for="{{invoiceDetail}}" bindtap="chooseInvoice" data-index="{{index}}" wx:key="index">
+    <view wx:if="{{item.checked}}" class="useInvoice">
+      <text>当前使用</text>
+    </view>
+    <view>
+      <text>公司名称</text>
+      <view>
+        <text>{{item.corporatename}}</text>
+      </view>
+    </view>
+    <view>
+      <text>税号/统一信用代码证号</text>
+      <view>
+        <text>{{item.billno}}</text>
+      </view>
+    </view>
+    <view>
+      <text>开户银行</text>
+      <view>
+        <text>{{item.openingbank}}</text>
+      </view>
+    </view>
+    <view>
+      <text>银行账号</text>
+      <view>
+        <text>{{item.bankaccount}}</text>
+      </view>
+    </view>
+    <view>
+      <text>开票电话</text>
+      <view>
+        <text>{{item.registeredphone}}</text>
+      </view>
+    </view>
+    <view>
+      <text>开票地址</text>
+      <view>
+        <text>{{item.registeredaddress}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="invoiceBtn">
+  <text bindtap="confirm">确定</text>
+</view>

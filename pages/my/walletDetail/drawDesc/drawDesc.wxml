@@ -1,0 +1,53 @@
+<!--pages/my/walletDetail/drawDesc/drawDesc.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="deawTop">
+  <text>申请提现金额</text>
+  <text>{{drawDetail.withdrawApplyTotal}}</text>
+</view>
+<view class="timeLine">
+  <view class="cu-time">当前状态</view>
+  <view class="cu-timeline">
+    <view class="cu-item cur text-greenSelf">
+      <view class="content bg-white shadow-blur">
+        <text class="wait" wx:if="{{drawDetail.status == 1}}">待审核</text>
+        <text class="end" wx:if="{{drawDetail.status == 3}}">已完成</text>
+        <text class="noPass" wx:if="{{drawDetail.status == -1}}">审核未通过</text>
+        <text class="end" wx:if="{{drawDetail.status == 2}}">审核通过</text> {{filter.formatDate(drawDetail.withdrawApplyTime)[1]}}
+      </view>
+    </view>
+    <view class="cu-item text-greenSelf">
+      <view class="content bg-white shadow-blur">
+        处理中
+      </view>
+    </view>
+    <view class="cu-item text-greenSelf">
+      <view class="bg-white content">
+        <text>发起时间</text> {{filter.formatDate(drawDetail.createTime)[1]}}
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="drawDetail">
+  <view>
+    <text>申请提现金额</text>
+    <text>￥{{drawDetail.withdrawApplyTotal}}</text>
+  </view>
+  <view>
+    <text>实际提现金额</text>
+    <text>￥{{drawDetail.withdrawRealityTotal}}</text>
+  </view>
+  <view>
+    <text>提现手续费</text>
+    <text>￥{{drawDetail.withdrawCharge}}</text>
+  </view>
+  <view>
+    <text>申请时间</text>
+    <text>{{filter.formatDate(drawDetail.createTime)[1]}}</text>
+  </view>
+  <view>
+    <text>提现单号</text>
+    <text>{{drawDetail.withdrawOrder}}</text>
+  </view>
+</view>

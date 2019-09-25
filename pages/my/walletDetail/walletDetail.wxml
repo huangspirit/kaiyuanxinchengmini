@@ -1,0 +1,11 @@
+<!--pages/my/walletDetail/walletDetail.wxml-->
+<view class="userInfoList">
+  <view bindtap="accountChange">
+    <text>消费明细</text>
+    <image src="../../../img/image/youjiantouxiao.png"></image>
+  </view>
+  <view bindtap="drawDetail">
+    <text>提现明细</text>
+    <image src="../../../img/image/youjiantouxiao.png"></image>
+  </view>
+</view>

@@ -6,7 +6,7 @@
       <text>{{item.phone}}</text>
     </view>
     <view>
-      <text>标签</text>
+      <!-- <text>标签</text> -->
       {{item.address}}
     </view>
   </view>

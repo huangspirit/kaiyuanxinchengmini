@@ -1,5 +1,6 @@
 // pages/productDetail/productDetail.js
 import api from '../../api/api'
+import utils from '../../utils/util.js'
 const app = getApp();
 Page({
 
@@ -11,7 +12,8 @@ Page({
     productDetail: {},
     specialData: {},
     priceLevel: [],
-    TabbarBot: app.globalData.tabbar_bottom
+    TabbarBot: app.globalData.tabbar_bottom,
+    timer: ""
   },
   getProductDetail() {
     api.get('/api-g/gods-anon/searchResult', {
@@ -115,7 +117,27 @@ Page({
       complete: function(res) {},
     })
   },
+  releaseSale() {
+    wx.navigateTo({
+      url: '../releaseSale/releaseSale',
+    })
+  },
+  setCountDown(val) {
+    let time = 1000
 
+    if (val <= 0) {
+      val = 0;
+    }
+    let formatTime = utils.getFormat(val);
+    val -= time;
+    this.data.specialData['countDown'] = formatTime;
+    this.setData({
+      specialData: this.data.specialData
+    });
+    this.data.timer = setTimeout(() => {
+      this.setCountDown(val)
+    }, time)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -129,6 +151,8 @@ Page({
       specialData: specialStorage
     })
     console.log('特价详情', this.data.specialData)
+    let time = this.data.specialData.expireTime - this.data.specialData.currentTime
+    this.setCountDown(time)
     this.getProductDetail()
   },
 
@@ -150,7 +174,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearTimeout(this.data.timer)
   },
 
   /**

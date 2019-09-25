@@ -1,152 +1,86 @@
 /* pages/direct/direct.wxss */
 
-/* 侧边栏样式 */
-
-.page-slidebar {
-  height: 100%;
-  width: 80%;
-  right: 0;
-  position: fixed;
-  background-color: white;
-  z-index: 0;
+page {
+  background: #fff;
 }
 
-/* 控制侧边栏的内容距离顶部的距离 */
-
-.page-content {
-  padding-top: 60rpx;
-  height: 100%;
-  overflow-y: scroll;
-}
-
-/* 侧边栏内容的 css 样式 */
-
-.page-content .wc {
-  color: black;
-  padding: 30rpx 0 30rpx 30px;
-  border-bottom: 1px solid #eee;
-}
-
-.page-content .wc>text {
-  font-weight: bold;
-  display: block;
-  line-height: 50rpx;
-}
-
-.page-content .wc>.typeList {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.page-content .wc>.typeList>text {
-  padding: 5rpx 10rpx;
-  background: #f7f7f7;
-  margin-right: 15rpx;
-  margin-top: 15rpx;
-}
-
-.page-content .wc>.typeList>.typeActive {
-  background: #df3f2f;
-  color: #fff;
-}
-
-.page-content .typeBtn {
-  line-height: 90rpx;
-  text-align: right;
-}
-
-.page-content .typeBtn>text {
-  padding: 5rpx 15rpx;
-  margin-right: 15px;
-}
-
-.page-content .typeBtn>text:nth-of-type(1) {
-  background: #f7f7f7;
-}
-
-.page-content .typeBtn>text:nth-of-type(2) {
-  background: #df3f2f;
-  color: #fff;
-}
-
-.c-state {
-  position: fixed;
-  background-color: white;
-  transform: rotate(0deg) scale(1) translate(-80%, 0%);
-  -webkit-transform: rotate(0deg) scale(1) translate(-80%, 0%);
-}
-
-.page-top {
-  height: 100%;
-  position: fixed;
+.productSearch {
   width: 100%;
-  background-color: white;
-  z-index: 0;
-  transition: All 0.4s ease;
-  -webkit-transition: All 0.4s ease;
-}
-
-.direct {
-  width: 100%;
-  height: 80rpx;
-}
-
-.direct .nav {
-  height: 80rpx;
-  width: 80%;
+  height: 98rpx;
+  border-top: 2rpx solid #f7f7f7;
+  border-bottom: 2rpx solid #f7f7f7;
+  margin-bottom: 20rpx;
+  padding: 16rpx 30rpx;
   box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  background: #f7f7f7;
-  font-size: 16px;
-  white-space: nowrap;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99;
 }
-
-.direct .nav .nav-item {
-  width: 25%;
-  display: inline-block;
+.productSearch>input {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
   text-align: center;
+  background: #f7f7f7;
+  border-radius: 60rpx;
+}
+.productContent {
+  display: flex;
 }
 
-.direct .nav .nav-item.active {
-  color: red;
+.productContent .productSider {
+  width: 160rpx;
+  background: #f7f7f7;
+  margin-right: 20rpx;
 }
 
-.direct .choose {
-  position: fixed;
-  right: 0;
-  height: 80rpx;
-  width: 20%;
+.productContent .productSider>text {
+  display: block;
   line-height: 80rpx;
   text-align: center;
-  background: #df3f2f;
-  color: #fff;
-  z-index: 1;
+  margin-bottom: 25rpx;
 }
-
-.productList {
-  background: #f7f7f7;
+.productContent .productSider .tabList {
+  color: #f40;
+  background: #fff;
+}
+.productContent .productList {
+  width: calc(100% - 180rpx);
+  background: #fff;
   height: 100%;
   overflow-y: scroll;
   padding-bottom: 80rpx;
+}
+.productContent .noData {
+  width: calc(100% - 180rpx);
+  background: #fff;
+  overflow-y: scroll;
+  padding-bottom: 80rpx;
+  text-align: center;
+}
+.productContent .productList .listTitle {
+  width: 100%;
+  height: 90rpx;
+  background: #f7f7f7;
+  display: flex;
+  line-height: 90rpx;
+  justify-content: space-around;
 }
 
 .brandHot {
   display: flex;
   margin-bottom: 15rpx;
   background: #fff;
+  padding: 20rpx 20rpx 20rpx 0;
 }
+
 .brandHot .list_left {
-  width: 30%;
-  padding: 15rpx;
+  width: 120rpx;
+  height: 120rpx;
   box-sizing: border-box;
+  border: 2rpx solid #f7f7f7;
 }
+
 .brandHot .list_left image {
-  height: 210rpx;
+  height: 100%;
+  width: 100%;
   background: rgba(243, 243, 243, 1);
   border-radius: 8px;
   vertical-align: middle;
@@ -154,19 +88,26 @@
 
 .brandHot .list_right {
   padding: 0 27rpx;
+  width: calc(100% - 120rpx);
 }
 
 .brandHot .list_right>text {
   display: block;
-  line-height: 45rpx;
+  line-height: 43rpx;
+  font-size: 16rpx;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
 }
 
 .brandHot .list_right>.speciStatus {
   display: block;
-  line-height: 64rpx;
+  line-height: 50rpx;
   font-size: 32rpx;
   font-weight: bold;
-  color: rgba(227, 99, 70, 1);
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .brandHot .list_right>view {
@@ -175,8 +116,11 @@
 }
 
 .brandHot .list_right>view text:nth-of-type(1) {
-  font-size: 16rpx;
-  font-weight: 400;
-  color: rgba(153, 153, 153, 1);
-  line-height: 25rpx;
+  color: #de3e30;
+  font-size: 22rpx;
+}
+
+.brandHot .list_right>view text:nth-of-type(2) {
+  color: #333;
+  font-size: 18rpx;
 }

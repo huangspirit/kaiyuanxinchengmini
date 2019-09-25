@@ -20,9 +20,42 @@ function formatDate(number) {
   if (second < 10) {
     second = '0' + second
   }
+  var time1 = [year, month, day].join('-')
   var timeDate = [year, month, day].join('-') + " " + [hour, minute, second].join(':')
-  return timeDate
+  return [time1,timeDate]
+}
+
+function priveLevel(val) {
+  console.log(val)
+  var price = val.split("@")
+  var length = price.length -1
+  price = price[length].split("-")
+  price = price[1]
+  return price
+  console.log(price, "价格")
+}
+function bankType(val) {
+  if (val == 'ICBC') {
+    return '工商银行'
+  }
+  if (val == 'ABC') {
+    return '农业银行'
+  }
+  if (val == 'CCB') {
+    return '建设银行'
+  }
+  if (val == 'CMB') {
+    return '招商银行'
+  }
+  if (val == 'COMM') {
+    return '交通银行'
+  }
+  if (val == 'alipay') {
+    return '支付宝'
+  }
 }
 module.exports = {
-  formatDate: formatDate
+  formatDate: formatDate,
+  priveLevel: priveLevel,
+  bankType: bankType
 }

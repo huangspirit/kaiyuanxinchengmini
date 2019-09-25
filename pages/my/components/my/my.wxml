@@ -32,23 +32,27 @@
     </view>
   </view>
 
-  <view class="delivery">
-    <view class="deliveryLeft">
-      <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
-    </view>
-    <view class="deliveryRight">
-      <text>已发货</text>
-      <text>对方是否水电费等五种器件</text>
-      <text>你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家</text>
-    </view>
-  </view>
+  <swiper class="delivery" vertical="true" autoplay="true" circular="true" interval="3000">
+  <block wx:for="{{3}}" wx:key="{{index}}">
+    <swiper-item>
+      <view class="deliveryLeft">
+        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="deliveryRight">
+        <text>已发货</text>
+        <text>对方是否水电费等五种器件</text>
+        <text>你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家你的订单买家</text>
+      </view>
+      </swiper-item>
+      </block>
+  </swiper>
   <view class="myFocus">
     <view bindtap="myFocus" data-index="1">
-      <text>{{userInfoDetail.fgoods}}</text>
+      <text>{{userInfoDetail.fgoods?userInfoDetail.fgoods:0}}</text>
       <text>关注的器件</text>
     </view>
     <view bindtap="myFocus" data-index="2">
-      <text>{{userInfoDetail.ssller}}</text>
+      <text>{{userInfoDetail.fsller?userInfoDetail.fsller:0}}</text>
       <text>关注的商家</text>
     </view>
     <view bindtap="myFocus" data-index="1">

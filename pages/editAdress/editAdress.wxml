@@ -32,14 +32,14 @@
   <input placeholder="请输入邮政编码" bindinput="postalChange" value="{{adressDetail.postalCode}}"></input>
   <text class="cuIcon-close text-gray"></text>
 </view>
-<view class="cu-form-group">
+<!-- <view class="cu-form-group">
   <view class="title">地址标签</view>
   <view class="adressLabel">
     <text>222</text>
     <text>333</text>
     <text>444</text>
   </view>
-</view>
+</view> -->
 <view class="editFooter">
   <text bindtap="confirm">确定</text>
   <text bindtap="confirm" wx:if="{{deleteShow}}" bindtap="deleteAddress">删除</text>

@@ -1,0 +1,83 @@
+/* pages/my/deposit/deposit.wxss */
+
+.deposit {
+  background: #fff;
+  padding: 50rpx 60rpx 35rpx;
+}
+
+.deposit .topupTitle {
+  display: block;
+  margin-bottom: 50rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.deposit .topupNum {
+  display: flex;
+  height: 140rpx;
+  line-height: 140rpx;
+  border-bottom: 2rpx solid #dcdcdc;
+}
+
+.deposit .topupNum>text {
+  font-size: 46rpx;
+  color: #333;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.deposit .topupNum>input {
+  height: 90rpx;
+  font-size: 46rpx;
+  color: #333;
+  margin-top: 25rpx;
+}
+
+.deposit .topupBtn {
+  margin: 56rpx 0;
+  width: 100%;
+  background: #df3f2f;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #fff;
+  border-radius: 20rpx;
+}
+
+.deposit .topupBtn:active {
+  background: rgba(223, 63, 47, 0.8);
+}
+
+.deposit .topupList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.deposit .topupList>text {
+  width: 180rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: #999;
+  border: 2rpx solid #dcdcdc;
+  margin-bottom: 20rpx;
+  margin-right: 15rpx;
+}
+
+.deposit .topupList .active {
+  border: 2rpx solid #df3f2f;
+}
+
+.deposit .topupList>text:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.deposit .topupDetail {
+  font-size: 28rpx;
+  color: #3d9ae8;
+}
+
+.deposit .topupDetail:active {
+  color: rgba(61, 154, 232, 0.8);
+}

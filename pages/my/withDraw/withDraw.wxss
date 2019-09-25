@@ -1,0 +1,94 @@
+/* pages/my/withDraw/withDraw.wxss */
+
+.bankList {
+  width: 100%;
+  padding: 20rpx;
+  background: #c74f58;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.bankList:nth-of-type(1) {
+  background: #018b74;
+}
+
+.bankList>view {
+  margin: 15rpx 0;
+}
+
+.bankList>view>text {
+  color: #fff;
+}
+
+.bankList>view:nth-of-type(1) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bankList>view:nth-of-type(1)>text:nth-of-type(1) {
+  font-size: 30rpx;
+}
+
+.bankList>view:nth-of-type(1)>text:nth-of-type(2) {
+  padding: 5rpx 20rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 30rpx;
+}
+
+.bankList>view:nth-of-type(2)>text {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.bankList>view:nth-of-type(3)>text {
+  font-size: 22rpx;
+  margin-right: 15rpx;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bankList>view:nth-of-type(4) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bankList>view:nth-of-type(4)>view {
+  font-size: 22rpx;
+  margin-right: 15rpx;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bankList>view:nth-of-type(4)>text {
+  padding: 5rpx 20rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 30rpx;
+}
+
+.bankNo {
+  width: 100%;
+  height: 400rpx;
+  line-height: 400rpx;
+  text-align: center;
+  padding: 0 50rpx;
+}
+
+.bantBtn {
+  width: 100%;
+}
+
+.bantBtn>text {
+  display: block;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background: #bbb;
+  color: #fff;
+  margin-bottom: 20rpx;
+}
+.section>input {
+  border: 1px solid #e5e5e5;
+  width: 70%;
+  margin: 20rpx auto;
+  height: 80rpx;
+  border-radius: 10rpx;
+}

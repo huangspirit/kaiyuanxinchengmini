@@ -48,6 +48,11 @@ Page({
       complete: function(res) {}
     })
   },
+  editPhone() {
+    wx.navigateTo({
+      url: './editPhone/editPhone',
+    })
+  },
   loginOut() {
     wx.removeStorageSync('token')
     wx.removeStorageSync('refreshToken')

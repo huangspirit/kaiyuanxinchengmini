@@ -25,13 +25,12 @@
     <text>地址管理</text>
     <image src="../../img/image/youjiantouxiao.png"></image>
   </view>
-  <view>
+  <view bindtap="editPhone">
     <text>修改手机号</text>
     <view>
       <text>{{userDetail.phone}}</text>
       <image src="../../img/image/youjiantouxiao.png"></image>
     </view>
-
   </view>
   <view>
     <text>增票资质</text>

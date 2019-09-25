@@ -1,8 +1,9 @@
 <!--pages/special/special.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="custom flex_center">
   <view class='navInput'>
     <text class="cuIcon-search"></text>
-    <input placeholder='搜索你想要的商品' placeholder-class='none'></input>
+    <input placeholder='搜索你想要的商品' bindtap='toSearch' placeholder-class='none'></input>
   </view>
 </view>
 <view class="specialContent">
@@ -11,24 +12,33 @@
       <text wx:for="{{specialSider}}" class="{{siderIndex == index?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" wx:key="index">{{item.name}}</text>
     </view>
     <view class="flex-twice padding-sm margin-xs radius rightContent">
-      <view class="specialList" wx:for="{{6}}" wx:key="index">
+      <view class="specialList" wx:for="{{speciaList}}" wx:key="index">
         <view class="listLeft">
-          <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+          <image wx:if="item.goodsImageUrl!='-'" src="{{item.goodsImageUrl}}"></image>
+          <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
         </view>
         <view class="listRight">
-          <text>546456456ui456456456tyyiyiuyio465</text>
+          <text>{{item.goods_name}}</text>
           <view class="listContent">
             <view>
-              <text>品牌：sierf</text>
-              <text>订货|代理</text>
-              <text>剩余 7 小时 8分 28秒</text>
+              <text>品牌：{{item.brandName}}</text>
+              <text>{{item.goods_type?'现货':'订货'}}|{{item.tag==1?'原厂':item.tag==2?'代理商':item.tag==3?'普通商户':''}}</text>
+
             </view>
             <view>
-              <text>￥3050</text>
+              <text wx:if="{{item.priceType}}">{{item.priceType?'$':'￥'}}{{filter.priveLevel(item.priceLevel)}}</text>
+              <text wx:else>{{item.priceType?'$':'￥'}}{{item.goodsPrice}}</text>
             </view>
           </view>
+          <view class="saleStatus">
+            <text wx:if="{{!item.seller_always && item.expireTime}}">{{countTimeData[index].countDown}}</text>
+            <text wx:if="{{item.seller_always}}">长期售卖</text>
+            <text>剩余{{item.goodsStockCount}}只</text>
+          </view>
         </view>
+
       </view>
+      <view class="prompt" wx:if="{{speciaList.length<=0}}">暂无数据</view>
     </view>
   </view>
 </view>

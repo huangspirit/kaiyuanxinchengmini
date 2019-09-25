@@ -1,0 +1,19 @@
+<!--pages/my/walletDetail/drawDetail/drawDetail.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="bankList" bindtap="todrawDesc" data-item="{{item}}" wx:for="{{drawList}}" wx:key="index">
+  <view>
+    <text>申请提现金额</text>
+    <text class="wait" wx:if="{{item.status == 1}}">待审核</text>
+    <text class="end" wx:if="{{item.status == 3}}">已完成</text>
+    <text class="noPass" wx:if="{{item.status == -1}}">审核未通过</text>
+    <text class="end" wx:if="{{item.status == 2}}">审核通过</text>
+  </view>
+  <view>
+    <text>{{filter.formatDate(item.createTime)[1]}}</text>
+    <text>{{item.withdrawRealityTotal}}</text>
+  </view>
+</view>
+
+<view class="bankNo" wx:if="{{drawList.length<=0}}">
+  <text>暂无提现记录</text>
+</view>

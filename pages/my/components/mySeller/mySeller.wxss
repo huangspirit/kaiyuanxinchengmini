@@ -45,7 +45,7 @@
 .mySeller .sellerTop>view:nth-of-type(1)>view>text {
   font-size: 22rpx;
   color: #1465de;
-  margin: 0 15rpx;
+  padding: 0 15rpx;
 }
 .mySeller .sellerTop>view:nth-of-type(2) {
   position: relative;
@@ -125,12 +125,13 @@
 .mySeller .sellerClass>view>view {
   height: 40rpx;
   margin-bottom: 15rpx;
+  color: #df3f2f;
 }
 .mySeller .sellerClass>view>view>image {
   vertical-align: middle;
 }
 .mySeller .sellerClass>view:nth-of-type(1)>view>image {
-    width: 40rpx;
+    width: 38rpx;
     height: 40rpx;
 }
 .mySeller .sellerClass>view:nth-of-type(2)>view>image {
@@ -138,11 +139,11 @@
     height: 40rpx;
 }
 .mySeller .sellerClass>view:nth-of-type(3)>view>image {
-    width: 40rpx;
-    height: 30rpx;
+    width: 37rpx;
+    height: 40rpx;
 }
 .mySeller .sellerClass>view:nth-of-type(4)>view>image {
-    width: 37rpx;
+    width: 33rpx;
     height: 40rpx;
 }
 .mySeller .sellerList {

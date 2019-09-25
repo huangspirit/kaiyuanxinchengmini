@@ -1,0 +1,16 @@
+<!--pages/my/walletDetail/saleDetail/saleDetail.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<!--  -->
+<view class="bankList" bindtap="toDetail" data-item="{{item}}" wx:for="{{saleList}}" wx:key="index">
+  <view>
+    <text>{{item.payDesc}}</text>
+    <text>{{filter.formatDate(item.createTime)[1]}}</text>
+  </view>
+
+  <view>
+    <text>{{item.amount}}</text>
+  </view>
+</view>
+<view class="bankNo" wx:if="{{saleList.length<=0}}">
+  <text>暂无消费记录</text>
+</view>

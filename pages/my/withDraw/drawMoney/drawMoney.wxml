@@ -1,0 +1,33 @@
+<!--pages/my/withDraw/drawMoney/drawMoney.wxml-->
+<view class="walletMoney">
+  钱包余额：{{UserInforma.userTagMap.wallet}}
+</view>
+<view class="drawContent">
+  <input bindinput="iptDraw" type="number" placeholder="请输入提现金额"></input>
+  <view wx:if="{{detailShow}}">
+    <view>
+      <text>手续费：</text>
+      <text>{{poundage}}</text>
+    </view>
+    <view>
+      <text>实际提现金额：</text>
+      <text>{{actualMoney}}</text>
+    </view>
+    <view>
+      <text>申请提现金额</text>
+      <text>{{applyMoney}}</text>
+    </view>
+  </view>
+</view>
+<view class="drawFooter">
+  <text bindtap="confirm">确认</text>
+</view>
+<view class="drawDesc">
+  <view>手续费说明：</view>
+  <text>当单笔提现金额小于1500元,y=2元+提现金额*0.55%</text>
+  <text>当单笔提现金额≥1500元，y=提现金额*0.7% </text>
+  <text>当天17:00点前申请提现的，提现金额当日到账；</text>
+  <text>当天17:00点后申请提现的，提现金额次日到账；</text>
+  <text>周末及节假日申请提现的，提现金额将在下个工作日到账；</text>
+  <text>温馨提示：单笔提现金额≥1500为最优提现方案</text>
+</view>

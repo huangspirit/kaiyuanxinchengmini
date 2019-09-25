@@ -1,0 +1,115 @@
+<!--pages/pay/pay.wxml-->
+<view class="orderTop" bindtap="changeAddress">
+  <view class="orderUser">
+    <text>{{defaultAddress.receivingName}}</text>
+    <text>{{defaultAddress.phone}}</text>
+  </view>
+  <view class="orderAdress">
+    <view>
+      <!-- <text>公司</text>  -->
+      {{defaultAddress.address}}{{defaultAddress.detailedAddress}}
+    </view>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+</view>
+
+<view class="paylist" wx:for="{{listData}}" wx:key="index">
+  <block>
+    <view class="listTop">
+      <image src="{{item.list[0].sellerHeader}}"></image>
+      <text>{{item.name}}</text>
+    </view>
+    <view class="listContent" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+      <view class="listLeft">
+        <image wx:if="subItem.goodsImage!='-'" src="{{subItem.goodsImage}}"></image>
+        <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+      </view>
+      <view class="listRight">
+        <text>{{subItem.goods_name}}</text>
+        <text>{{subItem.goodsDesc}}</text>
+        <view class="listLabel">
+          <text>订货 </text> |
+          <text wx:if="{{subItem.tag == '1'}}"> 原厂商户</text>
+          <text wx:if="{{subItem.tag == '2'}}"> 代理商</text>
+          <text wx:if="{{subItem.tag == '3'}}"> 商家</text>
+        </view>
+        <view class="listPrice">
+          <text>{{subItem.price_unit ? '$' : '￥'}}{{subItem.goods_price}}</text>
+          <text>X {{subItem.goods_count}}</text>
+        </view>
+        <view class="listTax">
+          <view>
+            <text>税</text>
+            <text>{{subItem.guanshuiRate}}%关税</text>
+          </view>
+          <view>
+            <text>交</text>
+            <text>{{subItem.diliver_place}}交货</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class="invoice" bindtap="invoiceInfo">
+  <text>发票信息</text>
+  <view>
+    <text>{{invoiceText}}</text>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+</view>
+<view class="invoice">
+  <text>支付方式</text>
+  <view>
+    <text>微信支付</text>
+  </view>
+</view>
+<view style="padding:20rpx;color:#999;line-heught:40rpx;background:#fff;">
+  目前平台暂不支持用户自行报关或香港交货，国内交货所有货物将折算成人民币价格
+</view>
+<view class="desc">
+  <text>*海关增值税13%；与国内商品销售暂行税率一致</text>
+  <text>*关税：是依据海关公布的产品来对应关税，若发现关税疑问，请联系客服</text>
+  <text>*清关服务费：按本批次总货值得0.5%收取，不足300元按300元收取；没报关一次收取，收取一次费用；</text>
+  <text>*运费说明：单一供应商购买金额500元以上为包国内邮费，500元以下为顺丰到付；</text>
+</view>
+<view class="payDetail">
+  <view>
+    <text>人民币共{{unuscount}}种器件，金额小计：</text>
+    <text>￥{{payDetail.rmbtotalPrice}}</text>
+  </view>
+  <view>
+    <text>美元共{{UScount}}种器件，金额小计：</text>
+    <text>US${{payDetail.usdTotalPrice}}</text>
+  </view>
+  <view>
+    <text>今日美元汇率牌价：</text>
+    <text>{{payDetail.exchange}}</text>
+  </view>
+  <view>
+    <text>关税</text>
+    <text>￥{{payDetail.Guanshui}}</text>
+  </view>
+  <view>
+    <text>清关服务费</text>
+    <text>￥{{payDetail.GuanshuiService}}</text>
+  </view>
+  <text>
+    应付总额：{{payDetail.rmbtotalPrice? '￥'+payDetail.rmbtotalPrice:'$'+payDetail.usdTotalPrice}}
+  </text>
+</view>
+<view class="payFooter">
+  <view>
+    <image src="../../img/image/xuanzhong.png"></image>
+    <view>
+      同意接受
+      <text>《开元芯城用户协议》</text>和
+      <text>《开元芯城销售合同》</text>
+    </view>
+  </view>
+  <text bindtap="payMoney">立即支付</text>
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
+  <view class="gray-text">加载中...</view>
+</view>

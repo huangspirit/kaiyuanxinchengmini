@@ -1,16 +1,16 @@
 <!--pages/my/components/mySeller/mySeller.wxml-->
 <view class="mySeller">
   <view class="sellerTop">
-    <view>
-      <text>0.00</text>
-      <text>押金</text>
+    <view wx:if="{{userDetail.userTagMap && userDetail.userTagMap.seller}}">
+      <text>{{userDetail.userTagMap.deposit}}</text>
+      <text>押金(元)</text>
       <text>售卖额度=押金*10+基础额度</text>
       <view>
-        <text>充值</text> |
-        <text>明细</text>
+        <text bindtap="topUp">充值</text> |
+        <text bindtap="topupDetail">明细</text>
       </view>
     </view>
-    <view>
+    <view wx:if="{{userDetail.userTagMap && userDetail.userTagMap.seller && userDetail.userTagMap.tag!=1}}">
       <view class='progress_box'>
         <canvas class="progress_bg" canvas-id="canvasProgressbg"> </canvas>
         <canvas class="progress_canvas" canvas-id="canvasProgress"> </canvas>
@@ -18,39 +18,65 @@
           <text class='progress_info'> {{progress_txt}}</text>
         </view>
       </view>
-      <text>售卖额度：50000</text>
-      <text>剩余额度：50000</text>
+      <text>售卖额度：{{userDetail.userTagMap['credit-seller']}}</text>
+      <text>剩余额度：{{userDetail.userTagMap['restcredit-seller']}}</text>
       <text>明细</text>
+    </view>
+  </view>
+  <view class="sellerClass">
+    <view bindtap="orderManage">
+      <view>
+        <image src="../../../../img/image/dingdanguanli.png"></image>
+      </view>
+      <text>订单管理</text>
+    </view>
+    <view>
+      <view>
+        <image src="../../../../img/image/shangpinguanli.png"></image>
+      </view>
+
+      <text>商品管理</text>
+    </view>
+    <view>
+      <view>
+        <image src="../../../../img/image/fabushangpin.png"></image>
+      </view>
+
+      <text>发布商品</text>
+    </view>
+    <view>
+      <view>
+        <image src="../../../../img/image/fapiaoguanli.png"></image>
+      </view>
+      <text>发票管理</text>
     </view>
   </view>
   <view class="sellerClass">
     <view>
       <view>
-        <image src="../../../../img/image/zaishou.png"></image>
+        <image src="../../../../img/image/zhangdanzhongxin.png"></image>
+      </view>
+      <text>账单中心</text>
+    </view>
+    <view>
+      <view>
+        <image src="../../../../img/image/dailizizhi.png"></image>
+      </view>
+
+      <text>代理资质</text>
+    </view>
+    <view  bindtap="isseller">
+      <view>
+        {{sellerDetail.isSelling}}
       </view>
 
       <text>在售商品</text>
     </view>
-    <view>
+    <view bindtap="noseller">
       <view>
-        <image src="../../../../img/image/yixiajia.png"></image>
+        {{sellerDetail.noSelling}}
       </view>
-
       <text>已下架商品</text>
-    </view>
-    <view>
-      <view>
-        <image src="../../../../img/my/daishouhuo.png"></image>
-      </view>
-
-      <text>代发货订单数</text>
-    </view>
-    <view>
-      <view>
-        <image src="../../../../img/my/shouhou.png"></image>
-      </view>
-
-      <text>待结算货款</text>
     </view>
   </view>
   <view class="sellerList">

@@ -87,7 +87,7 @@ Component({
       let index = val.currentTarget.dataset.index
       console.log(index)
       wx.navigateTo({
-        url: './myOrder/myOrder?params=' + index,
+        url: './sellerOrder/sellerOrder?params=' + index,
         success: function (res) { },
         fail: function (res) { },
         complete: function (res) { },

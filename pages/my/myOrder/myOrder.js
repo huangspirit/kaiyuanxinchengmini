@@ -6,7 +6,7 @@ Page({
    */
   data: {
     TabCur: 0,
-    navList: ['全部', '待确认', '待付款', '异常订单', '待收货','已完成']
+    navList: ['全部', '未发货', '已发货', '已逾期', '在售','已下架']
   },
   tabSelect(e) {
     if (e) {
@@ -58,6 +58,10 @@ Page({
     } else if (options.params == '4') {
       this.setData({
         TabCur: 0
+      })
+    } else if (options.params == '5') {
+      this.setData({
+        TabCur: 5
       })
     }
     this.tabSelect()

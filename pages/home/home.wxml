@@ -18,7 +18,7 @@
 </view>
 <view style="padding:0 20rpx;">
   <view class="classList">
-    <view class="subClassList" wx:for="{{classList}}" wx:key="index">
+    <view class="subClassList" wx:for="{{classList}}" wx:key="index" bindtap="classList" data-index="{{index}}">
       <image src="{{item.img}}"></image>
       <text>{{item.name}}</text>
     </view>
@@ -26,8 +26,12 @@
   <view class='specialList'>
     <view class='listHead'>
       <text>今日特价</text>
+      <view bindtap="classList" data-index="{{1}}">
+        <text>更多</text>
+        <image src="../../img/image/youjiantouxiao.png"></image>
+      </view>
     </view>
-    <scroll-view wx:if="{{specialList.length>0}}" scroll-x="true" class='listContent'>
+    <view wx:if="{{specialList.length>0}}" scroll-x="true" class='listContent'>
       <view class='list_left' wx:for="{{specialList}}" bindtap="toDetail" data-item="{{item}}" wx:key="{{id}}">
         <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
         <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
@@ -37,13 +41,17 @@
         <text wx:if="{{item.goods_type == true}}">现 货</text>
         <text wx:if="{{item.goods_type == false}}">期 货</text>
       </view>
-    </scroll-view>
+    </view>
     <view class="prompt" wx:if="{{specialList.length<=0}}">暂无特价</view>
   </view>
-  
+
   <view class='specialList'>
     <view class='listHead'>
-      <text>猜你需要</text>
+      <text>原厂直供</text>
+      <view bindtap="classList" data-index="{{0}}">
+        <text>更多</text>
+        <image src="../../img/image/youjiantouxiao.png"></image>
+      </view>
     </view>
     <view class='faclistContent' wx:for="{{facdirect}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
       <view class='list_left'>
@@ -71,5 +79,41 @@
       </view>
     </view>
     <view class="prompt" wx:if="{{facdirect.length<=0}}">暂无特价</view>
+  </view>
+  <view class='specialList'>
+    <view class='listHead'>
+      <text>呆料掘金</text>
+      <view bindtap="classList" data-index="{{3}}">
+        <text>更多</text>
+        <image src="../../img/image/youjiantouxiao.png"></image>
+      </view>
+
+    </view>
+    <view class='faclistContent' wx:for="{{material}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
+      <view class='list_left'>
+        <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
+        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+      </view>
+      <view class='list_right'>
+        <text>{{item.goods_name}}</text>
+        <view>
+          <view class='speciStatus'>
+            <text>{{item.brandName}}</text>
+            <text wx:if="{{item.goods_type == true}}">现 货</text>
+            <text wx:if="{{item.goods_type == false}}">期 货</text>
+            <text>{{item.diliverPlace}}</text>
+          </view>
+          <view class="price">
+            <text wx:if="{{item.priceType == true}}">阶梯价</text>
+            <text wx:if="{{item.priceType == false}}">一口价</text>
+            <text wx:if="{{item.priceType == true}}">￥{{item.goodsPrice}}+</text>
+            <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
+          </view>
+
+        </view>
+
+      </view>
+    </view>
+    <view class="prompt" wx:if="{{material.length<=0}}">暂无呆料</view>
   </view>
 </view>

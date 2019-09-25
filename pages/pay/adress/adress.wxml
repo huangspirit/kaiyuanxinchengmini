@@ -1,0 +1,18 @@
+<!--pages/pay/adress/adress.wxml-->
+
+<view class="addressList" wx:for="{{addresList}}" wx:key="index" bindtap="changeAdress" data-index="{{index}}">
+  <view class="listCentent">
+    <view class="changePic">
+      <image wx:if="{{item.checked}}" src="../../../img/image/xuanzhong.png"></image>
+      <image wx:if="{{!item.checked}}" src="../../../img/image/weixuanzhong.png"></image>
+    </view>
+    <view class="changeContent">
+      <view>
+        <text>{{item.receivingName}}</text>
+        <text>{{item.phone}}</text>
+      </view>
+      <view>{{item.address}}{{item.detailedAddress}}</view>
+    </view>
+
+  </view>
+</view>

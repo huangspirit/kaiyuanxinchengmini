@@ -1,7 +1,34 @@
+.myHeader {
+  width: 100%;
+  padding: 33rpx 0 0 0;
+  position: fixed;
+  background: #fff;
+  top: 0;
+  z-index: 10;
+  height: 130rpx;
+  line-height: 105rpx;
+}
+
+.myHeader>image {
+  position: absolute;
+  left: 20rpx;
+  bottom: 27rpx;
+  width: 30rpx;
+  height: 40rpx;
+}
+
+.myHeader>text {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 .mayTop {
   height: 265rpx;
   width: 100%;
   position: relative;
+  overflow: hidden;
+  margin-top: 130rpx;
 }
 
 .mayTop>image {
@@ -14,7 +41,7 @@
 }
 
 .mayTop>text {
-  display: block;
+  float: right;
   padding: 15rpx 20rpx 0;
   text-align: right;
   color: #fff;
@@ -24,6 +51,7 @@
 .mayTop>.myDetail {
   padding: 0 40rpx;
   display: flex;
+  margin: 30rpx 0 20rpx 0;
 }
 
 .mayTop>.myDetail>image {
@@ -93,8 +121,8 @@
 .mayTop .moneyDetail>view {
   display: flex;
   justify-content: space-around;
-   position: relative;
-   height: 100%;
+  position: relative;
+  height: 100%;
   overflow: hidden;
   padding: 15rpx 0;
 }
@@ -107,6 +135,7 @@
   width: 100%;
   height: 90rpx;
 }
+
 .mayTop .moneyDetail>view>view {
   color: #ffea00;
   font-size: 28rpx;

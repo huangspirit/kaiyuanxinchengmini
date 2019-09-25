@@ -9,9 +9,10 @@ Page({
   data: {
     searchList: [],
     textData: [],
-    brandTotal:"",
-    catergoryTotal:"",
-    productTotal:""
+    brandTotal: "",
+    catergoryTotal: "",
+    productTotal: "",
+    specialList: []
   },
   search(val) {
     if (val.detail.value == '') {
@@ -114,14 +115,9 @@ Page({
       this.setData({
         brandTotal: res.brandTotal,
         catergoryTotal: res.catergoryTotal,
-        productTotal: res.productTotal
+        productTotal: res.productTotal,
+        specialList: res.list
       })
-      if (res.resultCode == "200") {
-        this.setData({
-          specialList: res.data.data
-        })
-        console.log(this.data.specialList)
-      }
     })
   },
 

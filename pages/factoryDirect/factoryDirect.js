@@ -7,27 +7,68 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    facdirect: []
+    keyData: [],
+    brandData: []
   },
+  toIn() {
+    wx.showToast({
+      title: '请移步网站入驻',
+      icon: "none"
+    })
+  },
+  toDetail(val) {
+    console.log(val)
+    var tag = val.currentTarget.dataset['item']
+    let obj = {}
+    obj['documentid'] = tag.id
+    obj['name'] = tag.brand
+    obj['tag'] = tag.tag
+    if (tag.tag == 'brand') {
+      obj = JSON.stringify(obj)
+      wx: wx.navigateTo({
+        url: '../brandDetail/brandDetail?brandList=' + obj,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    } else if (tag.tag == 'direct') {
+      obj['brandId'] = ''
+      obj = JSON.stringify(obj)
+      wx: wx.navigateTo({
+        url: '../direct/direct?params=' + obj,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    } else if (tag.tag == 'undirect') {
 
+    } else if (tag.tag == 'goodsinfo') {
+      obj = JSON.stringify(obj)
+      wx: wx.navigateTo({
+        url: '../productDetail/productDetail?params=' + obj,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     //获取原厂直供
-    api.get("/api-g/gods-anon/queryDirectGoods", {
-      create_tag: true,
-      status: 1,
-      start: 0,
-      length: 3
-    }).then(res => {
-      console.log('获取原厂直供列表', res)
-      if (res.resultCode == "200") {
-        this.setData({
-          facdirect: res.data.data
-        })
+    api.get('/api-g/gods-anon/queryBrandHomePage', {}).then((res) => {
+      console.log(res)
+      this.data.brandData = res.data
+      this.data.keyData = []
+      for (var key in res.data) {
+        console.log(key)
+        this.data.keyData.push(key)
       }
+      this.setData({
+        brandData: this.data.brandData,
+        keyData: this.data.keyData
+      })
     })
   },
 

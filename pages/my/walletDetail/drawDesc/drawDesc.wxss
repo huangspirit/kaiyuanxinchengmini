@@ -1,0 +1,108 @@
+/* pages/my/walletDetail/drawDesc/drawDesc.wxss */
+page{
+  overflow: hidden;
+}
+.deawTop {
+  width: 100%;
+  height: 220rpx;
+  margin-top: 20rpx;
+  padding: 72rpx 0 0 0;
+  text-align: center;
+  border-bottom: 2rpx solid #dcdcdc;
+  background: #fff;
+}
+
+.deawTop>text {
+  display: block;
+  margin-bottom: 15rpx;
+  font-size: 28rpx;
+}
+
+.deawTop>text:nth-of-type(2) {
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.timeLine {
+  display: flex;
+  background: #fff;
+}
+
+.timeLine>.cu-time {
+  width: 200rpx;
+  padding-left: 40rpx;
+  padding-top: 70rpx;
+  background: #fff;
+  font-size: 38rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.cu-timeline>.cu-item:nth-of-type(2)>.content {
+  padding: 10rpx 30rpx;
+}
+
+.cu-timeline>.cu-item>.content>text {
+  display: block;
+}
+
+.cu-timeline>.cu-item::after {
+  top: 100rpx;
+}
+
+.cu-timeline>.cu-item:nth-of-type(3):after {
+  background-color: #fff;
+  width: 0rpx;
+  border: none;
+}
+
+.cu-timeline>.cu-item::before {
+  top: 80rpx;
+}
+
+.cu-timeline>.cu-item:nth-of-type(2):before {
+  top: 36rpx;
+}
+
+.timeLine .cu-timeline {
+  width: calc(100% - 200rpx);
+}
+
+.cu-timeline>.cu-item::after {
+  width: 0rpx;
+  border: 2rpx dashed #33d051;
+  background: #fff;
+}
+.cu-timeline>.cu-item:nth-of-type(1)>.content>.wait {
+  color: #ffa944;
+}
+
+.cu-timeline>.cu-item:nth-of-type(1)>.content>.end {
+  color: #33d051;
+}
+
+.cu-timeline>.cu-item:nth-of-type(1)>.content>.noPass {
+  color: #eb3636;
+}
+.drawDetail {
+  border-top: 2rpx solid #dcdcdc;
+  background: #fff;
+  padding: 40rpx 0;
+}
+
+.drawDetail>view {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.drawDetail>view>text {
+  color: #333;
+  font-size: 30rpx;
+}
+
+.drawDetail>view>text:nth-of-type(1) {
+  width: 220rpx;
+  text-align: right;
+  margin-right: 40rpx;
+  font-weight: bold;
+}

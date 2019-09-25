@@ -1,0 +1,47 @@
+/* pages/my/notice/notice.wxss */
+
+.nav .cu-item {
+  position: relative;
+}
+
+.cu-tag.badge {
+  top: 9rpx;
+  right: 4rpx;
+}
+
+.noticeList {
+  width: 100%;
+  background: #fff;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+.noticeList:last-child {
+  margin-bottom: 30rpx;
+}
+
+.noticeList>view:nth-of-type(1) {
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.noticeList>view:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.noticeList>view:nth-of-type(2)>text:nth-of-type(1) {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.noticeList>view:nth-of-type(2)>text:nth-of-type(2) {
+  color: #df3f2f;
+  font-size: 28rpx;
+}
+
+.noList {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}

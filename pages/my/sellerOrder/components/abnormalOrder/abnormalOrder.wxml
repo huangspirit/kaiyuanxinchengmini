@@ -1,0 +1,33 @@
+<!--pages/my/myOrder/components/abnormalOrder/abnormalOrder.wxml-->
+<wxs src="../../../../../utils/filter.wxs" module="filter" />
+<view class="myOrder">
+  <view class="orderList" wx:for="{{abnormalOrder}}" wx:key="index">
+    <view class="listTitle">
+      <view>
+        <text>{{item.orderVo.isMonth ? '月结订单' :'普通订单'}}</text>
+        <text>下单时间：{{filter.formatDate(item.orderVo.createtime)[0]}}</text>
+      </view>
+      <!-- <text>待确认</text> -->
+    </view>
+    <view class="listContent" wx:for="{{item.orderInfoList}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+      <view class="listLeft">
+        <image src="{{subItem.goods_image}}"></image>
+      </view>
+      <view class="listRight">
+        <text>{{subItem.goods_name}}</text>
+        <text>{{subItem.goods_desc}}</text>
+        <view>
+          <text>{{filter.formatDate(subItem.complete_date)[0]}}</text> |
+          <text>{{subItem.diliver_place}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="listFooter">
+      <text class="waitDelivery">查看更多</text>
+      <text class="waitDelivery">去付款</text>
+      <text class="waitDelivery">上传合同</text>
+      <text class="waitDelivery">取消订单</text>
+    </view>
+  </view>
+  <view wx:if="{{abnormalOrder.length<=0}}" class="prompt">暂无数据</view>
+</view>

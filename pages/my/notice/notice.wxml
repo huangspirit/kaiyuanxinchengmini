@@ -1,0 +1,25 @@
+<!--pages/my/notice/notice.wxml-->
+<wxs src="../../../utils/filter.wxs" module="filter" />
+<scroll-view scroll-x class="bg-white nav fixed">
+  <view class="flex text-center action">
+    <view class="cu-item flex-sub {{index==TabCur?'text-red cur':''}}" wx:for="{{navList}}" wx:key="index" bindtap="tabSelect" data-id="{{index}}">
+      <view class="action">
+        <view class="cuIcon-cu-image">
+          <view class="cu-tag badge">99</view>
+        </view>
+        <view class="text-gray">{{item}}</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+<view style="height:90rpx"></view>
+<view class="noticeList" wx:for="{{noticeList}}" wx:key="index">
+  <view>
+    {{item.message}}
+  </view>
+  <view>
+    <text>{{filter.formatDate(item.messageTime)[1]}}</text>
+    <text bindtap="delNotice" data-uid="{{item.uid}}">删除消息</text>
+  </view>
+</view>
+<view wx:if="{{noticeList.length<=0}}" class="noList">暂无消息</view>

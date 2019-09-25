@@ -17,6 +17,7 @@ page {
 	--orange: #f37b1d;
 	--yellow: #fbbd08;
 	--olive: #8dc63f;
+  --greenSelf:#33d051;
 	--green: #39b54a;
 	--cyan: #1cbbb4;
 	--blue: #0081ff;
@@ -3879,7 +3880,11 @@ scroll-view.cu-steps .cu-item {
 .lines-green {
 	color: var(--green);
 }
-
+.text-greenSelf,
+.line-greenSelf,
+.lines-greenSelf {
+	color: var(--greenSelf);
+}
 .text-cyan,
 .line-cyan,
 .lines-cyan {
