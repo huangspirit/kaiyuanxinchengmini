@@ -43,7 +43,7 @@ Page({
       })
     })
   },
-  getXiajiaList(val) {
+  getXiajiaList() {
     api.get("/api-g/goods-b/queryPublishGoodsListByUser", {
       start: 0,
       length: 10,
@@ -54,6 +54,32 @@ Page({
       this.setData({
         xiajiaList: res.data.data
       })
+    })
+  },
+  delGoods(val) {
+    console.log(val)
+
+    api.post("/api-g/goods-b/updatePublishGoodsSatus", {
+      id: val.currentTarget.dataset.item.id,
+      isenable: false,
+      uid: val.currentTarget.dataset.item.uid
+    }).then(res => {
+      console.log('下架商品', res)
+      this.getXiajiaList()
+      this.getSaleList()
+    })
+  },
+  addGoods(val) {
+    console.log(val)
+
+    api.post("/api-g/goods-b/updatePublishGoodsSatus", {
+      id: val.currentTarget.dataset.item.id,
+      isenable: true,
+      uid: val.currentTarget.dataset.item.uid
+    }).then(res => {
+      console.log('下架商品', res)
+      this.getXiajiaList()
+      this.getSaleList()
     })
   },
   /**

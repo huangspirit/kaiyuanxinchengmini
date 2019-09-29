@@ -1,0 +1,58 @@
+<!--pages/my/agencyQualification/addEditAgency/addEditAgency.wxml-->
+<view style="padding:20rpx 0;box-sizing: border-box">
+  <view class="addEditBrand" bindtap="chooseBrand">
+    <text>选择品牌</text>
+    <view>
+      <text>{{alredyChooseBrand}}</text>
+      <image src="../../../../img/image/youjiantouxiao.png"></image>
+    </view>
+  </view>
+  <view class="addEditDesc">
+    <view>代理商资质上传（所有资质需要加盖红章）</view>
+    <view>*品牌授权书</view>
+    <text>1.请下载模板填写并加盖公章及商标权人公司红章后，拍照或彩扫扫描后上传</text>
+    <text>2.若商标授权人为自然人，须同时提交商标授权人亲笔签名的身份证复印件，并加盖开店公司红章</text>
+    <text>3.经营自有品牌，无需提交独占协议书，此处请上传商标注册证</text>
+    <view>下载模板</view>
+  </view>
+  <view class="agencyTime">
+    <text>有效期</text>
+    <view>
+      <text>开始时间</text>
+      <picker mode="date" value="{{startdate}}" start="1970-09-01" end="2100-09-01" bindchange="startDateChange">
+        <view class="picker">
+          {{startdate}}
+        </view>
+      </picker>
+    </view>
+    <view>
+      <text>结束时间</text>
+      <picker mode="date" value="{{enddate}}" start="1970-09-01" end="2100-09-01" bindchange="endDateChange">
+        <view class="picker">
+          {{enddate}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="upPic">
+    <text>资质图上传</text>
+    <view>
+      <view class="grid col-4 grid-square flex-sub">
+        <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" :data-url="item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="cu-tag bg-red" bindtap="DelImg" :data-index="{{index}}">
+            <text class='cuIcon-close'></text>
+          </view>
+        </view>
+        <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<1}}">
+          <text class='cuIcon-cameraadd'></text>
+        </view>
+      </view>
+    </view>
+    <text>最新版营业执照，需加盖公司红章</text>
+    <text>图片尺寸请确保800px*800px以上，文件大小1MB以内，支持png,ipg,gif格式</text>
+  </view>
+  <view class="footerBtn">
+    <text>保存并提交</text>
+  </view>
+</view>

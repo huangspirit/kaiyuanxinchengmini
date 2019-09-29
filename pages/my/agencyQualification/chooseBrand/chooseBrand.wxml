@@ -1,0 +1,17 @@
+<!--pages/my/agencyQualification/chooseBrand/chooseBrand.wxml-->
+<view style="padding:20rpx 0">
+  <view class="factoryBanner">
+    <input placeholder="请输入搜索品牌名称" bindinput="brandSearch"></input>
+  </view>
+  <view class="keyword">
+    <text wx:for="{{keyWord}}" wx:key="index" bindtap="keySearch" data-item="{{item}}">{{item}}</text>
+  </view>
+  <view class='searchList' wx:if="{{searchBrand.length>0}}">
+    <view bindtap="confiemBrand" wx:for="{{searchBrand}}" data-item="{{item}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+      <block wx:for="{{item.nameLight}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+        <text wx:if="{{subItem.key == true}}" style="color:red;">{{subItem.str}}</text>
+        <text wx:else>{{subItem.str}}</text>
+      </block>
+    </view>
+  </view>
+</view>

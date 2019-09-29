@@ -47,7 +47,12 @@
   background: #fff;
   margin-top: 20rpx;
 }
-
+.noSale {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
 .saleList>.listLeft {
   width: 175rpx;
   padding: 0 25rpx;
@@ -59,11 +64,14 @@
 }
 
 .saleList>.listLeft>text {
-  width: 120rpx;
+  padding: 0 10rpx;
   height: 50rpx;
   text-align: center;
   line-height: 50rpx;
   background: #eee;
+  display: block;
+  border-radius: 8rpx;
+  font-size: 22rpx;
 }
 
 .saleList>.listRight {

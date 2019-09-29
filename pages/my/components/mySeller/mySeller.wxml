@@ -43,7 +43,7 @@
 
       <text>发布商品</text>
     </view>
-    <view>
+    <view bindtap="invoiceManage">
       <view>
         <image src="../../../../img/image/fapiaoguanli.png"></image>
       </view>
@@ -57,7 +57,7 @@
       </view>
       <text>账单中心</text>
     </view>
-    <view>
+    <view bindtap="agentQualification">
       <view>
         <image src="../../../../img/image/dailizizhi.png"></image>
       </view>

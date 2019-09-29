@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 40,
+			"current": 43,
 			"list": [
 				{
 					"id": -1,
@@ -326,6 +326,27 @@
 					"id": -1,
 					"name": "商品管理",
 					"pathName": "pages/my/goodsManage/goodsManage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发票管理",
+					"pathName": "pages/my/invoiceManage/invoiceManage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "代理资质",
+					"pathName": "pages/my/agencyQualification/agencyQualification",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "选择品牌",
+					"pathName": "pages/my/agencyQualification/chooseBrand/chooseBrand",
 					"scene": null
 				}
 			]

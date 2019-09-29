@@ -1,0 +1,60 @@
+/* pages/my/agencyQualification/chooseBrand/chooseBrand.wxss */
+
+.factoryBanner {
+  width: 100%;
+  height: 90rpx;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+}
+
+.factoryBanner>input {
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+}
+
+.keyword {
+  width: 100%;
+  padding: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+}
+
+.keyword>text {
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  background: #4a5a6a;
+  color: #fff;
+  padding: 10rpx 35rpx;
+}
+
+.keyword>text:active {
+  background: #df3f2f;
+}
+
+.searchList {
+  height: calc(100% - 455rpx);
+  width: 100%;
+  padding: 0 20rpx 40rpx 20rpx;
+  overflow-y: scroll;
+  position: fixed;
+  top: 455rpx;
+  left: 0;
+  overflow: auto;
+  z-index: 1;
+}
+
+.searchList>view {
+  display: block;
+  line-height: 45px;
+  padding: 0 20rpx;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.searchList>text:active {
+  background: #4a5a6a;
+  color: #fff;
+}

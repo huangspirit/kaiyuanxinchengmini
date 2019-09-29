@@ -17,7 +17,7 @@ Page({
     addressindex: 0,
     is_old_product: 'false', //是否是呆料   做处理
     price_type: 'true', //是否是阶梯价  出价方式 做处理
-    seller_always: 'false', //售卖期限   做处理
+    seller_always: 'true', //售卖期限   做处理
     date: '2016-09-01',
     time: '12:01',
     dateTimeArray: null,
@@ -403,7 +403,6 @@ Page({
       this.data.price_level = arr.join("@")
     } else {
       this.data.price_type = false
-      this.data.moq = ""
     }
 
     if (this.data.seller_always == "true") {
@@ -418,6 +417,7 @@ Page({
     let startTimeP = this.data.startTimeArray[0][this.data.startTime[0]] + '/' + this.data.startTimeArray[1][this.data.startTime[1]] + '/' + this.data.startTimeArray[2][this.data.startTime[2]] + ' ' + this.data.startTimeArray[3][this.data.startTime[3]] + ':' + this.data.startTimeArray[4][this.data.startTime[4]] + ':' + this.data.startTimeArray[5][this.data.startTime[5]]
 
     let dateTimeP = this.data.dateTimeArray[0][this.data.dateTime[0]] + '/' + this.data.dateTimeArray[1][this.data.dateTime[1]] + '/' + this.data.dateTimeArray[2][this.data.dateTime[2]] + ' ' + this.data.dateTimeArray[3][this.data.dateTime[3]] + ':' + this.data.dateTimeArray[4][this.data.dateTime[4]] + ':' + this.data.dateTimeArray[5][this.data.dateTime[5]]
+    console.log(this.data.seller_always)
     if (!this.data.seller_always) {
       if (startTimeP >= dateTimeP) {
         wx.showToast({
@@ -469,22 +469,22 @@ Page({
       delete obj.end_date;
     }
     console.log(obj)
-    // api.get("/api-g/goods-b/publish?access_token=" + wx.getStorageSync('token'), obj).then((res) => {
-    //   console.log(res)
-    //   if (res.resultCode == "200") {
-    //     wx.showToast({
-    //       title: '发布成功',
-    //       icon: 'none',
-    //       duration: 1000,
-    //       success: function() {
-    //         wx.switchTab({
-    //           url: '../home/home',
-    //         })
-    //       }
-    //     })
+    api.get("/api-g/goods-b/publish?access_token=" + wx.getStorageSync('token'), obj).then((res) => {
+      console.log(res)
+      if (res.resultCode == "200") {
+        wx.showToast({
+          title: '发布成功',
+          icon: 'none',
+          duration: 1000,
+          success: function() {
+            wx.switchTab({
+              url: '../home/home',
+            })
+          }
+        })
 
-    //   }
-    // })
+      }
+    })
   },
   getAdress() {
     api.get('/api-g/goods-b/queryDictionarieList', {

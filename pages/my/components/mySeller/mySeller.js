@@ -133,5 +133,15 @@ Component({
         url: '../../../goodsManage/goodsManage',
       })
     },
+    invoiceManage() {
+      wx.navigateTo({
+        url: '../../../invoiceManage/invoiceManage',
+      })
+    },
+    agentQualification() {
+      wx.navigateTo({
+        url: '../../../agencyQualification/agencyQualification',
+      })
+    }
   }
 })

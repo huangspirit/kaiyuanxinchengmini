@@ -59,7 +59,12 @@
     "pages/releaseSale/releaseSale",
     "pages/my/notice/notice",
     "pages/myEdit/editPhone/editPhone",
-    "pages/my/goodsManage/goodsManage"
+    "pages/my/goodsManage/goodsManage",
+    "pages/my/invoiceManage/invoiceManage",
+    "pages/my/agencyQualification/agencyQualification",
+    "pages/my/agencyQualification/agencyDetail/agencyDetail",
+    "pages/my/agencyQualification/addEditAgency/addEditAgency",
+    "pages/my/agencyQualification/chooseBrand/chooseBrand"
   ],
   "window": {
     "backgroundTextStyle": "dark",

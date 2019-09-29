@@ -1,0 +1,23 @@
+<!--pages/my/invoiceManage/invoiceManage.wxml-->
+<view class='myFocus'>
+  <!--Tab布局-->
+  <view class='title'>
+    <view class='titleSel' bindtap='titleClick' data-idx='0'>
+      <text class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}">已开票</text>
+    </view>
+
+    <view class='titleSel' bindtap='titleClick' data-idx='1'>
+      <text class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} ">待开票</text>
+    </view>
+  </view>
+
+  <!--内容布局-->
+  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+    <swiper-item class='swiper'>
+   11111
+    </swiper-item>
+    <swiper-item class='swiper' class='swiper'>
+      2222
+    </swiper-item>
+  </swiper>
+</view>

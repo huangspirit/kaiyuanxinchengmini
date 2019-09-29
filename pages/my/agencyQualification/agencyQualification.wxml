@@ -1,0 +1,19 @@
+<!--pages/my/agencyQualification/agencyQualification.wxml-->
+<wxs src="../../../utils/filter.wxs" module="filter" />
+<view class="agencyQualification">
+  <view class="listContent" wx:for="{{agentList}}" wx:key="index" bindtap="agentDetail" data-item="{{item}}">
+    <view class="listTop">
+      <text>代理品牌：{{item.brandName}}</text>
+      <text class="end" wx:if="{{item.isEnable == 1}}">已通过</text>
+      <text class="wait" wx:if="{{item.isEnable == 0}}">待审核</text>
+      <text class="fail" wx:if="{{item.isEnable == 2}}">已拒绝</text>
+    </view>
+    <view class="listBottom">
+      <text>有效期</text>
+      <text>{{filter.formatDate(item.startTime)[1]}} 至 {{filter.formatDate(item.endTime)[1]}}</text>
+    </view>
+  </view>
+  <view class="footerBtn">
+    <text bindtap="addAgency">新增资质</text>
+  </view>
+</view>

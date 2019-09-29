@@ -14,38 +14,69 @@
   <!--内容布局-->
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
     <swiper-item class='swiper'>
-      <view class="saleList">
+      <view class="saleList" wx:for="{{saleList}}" wx:key="index">
         <view class="listLeft">
-          <image src="http://brand.113ic.com/jy_77_Digi.png"></image>
-          <text>下架商品</text>
+          <image src="{{item.goodsImageUrl}}"></image>
+          <text bindtap="delGoods" data-item="{{item}}">下架商品</text>
         </view>
         <view class="listRight">
-          <text>批次号：12456</text>
-          <text>GHUIGHUGJHGK</text>
-          <text>sdafwersdfsda</text>
+          <text>批次号：{{item.product_no}}</text>
+          <text>{{item.goods_name}}</text>
+          <text>{{item.goodsDesc}}</text>
           <view>
-            <text>￥99.00</text>
-            <text>(不含税)</text>
+            <text wx:if="{{!item.priceType}}">{{item.priceUnit ? '$' : '￥'}}{{item.goodsPrice}}</text>
+            <text wx:if="{{item.priceType}}">{{item.priceUnit ? '$' : '￥'}}{{item.goodsPrice}}</text>
+            <text>({{item.includBill? '含13%增值税' : '不含税' }})</text>
           </view>
 
           <view>
-            <text>国内</text> |
-            <text>现货</text>
+            <text>{{item.diliverPlace}}</text> |
+            <text>{{item.goods_type ? '现货' : '期货'}}</text>
           </view>
-          <text>起订量：100 只</text>
-          <text>最小增量：100 只</text>
-          <text>总库存：100 只</text>
-          <text>剩余：100 只</text>
+          <text>起订量：{{item.moq}} 只</text>
+          <text>最小增量：{{item.mpq}} 只</text>
+          <text>总库存：{{item.goodsCount}} 只</text>
+          <text>剩余：{{item.goodsStockCount}} 只</text>
           <view>
-            <text>长期售卖</text>
-            <text class="time">限时卖：3 天 13 小时 22 分 48 秒</text>
+            <text wx:if="{{item.seller_always}}">长期售卖</text>
+            <text wx:if="{{!item.seller_always}}" class="time">限时卖：3 天 13 小时 22 分 48 秒</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{saleList.length<=0}}" class="noSale">暂无售卖商品</view>
+    </swiper-item>
+    <swiper-item class='swiper' class='swiper'>
+      <view class="saleList" wx:for="{{xiajiaList}}" wx:key="index">
+        <view class="listLeft">
+          <image src="{{item.goodsImageUrl}}"></image>
+          <text bindtap="addGoods" data-item="{{item}}">重新上架</text>
+        </view>
+        <view class="listRight">
+          <text>批次号：{{item.product_no}}</text>
+          <text>{{item.goods_name}}</text>
+          <text>{{item.goodsDesc}}</text>
+          <view>
+            <text wx:if="{{!item.priceType}}">{{item.priceUnit ? '$' : '￥'}}{{item.goodsPrice}}</text>
+            <text wx:if="{{item.priceType}}">{{item.priceUnit ? '$' : '￥'}}{{item.goodsPrice}}</text>
+            <text>({{item.includBill? '含13%增值税' : '不含税' }})</text>
+          </view>
+
+          <view>
+            <text>{{item.diliverPlace}}</text> |
+            <text>{{item.goods_type ? '现货' : '期货'}}</text>
+          </view>
+          <text>起订量：{{item.moq}} 只</text>
+          <text>最小增量：{{item.mpq}} 只</text>
+          <text>总库存：{{item.goodsCount}} 只</text>
+          <text>剩余：{{item.goodsStockCount}} 只</text>
+          <view>
+            <text wx:if="{{item.seller_always}}">长期售卖</text>
+            <text wx:if="{{!item.seller_always}}" class="time">限时卖：3 天 13 小时 22 分 48 秒</text>
           </view>
         </view>
 
       </view>
-    </swiper-item>
-    <swiper-item class='swiper' class='swiper'>
-      2222222
+      <view wx:if="xiajiaList.length<=0" class="noSale">暂无下架商品</view>
     </swiper-item>
   </swiper>
 </view>

@@ -1,0 +1,139 @@
+/* pages/my/agencyQualification/addEditAgency/addEditAgency.wxss */
+
+.addEditBrand {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #fff;
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.addEditBrand>view>image {
+  width: 15rpx;
+  height: 26rpx;
+  margin-left: 20rpx;
+  margin-top: 4rpx;
+}
+
+.addEditDesc {
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+}
+
+.addEditDesc>view:nth-of-type(1) {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.addEditDesc>view:nth-of-type(2) {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+
+.addEditDesc>text {
+  margin-bottom: 10rpx;
+  display: block;
+  line-height: 40rpx;
+  color: #999;
+}
+
+.addEditDesc>view:nth-of-type(3) {
+  font-size: 28rpx;
+  color: #6d1fee;
+  text-align: right;
+}
+
+.addEditDesc>view:nth-of-type(3):active {
+  font-size: 28rpx;
+  color: rgba(109, 31, 238, 0.8);
+  text-align: right;
+}
+
+.agencyTime {
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.agencyTime>text {
+  display: block;
+  line-height: 90rpx;
+  padding: 0 20rpx;
+  background: #fff;
+  height: 90rpx;
+  color: #333;
+  font-size: 30rpx;
+  font-weight: bold;
+  border-bottom: 2rpx solid #eee;
+}
+
+.agencyTime>view {
+  display: flex;
+  justify-content: space-between;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 2rpx solid #eee;
+  padding: 0 20rpx;
+}
+
+.upPic {
+  background: #fff;
+  margin-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.upPic>text:nth-of-type(1) {
+  display: block;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  padding: 0 20rpx;
+  height: 90rpx;
+  color: #333;
+  font-weight: bold;
+  border-bottom: 2rpx solid #eee;
+}
+
+.upPic>text:nth-of-type(2) {
+  display: block;
+  line-height: 70rpx;
+  padding: 0 20rpx;
+  height: 70rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.upPic>text:nth-of-type(3) {
+  display: block;
+  line-height: 40rpx;
+  padding: 0 20rpx;
+  color: #999;
+}
+
+.upPic>view {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+}
+
+.footerBtn {
+  padding: 20rpx;
+}
+
+.footerBtn>text {
+  display: block;
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  background: #df3f2f;
+  color: #fff;
+  border-radius: 8rpx;
+}
+
+.footerBtn>text:active {
+  background: rgba(223, 63, 47, 0.8);
+}

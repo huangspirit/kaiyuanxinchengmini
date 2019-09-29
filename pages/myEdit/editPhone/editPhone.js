@@ -175,7 +175,7 @@ Page({
    */
   onReady: function() {
     this.dialog = this.selectComponent('#dialog')
-    // this.dialog.show()
+    this.dialog.show()
   },
 
   /**
