@@ -49,8 +49,9 @@ Page({
     })
   },
   editPhone() {
+    let phone = this.data.userDetail.phone
     wx.navigateTo({
-      url: './editPhone/editPhone',
+      url: './editPhone/editPhone?params=' + phone,
     })
   },
   loginOut() {

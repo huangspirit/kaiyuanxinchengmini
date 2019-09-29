@@ -30,14 +30,13 @@
       </view>
       <text>订单管理</text>
     </view>
-    <view>
+    <view bindtap="goodsManage">
       <view>
         <image src="../../../../img/image/shangpinguanli.png"></image>
       </view>
-
       <text>商品管理</text>
     </view>
-    <view>
+    <view bindtap="releaseSale">
       <view>
         <image src="../../../../img/image/fabushangpin.png"></image>
       </view>

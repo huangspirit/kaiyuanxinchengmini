@@ -122,6 +122,16 @@ Component({
       wx.navigateTo({
         url: '../../../deposit/depositDetail/depositDetail',
       })
-    }
+    },
+    releaseSale() {
+      wx.navigateTo({
+        url: '../../../../releaseSale/releaseSale',
+      })
+    },
+    goodsManage() {
+      wx.navigateTo({
+        url: '../../../goodsManage/goodsManage',
+      })
+    },
   }
 })

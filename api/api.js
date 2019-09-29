@@ -13,15 +13,16 @@ const request = (url, options) => {
         } else if (request.statusCode === 401) {
           // 401 说明 token 验证失败
           // 可以直接跳转到登录页面，重新登录获取 token
-          wx:wx.removeStorageSync('token')
+          wx: wx.removeStorageSync('token')
           wx: wx.removeStorageSync('refreshToken')
-          wx:wx.navigateTo({
+          wx: wx.navigateTo({
             url: '/pages/index/index',
             success: function(res) {},
             fail: function(res) {},
             complete: function(res) {},
           })
-        } else{
+        }
+        else {
           reject(request.data)
         }
       },
@@ -75,7 +76,7 @@ const post = (url, options) => {
     })
   }
 }
-const put = (url, options)=> {
+const put = (url, options) => {
   return request(url, {
     method: 'PUT',
     data: options,

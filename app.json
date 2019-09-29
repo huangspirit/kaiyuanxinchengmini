@@ -58,7 +58,8 @@
     "pages/my/deposit/depositDetail/depositDetail",
     "pages/releaseSale/releaseSale",
     "pages/my/notice/notice",
-    "pages/myEdit/editPhone/editPhone"
+    "pages/myEdit/editPhone/editPhone",
+    "pages/my/goodsManage/goodsManage"
   ],
   "window": {
     "backgroundTextStyle": "dark",

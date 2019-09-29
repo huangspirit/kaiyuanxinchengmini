@@ -1,5 +1,31 @@
 /* pages/releaseSale/releaseSale.wxss */
 
+.searchList {
+  margin-top: 8rpx;
+  height: calc(100% - 140rpx);
+  width: 100%;
+  padding: 0 20rpx 40rpx 20rpx;
+  overflow-y: scroll;
+  position: fixed;
+  top: 140rpx;
+  left: 0;
+  overflow: auto;
+  z-index: 10;
+  background: #fff;
+}
+
+.searchList>view {
+  display: block;
+  line-height: 45px;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.searchList>view:active {
+  background: #4a5a6a;
+  color: #fff;
+}
+
 .radioSquare {
   display: flex;
   flex: 1;
@@ -28,7 +54,9 @@
 .cu-form-group {
   margin-top: 10rpx;
 }
-
+.cu-form-group .leverList input {
+  font-size: 20rpx;
+}
 .leverPrice {
   display: flex;
   flex-direction: column;
@@ -44,7 +72,7 @@
   line-height: 60rpx;
   display: block;
   color: #fff;
-   border-radius: 8rpx;
+  border-radius: 8rpx;
 }
 
 .leverPrice .leverList {
@@ -59,10 +87,19 @@
 
 .leverPrice .leverList>view>view {
   display: flex;
+  width: 40%;
 }
+
+.leverPrice .leverList>view>text {
+  width: 20%;
+  display: block;
+  text-align: center;
+}
+
 .leverPrice .leverList>view>view:nth-of-type(1)>text {
-  padding-right:15rpx;
+  padding-right: 15rpx;
 }
+
 .leverPrice .leverList>view>view:nth-of-type(2)>text {
   padding: 0 15rpx;
 }
@@ -70,6 +107,7 @@
 .leverPrice .leverList>view>view>input {
   border: 2rpx solid #dcdcdc;
   border-radius: 8rpx;
+  padding: 0 10rpx;
 }
 
 .footerBtn {
@@ -80,7 +118,6 @@
   line-height: 90rpx;
   color: #fff;
   background: #df3f2f;
- 
 }
 
 .footerBtn:active {

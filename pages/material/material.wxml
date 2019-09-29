@@ -1,5 +1,4 @@
 <!--pages/material/material.wxml-->
-<!--pages/spotSpecial/spotSpecial.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="spotSpecial">
   <view class="Left">

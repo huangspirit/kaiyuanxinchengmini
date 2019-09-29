@@ -27,7 +27,7 @@
         <view class="cu-avatar lg round margin-left margin-right">
           <image style="width:100%;height:100%;border-radius:100%;" src="{{item.sellerUrl}}"></image>
         </view>
-        <text>{{item.sellerName}} ></text>
+        <text>{{item.sellerName}}</text>
       </view>
       <view class="sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
         <view wx:if="{{subItem.isenable}}" class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">

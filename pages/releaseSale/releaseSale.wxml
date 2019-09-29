@@ -1,8 +1,16 @@
 <!--pages/releaseSale/releaseSale.wxml-->
-<view style="padding:20rpx 0">
+<view class='searchList' wx:if="{{goodsList.length>0}}">
+  <view bindtap="toDetail" wx:for="{{goodsList}}" data-item="{{item}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+    <block wx:for="{{item.nameLight}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+      <text wx:if="{{subItem.key == true}}" style="color:red;">{{subItem.str}}</text>
+      <text wx:else>{{subItem.str}}</text>
+    </block>
+  </view>
+</view>
+<view style="padding:20rpx 0;position: fixed;top: 0;height:100%;overflow:auto">
   <view class="cu-form-group">
     <view class="title">器件型号</view>
-    <input placeholder="请输入商品详细型号" name="input"></input>
+    <input placeholder="请输入商品详细型号" bindinput="goodsName" value="{{goods_name}}" name="input"></input>
   </view>
   <radio-group class="block" bindchange="RadioChange">
     <view class="cu-form-group">
@@ -21,7 +29,7 @@
   </radio-group>
   <view class="cu-form-group" wx:if="{{goods_type=='true'}}">
     <view class="title">批号</view>
-    <input placeholder="请输入产品批号" name="input"></input>
+    <input placeholder="请输入产品批号" bindinput="baseno" name="input"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">交货地点</view>
@@ -80,46 +88,26 @@
 
   <view class="cu-form-group" wx:if="{{price_type=='false'}}">
     <view class="title">一口价</view>
-    <input placeholder="请输入价格" name="input"></input>
+    <input placeholder="请输入价格" bindinput="seckilPrice" name="input"></input>
   </view>
 
 
   <view class="cu-form-group" wx:if="{{price_type=='true'}}">
-    <view class="title">阶梯价</view>
     <view class="leverPrice">
       <view class="leverList">
-        <view>
+        <view wx:for="{{SteppedPriceListlength}}" wx:key="index">
           <view>
             <text>数量</text>
-            <input></input>
+            <input bindinput="priceNum" bindblur="numBlur" value="{{SteppedPriceListobj['num'+index]}}" placeholder="{{SteppedPriceListobj['placeholdernum'+index]}}" data-index="{{index}}"></input>
           </view>
           <view>
             <text>价格</text>
-            <input></input>
+            <input bindinput="leverPrice" bindblur="priceBlur" value="{{SteppedPriceListobj['price'+index]}}" data-index="{{index}}" placeholder="{{SteppedPriceListobj['placeholderprice'+index]}}"></input>
           </view>
-        </view>
-        <view>
-          <view>
-            <text>数量</text>
-            <input></input>
-          </view>
-          <view>
-            <text>价格</text>
-            <input></input>
-          </view>
-        </view>
-        <view>
-          <view>
-            <text>数量</text>
-            <input></input>
-          </view>
-          <view>
-            <text>价格</text>
-            <input></input>
-          </view>
+          <text wx:if="{{index==SteppedPriceListlength-1}}" bindtap="addLever" data-index="{{index}}">添加</text>
         </view>
       </view>
-      <view class="leverReset">重置阶梯价</view>
+      <view class="leverReset" bindtap="leverReset">重置阶梯价</view>
     </view>
 
   </view>
@@ -129,15 +117,15 @@
 
   <view class="cu-form-group">
     <view class="title">最小订购量</view>
-    <input placeholder="请输入数量" name="input"></input>
+    <input placeholder="请输入数量" bindinput="moq" name="input"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">最小增量</view>
-    <input placeholder="请输入数量" name="input"></input>
+    <input placeholder="请输入数量" bindinput="mpq" name="input"></input>
   </view>
   <view class="cu-form-group">
     <view class="title">可卖数量</view>
-    <input placeholder="请输入数量" name="input"></input>
+    <input placeholder="请输入数量" bindinput="stockCount" name="input"></input>
   </view>
 
   <radio-group class="block" bindchange="selleralwaysChange">
@@ -156,7 +144,7 @@
     </view>
   </radio-group>
 
-  <view class="cu-form-group">
+  <view class="cu-form-group" wx:if="{{seller_always == 'false'}}">
     <view class="title">开始时间</view>
     <view class="radioSquare">
       <picker mode="multiSelector" value="{{startTime}}" bindchange="changestartTime" bindcolumnchange="changestartTimeColumn" range="{{startTimeArray}}">
@@ -166,11 +154,19 @@
       </picker>
     </view>
   </view>
-  <view class="cu-form-group">
+  <view class="cu-form-group" wx:if="{{seller_always == 'false'}}">
     <view class="title">结束时间</view>
     <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
       <view class="tui-picker-detail">
         {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}:{{dateTimeArray[5][dateTime[5]]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:if="{{goods_type=='false'}}">
+    <view class="title">预计交期</view>
+    <picker mode="date" value="{{complete_date}}" start="2015-09-01" end="2100-09-01" bindchange="bindDateChange">
+      <view class="picker">
+        {{complete_date}}
       </view>
     </picker>
   </view>
@@ -192,5 +188,5 @@
       <text>文件大小在1M以内，支持png,jpg,gif格式</text> -->
     </view>
   </view>
-  <view class="footerBtn">立即发布</view>
+  <view class="footerBtn" bindtap="submit">立即发布</view>
 </view>

@@ -1,6 +1,21 @@
 <!--pages/myEdit/editPhone/editPhone.wxml-->
 <dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="取消" confirmText="确认" title="验证当前手机号">
   <view slot="content" class="section">
-
+    <text>已绑定手机号：{{historyPhone}}</text>
+    <view>
+      <input type="number" bindinput="codeIpt"></input>
+      <text bindtap="getCode" wx:if="{{btnShow}}">{{getcodeText}}</text>
+      <text wx:if="{{!btnShow}}">{{getcodeText}}</text>
+    </view>
   </view>
 </dialog>
+
+<view class="selectPhone">
+  <input placeholder="输入新的手机号码" bindinput="newPhone"></input>
+  <view>
+    <input type="number" placeholder="输入验证码" bindinput="selcTcodeIpt"></input>
+    <text bindtap="selcTgetCode" wx:if="{{selcTbtnShow}}">{{selcTgetcodeText}}</text>
+    <text wx:if="{{!selcTbtnShow}}">{{selcTgetcodeText}}</text>
+  </view>
+  <text bindtap="confirm">确认</text>
+</view>

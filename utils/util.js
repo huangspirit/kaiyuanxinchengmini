@@ -37,7 +37,37 @@ const getFormat = msec => {
   day = day > 9 ? day : `0${day}`;
   return day + "天" + hh + "时" + mm + "分" + ss + "秒"
 }
-module.exports = {
-  formatTime: formatTime,
-  getFormat: getFormat
-}
+
+// 根据搜索字分割字符
+const hilight_word=(key, word) => {
+    let idx = word.indexOf(key.toUpperCase()),
+      t = [];
+    if (idx > -1) {
+      if (idx == 0) {
+        t = hilight_word(key, word.substr(key.length));
+        t.unshift({
+          key: true,
+          str: key
+        });
+        return t;
+      }
+
+      if (idx > 0) {
+        t = hilight_word(key, word.substr(idx));
+        t.unshift({
+          key: false,
+          str: word.substring(0, idx)
+        });
+        return t;
+      }
+    }
+    return [{
+      key: false,
+      str: word
+    }];
+  }
+  module.exports = {
+    formatTime: formatTime,
+    getFormat: getFormat,
+    hilightWord: hilight_word
+  }

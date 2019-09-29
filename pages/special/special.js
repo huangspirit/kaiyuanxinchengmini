@@ -132,6 +132,22 @@ Page({
       complete: function(res) {},
     })
   },
+  goodsDetail(val) {
+    console.log(val)
+    var obj = {}
+    obj['documentid'] = val.currentTarget.dataset.item.goods_id
+    obj['tag'] = 'goodsinfo'
+    obj['name'] = val.currentTarget.dataset.item.goods_name
+    var routerParams = JSON.stringify(obj)
+    let storageItem = JSON.stringify(val.currentTarget.dataset.item)
+    wx: wx.setStorageSync('productDetail', storageItem)
+    wx: wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,0 +1,120 @@
+/* pages/my/googsManage/goodsManage.wxss */
+
+.myFocus {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.myFocus .title {
+  width: 100%;
+  height: 88rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.myFocus .titleSel {
+  color: #333;
+  font-size: 32rpx;
+}
+
+.myFocus .headerLineSel {
+  color: #df3f2f;
+}
+
+.myFocus.headerLineUnsel {
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+
+.myFocus .swiper {
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 88rpx);
+  overflow: scroll;
+}
+
+.saleList {
+  display: flex;
+  padding: 40rpx 20rpx;
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.saleList>.listLeft {
+  width: 175rpx;
+  padding: 0 25rpx;
+}
+
+.saleList>.listLeft>image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.saleList>.listLeft>text {
+  width: 120rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  background: #eee;
+}
+
+.saleList>.listRight {
+  width: calc(100% - 175rpx);
+}
+
+.saleList>.listRight>text {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+  line-height: 40rpx;
+}
+
+.saleList>.listRight>text:nth-of-type(1) {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.saleList>.listRight>text:nth-of-type(2) {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.saleList>.listRight>view:nth-of-type(1)>text:nth-of-type(1) {
+  color: #df3f2f;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-right: 15rpx;
+}
+
+.saleList>.listRight>view:nth-of-type(1)>text:nth-of-type(2) {
+  color: #214ef5;
+  font-size: 18rpx;
+}
+
+.saleList>.listRight>view:nth-of-type(2) {
+  color: #999;
+  font-size: 22rpx;
+}
+
+.saleList>.listRight>view:nth-of-type(3)>text {
+  color: #df3f2f;
+}
+
+.saleList>.listRight>view:nth-of-type(3)>.time {
+  display: block;
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  text-align: center;
+  background: #df3f2f;
+}

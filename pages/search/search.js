@@ -1,6 +1,7 @@
 // pages/search/search.js
 const app = getApp()
 import api from '../../api/api'
+import util from '../../utils/util'
 Page({
 
   /**
@@ -31,7 +32,7 @@ Page({
         for (let i = 0; i < this.data.searchList.length; i++) {
           this.data.searchList[i].nick_name = this.data.searchList[i].nick_name.replace('<font color="red">', "")
           this.data.searchList[i].nick_name = this.data.searchList[i].nick_name.replace('</font>', "")
-          this.data.searchList[i]['nameLight'] = this.hilight_word(val.detail.value, this.data.searchList[i].nick_name)
+          this.data.searchList[i]['nameLight'] = util.hilightWord(val.detail.value, this.data.searchList[i].nick_name)
         }
         this.setData({
           searchList: this.data.searchList,
@@ -40,34 +41,7 @@ Page({
     }
 
   },
-  // 根据搜索字分割字符
-  hilight_word: function(key, word) {
-    let idx = word.indexOf(key.toUpperCase()),
-      t = [];
-    if (idx > -1) {
-      if (idx == 0) {
-        t = this.hilight_word(key, word.substr(key.length));
-        t.unshift({
-          key: true,
-          str: key
-        });
-        return t;
-      }
 
-      if (idx > 0) {
-        t = this.hilight_word(key, word.substr(idx));
-        t.unshift({
-          key: false,
-          str: word.substring(0, idx)
-        });
-        return t;
-      }
-    }
-    return [{
-      key: false,
-      str: word
-    }];
-  },
   toDetail(val) {
     console.log(val, '555555')
     var tag = val.currentTarget.dataset['item']

@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 39,
+			"current": 40,
 			"list": [
 				{
 					"id": -1,
@@ -319,6 +319,13 @@
 					"id": -1,
 					"name": "消息中心",
 					"pathName": "pages/my/notice/notice",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "商品管理",
+					"pathName": "pages/my/goodsManage/goodsManage",
 					"scene": null
 				}
 			]

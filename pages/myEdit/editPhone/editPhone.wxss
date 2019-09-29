@@ -1,1 +1,84 @@
 /* pages/myEdit/editPhone/editPhone.wxss */
+
+.section>text {
+  display: block;
+  padding: 0 20rpx;
+}
+
+.section>view {
+  display: flex;
+  padding: 20rpx;
+}
+
+.section>view>input {
+  border: 2rpx solid #dcdcdc;
+  height: 80rpx;
+  width: 100%;
+  border-right: none;
+}
+
+.section>view>text {
+  border: 2rpx solid #dcdcdc;
+  height: 80rpx;
+  width: 50%;
+  text-align: center;
+  line-height: 80rpx;
+  background: #f5f7fa;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 10rpx;
+}
+
+.selectPhone {
+  padding: 20rpx;
+}
+
+.selectPhone>input {
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  border-bottom: 2rpx solid #eee;
+  padding: 0 20rpx;
+}
+
+.selectPhone>view {
+  display: flex;
+  background: #fff;
+  margin: 10rpx 0 20rpx;
+}
+
+.selectPhone>view>input {
+  border-bottom: 2rpx solid #eee;
+  height: 100rpx;
+  width: 100%;
+  border-right: none;
+  padding: 0 20rpx;
+}
+
+.selectPhone>view>text {
+  border: 2rpx solid #dcdcdc;
+  height: 100rpx;
+  width: 50%;
+  text-align: center;
+  line-height: 100rpx;
+  background: #f5f7fa;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 10rpx;
+  background: #df3f2f;
+  color: #fff;
+}
+
+.selectPhone>text {
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  background: #df3f2f;
+  color: #fff;
+  display: block;
+}
