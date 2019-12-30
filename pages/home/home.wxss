@@ -152,9 +152,8 @@ page {
 
 .specialList .listContent .list_left {
   width: 49%;
-  height: 300rpx;
   margin-right: 2%;
-  padding: 0 20rpx;
+  padding: 20rpx;
   box-sizing: border-box;
   display: inline-block;
   text-align: center;
@@ -174,22 +173,28 @@ page {
   height: 210rpx;
   background: rgba(243, 243, 243, 1);
   border-radius: 8px;
+  margin-bottom:15rpx;
 }
-
-.specialList .listContent .list_left>text {
-  display: block;
+.specialList .listContent .list_left .name{
+  margin-top:5rpx;
   text-align: left;
+  }
+.specialList .listContent .list_left .desc{
+  text-align: left;
+  font-weight: bold;
+  margin-top:10rpx;
 }
-.specialList .listContent .list_left>text:nth-of-type(1) {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.specialList .listContent .list_left .mark{
+  text-align: left;
+  margin-top:15rpx;
 }
-.specialList .listContent .list_left>text:nth-of-type(2) {
-  color: #dd4031;
+.specialList .listContent .list_left .mark text{
+  padding:0 10rpx;
+  border-radius: 5rpx;
+  font-size:22rpx;
+  margin-right:5rpx;
 }
-
-.specialList .listContent .list_left>text:nth-of-type(3) {
+.specialList .listContent .list_left .goodsTypemark {
   position: absolute;
   top: -13rpx;
   left: -22px;
@@ -206,74 +211,97 @@ page {
 .specialList .faclistContent {
   display: flex;
   background: #fff;
-  height: 200rpx;
   margin-bottom: 10rpx;
   box-sizing: border-box;
   padding: 20rpx;
-}
-
-.specialList .faclistContent .list_left {
-  width: 25%;
+  align-items: center;
 }
 
 .specialList .faclistContent .list_left>image {
-  height: 100%;
+  height: 120rpx;
+  width:120rpx;
+  vertical-align: middle;
 }
-
 .specialList .faclistContent .list_right {
   padding-left: 20rpx;
-  box-sizing: border-box;
-  width: 75%;
-}
-
-.specialList .faclistContent .list_right>text {
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #333;
-}
-
-.specialList .faclistContent .list_right>view {
+  flex:1;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
 }
-
-.specialList .faclistContent .list_right>view .speciStatus {
-  min-width: 45%;
+.specialList .faclistContent .list_right .speciStatus{
+  flex:1;
 }
-
-.specialList .faclistContent .list_right>view .speciStatus>text {
-  padding: 5rpx 16rpx;
-  border: 1rpx solid #666;
-  margin-right: 20rpx;
-  font-size: 22rpx;
-  border-radius: 4rpx;
+.specialList .faclistContent .list_right .speciStatus .name{
+  font-size:30rpx;
+  margin-bottom:5rpx;
 }
-
-.specialList .faclistContent .list_right>view .speciStatus>text:nth-of-type(1) {
-  display: block;
-  border: none;
-  font-size: 22rpx;
-  color: #999;
-  padding: 0;
-  margin-top: 10rpx;
-  margin-bottom: 30rpx;
+.specialList .faclistContent .list_right .speciStatus .mark{
+  margin-top:5rpx;
 }
-
-.specialList .faclistContent .list_right>view>.price {
-  width: 40%;
-  text-align: right;
+.specialList .faclistContent .list_right .speciStatus .mark text{
+  padding:0 10rpx;
+  margin-right:15rpx;
+  font-size:20rpx;
 }
-
-.specialList .faclistContent .list_right>view>.price>text:nth-of-type(1) {
-  display: block;
-  color: #df3f2f;
-  font-size: 26rpx;
-  margin-bottom: 20rpx;
+.specialList .faclistContent .list_right .price{
+  font-size:25rpx;
+  text-align: center;
 }
-
-.specialList .faclistContent .list_right>view>.price>text:nth-of-type(2) {
-  display: block;
-  color: #df3f2f;
-  font-size: 36rpx;
+.specialList .faclistContent .list_right .price .num{
+  font-size:30rpx;
   font-weight: bold;
+  margin-top:8rpx;
+}
+.goodslist > .list{
+  display:flex;
+  flex-wrap: wrap;
+  padding:20rpx;
+}
+.goodslist .list .oneitem{
+  width:48.5%;
+  margin-right:3%;
+  background:#fff;
+  margin-bottom:3%;
+  padding:10rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  position: relative;
+  box-shadow: 0 0 10rpx 3rpx #ddd;
+}
+.goodslist .list .oneitem:nth-of-type(even){
+  margin-right:0;
+}
+.goodslist .list .oneitem .imgWrap{
+  text-align: center;
+  
+}
+.goodslist .list .oneitem .imgWrap image{
+  height:250rpx;
+  width:250rpx;
+}
+.goodslist .list .oneitem .name{
+  font-size:28rpx;
+}
+.goodslist .list .oneitem .desc{
+  font-size:20rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  margin:10rpx 0;
+}
+.goodslist .list .oneitem .mark{
+  font-size:20rpx;
+  margin-left:10rpx;
+}
+.goodslist .list .oneitem .price{
+  font-weight: bolder;
+}
+.goodslist .list .oneitem .goodsTypeMark{
+  position: absolute;
+  left:0;
+  top:0;
+  padding:0 10rpx;
+  border-radius: 10rpx;
+  font-size: 22rpx;
 }

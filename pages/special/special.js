@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    errorImg:app.globalData.errorImg,
     specialSider: [{
       name: '现货',
       id: '0'
@@ -25,104 +26,81 @@ Page({
     countTimeData: []
   },
   siderChange(val) {
+    clearTimeout(this.data.timer)
+    this.setData({
+      loadModal: true
+    })
     var index = 0
     if (val) {
-      console.log('1111')
       this.setData({
         siderIndex: val.currentTarget.dataset.index
       })
       index = val.currentTarget.dataset.index
     }
-    clearTimeout(this.data.timer)
-
-    if (index == 2) {
-      api.get('/api-g/gods-anon/queryDirectGoods', {
+    let obj={}
+    if(index==2){
+      obj={
         start: 0,
         length: 100,
         is_old_product: true,
         status: 1
-      }).then(res => {
-        console.log(res)
-        this.setData({
-          speciaList: res.data.data
-        })
-        if (res.data.data.length > 0) {
-          this.data.countTimeData = []
-          for (var i = 0; i < this.data.speciaList.length; i++) {
-            let countdownTime = this.data.speciaList[i].expireTime - this.data.speciaList[i].currentTime
-            this.data.countTimeData.push({
-              remainTime: countdownTime,
-              countDown: ""
-            })
-          }
-          this.setCountDown(this.data.countTimeData)
-        }
-      })
-    } else if (index == 1) {
-      api.get('/api-g/gods-anon/queryDirectGoods', {
+      }
+    }else if(index==1){
+      obj={
         start: 0,
         length: 100,
         goods_type: false,
         status: 1
-      }).then(res => {
-        console.log(res)
-        this.setData({
-          speciaList: res.data.data
-        })
-        if (res.data.data.length > 0) {
-          this.data.countTimeData = []
-          for (var i = 0; i < this.data.speciaList.length; i++) {
-            let countdownTime = this.data.speciaList[i].expireTime - this.data.speciaList[i].currentTime
-            this.data.countTimeData.push({
-              remainTime: countdownTime,
-              countDown: ""
-            })
-          }
-          this.setCountDown(this.data.countTimeData)
-        }
-      })
-    } else if (index == 0) {
-      api.get('/api-g/gods-anon/queryDirectGoods', {
+      }
+    }else if(index==0){
+      obj = {
         start: 0,
         length: 100,
         goods_type: true,
-        status: 0
-      }).then(res => {
-        console.log(res)
-        this.setData({
-          speciaList: res.data.data
-        })
-        if (res.data.data.length > 0) {
-          this.data.countTimeData = []
-          for (var i = 0; i < this.data.speciaList.length; i++) {
-            let countdownTime = this.data.speciaList[i].expireTime - this.data.speciaList[i].currentTime
-            this.data.countTimeData.push({
-              remainTime: countdownTime,
-              countDown: ""
-            })
-          }
-          this.setCountDown(this.data.countTimeData)
-        }
-      })
-    }
-  },
-  setCountDown(val) {
-    let time = 1000
-    let list = val.map((v, i) => {
-      if (v.remainTime <= 0) {
-        v.remainTime = 0;
+        status: 1
       }
-      let formatTime = utils.getFormat(v.remainTime);
-      v.remainTime -= time;
-      v.countDown = formatTime;
-      return v;
-    })
+    }
+    api.get('/api-g/gods-anon/queryDirectGoods', obj).then(res => {
+      this.setData({
+        loadModal: false
+      })
+      if (res.data.data.length > 0) {
+        let specialList = res.data.data.map(item => {
+          if (item.expireTime){
+            let countdownTime = item.expireTime - item.currentTime;
+            item.remainTime = countdownTime;
+            item.countDown=""
+          }
+          return item;
+        })
+        this.setData({
+          speciaList: specialList,
+        })
+      }else{
+        this.setData({
+          speciaList:[],
+        })
+      }
+      this.setCountDown()
+      })
+  },
+  setCountDown: function () {
+    var _this=this;
+    let time = 100;
+    let { speciaList } = this.data;
+    let list = speciaList.map((v, i) => {
+          if (v.remainTime <= 0) {
+            v.remainTime = 0;
+          }
+          let formatTime = utils.getFormat(v.remainTime);
+          v.remainTime -= time;
+          v.countDown = formatTime;
+          return v;
+        })
     this.setData({
-      countTimeData: list
+      speciaList: list,
+      timer: setTimeout(_this.setCountDown, time)
     });
-    this.data.timer = setTimeout(() => {
-      this.setCountDown(list)
-    }, time)
   },
   toSearch() {
     wx: wx.navigateTo({

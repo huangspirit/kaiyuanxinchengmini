@@ -1,0 +1,61 @@
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view>
+  <view class="top">
+    <view class="brandPic">
+      <image src='{{brand.imageUrl?brand.imageUrl:errorImg}}'></image>
+    </view>
+    <view class="brandComponey">
+      <view class="brandTitle">品牌简介</view>
+      <view class="brandDetail">
+        <text class="{{descHeight?'descText desc':'desc'}}"> {{brand.brandDesc?brand.brandDesc:'暂无'}}</text>
+        <view bindtap="descShow" class="btn blu">{{descText}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="goodslist">
+    <view class="title">热卖型号</view>
+    <view class="nocommit gray" wx:if="{{goodslist.length==0}}">暂无热卖</view>
+    <view class="list">
+      <view class="oneitem" wx:for="{{goodslist}}" wx:key="{{item.id}}" bindtap="toDetail" data-item="{{item}}">
+        <view class="imgWrap">
+          <image src="{{item.sellerGoodsImage}}"></image>
+        </view>
+        <view>
+          <view class="blu">{{item.catergoryName}}</view>
+          <view class="name color">{{item.goods_name}}</view>
+          <view class="desc gray">{{item.goodsDesc}}</view>
+          <view class="price">
+            <text class="num color">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+            <text class="mark" wx:if="{{item.priceType}}">起</text>
+          </view>
+          <view class="{{item.goods_type?'greenColor goodsTypeMark':'bgColor goodsTypeMark'}}">{{item.goods_type?'现货':'订货'}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="title">用户评价</view>
+    <view class="nocommit gray" wx:if="{{commitlist.length==0}}">暂无评价</view>
+    <view class="commitlist">
+      <view wx:for="{{commitlist}}" wx:key="item" data-item="{{item}}" class="oneitem">
+        <view class="header">
+          <image src="{{item.userHead}}"></image>
+        </view>
+        <view class="list">
+          <view class="tit">
+            <view class="blu">{{item.userName}}
+              <text class="gray time">{{filter.formatDate(item.createTime)[1]}} </text>
+            </view>
+            <view class="gray">购买型号:{{item.goodsName}}</view>
+          </view>
+          <view wx:if="{{item.content}}">{{item.content}}</view>
+          <view wx:if="{{item.commentPicturelist.length}}">
+            <image class="img" wx:for="{{item.commentPicturelist}}" wx:key="{{item}}" data-item="{{item}}" src="{{item+'?imageView2/2/w/100/h/100'}}"></image>
+          </view>
+          <view wx:if="{{item.replyContent}}" class="reply peruBg">
+            <view class="tit">商家回复：</view>
+            <text>{{item.replyContent}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -12,74 +12,118 @@ Page({
     productDetail: {},
     TabbarBot: app.globalData.tabbar_bottom,
     specialList: [],
+    currentPage:1,
+    pageSize:6,
+    total:0,
     countTimeData: [],
-    timer: ""
+    timer: "",
+    errorImg:app.globalData.errorImg,
+    loadModal: false,
+    timerCount:0,
+    getMoreMark:false
+  },
+  getMoreSpecial(){
+    this.setData({
+      currentPage:this.data.currentPage+1,
+      loadModal:true
+    })
+    this.getSpecialList()
+  },
+  getSpecialList(){
+    //器件售卖商家列表
+    api.get("/api-g/gods-anon/queryDirectGoods", {
+      start: this.data.pageSize * (this.data.currentPage - 1),
+      length: this.data.pageSize,
+      goods_id: this.data.productDetail.id,
+      status: 1
+    }).then(res => {
+      if (res.resultCode == "200") {
+        clearTimeout(this.data.timer);
+        this.setData({
+          loadModal: false,
+          total: res.data.total
+        })
+        if (res.data.data.length > 0) {
+            this.setData({
+              getMoreMark: res.data.data.length == this.data.pageSize?true:false
+            })
+          let specialList = res.data.data.map(item => {
+            if (item.expireTime) {
+              let countdownTime = item.expireTime - item.currentTime;
+              item.remainTime = countdownTime;
+              item.countDown = "";
+            }
+            return item;
+          })
+          if(this.data.currentPage==1){
+            this.setData({
+              specialList: specialList
+            })
+          }else{
+            this.setData({
+              specialList: this.data.specialList.concat(specialList),
+            })
+          }
+          
+        } else {
+          this.setData({
+            speciaList: [],
+            getMoreMark:false
+          })
+        }
+        this.setCountDown()
+      }
+    })
   },
   getProductDetail() {
+    this.setData({
+      loadModal:true
+    })
     api.get('/api-g/gods-anon/searchResult', {
-      id: this.data.productParams.documentid,
+      id: this.data.productParams.id,
       tag: this.data.productParams.tag,
       name: this.data.productParams.name
     }).then(res => {
-      console.log('商品详情', res)
       if (res.resultCode == "200") {
         this.setData({
           productDetail: res.data.goodsinfo,
         })
-        //直通车正在售卖列表
-        api.get("/api-g/gods-anon/queryDirectGoods", {
-          start: 0,
-          length: 6,
-          goods_id: this.data.productDetail.id,
-          status: 1
-        }).then(res => {
-          console.log('特价', res)
-          if (res.resultCode == "200") {
-            this.setData({
-              specialList: res.data.data
-            })
-            if (res.data.data.length > 0) {
-              this.data.countTimeData = []
-              for (var i = 0; i < this.data.speciaList.length; i++) {
-                let countdownTime = this.data.speciaList[i].expireTime - this.data.speciaList[i].currentTime
-                this.data.countTimeData.push({
-                  remainTime: countdownTime,
-                  countDown: ""
-                })
-              }
-              this.setCountDown(this.data.countTimeData)
-            }
-          }
-        })
+        this.getSpecialList()
       }
     })
   },
-  setCountDown(val) {
+  setCountDown() {
+    var _this=this;
     let time = 1000
-    let list = val.map((v, i) => {
-      if (v.remainTime <= 0) {
+    let specialList = this.data.specialList;
+    let count=0;
+    let list = specialList.map((v, i) => {
+      if (!v.remainTime || v.remainTime <= 0) {
         v.remainTime = 0;
+      }else{
+        count=count+1
       }
       let formatTime = utils.getFormat(v.remainTime);
       v.remainTime -= time;
       v.countDown = formatTime;
       return v;
     })
+   if(count==0){
+     return;
+   }
     this.setData({
-      countTimeData: list
+      specialList: list,
+      timer: setTimeout(() => {
+        _this.setCountDown()
+      }, time)
     });
-    this.data.timer = setTimeout(() => {
-      this.setCountDown(list)
-    }, time)
   },
   addFocus(val) {
-    console.log(val)
     api.get('/api-g/gf/insertGoodsFavourite', {
       goods_id: val.currentTarget.dataset.item.id,
       catergory_id: val.currentTarget.dataset.item.classificationId,
       favour_type: "1"
     }).then(res => {
-      console.log(res)
       if (res.resultCode == '200') {
         wx: wx.showToast({
           title: '关注成功',
@@ -91,7 +135,17 @@ Page({
           fail: function(res) {},
           complete: function(res) {},
         })
-        this.getProductDetail()
+        api.get('/api-g/gods-anon/searchResult', {
+          id: this.data.productParams.id,
+          tag: this.data.productParams.tag,
+          name: this.data.productParams.name
+        }).then(res => {
+          if (res.resultCode == "200") {
+            this.setData({
+              productDetail: res.data.goodsinfo,
+            })
+          }
+        })
       }
     })
   },
@@ -122,8 +176,29 @@ Page({
     })
   },
   releaseSale() {
+    console.log(this.data.productDetail)
     wx.navigateTo({
-      url: '../releaseSale/releaseSale',
+      url: '../releaseSale/releaseSale?name=' + this.data.productDetail.productno
+    })
+  },
+  purchase(){
+
+  },
+  toDetail(val) {
+    var currentItem = this.data.specialList[val.currentTarget.dataset.index];
+    console.log(currentItem)
+    var obj = {}
+    obj['id'] = currentItem.goods_id
+    obj['tag'] = 'goodsinfo'
+    obj['name'] = currentItem.goods_name
+    var routerParams = JSON.stringify(obj)
+    let storageItem = JSON.stringify(currentItem)
+    wx: wx.setStorageSync('productDetail', storageItem)
+    wx: wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
   /**
@@ -135,7 +210,6 @@ Page({
       productParams: reqInfo
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -147,7 +221,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**

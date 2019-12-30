@@ -1,28 +1,29 @@
 /* pages/orderGoods/orderGoods.wxss */
-
+page{
+  height:100%;
+}
 .spotSpecial {
   width: 100%;
   display: flex;
+  border-top:1rpx solid #f7f7f7;
 }
-
 .Left {
   width: 180rpx;
-  padding: 20rpx 0;
+  
 }
-
 .Left>text {
   display: block;
-  line-height: 80rpx;
-  margin-bottom: 40rpx;
-  padding: 0 10rpx;
+  padding: 40rpx 10rpx;
   text-align: center;
-  white-space: nowrap;
+  /* white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow: hidden; */
+  font-size:24rpx;
 }
 
 .Left .siderActive {
   color: #e03e31;
+  background:#fff;
 }
 
 .Right {
@@ -36,13 +37,15 @@
   box-sizing: border-box;
   height: 225rpx;
   display: flex;
+  align-items: center;
 }
 
 .Right .specialList .listLeft {
-  width: 120rpx;
-  height: 120rpx;
-  border: 2rpx solid #e6e6e6;
+  width: 100rpx;
+  height: 100rpx;
+  border: 2rpx solid #f7f7f7;
   margin-right: 22rpx;
+  padding:10rpx;
 }
 
 .Right .specialList .listLeft>image {
@@ -88,10 +91,9 @@
   font-size: 24rpx;
 }
 
-.Right .specialList .listRight .listContent>view>text:nth-of-type(3) {
-  color: #333;
+/* .Right .specialList .listRight .listContent>view>text:nth-of-type(3) {
   font-size: 24rpx;
-}
+} */
 
 .Right .specialList .listRight .listContent>view>image {
   width: 50rpx;

@@ -1,4 +1,5 @@
 <!--pages/my/my.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="myHeader">
   <image bindtap="notice" src="../../img/image/notice.png"></image>
   <text>我的</text>
@@ -16,9 +17,7 @@
       </view>
       <view class="myPosition">
         <text>信用等级 {{userDetail.userTagMap.userLevel}}</text>
-        <text wx:if="{{userDetail.userTagMap.tag == 1}}">原厂</text>
-        <text wx:if="{{userDetail.userTagMap.tag == 2}}">代理商</text>
-        <text wx:if="{{userDetail.userTagMap.tag==3}}">认证商</text>
+        <text>{{filter.tagFilter(userDetail.userTagMap.tag)}}</text>
       </view>
     </view>
   </view>

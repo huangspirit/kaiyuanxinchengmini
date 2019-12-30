@@ -1735,8 +1735,8 @@ button.icon.lg {
 	padding: 0;
 	height: calc(100rpx + env(safe-area-inset-bottom) / 2);
 	padding-bottom: calc(env(safe-area-inset-bottom) / 2);
+  box-shadow: 0 0 10rpx 2rpx #333333;
 }
-
 .cu-tabbar-height {
 	min-height: 100rpx;
 	height: calc(100rpx + env(safe-area-inset-bottom) / 2);
@@ -2383,7 +2383,9 @@ button.icon.lg {
 	color: #555;
 	padding-right: 20rpx;
 }
-
+.cu-form-group .seckilPrice{
+  padding-left:10px;
+}
 .cu-form-group>text[class*="cuIcon-"] {
 	font-size: 36rpx;
 	padding: 0;

@@ -33,7 +33,6 @@ Page({
     console.log('222', this.data.descHeight, this.data.descText)
   },
   subCateList(val) {
-    console.log(val, '1111')
     if (val.currentTarget.dataset.item.parentId) {
       let directObj = {}
       this.data.directObj['brandId'] = this.data.brandList.documentid
@@ -56,7 +55,6 @@ Page({
         firstCatergoryId: obj.catergoryId,
         brandId: this.data.brandList.documentid
       }).then(res => {
-        console.log(res)
         this.setData({
           catetoryList: res.list
         })
@@ -65,14 +63,12 @@ Page({
 
   },
   toproductDetail(val) {
-    console.log(val, this.data.brandList)
     this.data.detailObj['documentid'] = val.currentTarget.dataset.item.id
     this.data.detailObj['tag'] = 'goodsinfo'
     this.data.detailObj['name'] = val.currentTarget.dataset.item.productno
     this.setData({
       detailObj: this.data.detailObj
     })
-    console.log(this.data.detailObj)
     let detailParams = JSON.stringify(this.data.detailObj)
     wx.navigateTo({
       url: '../productDetail/productDetail?params=' + detailParams,
@@ -175,7 +171,6 @@ Page({
     this.setData({
       start: this.data.start + 10
     })
-
     api.get('/api-g/gods-anon/findGoodsBaseInfoAndExInfo', {
       type: '1',
       brandId: this.data.brandList.documentid,

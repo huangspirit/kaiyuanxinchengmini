@@ -13,7 +13,6 @@
 .brandComponey {
   margin-bottom: 10rpx;
 }
-
 .brandComponey .brandTitle {
   width: 100%;
   height: 100rpx;
@@ -194,21 +193,23 @@
 .specile .specileList .listContent .listDetail {
   display: flex;
   justify-content: space-between;
+  padding:10rpx;
 }
 
 .specile .specileList .listContent .listDetail .listLeft {
   font-size: 26rpx;
   color: #989898;
-  width: 70%;
   white-space: wrap;
   line-height: 50rpx;
 }
-
-.specile .specileList .listContent .listDetail .listLeft>text {
+.specile .specileList .listContent .listDetail .listLeft .right{
+  float: right;
+}
+/* .specile .specileList .listContent .listDetail .listLeft>text {
   color: #e13f32;
   font-size: 28rpx;
   display: block;
-}
+} */
 
 .specile .specileList .listContent .listDetail .listRight {
   display: flex;
@@ -218,28 +219,24 @@
   padding: 15rpx 0;
 }
 
-.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(1) {
-  color: #df3d2e;
-  font-weight: bold;
+.specile .specileList .listContent .listDetail .listRight .price {
   font-size: 30rpx;
+  margin-top:15rpx;
 }
 
-.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(2) {
-  color: #df3d2e;
+.specile .specileList .listContent .listDetail .listRight .bill {
   font-size: 18rpx;
-  margin: 5rpx 0 45rpx 0;
+  margin: 5rpx 0 15rpx 0;
 }
 
-.specile .specileList .listContent .listDetail .listRight>text:nth-of-type(3) {
+/* .specile .specileList .listContent .listDetail .listRight>text:nth-of-type(3) {
   width: 150rpx;
-  height: 70rpx;
+  height: 50rpx;
   text-align: center;
-  line-height: 70rpx;
-  background: #df3f2f;
-  color: #fff;
+  line-height: 50rpx;
   border-radius: 8rpx;
-  font-weight: bold;
-}
+  font-size:26rpx;
+} */
 .specile .specileList .listMore {
   height: 120rpx;
   line-height: 120rpx;

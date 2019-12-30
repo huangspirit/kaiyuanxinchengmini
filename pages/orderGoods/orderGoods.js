@@ -1,5 +1,6 @@
 // pages/orderGoods/orderGoods.js
 import api from '../../api/api'
+var app = getApp();
 Page({
 
   /**
@@ -8,7 +9,56 @@ Page({
   data: {
     classList: [],
     spotList: [],
-    siderIndex: 0
+    siderIndex: 0,
+    errorImg: app.globalData.errorImg,
+    currentPage: 1,
+    pageSize: 9,
+    loadModal:false,
+  },
+  getMoreList() {
+    if (this.data.spotList.length == this.data.currentPage * this.data.pageSize) {
+      this.setData({
+        currentPage: this.data.currentPage + 1,
+        loadModal:true
+      });
+
+      let obj = {
+        goods_type: true,
+        start: (this.data.currentPage - 1) * this.data.pageSize,
+        length: this.data.pageSize,
+        status: 1,
+      }
+
+      if (this.data.siderIndex != 0) {
+        obj.catergory_id = this.data.classList[this.data.siderIndex].id
+      } else {
+        delete obj.catergory_id;
+      }
+      api.get('/api-g/gods-anon/queryDirectGoods', obj).then((res) => {
+
+        let arr = this.data.spotList.concat(res.data.data)
+        this.setData({
+          spotList: arr,
+          loadModal:false
+        })
+      })
+    }
+  },
+  toDetail(val) {
+    var obj = {
+      documentid: val.currentTarget.dataset.item.goods_id,
+      tag: 'goodsinfo',
+      name: val.currentTarget.dataset.item.goods_name
+    }
+    var routerParams = JSON.stringify(obj)
+    let storageItem = JSON.stringify(val.currentTarget.dataset.item)
+    wx: wx.setStorageSync('productDetail', storageItem)
+    wx: wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
   getclassList() {
     api.get('/api-g/gods-anon/queryDirectC', {
@@ -23,47 +73,53 @@ Page({
     })
   },
   siderChange(val) {
-    console.log(val)
+    this.setData({
+      loadModal:true,
+      currentPage:1
+    })
     var index = 0
+    let obj = {
+      goods_type: false,
+      start: (this.data.currentPage - 1) * this.data.pageSize,
+      length: this.data.pageSize,
+      status: 1,
+    }
     if (val) {
-      console.log('1111')
       this.setData({
         siderIndex: val.currentTarget.dataset.index + 1
       })
       index = val.currentTarget.dataset.index + 1
     }
-    if (index == 0) {
-      this.getclassList()
+    if (index != 0) {
+      obj.catergory_id = val.currentTarget.dataset.item.id
     } else {
-      api.get('/api-g/gods-anon/queryDirectC', {
-        goods_type: false,
-        start: 0,
-        length: 10,
-        status: 1,
-        catergory_id: val.currentTarget.dataset.item.id
-      }).then((res) => {
-        console.log(res)
-        this.setData({
-          classList: res.data.list
-        })
-      })
+      delete obj.catergory_id;
     }
+    api.get('/api-g/gods-anon/queryDirectGoods', obj).then((res) => {
+      wx.hideLoading()
+      this.setData({
+        spotList: res.data.data,
+        loadModal:false
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      loadModal:true
+    })
     this.getclassList()
-
     api.get('/api-g/gods-anon/queryDirectGoods', {
       start: 0,
       length: 10,
       goods_type: false,
       status: 1
     }).then((res) => {
-      console.log(res)
       this.setData({
-        spotList: res.data.data
+        spotList: res.data.data,
+        loadModal:false
       })
     })
   },

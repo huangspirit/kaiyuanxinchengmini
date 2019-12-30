@@ -3,11 +3,10 @@
   <view class="searchBanner">
     <image src="../../img/home/searchBanner.jpg"></image>
     <view class='searchContent'>
-      <text>{{brandTotal}}个厂商 {{catergoryTotal}}个品类 {{productTotal}}个产品</text>
+      <text>找低价 买特价 开源节流</text>
       <text>数百家厂商的选择，芯手网值得您信赖</text>
     </view>
   </view>
-
   <view class='navInput'>
     <input placeholder='搜索你想要的内容' placeholder-class='none' bindinput='search' placeholder-style='color:#999999;font-size:23rpx;'></input>
     <image src="../../img/image/sousuo.png"></image>

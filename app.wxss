@@ -38,3 +38,74 @@ view, text {
   width: 120rpx;
   height: 120rpx;
 }
+
+ .peruBg{
+    background: #fce9e5
+  }
+   .greenColor{
+     background:#529641;
+     color:#fff;
+   }
+   .borderGreen{
+      border:1px solid #529641;
+   }
+   .gray{
+     color:#999;
+   }
+   .green{
+     color:#529641;
+   }
+    .color{
+        color:#df3f2f;
+    }
+    .bgColor{
+        background: #df3f2f;
+        color:#fff;
+    }
+    .borderColor{
+      border:1px solid #df3f2f;
+    }
+    .blu{
+     color:#007efe;
+    }
+    .bgBlu{
+      background:#007efe;
+      color:#fff;
+    }
+    .borderBlu{
+      border:1px solid #007efe;
+    }
+    .orange{
+      color:rgb(161, 106, 2);
+    }
+    .bgOrange{
+      background: rgb(161, 106, 2);
+      color:#fff;
+    }
+    .borderOrange{
+      border:1px solid rgb(161, 106, 2);
+    }
+    .bgGray{
+        background:#4f4f4f ;
+        color:#fff;
+    }
+    .bgLightGray{
+        background: #d5d5d5;
+        color:#999;
+    }
+   
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
+.bgColor {
+  background: #df3f2f;
+  color: #fff;
+}

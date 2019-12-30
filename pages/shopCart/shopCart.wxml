@@ -39,8 +39,7 @@
       </view>
       <view class="listDetail">
         <view class="listLeft">
-          <image wx:if="{{subItem.goodsImageUrl!='-'}}" src="{{subItem.goodsImageUrl}}"></image>
-          <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+          <image src="{{subItem.goodsImageUrl?subItem.goodsImageUrl:errorImg}}"></image>
         </view>
         <view class="listRight">
           <text>{{subItem.goods_name}}</text>

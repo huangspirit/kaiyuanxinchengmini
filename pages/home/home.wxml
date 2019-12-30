@@ -1,17 +1,17 @@
 <!--pages/home/home.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class='homeTop'>
   <image src="../../img/home/homebg.png"></image>
   <view class="homeTitle">
     <image src='../../img/home/menu.png' bindtap="classSearch"></image>
-    <text>开元芯城</text>
+    <text>{{title}}</text>
   </view>
   <view class="swiperPic">
     <image src='../../img/home/banner.png'></image>
     <view class='hometopContent'>
-      <text>{{brandTotal}}个厂商 {{catergoryTotal}}个品类 {{productTotal}}个产品</text>
+      <text>找低价 买特价 开源节流</text>
       <text>数百家厂商的选择，芯手网值得您信赖</text>
       <view class='homeInput' bindtap='toSearch'>
-
       </view>
     </view>
   </view>
@@ -33,13 +33,15 @@
     </view>
     <view wx:if="{{specialList.length>0}}" scroll-x="true" class='listContent'>
       <view class='list_left' wx:for="{{specialList}}" bindtap="toDetail" data-item="{{item}}" wx:key="{{id}}">
-        <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
-        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
-        <text>{{item.goods_name}}</text>
-        <text wx:if="{{item.priceType == true}}">￥{{item.priceLevel}}</text>
-        <text wx:if="{{item.priceType == false}}"> 一口价: ￥{{item.goodsPrice}}</text>
-        <text wx:if="{{item.goods_type == true}}">现 货</text>
-        <text wx:if="{{item.goods_type == false}}">期 货</text>
+        <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:errorImg}}"></image>
+        <view class="name">{{item.goods_name}}</view>
+        <view class="mark">
+          <text class="item.goods_type?'borderGreen green':'borderColor color'">{{item.goods_type?'现货':'订货'}}</text>
+          <text class="borderColor">{{item.diliverPlace}}交货</text>
+          <text class="borderBlu" :class="item.seller_always?'':'color'">{{item.seller_always?'长期特价':'限时抢购'}}</text>
+        </view>
+        <view class="color desc">{{item.priceType?'起售价':'一口价'}}{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
+        <!-- <text class="goodsTypemark">{{filter.goodsTypeFilter(item.goods_type)}}</text> -->
       </view>
     </view>
     <view class="prompt" wx:if="{{specialList.length<=0}}">暂无特价</view>
@@ -55,65 +57,72 @@
     </view>
     <view class='faclistContent' wx:for="{{facdirect}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
       <view class='list_left'>
-        <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
-        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:errorImg}}'></image>
       </view>
       <view class='list_right'>
-        <text>{{item.goods_name}}</text>
-        <view>
-          <view class='speciStatus'>
-            <text>{{item.brandName}}</text>
-            <text wx:if="{{item.goods_type == true}}">现 货</text>
-            <text wx:if="{{item.goods_type == false}}">期 货</text>
-            <text>{{item.diliverPlace}}</text>
+        <view class='speciStatus'>
+          <view class="color name">{{item.goods_name}}</view>
+          <view class="blu">{{item.brandName}}</view>
+          <view class="mark">
+            <text class="item.goods_type?'borderGreen green':'color borderColor'">{{filter.goodsTypeFilter(item.goods_type)}}</text>
+            <text class="borderColor">{{item.diliverPlace}}发货</text>
           </view>
-          <view class="price">
-            <text wx:if="{{item.priceType == true}}">阶梯价</text>
-            <text wx:if="{{item.priceType == false}}">一口价</text>
-            <text wx:if="{{item.priceType == true}}">￥{{item.goodsPrice}}+</text>
-            <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
-          </view>
-
         </view>
-
+        <view class="price color">
+          <view>{{filter.priceTypeFilter(item.priceType)}}</view>
+          <view class="num ">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
+        </view>
       </view>
     </view>
-    <view class="prompt" wx:if="{{facdirect.length<=0}}">暂无特价</view>
+    <view class="prompt" wx:if="{{facdirect.length<=0}}">暂无原厂直供商品</view>
   </view>
-  <view class='specialList'>
+  <view class='specialList goodslist'>
     <view class='listHead'>
       <text>呆料掘金</text>
       <view bindtap="classList" data-index="{{3}}">
         <text>更多</text>
         <image src="../../img/image/youjiantouxiao.png"></image>
       </view>
-
     </view>
-    <view class='faclistContent' wx:for="{{material}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
+     <view class="list">
+      <view class="oneitem" wx:for="{{material}}" wx:key="{{item.id}}" bindtap="toDetail" data-item="{{item}}">
+        <view class="imgWrap">
+          <image src="{{item.sellerGoodsImage?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
+        </view>
+        <view>
+          <!-- <view class="blu">{{item.catergoryName}}</view> -->
+          <view class="name color">{{item.goods_name}}</view>
+          <view>
+            <text class="blu">{{item.brandName}}</text>
+          
+          </view>
+          <view class="desc gray">{{item.goodsDesc}}</view>
+          <view class="price">
+            <text class="num color">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+              <text>（{{item.diliverPlace}}发货）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='faclistContent' wx:for="{{material}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
       <view class='list_left'>
-        <image wx:if="{{item.goodsImageUrl!='-'}}" src='{{item.goodsImageUrl}}'></image>
-        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+        <image src='{{item.goodsImageUrl?item.sellerGoodsImage:errorImg}}'></image>
       </view>
       <view class='list_right'>
         <text>{{item.goods_name}}</text>
         <view>
           <view class='speciStatus'>
             <text>{{item.brandName}}</text>
-            <text wx:if="{{item.goods_type == true}}">现 货</text>
-            <text wx:if="{{item.goods_type == false}}">期 货</text>
             <text>{{item.diliverPlace}}</text>
           </view>
           <view class="price">
-            <text wx:if="{{item.priceType == true}}">阶梯价</text>
-            <text wx:if="{{item.priceType == false}}">一口价</text>
+            <text>{{filter.priceTypeFilter(item.priceType)}}</text>
             <text wx:if="{{item.priceType == true}}">￥{{item.goodsPrice}}+</text>
             <text wx:if="{{item.priceType == false}}">￥{{item.goodsPrice}}</text>
           </view>
-
         </view>
-
       </view>
-    </view>
-    <view class="prompt" wx:if="{{material.length<=0}}">暂无呆料</view>
+    </view> -->
+    <view class="prompt" wx:if="{{material.length==0}}">暂无呆料</view>
   </view>
 </view>

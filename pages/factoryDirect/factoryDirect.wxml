@@ -2,6 +2,10 @@
 <view class="factoryBanner" bindtap="toIn">
   <image src="../../img/image/factoryBanner.png"></image>
 </view>
+<view>
+<swiper>
+</swiper>
+</view>
 <view class="factoryDirect" wx:for="{{keyData}}" wx:key="{{index}}">
   <view>{{item}}</view>
   <text wx:for="{{brandData[item]}}" bindtap="toDetail" data-item="{{subItem}}" wx:for-index="k" wx:for-item="subItem" wx:key="k">{{subItem.brand}}</text>

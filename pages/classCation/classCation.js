@@ -12,13 +12,10 @@ Page({
     classList: [],
     subClassList: [],
     directObj: {},
-    loadModal: false
+    loadModal: false,
+    errorImg:app.globalData.errorImg
   },
   getSubClassList(val) {
-    this.setData({
-      loadModal: true
-    })
-    console.log(val)
     var cateInfo = ""
     if (val.id) {
       cateInfo = val.id
@@ -32,7 +29,6 @@ Page({
       catergory_id: cateInfo,
       flag: false
     }).then(res => {
-      console.log('分类', res)
       if (res.resultCode == "200") {
         this.setData({
           subClassList: res.data,
@@ -43,7 +39,6 @@ Page({
 
   },
   subClssRouter(val) {
-    console.log(val)
     this.data.directObj = {}
     this.data.directObj['brandId'] = null
     this.data.directObj['tag'] = 'direct'
@@ -87,12 +82,13 @@ Page({
    */
   onShow: function() {
     // //获取分类列表
+    this.setData({
+      loadModal: true
+    })
     api.get("/api-g/gods-anon/queryCatergoryHomePage", {
       catergory_id: 0,
       flag: true
     }).then(res => {
-      console.log('获取分类列表', res)
-
       if (res.resultCode == '200') {
         this.setData({
           classList: res.data,

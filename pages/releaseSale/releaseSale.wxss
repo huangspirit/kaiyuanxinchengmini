@@ -56,6 +56,7 @@
 }
 .cu-form-group .leverList input {
   font-size: 20rpx;
+  padding-left:25rpx!important;
 }
 .leverPrice {
   display: flex;
@@ -88,6 +89,7 @@
 .leverPrice .leverList>view>view {
   display: flex;
   width: 40%;
+  position: relative;
 }
 
 .leverPrice .leverList>view>text {
@@ -99,7 +101,12 @@
 .leverPrice .leverList>view>view:nth-of-type(1)>text {
   padding-right: 15rpx;
 }
-
+.leverPrice .leverList .priceunitmark{
+  position:absolute;
+  left:73rpx;
+  top:9rpx;
+  font-size:24rpx;
+}
 .leverPrice .leverList>view>view:nth-of-type(2)>text {
   padding: 0 15rpx;
 }

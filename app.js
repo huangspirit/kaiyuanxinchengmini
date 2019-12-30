@@ -66,6 +66,10 @@ App({
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     version: '1.0.0',
     classType:0,
-    host: 'https://api.113ic.com'
+    host: 'https://api.113ic.com',
+    errorImg:'/img/public/errorImg.png',
+    title:'大麦晶城',
+    baseURL3 : "http://brand.113ic.com"
+   // errorImg: "http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"
   }
 })

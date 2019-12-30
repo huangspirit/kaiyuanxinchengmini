@@ -23,8 +23,7 @@
         <block wx:for="{{subClassList}}" wx:key="id">
           <view class="nav_right_items" bindtap="subClssRouter" data-item="{{item}}">
             <!--界面跳转 -->
-            <image wx:if="{{item.imgUrl&&item.imgUrl!='-'}}" src="{{item.imgUrl}}"></image>
-            <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+            <image src="{{item.imgUrl?item.imgUrl:errorImg}}"></image>
             <text>{{item.name}}</text>
           </view>
         </block>

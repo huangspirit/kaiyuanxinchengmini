@@ -20,15 +20,14 @@ Page({
     sendData: {},
     adressList: [],
     addressindex: 0,
-    payBtnShow: false
+    payBtnShow: false,
+    errorImg:app.globalData.errorImg
   },
   bindPickerChange: function(e) {
-    console.log('picker下拉项发生变化后，下标为：', e.detail.value)
     this.setData({
       addressindex: e.detail.value
     })
     let address = JSON.stringify(this.data.adressList[e.detail.value])
-    console.log(address)
     wx.setStorageSync('chooseAddress', address)
   },
   getAdress() {
@@ -36,7 +35,6 @@ Page({
       start: 0,
       length: 100
     }).then(res => {
-      console.log('地址', res)
       if (res.data != null) {
         this.setData({
           adressList: res.data.data
@@ -102,8 +100,6 @@ Page({
           allChecked: false
         })
         wx.stopPullDownRefresh();
-
-        console.log('购物车', this.data.cartList)
       }
     })
   },

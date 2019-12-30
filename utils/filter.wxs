@@ -24,15 +24,47 @@ function formatDate(number) {
   var timeDate = [year, month, day].join('-') + " " + [hour, minute, second].join(':')
   return [time1,timeDate]
 }
-
-function priveLevel(val) {
-  console.log(val)
+//身份过滤器
+function tagFilter(val){
+   switch (val){
+     case 1:
+      return '原厂';
+    case 2:
+      return "代理商";
+    case 3:
+      return "商家";
+    case 18:
+      return ""
+   }
+}
+//商品状态
+function goodsTypeFilter(val){
+  switch(val){
+    case false :
+      return '订货';
+    case true :
+      return '现货';
+  }
+}
+//价格类型
+function priceTypeFilter(val) {
+  switch (val) {
+    case false:
+      return '一口价';
+    case true:
+      return '起售价';
+  }
+}
+//小数点过滤
+function toFixed(s,n){
+  return Number(s).toFixed(n)
+}
+function priveLevel(val,length) {
   var price = val.split("@")
   var length = price.length -1
   price = price[length].split("-")
-  price = price[1]
+  price = Number(price[1]).toFixed(length)
   return price
-  console.log(price, "价格")
 }
 function bankType(val) {
   if (val == 'ICBC') {
@@ -57,5 +89,9 @@ function bankType(val) {
 module.exports = {
   formatDate: formatDate,
   priveLevel: priveLevel,
-  bankType: bankType
+  bankType: bankType,
+  tagFilter: tagFilter,
+  goodsTypeFilter: goodsTypeFilter,
+  priceTypeFilter: priceTypeFilter,
+  toFixed:toFixed
 }

@@ -7,12 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseURL3: app.globalData.baseURL3,
+    title:app.globalData.title,
+    errorImg:app.globalData.errorImg,
     specialList: [],
     facdirect: [],
     material: [], //呆料
-    brandTotal: 0,
-    catergoryTotal: 0,
-    productTotal: 0,
+    // brandTotal: 0,
+    // catergoryTotal: 0,
+    // productTotal: 0,
     indicatorDots: false,
     searchList: [],
     classList: [{
@@ -48,9 +51,9 @@ Page({
         name: '隔离器'
       },
     ],
-    calssIndex: 0,
-    subClassList: [],
-    directObj: {},
+    // calssIndex: 0,
+    // subClassList: [],
+    // directObj: {},
 
   },
   factoryDirect() {
@@ -78,7 +81,6 @@ Page({
   },
 
   toDetail(val) {
-    console.log(val)
     var obj = {}
     obj['documentid'] = val.currentTarget.dataset.item.goods_id
     obj['tag'] = 'goodsinfo'
@@ -105,7 +107,6 @@ Page({
     })
   },
   classList(val) {
-    console.log(val)
     let index = val.currentTarget.dataset.index
     if (index == 0) {
       wx.navigateTo({
@@ -124,7 +125,6 @@ Page({
         url: '../material/material',
       })
     } else {
-      console.log(app)
       if (index == 4) {
         app.globalData.classType = 1
       } else if (index == 5) {
@@ -134,7 +134,6 @@ Page({
       } else if (index == 7) {
         app.globalData.classType = 2
       }
-
       wx.switchTab({
         url: '../classCation/classCation',
       })
@@ -159,43 +158,47 @@ Page({
       special_price: false,
       status: 1
     }).then(res => {
-      console.log('特价直通车', res)
       if (res.resultCode == "200") {
         this.setData({
-          specialList: res.data.data
+          specialList: res.data.data.map(item=>{
+            if (item.sellerGoodsImageUrl){
+              item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+            }
+            return item;
+          })
         })
       }
     })
     // 统计厂商产品总数的接口
-    api.get("/api-g/gods-anon/querySummaryHome", {}).then(res => {
+    // api.get("/api-g/gods-anon/querySummaryHome", {}).then(res => {
 
-      this.setData({
-        brandTotal: res.brandTotal,
-        catergoryTotal: res.catergoryTotal,
-        productTotal: res.productTotal
-      })
-      if (res.resultCode == "200") {
-        this.setData({
-          specialList: res.data.data
-        })
-        console.log(this.data.specialList)
-      }
-    })
+    //   this.setData({
+    //     brandTotal: res.brandTotal,
+    //     catergoryTotal: res.catergoryTotal,
+    //     productTotal: res.productTotal
+    //   })
+    //   if (res.resultCode == "200") {
+    //     this.setData({
+    //       specialList: res.data.data
+    //     })
+    //     console.log(this.data.specialList)
+    //   }
+    // })
 
     //获取品牌列表
-    api.get("/api-g/gods-anon/findBrand", {
-      type: "",
-      name: "",
-      start: 0,
-      length: 1000
-    }).then(res => {
-      console.log('获取品牌列表', res)
-      if (res.resultCode == "200") {
-        this.setData({
-          imgUrls: res.data.data
-        })
-      }
-    })
+    // api.get("/api-g/gods-anon/findBrand", {
+    //   type: "",
+    //   name: "",
+    //   start: 0,
+    //   length: 1000
+    // }).then(res => {
+    //   console.log('获取品牌列表', res)
+    //   if (res.resultCode == "200") {
+    //     this.setData({
+    //       imgUrls: res.data.data
+    //     })
+    //   }
+    // })
     //获取原厂直供
     api.get("/api-g/gods-anon/queryDirectGoods", {
       create_tag: true,
@@ -203,10 +206,14 @@ Page({
       start: 0,
       length: 3
     }).then(res => {
-      console.log('获取原厂直供列表', res)
       if (res.resultCode == "200") {
         this.setData({
-          facdirect: res.data.data
+          facdirect: res.data.data.map(item => {
+            if (item.sellerGoodsImageUrl) {
+              item.sellerGoodsImage = this.data.baseURL3 + "/" +item.sellerGoodsImageUrl.split("@")[0];
+            }
+            return item;
+          })
         })
       }
     })
@@ -218,10 +225,15 @@ Page({
       is_old_product: true,
       status: 1
     }).then(res => {
-      console.log('获取呆料掘金列表', res)
+     
       if (res.resultCode == "200") {
         this.setData({
-          material: res.data.data
+          material: res.data.data.map(item => {
+            if (item.sellerGoodsImageUrl) {
+              item.sellerGoodsImage = this.data.baseURL3+"/"+item.sellerGoodsImageUrl.split("@")[0];
+            }
+            return item;
+          })
         })
       }
     })
@@ -246,7 +258,6 @@ Page({
    */
   onPullDownRefresh: function() {
     var that = this;
-    console.log('11')
   },
 
   /**

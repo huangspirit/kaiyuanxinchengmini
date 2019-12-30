@@ -5,7 +5,7 @@ const request = (url, options) => {
     wx.request({
       url: `${app.globalData.host}${url}`,
       method: options.method,
-      data: options.method === 'GET' ? options.data : JSON.stringify(options.data),
+      data: options.data ,
       header: options.header,
       success(request) {
         if (request.statusCode === 200) {
@@ -76,6 +76,27 @@ const post = (url, options) => {
     })
   }
 }
+const postForm = (url, options) => {
+  console.log(options)
+  if (wx.getStorageSync('token') != "") {
+    return request(url, {
+      method: 'POST',
+      data: options,
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": "Bearer " + wx.getStorageSync('token')
+      }
+    })
+  } else {
+    return request(url, {
+      method: 'POST',
+      data: options,
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+  }
+}
 const put = (url, options) => {
   return request(url, {
     method: 'PUT',
@@ -89,5 +110,6 @@ const put = (url, options) => {
 module.exports = {
   get,
   post,
+  postForm,
   put
 }

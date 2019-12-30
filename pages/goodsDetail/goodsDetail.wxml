@@ -2,40 +2,39 @@
 <!--pages/productDetail/productDetail.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="productDetailPic">
-  <image wx:if="{{productDetail.imageUrl && productDetail.imageUrl !='-' }}" src='{{productDetail.imageUrl}}'></image>
-  <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+<swiper indicator-dots='true' indicator-color='red' indicator-active-color='yellow' autoplay='true' interval="3000" circular="true">
+    <swiper-item wx:for="{{showimgList}}" wx:key="{{item}}" data-item="{{item}}" class="swiperitem">
+       <image  src='{{item}}'></image>
+    </swiper-item>
+  </swiper>
 </view>
-<view wx:if="{{!productDetail.factorySellerInfo.seller_id || !productDetail.factorySellerInfo.price_type}}" class="priceStyle">
-  <view>
-    <text>{{specialData.priceUnit?'$':'￥'}} {{specialData.goodsPrice}}</text>
-    <text>仅剩{{specialData.goodsStockCount}}只 | 预计交期 {{specialData.day_interval?specialData.day_interval+'小时内发货':filter.formatDate(specialData.deliverTime)[0]}}</text>
+<view  class="priceStyle">
+<!-- 一口价 -->
+  <view wx:if="{{!specialData.priceType}}" class="priceType">
+    <text class="price">{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(specialData.goodsPrice,specialData.priceUnit?3:2)}}</text>
+    <text>仅剩{{specialData.goodsStockCount}}只 </text>
+    <!-- 订货 -->
+    <text wx:if="{{!specialData.goods_type}}"> 预计交期 {{filter.formatDate(specialData.deliverTime)[0]}}</text>
   </view>
-  <view>
-    <text class="saleTime" wx:if="{{!specialData.seller_always && specialData.expireTime}}">距离特价结束</text>
-    <text class="saleTime" wx:if="{{!specialData.seller_always && specialData.expireTime}}">{{specialData.countDown}}</text>
-    <text class="saleStatus" wx:if="{{specialData.seller_always}}">长期售卖</text>
-  </view>
-</view>
-<view wx:if="{{productDetail.factorySellerInfo.seller_id&&productDetail.factorySellerInfo.price_type}}" class="pricelevStyle">
-  <view class="levLeft">
+  <!-- 阶梯价 -->
+  <view class="levLeft"  wx:if="{{specialData.priceType}}">
     <view class="levLeftLeft">
       <view wx:for="{{priceLevel}}" wx:key="index">
-        <text>{{item.value}}+</text>
-        <text>￥{{item.price}}</text>
+        <text class="num">{{item.value}}+</text>
+        <text>{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(item.price,specialData.priceUnit?3:2)}}</text>
       </view>
     </view>
     <view class="levLeftRight">
       <text>仅剩{{specialData.goodsStockCount}}只</text>
-      <text>预计交期 {{specialData.day_interval}}天</text>
     </view>
-
   </view>
-  <view class="levRight">
+  <view class="sellerStatus">
     <text class="saleTime" wx:if="{{!specialData.seller_always && specialData.expireTime}}">距离特价结束</text>
     <text class="saleTime" wx:if="{{!specialData.seller_always && specialData.expireTime}}">{{specialData.countDown}}</text>
     <text class="saleStatus" wx:if="{{specialData.seller_always}}">长期售卖</text>
   </view>
 </view>
+
 <view class="brandComponey">
   <view wx:if="{{productDetail.productno}}" class="brandDetail">
     <text>{{productDetail.productno}}</text>
@@ -43,12 +42,14 @@
     <text>品牌：{{productDetail.branda}}</text>
     <view class="goodsLabel">
       <view class="labelList">
-        <text wx:if="{{specialData.tag == 1}}">原厂</text>
-        <text wx:if="{{specialData.tag == 2}}">代理商</text>
-        <text wx:if="{{specialData.goods_type}}">现货</text>
-        <text wx:if="{{!specialData.goods_type}}">期货</text>
+        <text>{{filter.tagFilter(specialData.tag)}}</text>
+        <text>{{filter.goodsTypeFilter(specialData.goods_type)}}</text>
       </view>
       <view class="productFocus">
+      <view bindtap="releaseSale" data-item="{{productDetail}}" class="focus publish">
+          <image src="../../img/image/publish.png"></image>
+          <text>发布</text>
+        </view>
         <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
           <image src="../../img/image/guanzhu.png"></image>
           <text>关注</text>
@@ -64,7 +65,6 @@
           </button>
           <text>分享</text>
         </view>
-
       </view>
     </view>
     <view class="goodsDesc">
@@ -72,16 +72,16 @@
     </view>
     <view class="seller">
       <text>此器件由</text>
-      <view class="userHead">
+      <view class="userHead" bindtap="intoShopping">
         <image src="{{specialData.userImgeUrl}}"></image>
-        <text>晶源电子</text>
-        <text>提供报价发货</text>
+        <text class="name blu">{{specialData.sellerName}}</text>
       </view>
+      <text>提供报价发货</text>
     </view>
-    <view class="seller1">
+    <!-- <view class="seller1">
       <text>原装正品</text> |
       <text>供应商负责发货&售后。不支持七天无理由退款。满1000包邮</text>
-    </view>
+    </view> -->
   </view>
   <view class="prompt" wx:else>暂无详情</view>
 </view>
@@ -92,8 +92,8 @@
     <text style="font-weight:bold;">参数</text>
   </view>
   <view class="productParams" wx:for="{{productDetail.list}}" wx:key="index">
-    <text>{{item.name}}</text>
-    <text>{{item.value}}</text>
+    <text wx:if="{{item.value}}">{{item.name}}</text>
+    <text wx:if="{{item.value}}">{{item.value}}</text>
   </view>
 </view>
 
@@ -106,10 +106,36 @@
     <view class='cuIcon-cart'></view> 购物车
   </view>
   <view class="action text-grey">
-    <!-- <view class='cuIcon-shop'></view> 店铺 -->
+     <!-- <view class='cuIcon-shop'></view> 店铺  -->
   </view>
   <view class='btn-group'>
+  <button class='cu-btn bg-red round shadow-blur' bindtap="purchase" data-target="bottomModal">立即购买</button>
     <button class='cu-btn bg-orange round shadow-blur' bindtap="addCart">加入购物车</button>
-    <button class='cu-btn bg-red round shadow-blur' bindtap="releaseSale">发布特价</button>
+    <!-- <button class='cu-btn bg-red round shadow-blur' bindtap="releaseSale">我有特价</button> -->
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-blue" bindtap="hideModal" >取消</view>
+       <view class="action text-green" bindtap="submitpurchase">提交</view>
+        <!-- <view class="action text-green" bindtap="submitpurchase">购买</view> -->
+    </view>
+    <view class="padding-xl">
+      <view class="goodsPurchase">
+            <text class="color">
+               单价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.price,specialData.priceUnit?3:2)}}
+            </text>
+            <text class="color">
+                总价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.totalPrice,specialData.priceUnit?3:2)}}
+            </text>
+            <view class="btnwrap">
+              <button class='cu-btn' disabled="{{purchaseObj.delbtnShow}}" bindtap="delGoodsNum">-</button>
+              <input class='ca-sum' name='input' value="{{purchaseObj.goodsNum}} "readonly="readonly" type="number"></input>
+              <button class='cu-btn' disabled="{{purchaseObj.addbtnShow}}" bindtap="addGoodsNum">+</button>
+            </view>
+      </view>
+     
+    </view>
   </view>
 </view>

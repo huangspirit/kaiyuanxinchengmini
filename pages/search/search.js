@@ -43,23 +43,23 @@ Page({
   },
 
   toDetail(val) {
-    console.log(val, '555555')
     var tag = val.currentTarget.dataset['item']
     let obj = {}
-    obj['documentid'] = tag.documentid
+   // obj['documentid'] = tag.documentid
     obj['name'] = tag.name
     obj['tag'] = tag.tag
+    obj.id = tag.documentid;
+    obj = JSON.stringify(obj)
     if (tag.tag == 'brand') {
-      obj = JSON.stringify(obj)
+     
       wx: wx.navigateTo({
-        url: '../brandDetail/brandDetail?brandList=' + obj,
+        url: "../orSeller/orSeller?params=" + obj,
         success: function(res) {},
         fail: function(res) {},
         complete: function(res) {},
       })
     } else if (tag.tag == 'direct') {
-      obj['brandId'] = ''
-      obj = JSON.stringify(obj)
+     
       wx: wx.navigateTo({
         url: '../direct/direct?params=' + obj,
         success: function(res) {},
@@ -67,9 +67,13 @@ Page({
         complete: function(res) {},
       })
     } else if (tag.tag == 'undirect') {
-
+      wx: wx.navigateTo({
+        url: '../undirect/undirect?params=' + obj,
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
     } else if (tag.tag == 'goodsinfo') {
-      obj = JSON.stringify(obj)
       wx: wx.navigateTo({
         url: '../productDetail/productDetail?params=' + obj,
         success: function(res) {},
@@ -84,8 +88,7 @@ Page({
    */
   onLoad: function(options) {
     // 统计厂商产品总数的接口
-    api.get("/api-g/gods-anon/querySummaryHome", {}).then(res => {
-
+    api.get("/api-g/gods-anon/querySummaryHome").then(res => {
       this.setData({
         brandTotal: res.brandTotal,
         catergoryTotal: res.catergoryTotal,

@@ -1,31 +1,41 @@
 <!--pages/material/material.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
+<scroll-view 
+  scroll-y
+  style="height:100%;"
+  bindscrolltolower="getMoreList"
+  scroll-with-animation="{{true}}">
 <view class="spotSpecial">
   <view class="Left">
     <text class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</text>
     <text wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">{{item.name}}</text>
   </view>
   <view class="Right">
-    <view class="specialList" wx:for="{{spotList}}" wx:key="index">
+    <view class="specialList" wx:for="{{spotList}}" wx:key="index" bindtap="toDetail" data-item="{{item}}">
       <view class="listLeft">
-        <image wx:if="item.goodsImageUrl!='-'" src="{{item.goodsImageUrl}}"></image>
-        <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        <image src="{{item.goodsImageUrl?item.goodsImageUrl:errorImg}}"></image>
       </view>
       <view class="listRight">
         <text>{{item.goods_name}}</text>
         <view class="listContent">
           <view>
             <text>品牌：{{item.brandName}}</text>
-            <text>{{item.goods_type?'现货':'订货'}} | {{item.tag==1?'原厂':item.tag==2?'代理商':item.tag==3?'普通商户':''}}</text>
-            <text>{{item.countDown}}</text>
+              <text>{{filter.goodsTypeFilter(item.goods_type)}} | {{filter.tagFilter(item.tag)}} |  仅剩{{item.goodsStockCount}}</text>
+           <text wx:if="{{item.priceType}}" class="color">起售价:{{item.priceUnit?'$':'￥'}}{{filter.priveLevel(item.priceLevel)}}</text>
+            <text wx:else class="color">一口价:{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
           </view>
-          <view>
+          <!-- <view>
             <text wx:if="{{item.priceType}}">{{item.priceType?'$':'￥'}}{{filter.priveLevel(item.priceLevel)}}+</text>
             <text wx:else>{{item.priceType?'$':'￥'}}{{item.goodsPrice}}</text>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>
-    <view class="prompt" wx:if="{{speciaList.length<=0}}">暂无数据</view>
+    <view class="prompt" wx:if="{{spotList.length<=0}}">暂无数据</view>
   </view>
+    
 </view>
+ <view class="cu-load load-modal" wx:if="{{loadModal}}">
+        <view class="gray-text">加载中...</view>
+      </view>
+</scroll-view>

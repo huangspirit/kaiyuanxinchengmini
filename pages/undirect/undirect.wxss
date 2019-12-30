@@ -1,0 +1,124 @@
+/* pages/undirect/undirect.wxss */
+/* pages/direct/direct.wxss */
+
+page {
+  background: #fff;
+}
+
+.productSearch {
+  width: 100%;
+  height: 98rpx;
+  border-top: 2rpx solid #f7f7f7;
+  border-bottom: 2rpx solid #f7f7f7;
+  margin-bottom: 20rpx;
+  padding: 16rpx 30rpx;
+  box-sizing: border-box;
+}
+.productSearch>input {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 60rpx;
+}
+.productContent {
+  display: flex;
+}
+
+.productContent .productSider {
+  width: 160rpx;
+  background: #f7f7f7;
+  margin-right: 20rpx;
+}
+
+.productContent .productSider>text {
+  display: block;
+  line-height: 80rpx;
+  text-align: center;
+  margin-bottom: 25rpx;
+}
+.productContent .productSider .tabList {
+  color: #f40;
+  background: #fff;
+}
+.productContent .productList {
+  width: calc(100% - 180rpx);
+  background: #fff;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 80rpx;
+}
+.productContent .noData {
+  width: calc(100% - 180rpx);
+  background: #fff;
+  overflow-y: scroll;
+  padding-bottom: 80rpx;
+  text-align: center;
+}
+.productContent .productList .listTitle {
+  width: 100%;
+  height: 90rpx;
+  background: #f7f7f7;
+  display: flex;
+  line-height: 90rpx;
+  justify-content: space-around;
+}
+
+.brandHot {
+  display: flex;
+  margin-bottom: 15rpx;
+  background: #fff;
+  padding: 20rpx 20rpx 20rpx 0;
+}
+
+.brandHot .list_left {
+  width: 120rpx;
+  height: 120rpx;
+  box-sizing: border-box;
+  border: 2rpx solid #f7f7f7;
+}
+
+.brandHot .list_left image {
+  height: 100%;
+  width: 100%;
+  background: rgba(243, 243, 243, 1);
+  border-radius: 8px;
+  vertical-align: middle;
+}
+
+.brandHot .list_right {
+  padding: 0 27rpx;
+  width: calc(100% - 120rpx);
+}
+
+.brandHot .list_right>text {
+  display: block;
+  line-height: 43rpx;
+  font-size: 16rpx;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+}
+
+.brandHot .list_right>.speciStatus {
+  display: block;
+  line-height: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.brandHot .list_right>view {
+  display: flex;
+  justify-content: space-between;
+}
+.brandHot .list_right>view text:nth-of-type(1) {
+  color: #de3e30;
+  font-size: 22rpx;
+}
+.brandHot .list_right>view text:nth-of-type(2) {
+  color: #333;
+  font-size: 18rpx;
+}

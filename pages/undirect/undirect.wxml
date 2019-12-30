@@ -1,0 +1,31 @@
+<!--pages/direct/direct.wxml-->
+<view class="productSearch">
+  <input placeholder="搜索你想要的商品" bindtap='toSearch' placeholder-style="color:#979797;font-size:30rpx;"></input>
+</view>
+<view class="productContent">
+  <view class="productSider">
+    <text class="{{tabIndex==index?'tabList':''}}" bindtap="siderTab" data-index="{{index}}" wx:for="{{siderTab}}" wx:key="{{index}}">{{item.name}}</text>
+  </view>
+  <view class="productList" wx:if="{{hotSaleList.length>0}}">
+    <view class="brandHot" wx:for="{{hotSaleList}}" wx:key="index">
+      <view class='list_left'>
+        <image wx:if="{{item.imageUrl!='-'}}" src='{{item.imageUrl}}'></image>
+        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
+      </view>
+      <view class='list_right' bindtap="toproductDetail" data-item="{{item}}">
+        <text class='speciStatus'>{{item.productno}}</text>
+        <text>品牌：{{item.branda}}</text>
+        <view>
+          <text wx:if="{{item.map.totalSeller==0}}">暂无供应商报价</text>
+
+          <text wx:if="{{item.map.totalSeller!=0}}">{{item.map.minPrice}}</text>
+          <text wx:if="{{item.map.totalSeller!=0}}">共有{{item.map.totalSeller}}家供应商报价</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="noData" wx:else>暂无热卖</view>
+  <view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+  </view>
+</view>

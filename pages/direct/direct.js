@@ -16,30 +16,43 @@
           name: '全部商品'
         },
         {
-          name: '现货'
+          name: '现货',
+          tag:'goods_type',
+          value:true
         },
         {
-          name: '订货'
+          name: '订货',
+          tag:'goods_type',
+          value:false
         },
         {
-          name: '原厂直供'
+          name: '原厂直供',
+          tag:"create_tag",
+          value:true
         },
         {
-          name: '代理商'
+          name: '代理商',
+          tag:"create_tag",
+          value:false
         },
         {
-          name: '特价商品'
+          name: '特价商品',
+          tag:"special_price",
+          value:true
         },
         {
-          name: '呆料清仓'
+          name: '呆料清仓',
+          tag:"is_old_product",
+          value:true
         }
       ],
-      tabIndex: 0
+      tabIndex: 0,
+      start:0,
+      length:10
     },
     // 跳转商品详情
     toproductDetail(val) {
-      console.log(val, this.data.brandList)
-      this.data.detailObj['documentid'] = val.currentTarget.dataset.item.id
+      this.data.detailObj['id'] = val.currentTarget.dataset.item.id
       this.data.detailObj['tag'] = 'goodsinfo'
       this.data.detailObj['name'] = val.currentTarget.dataset.item.productno
       this.setData({
@@ -53,160 +66,57 @@
         complete: function(res) {},
       })
     },
-    getsearchResult() {
-      this.setData({
-        loadModal: true
-      })
-      api.get('/api-g/gods-anon/searchResult', {
-        start: 0,
-        length: 10,
-        tag: this.data.directList.tag,
-        name: this.data.directList.name,
-        id: this.data.directList.documentid,
-        flag:true
-      }).then(res => {
-        console.log(res)
-        this.setData({
-          loadModal: false
-        })
-        if (res.data != null) {
-          this.setData({
-            hotSaleList: res.data.direct.data
-          })
-          wx.setNavigationBarTitle({
-            title: res.data.parentName
-          })
-        }
-      })
-    },
+    // getsearchResult() {
+    //   this.setData({
+    //     loadModal: true
+    //   })
+    //   api.get('/api-g/gods-anon/searchResult', {
+    //     start: this.data.start,
+    //     length: this.data.length,
+    //     tag: this.data.directList.tag,
+    //     name: this.data.directList.name,
+    //     id: this.data.directList.id,
+    //     flag:true
+    //   }).then(res => {
+    //     this.setData({
+    //       loadModal: false
+    //     })
+    //     if (res.data != null) {
+    //       this.setData({
+    //         hotSaleList: res.data.direct.data
+    //       })
+          
+    //     }
+    //   })
+    // },
     siderTab(val) {
-      console.log(val)
-      var index = 0
-      if (val) {
-        index = val.currentTarget.dataset.index
-      } else {
-        console.log('11', this.data.directList.index)
-        if (this.data.directList.index) {
-          console.log('22')
-          index = this.data.directList.index + 2
-        } else {
-          console.log('333')
-          index = 0
-        }
+      let obj={
+        start: this.data.start,
+        length: this.data.length,
+        parent_id: this.data.directList.id,
       }
-      this.setData({
-        tabIndex: index
-      })
-      this.setData({
-        loadModal: true
-      })
-      console.log(index)
-      if (index == 0) {
-        this.getsearchResult()
-      } else if (index == 1) {
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          goods_type: true
-        }).then(res => {
-          console.log(res)
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
+      if(val){
+        this.setData({
+          tabIndex: val.currentTarget.dataset.index,
+          loadModal: true
         })
-      } else if (index == 2) {
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          goods_type: false
-        }).then(res => {
-          this.setData({
-            loadModal: false
-          })
-          console.log(res)
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
-        })
-      } else if (index == 3) {
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          create_tag: true
-        }).then(res => {
-          console.log(res)
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
-        })
-      } else if (index == 4) {
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          create_tag: false
-        }).then(res => {
-          console.log(res)
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
-        })
-      } else if (index == 5) {
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          special_price: false
-        }).then(res => {
-          console.log(res)
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
-        })
-      } else if (index == 6) {
-
-        api.post('/api-g/gods-anon/queryByProperty', {
-          start: 0,
-          length: 10,
-          parent_id: this.data.directList.documentid,
-          is_old_product: true
-        }).then(res => {
-          console.log(res)
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
+        obj[this.data.siderTab[val.currentTarget.dataset.index].tag] = this.data.siderTab[val.currentTarget.dataset.index].value
+      }else{
+        this.setData({
+          tabIndex: 0,
+          loadModal: true
         })
       }
+       api.post('/api-g/gods-anon/queryByProperty', obj).then(res => {
+          this.setData({
+            loadModal: false
+          })
+          if (res.data != null) {
+            this.setData({
+              hotSaleList: res.data.data
+            })
+          }
+        })
     },
     toSearch() {
       wx: wx.navigateTo({
@@ -220,10 +130,12 @@
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-      console.log(options)
       let item = JSON.parse(options.params)
       this.setData({
         directList: item
+      })
+      wx.setNavigationBarTitle({
+        title:item.name
       })
       this.siderTab()
     },
@@ -265,6 +177,32 @@
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
+      var that = this;
+      // 显示加载图标
+      this.setData({
+        loadModal: true
+      })
+      this.setData({
+        start: this.data.start + this.data.length
+      });
+      let obj = {
+        start: this.data.start,
+        length: this.data.length,
+        parent_id: this.data.directList.id,
+      }
+      obj[this.data.siderTab[this.data.tabIndex].tag] = this.data.siderTab[this.data.tabIndex].value
+      api.post('/api-g/gods-anon/queryByProperty', obj).then(res => {
+        this.setData({
+          loadModal: false
+        })
+        if (res.data != null) {
+          let getHotList = this.data.hotSaleList
+          getHotList = getHotList.concat(res.data.data)
+          this.setData({
+            hotSaleList: getHotList
+          })
+        }
+      })  
 
     },
 

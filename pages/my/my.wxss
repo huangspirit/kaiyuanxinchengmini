@@ -8,7 +8,6 @@
   height: 130rpx;
   line-height: 105rpx;
 }
-
 .myHeader>image {
   position: absolute;
   left: 20rpx;

@@ -68,7 +68,10 @@ function dateTimePicker(startYear, endYear, date) {
   var start = startYear || 1978;
   var end = endYear || 2100;
   // 默认开始显示数据
+  console.log(date)
+  console.log('getNewDateArry:', getNewDateArry())
   var defaultDate = date ? [...date.split(' ')[0].split('-'), ...date.split(' ')[1].split(':')] : getNewDateArry();
+  console.log(defaultDate)
   // 处理联动列表数据
   /*年月日 时分秒*/
   dateTimeArray[0] = getLoopArray(start, end);

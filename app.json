@@ -7,6 +7,8 @@
     "pages/special/special",
     "pages/search/search",
     "pages/brandDetail/brandDetail",
+    "pages/orSeller/orSeller",
+    "pages/agSeller/agSeller",
     "pages/productDetail/productDetail",
     "pages/direct/direct",
     "components/dialog/dialog",
@@ -64,7 +66,8 @@
     "pages/my/agencyQualification/agencyQualification",
     "pages/my/agencyQualification/agencyDetail/agencyDetail",
     "pages/my/agencyQualification/addEditAgency/addEditAgency",
-    "pages/my/agencyQualification/chooseBrand/chooseBrand"
+    "pages/my/agencyQualification/chooseBrand/chooseBrand",
+    "pages/undirect/undirect"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -81,19 +84,19 @@
         "selectedIconPath": "./img/home/homedianji.png",
         "iconPath": "./img/home/home.png",
         "pagePath": "pages/home/home",
-        "text": "首 页"
+        "text": "首页"
       },
       {
         "selectedIconPath": "./img/home/fenleidianji.png",
         "iconPath": "./img/home/fenlei.png",
         "pagePath": "pages/classCation/classCation",
-        "text": "分 类"
+        "text": "分类"
       },
       {
         "selectedIconPath": "./img/home/zhaotejiadianji.png",
         "iconPath": "./img/home/zhaotejia.png",
         "pagePath": "pages/special/special",
-        "text": "特 价"
+        "text": "特价"
       },
       {
         "selectedIconPath": "./img/home/gouwuchedianji.png",
@@ -105,7 +108,7 @@
         "selectedIconPath": "./img/home/wdedianji.png",
         "iconPath": "./img/home/wde.png",
         "pagePath": "pages/my/my",
-        "text": "我 的"
+        "text": "我的"
       }
     ]
   },

@@ -1,28 +1,27 @@
 /* pages/material/material.wxss *//* pages/spotSpecial/spotSpecial.wxss */
-
+page{
+  height:100%;
+}
 .spotSpecial {
   width: 100%;
   display: flex;
+  border-top:1rpx solid #f7f7f7;
 }
 
 .Left {
   width: 180rpx;
-  padding: 20rpx 0;
 }
 
 .Left>text {
   display: block;
-  line-height: 80rpx;
-  margin-bottom: 40rpx;
-  padding: 0 10rpx;
+  padding: 40rpx 10rpx;
   text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+ 
 }
 
 .Left .siderActive {
   color: #e03e31;
+  background:#fff;
 }
 
 .Right {
@@ -36,6 +35,7 @@
   box-sizing: border-box;
   height: 225rpx;
   display: flex;
+  align-items: center;
 }
 
 .Right .specialList .listLeft {
@@ -84,12 +84,11 @@
 }
 
 .Right .specialList .listRight .listContent>view>text:nth-of-type(2) {
-  color: #333;
+
   font-size: 24rpx;
 }
 
 .Right .specialList .listRight .listContent>view>text:nth-of-type(3) {
-  color: #333;
   font-size: 24rpx;
 }
 
