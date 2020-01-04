@@ -185,14 +185,15 @@ page {
   }
 .specialList .listContent .list_left .desc{
   text-align: left;
-  margin-top:10rpx;
+  margin-top:8rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size:22rpx;
 }
 .specialList .listContent .list_left .mark{
   text-align: left;
-  margin-top:15rpx;
+  margin-top:8rpx;
 }
 .specialList .listContent .list_left .mark text{
   padding:0 10rpx;
@@ -266,6 +267,7 @@ page {
 .specialList .faclistContent .list_right .price{
   font-size:25rpx;
   text-align: center;
+  padding-left:10rpx;
 }
 .specialList .faclistContent .list_right .price .num{
   font-size:30rpx;

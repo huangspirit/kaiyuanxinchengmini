@@ -41,7 +41,8 @@
           <text class="borderColor">{{item.diliverPlace}}交货</text>
           <text class="borderBlu" :class="item.seller_always?'':'color'">{{item.seller_always?'长期特价':'限时抢购'}}</text>
         </view>
-        <view class="color desc">{{item.priceType?'起售价':'一口价'}}{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
+        <view class="color desc">
+        {{item.priceType?'起售价':'一口价'}}{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
         <!-- <text class="goodsTypemark">{{filter.goodsTypeFilter(item.goods_type)}}</text> -->
       </view>
     </view>
@@ -71,8 +72,9 @@
           </view>
         </view>
         <view class="price color">
-          <view>{{filter.priceTypeFilter(item.priceType)}}</view>
+       
           <view class="num ">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
+             <view>{{filter.priceTypeFilter(item.priceType)}}</view>
         </view>
       </view>
     </view>

@@ -1,7 +1,7 @@
 <!--pages/brandlist/brandlist.wxml-->
 <view>
   <swiper indicator-dots='true' indicator-color='red' indicator-active-color='yellow' autoplay='true' interval="3000" circular="true">
-    <swiper-item wx:for="{{hasjoin}}" wx:key="{{item.id}}" data-item="{{item}}">
+    <swiper-item wx:for="{{hasjoin}}" wx:key="{{item.id}}" data-item="{{item}}" style="text-align:center;">
       <image src="{{item.imgurl}}" style="height:100%;"></image>
     </swiper-item>
   </swiper>
