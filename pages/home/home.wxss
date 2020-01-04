@@ -178,11 +178,17 @@ page {
 .specialList .listContent .list_left .name{
   margin-top:5rpx;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
   }
 .specialList .listContent .list_left .desc{
   text-align: left;
-  font-weight: bold;
   margin-top:10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .specialList .listContent .list_left .mark{
   text-align: left;
@@ -223,17 +229,31 @@ page {
   vertical-align: middle;
 }
 .specialList .faclistContent .list_right {
-  padding-left: 20rpx;
+  margin-left: 20rpx;
   flex:1;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 .specialList .faclistContent .list_right .speciStatus{
   flex:1;
+  min-width: 0;
+    
 }
 .specialList .faclistContent .list_right .speciStatus .name{
   font-size:30rpx;
   margin-bottom:5rpx;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.specialList .faclistContent .list_right .desc{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size:22rpx;
+  margin-top:10rpx;
+  
 }
 .specialList .faclistContent .list_right .speciStatus .mark{
   margin-top:5rpx;
@@ -281,6 +301,9 @@ page {
 }
 .goodslist .list .oneitem .name{
   font-size:28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .goodslist .list .oneitem .desc{
   font-size:20rpx;

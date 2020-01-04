@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "dialog": "../../components/dialog/dialog"
+  },
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "一级类",

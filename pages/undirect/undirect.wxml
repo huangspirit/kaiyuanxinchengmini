@@ -1,31 +1,68 @@
 <!--pages/direct/direct.wxml-->
 <view class="productSearch">
-  <input placeholder="搜索你想要的商品" bindtap='toSearch' placeholder-style="color:#979797;font-size:30rpx;"></input>
+  <input placeholder="搜索你想要的商品"  placeholder-style="color:#979797;font-size:30rpx;" bindconfirm="toSearch" value="{{name}}"></input>
+</view>
+<view class="title">
+  <view class="left">
+    <view class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</view>
+    <view wx:for="{{categorylist}}" class="{{siderIndex == index+1?'siderActive':''}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
+      {{item.catergoryName}}（{{item.summaryTotal}}）
+    </view>
+  </view>
+  <text bindtap="showCoverTap" class="right">筛选</text>
+</view>
+<view class="coverItem" wx:if="{{showCover}}" catchtap="hideCoverTap">
+  <view class="list">
+    <view class="{{siderIndex == 0?'siderActive item':'item'}}" bindtap="siderChange" data-index="{{-1}}">
+      <view>全部</view>
+    </view>
+    <view wx:for="{{categorylist}}" class="{{siderIndex == index+1?'siderActive item':'item'}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
+      <view>{{item.catergoryName}}（{{item.summaryTotal}}）</view>
+    </view>
+  </view>
 </view>
 <view class="productContent">
-  <view class="productSider">
-    <text class="{{tabIndex==index?'tabList':''}}" bindtap="siderTab" data-index="{{index}}" wx:for="{{siderTab}}" wx:key="{{index}}">{{item.name}}</text>
-  </view>
   <view class="productList" wx:if="{{hotSaleList.length>0}}">
     <view class="brandHot" wx:for="{{hotSaleList}}" wx:key="index">
-      <view class='list_left'>
-        <image wx:if="{{item.imageUrl!='-'}}" src='{{item.imageUrl}}'></image>
-        <image wx:else src='http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg'></image>
-      </view>
-      <view class='list_right' bindtap="toproductDetail" data-item="{{item}}">
-        <text class='speciStatus'>{{item.productno}}</text>
-        <text>品牌：{{item.branda}}</text>
-        <view>
-          <text wx:if="{{item.map.totalSeller==0}}">暂无供应商报价</text>
-
-          <text wx:if="{{item.map.totalSeller!=0}}">{{item.map.minPrice}}</text>
-          <text wx:if="{{item.map.totalSeller!=0}}">共有{{item.map.totalSeller}}家供应商报价</text>
+      <view class="wrap">
+        <view class='list_left'>
+          <image src='{{item.imageUrl?item.imageUrl+"?imageView2/2/w/50/h/50":errorImg}}'></image>
+        </view>
+        <view class='list_right' bindtap="toproductDetail" data-item="{{item}}">
+          <view class='tit'>
+            <view class="name">{{item.productno}}</view>
+            <view class="gray">...</view>
+          </view>
+          <view class="cont">
+            <view class="desc">
+              <view class="brand blu" catchtap="toBrand" data-item="{{item}}">品牌：{{item.branda}}</view>
+              <view class="gray">{{item.productdesc}}</view>
+              <view class="btnwrap">
+                <text class="bgOrange" wx:if="{{item.hasSeller}}" catchtap="specialPrice" data-item="{{item}}">申请特价</text>
+                <text class="bgColor" wx:if="{{item.hasSeller}}" catchtap="addInquiry" data-item="{{item}}">加入询价蓝</text>
+                <text class="bgColor"  wx:if="{{!item.hasSeller}}"   data-item="{{item}}" catchtap="pushlishspecialPrice">我有特价</text>
+                <text class="bgGray" wx:if="{{!item.focus}}" catchtap="focus" data-item="{{item}}" data-index="{{index}}">关注此器件</text>
+                <text class="bgGray" wx:if="{{item.focus}}">已关注</text>
+              </view>
+            </view>
+          </view>
+          <view class="gray ofer" wx:if="{{item.map.totalSeller!=0}}">
+           <view wx:if="{{item.map.totalSeller!=0}}" class="color price">{{item.map.minPrice}}<text wx:if="{{item.map.minPrice!=item.map.maxPrice}}">-{{item.map.maxPrice}} </text></view>
+            <view class="num gray">共有<text class="color" style="font-weight:bolder;">{{item.map.totalSeller}}</text>家供应商报价</view>
+          </view>
         </view>
       </view>
     </view>
+    <view wx:if="{{start>=total}}" class="gray">已加载到底</view>
   </view>
   <view class="noData" wx:else>暂无热卖</view>
   <view class="cu-load load-modal" wx:if="{{loadModal}}">
     <view class="gray-text">加载中...</view>
   </view>
+  <dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="朕知道了" confirmText="立即入驻" hasConfirm="{{false}}" title="提示">
+    <view slot="content" class="section">
+       <text wx:if="{{join}}">由于您还不是平台商家，请在电脑端(<text space="ensp" selectable='true'>https://www.icmap.cn</text>)登录后进行商家入驻</text> 
+       <text  wx:if="{{!join}}">请在电脑端(<text space="ensp" selectable='true'>https://www.icmap.cn</text>)登录后方可申请特价</text> 
+    </view>
+  </dialog>
 </view>

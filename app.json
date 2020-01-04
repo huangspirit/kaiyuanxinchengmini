@@ -67,7 +67,8 @@
     "pages/my/agencyQualification/agencyDetail/agencyDetail",
     "pages/my/agencyQualification/addEditAgency/addEditAgency",
     "pages/my/agencyQualification/chooseBrand/chooseBrand",
-    "pages/undirect/undirect"
+    "pages/undirect/undirect",
+    "pages/brandlist/brandlist"
   ],
   "window": {
     "backgroundTextStyle": "dark",

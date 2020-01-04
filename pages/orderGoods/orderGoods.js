@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseURL3: app.globalData.baseURL3,
     classList: [],
     spotList: [],
     siderIndex: 0,
@@ -35,10 +36,14 @@ Page({
         delete obj.catergory_id;
       }
       api.get('/api-g/gods-anon/queryDirectGoods', obj).then((res) => {
-
         let arr = this.data.spotList.concat(res.data.data)
         this.setData({
-          spotList: arr,
+          spotList: arr.map(item => {
+            if (item.sellerGoodsImageUrl) {
+              item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+            }
+            return item;
+          }),
           loadModal:false
         })
       })
@@ -46,7 +51,7 @@ Page({
   },
   toDetail(val) {
     var obj = {
-      documentid: val.currentTarget.dataset.item.goods_id,
+      id: val.currentTarget.dataset.item.goods_id,
       tag: 'goodsinfo',
       name: val.currentTarget.dataset.item.goods_name
     }
@@ -98,7 +103,12 @@ Page({
     api.get('/api-g/gods-anon/queryDirectGoods', obj).then((res) => {
       wx.hideLoading()
       this.setData({
-        spotList: res.data.data,
+        spotList: res.data.data.map(item => {
+          if (item.sellerGoodsImageUrl) {
+            item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+          }
+          return item;
+        }),
         loadModal:false
       })
     })
@@ -118,7 +128,12 @@ Page({
       status: 1
     }).then((res) => {
       this.setData({
-        spotList: res.data.data,
+        spotList: res.data.data.map(item => {
+          if (item.sellerGoodsImageUrl) {
+            item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+          }
+          return item;
+        }),
         loadModal:false
       })
     })

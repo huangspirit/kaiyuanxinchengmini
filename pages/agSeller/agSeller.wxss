@@ -28,6 +28,7 @@
 .goodslist{
   padding:20rpx 0;
 }
+
 .goodslist .title{
   font-size:30rpx;
   font-weight: bolder;
@@ -141,3 +142,90 @@
 .goodslist .commitlist .oneitem .list .reply .tit{
   margin-bottom:10rpx;
 }
+.selectitem .tit{
+  display: flex;
+}
+.selectitem .name{
+  flex:1;
+}
+.selectitem .btn{
+  width:80rpx;
+}
+.selectitem .allitem{
+  position: fixed;
+  z-index: 1;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: rgba(0,0,0,0.5);
+}
+.selectitem .allitem .cont{
+  background:#fff;
+  width:90%;
+  margin-left:10%;
+  margin-top:1px;
+  height:100%;
+  }
+  .selectitem .allitem .cont .item{
+    padding:20rpx;
+  }
+  .selectitem .allitem .cont .titl{
+    font-weight: bolder;
+    margin-bottom:25rpx;
+  }
+  .selectitem .allitem .cont .list{
+    width:100%;
+    box-sizing: border-box;
+  }
+  .selectitem .allitem .cont .list>view{
+    width:30%;
+
+    margin-right:3%;
+    display: inline-block;
+    text-align: center;
+    font-weight: normal;
+    font-size:26rpx;
+    margin-bottom:10rpx;
+   
+  }
+  .selectitem .allitem .cont .list>view>text{
+      border:1px solid #f7f7f7;
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+      height:60rpx;
+      line-height: 60rpx;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+  }
+  .selectitem .allitem .cont .list .nomargin{
+    margin-right:0;
+  }
+  .selectitem .allitem .bottom{
+    display:flex;
+    justify-content: center;
+    margin-top:20rpx;
+    padding:20rpx;
+    border-top:1px solid #f7f7f7;
+  }
+  .selectitem .allitem .bottom view{
+      width:35%;
+      text-align: center;
+      border-radius: 55rpx;
+      height:55rpx;
+      line-height: 55rpx;
+      border: 1px solid #f7f7f7;
+      margin-right:20rpx;
+  }
+  .selectitem .allitem .item input{
+    border:1px solid #f7f7f7;
+    height:40rpx;
+    line-height: 40rpx;
+    width:80%;
+    padding:0 15rpx;
+  }
+  .borderColor{
+    border-color:#df3f2f!important;
+  }

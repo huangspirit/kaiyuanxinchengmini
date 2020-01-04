@@ -10,6 +10,12 @@ const request = (url, options) => {
       success(request) {
         if (request.statusCode === 200) {
           resolve(request.data)
+        } else if (request.statusCode === 400){
+          wx.showToast({
+            title: request.data.message,
+            icon: 'none',
+            duration: 2000
+          })
         } else if (request.statusCode === 401) {
           // 401 说明 token 验证失败
           // 可以直接跳转到登录页面，重新登录获取 token

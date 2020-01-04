@@ -1,10 +1,11 @@
 <!--pages/spotSpecial/spotSpecial.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view>
+<scroll-view scroll-y style="height:100%;" bindscrolltolower="getMoreList" scroll-with-animation="{{true}}">
   <view class="title">
     <view class="left">
       <view class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</view>
-      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item.id}}" wx:key="index">
+      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
         {{item.name}}
       </view>
     </view>
@@ -15,13 +16,13 @@
       <view class="{{siderIndex == 0?'siderActive item':'item'}}" bindtap="siderChange" data-index="{{-1}}">
         <view>全部</view>
       </view>
-      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive item':'item'}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item.id}}" wx:key="index">
+      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive item':'item'}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
         <image src="{{item.url}}"></image>
         <view>{{item.name}}</view>
       </view>
     </view>
   </view>
-  <scroll-view scroll-y style="height:100%;" bindscrolltolower="getMoreList" scroll-with-animation="{{true}}">
+  
     <view class="spotSpecial">
       <!-- <view class="Left">
         <text class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</text>
@@ -30,11 +31,12 @@
       <view class="Right">
         <view class="specialList" wx:for="{{spotList}}" wx:key="index" bindtap="toDetail" data-item="{{item}}">
           <view class="listLeft">
-            <image src="{{item.goodsImageUrl?item.goodsImageUrl:errorImg}}"></image>
+            <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
           </view>
           <view class="listcenter">
             <view>{{item.goods_name}}</view>
-            <view class="gray">品牌：{{item.brandName}}</view>
+            <view class="blu brand">品牌：{{item.brandName}}</view>
+            <view class="gray goodsdesc">{{item.goodsDesc}}</view>
             <view class="desc">
               <text class="{{item.goods_type?'green borderGreen':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
                <text class="color borderColor" wx:if="{{item.tag==1}}">{{filter.tagFilter(item.tag)}}</text>

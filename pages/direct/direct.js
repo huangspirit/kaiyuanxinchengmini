@@ -8,9 +8,12 @@
      * 页面的初始数据
      */
     data: {
+      UserInforma: {},
       directList: {},
       detailObj: {},
       hotSaleList: [],
+      total:0,
+      byName: false,
       loadModal: false,
       siderTab: [{
           name: '全部商品'
@@ -48,7 +51,101 @@
       ],
       tabIndex: 0,
       start:0,
-      length:10
+      length:10,
+      errorImg: app.globalData.errorImg,
+      name:"",
+      join:false
+    },
+    //加入询价蓝
+    addInquiry(val) {
+      val = val.currentTarget.dataset.item
+      var obj = {
+        sellerGoodsId: val.id,
+        goodsId: val.id,
+        sellerId: val.brandId,
+        goodsSource: "2",
+        goodsName: val.productno
+      };
+      api.get("/api-g/sc/insertShoppingCar", obj).then(res => {
+        if (res.resultCode == "200") {
+          wx.showToast({
+            title: '已加入询价篮',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      })
+    },
+    //商家发布特价若未入驻
+    pushlishspecialPrice(val) {
+      val = val.currentTarget.dataset.item;
+      let UserInforma = JSON.parse(this.data.UserInforma)
+      if (UserInforma.userTagMap.seller) {
+        wx: wx.navigateTo({
+          url: '../releaseSale/releaseSale?name=' + val.productno,
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      } else {
+        this.setData({
+          join: true
+        })
+        this.dialog.show()
+      }
+    },
+    //申请特价
+    specialPrice() {
+      this.setData({
+        join: false
+      })
+      this.dialog.show()
+    },
+    popupCancel() {
+      this.dialog.hide()
+    },
+    popupConfirm() { },
+    focus(val) {
+      let index = val.currentTarget.dataset.index
+      val = val.currentTarget.dataset.item;
+      console.log(index)
+      let obj = {
+        goods_id: val.id,
+        catergory_id: val.classificationId,
+        favour_type: "1",
+      };
+
+      api.get("/api-g/gf/insertGoodsFavourite", obj).then(res => {
+        console.log(res)
+        if (res.resultCode == 200) {
+          wx.showToast({
+            title: '已关注',
+            icon: 'success',
+            duration: 2000
+          })
+          this.setData({
+            hotSaleList: this.data.hotSaleList.map((item, index0) => {
+              if (index == index0) {
+                item.focus = true;
+              }
+              return item;
+            })
+          })
+        }
+
+      })
+    },
+    //跳转到品牌
+    toBrand(val) {
+      let item = val.currentTarget.dataset.item;
+      let obj = {
+        tag: "brand",
+        id: item.brandId,
+        name: item.brand
+      }
+      wx: wx.navigateTo({
+        url: '../orSeller/orSeller?params=' + JSON.stringify(obj),
+      })
     },
     // 跳转商品详情
     toproductDetail(val) {
@@ -66,73 +163,101 @@
         complete: function(res) {},
       })
     },
-    // getsearchResult() {
-    //   this.setData({
-    //     loadModal: true
-    //   })
-    //   api.get('/api-g/gods-anon/searchResult', {
-    //     start: this.data.start,
-    //     length: this.data.length,
-    //     tag: this.data.directList.tag,
-    //     name: this.data.directList.name,
-    //     id: this.data.directList.id,
-    //     flag:true
-    //   }).then(res => {
-    //     this.setData({
-    //       loadModal: false
-    //     })
-    //     if (res.data != null) {
-    //       this.setData({
-    //         hotSaleList: res.data.direct.data
-    //       })
-          
-    //     }
-    //   })
-    // },
     siderTab(val) {
-      let obj={
+      if (val) {
+        this.setData({
+          tabIndex: val.currentTarget.dataset.index,
+          start: 0,
+          byName:false
+        })
+      } else {
+        this.setData({
+          tabIndex: 0,
+          start: 0,
+          byName: false
+        })
+      }
+     this.getgoodslistByitem()
+    },
+    getgoodslistByName(){
+      this.setData({
+        loadModal: true
+      })
+      let obj = {
+        start: this.data.start,
+        length: this.data.length,
+        parent_id: this.data.directList.id,
+        type:3
+      }
+      if (this.data.name) {
+        obj.name = this.data.name
+      }
+      if (this.data.directList.brandId) {
+        obj.brandId = this.data.directList.brandId
+      }
+      api.get('/api-g/gods-anon/findGoodsBaseInfoAndExInfo', obj).then(res => {
+        this.setData({
+          loadModal: false,
+          total: res.data.total
+        })
+        if (res.data != null) {
+          this.setData({
+            hotSaleList: res.data.data,
+          })
+        } else {
+          this.setData({
+            hotSaleList: []
+          })
+        }
+      })
+    },
+    getgoodslistByitem(){
+      this.setData({
+        loadModal: true
+      })
+      let obj = {
         start: this.data.start,
         length: this.data.length,
         parent_id: this.data.directList.id,
       }
-      if(val){
-        this.setData({
-          tabIndex: val.currentTarget.dataset.index,
-          loadModal: true
-        })
-        obj[this.data.siderTab[val.currentTarget.dataset.index].tag] = this.data.siderTab[val.currentTarget.dataset.index].value
-      }else{
-        this.setData({
-          tabIndex: 0,
-          loadModal: true
-        })
+      if (this.data.directList.brandId) {
+        obj.brand_id = this.data.directList.brandId
       }
-       api.post('/api-g/gods-anon/queryByProperty', obj).then(res => {
-          this.setData({
-            loadModal: false
-          })
-          if (res.data != null) {
-            this.setData({
-              hotSaleList: res.data.data
-            })
-          }
+      obj[this.data.siderTab[this.data.tabIndex].tag] = this.data.siderTab[this.data.tabIndex].value
+      api.post('/api-g/gods-anon/queryByProperty', obj).then(res => {
+        this.setData({
+          loadModal: false,
+          total: res.data.total
         })
-    },
-    toSearch() {
-      wx: wx.navigateTo({
-        url: '../search/search',
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
+        if (res.data != null) {
+          this.setData({
+            hotSaleList: res.data.data,
+          })
+        } else {
+          this.setData({
+            hotSaleList: []
+          })
+        }
       })
+    },
+    toSearch(val) {
+      this.setData({
+        name: val.detail.value,
+        start:0,
+        byName:true
+      })
+     this.getgoodslistByName();
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+  console.log(options)
+      let UserInforma = wx.getStorageSync('UserInforma')
       let item = JSON.parse(options.params)
       this.setData({
-        directList: item
+        directList: item,
+        UserInforma: UserInforma
       })
       wx.setNavigationBarTitle({
         title:item.name
@@ -143,7 +268,9 @@
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {},
+    onReady: function() {
+      this.dialog = this.selectComponent('#dialog')
+    },
 
     /**
      * 生命周期函数--监听页面显示
@@ -177,33 +304,16 @@
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-      var that = this;
-      // 显示加载图标
-      this.setData({
-        loadModal: true
-      })
-      this.setData({
-        start: this.data.start + this.data.length
-      });
-      let obj = {
-        start: this.data.start,
-        length: this.data.length,
-        parent_id: this.data.directList.id,
-      }
-      obj[this.data.siderTab[this.data.tabIndex].tag] = this.data.siderTab[this.data.tabIndex].value
-      api.post('/api-g/gods-anon/queryByProperty', obj).then(res => {
+      if (this.data.total > this.data.start + this.data.length) {
         this.setData({
-          loadModal: false
+          start: this.data.start + this.data.length
         })
-        if (res.data != null) {
-          let getHotList = this.data.hotSaleList
-          getHotList = getHotList.concat(res.data.data)
-          this.setData({
-            hotSaleList: getHotList
-          })
+        if(this.data.byName){
+          this.getgoodslistByName()
+        }else{
+          this.getgoodslistByitem();
         }
-      })  
-
+      }
     },
 
     /**

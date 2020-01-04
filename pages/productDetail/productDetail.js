@@ -175,8 +175,30 @@ Page({
       complete: function(res) {},
     })
   },
+  toseller(val){
+    let item = val.currentTarget.dataset.item;
+    if (item.tag == 1) {
+      let obj = {
+        tag: 'brand',
+        id: item.brandId,
+        name: item.brandName
+      }
+      wx: wx.navigateTo({
+        url: '../orSeller/orSeller?params=' + JSON.stringify(obj),
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    } else {
+      wx: wx.navigateTo({
+        url: '../agSeller/agSeller?seller_id=' + item.sellerId + '&name=' + item.sellerName,
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+  },
   releaseSale() {
-    console.log(this.data.productDetail)
     wx.navigateTo({
       url: '../releaseSale/releaseSale?name=' + this.data.productDetail.productno
     })

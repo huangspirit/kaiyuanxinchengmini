@@ -40,7 +40,7 @@
   <view class="specileList" wx:if="{{specialList.length>0}}">
     <view class="listContent" wx:for="{{specialList}}" wx:key="{{index}}" data-index="{{index}}" bindtap="toDetail">
       <view class="listTitle">
-        <view>
+        <view catchtap="toseller" data-item="{{item}}">
           <image src="{{item.userImgeUrl}}"></image>
           <text>{{item.sellerName}}</text>
           <text>{{filter.tagFilter(item.tag)}}</text>

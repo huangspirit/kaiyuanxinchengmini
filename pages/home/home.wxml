@@ -33,10 +33,11 @@
     </view>
     <view wx:if="{{specialList.length>0}}" scroll-x="true" class='listContent'>
       <view class='list_left' wx:for="{{specialList}}" bindtap="toDetail" data-item="{{item}}" wx:key="{{id}}">
-        <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:errorImg}}"></image>
+        <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
         <view class="name">{{item.goods_name}}</view>
+        <view class="desc gray">{{item.goodsDesc}}</view>
         <view class="mark">
-          <text class="item.goods_type?'borderGreen green':'borderColor color'">{{item.goods_type?'现货':'订货'}}</text>
+          <text class="{{item.goods_type?'borderGreen green':'borderColor color'}}">{{item.goods_type?'现货':'订货'}}</text>
           <text class="borderColor">{{item.diliverPlace}}交货</text>
           <text class="borderBlu" :class="item.seller_always?'':'color'">{{item.seller_always?'长期特价':'限时抢购'}}</text>
         </view>
@@ -57,14 +58,15 @@
     </view>
     <view class='faclistContent' wx:for="{{facdirect}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
       <view class='list_left'>
-        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:errorImg}}'></image>
+        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}'></image>
       </view>
       <view class='list_right'>
         <view class='speciStatus'>
           <view class="color name">{{item.goods_name}}</view>
           <view class="blu">{{item.brandName}}</view>
+          <view class="desc gray">{{item.goodsDesc}}</view>
           <view class="mark">
-            <text class="item.goods_type?'borderGreen green':'color borderColor'">{{filter.goodsTypeFilter(item.goods_type)}}</text>
+            <text class="{{item.goods_type?'borderGreen green':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
             <text class="borderColor">{{item.diliverPlace}}发货</text>
           </view>
         </view>

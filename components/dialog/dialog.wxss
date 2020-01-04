@@ -45,6 +45,7 @@
   text-align: center;
   color: #888;
   flex: 1;
+  padding:0 20rpx;
 }
 
 .m-avatur {
@@ -78,7 +79,7 @@
   margin-top: 30rpx;
 }
 
-.btn-footer {
+.modal-footer .btn-footer {
   width: 280rpx;
   font-size: 36rpx;
   color: #02bb00;
@@ -87,6 +88,17 @@
   justify-content: center;
 }
 
-.btn-l-footer {
+.modal-footer .btn-l-footer {
   border-right: 1rpx solid #e5e5e5;
+}
+.unConfirm{
+  text-align: center;
+  padding:20rpx;
+  margin: 20rpx;
+}
+.unConfirm  .btn-footer text{
+    border:1px solid #02bb00;
+    padding:6rpx 25rpx;
+    border-radius: 5rpx;
+    font-size:28rpx;
 }

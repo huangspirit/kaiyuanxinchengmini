@@ -32,6 +32,13 @@
         </view>
       </view>
     </view>
+    <view class="title">全部分类</view>
+    <view wx:for="{{brand.childrenList}}" wx:key="{{item.catergoryId}}" class="cateWrap">
+      <view class="first blu" bindtap="fistSend"  data-item="{{item}}">{{item.catergoryName}}</view>
+      <view class="secondCate">
+        <view class="borderGreen" wx:for="{{item.childernList}}" wx:key="{{item.catergoryId}}" data-item="{{item}}" bindtap="send">{{item.catergoryName}}</view>
+      </view>
+    </view>
     <view class="title">用户评价</view>
     <view class="nocommit gray" wx:if="{{commitlist.length==0}}">暂无评价</view>
     <view class="commitlist">

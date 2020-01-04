@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "dialog": "../../components/dialog/dialog"
+  },
   "navigationBarBackgroundColor": "#fff",
   "backgroundTextStyle": "light",
   "navigationBarTitleText": "二级类商品",

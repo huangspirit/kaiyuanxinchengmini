@@ -11,12 +11,17 @@
       
       </slot>
     </view>
-    <view class="modal-footer">
+    <view class="modal-footer" wx:if="{{hasConfirm}}">
       <view class="btn-footer btn-l-footer" bindtap="_onCancel">
         <text>{{cancelText}}</text>
       </view>
-      <view class="btn-footer btn-r-footer" bindtap="_onConfirm">
+      <view class="btn-footer btn-r-footer" bindtap="_onConfirm" >
         <text>{{confirmText}}</text>
+      </view>
+    </view>
+    <view class="unConfirm" wx:if="{{!hasConfirm}}">
+      <view class="btn-footer btn-l-footer" bindtap="_onCancel">
+        <text class="borderGreen">{{cancelText}}</text>
       </view>
     </view>
   </view>

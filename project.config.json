@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 46,
+			"current": 25,
 			"list": [
 				{
 					"id": -1,
@@ -80,14 +80,14 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "brand详情",
 					"pathName": "pages/brandDetail/brandDetail",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "二级类商品",
 					"pathName": "pages/direct/direct",
 					"query": "",
@@ -115,9 +115,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "原厂直供",
-					"pathName": "pages/factoryDirect/factoryDirect",
+					"id": 9,
+					"name": "原厂直营",
+					"pathName": "pages/brandlist/brandlist",
 					"query": "",
 					"scene": null
 				},
@@ -227,14 +227,14 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 25,
 					"name": "现货直通车",
 					"pathName": "pages/spotSpecial/spotSpecial",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 26,
 					"name": "订货跟单",
 					"pathName": "pages/orderGoods/orderGoods",
 					"query": "",
@@ -368,16 +368,16 @@
 				},
 				{
 					"id": 45,
-					"name": "代理旗舰店",
+					"name": "pages/agSeller/agSeller",
 					"pathName": "pages/agSeller/agSeller",
 					"query": "seller_id=63&name=金源电子",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 46,
 					"name": "一级类",
 					"pathName": "pages/undirect/undirect",
-					"query": "params= {\"tag\":\"undirect\",\"id\":7,\"name\":\"微控制器\"}",
+					"query": "params= {\"tag\":\"undirect\",\"id\":5,\"name\":\"微控制器\"}",
 					"scene": null
 				}
 			]

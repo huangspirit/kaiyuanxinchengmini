@@ -1,0 +1,32 @@
+<!--pages/brandlist/brandlist.wxml-->
+<view>
+  <swiper indicator-dots='true' indicator-color='red' indicator-active-color='yellow' autoplay='true' interval="3000" circular="true">
+    <swiper-item wx:for="{{hasjoin}}" wx:key="{{item.id}}" data-item="{{item}}">
+      <image src="{{item.imgurl}}" style="height:100%;"></image>
+    </swiper-item>
+  </swiper>
+  <view class="cont">
+    <view class="item">
+      <view class="title">中国芯</view>
+      <view class="list">
+        <view wx:for="{{china}}" data-item="{{item[0]}}" bindtap="toDetail" class="{{(index+1)%3==0?'nomargin':''}}">
+          <view>
+            <text wx:if="{{item[0].hasFactorySeller}}" class="bgColor mark">驻</text> {{item[0].brand}}
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <view wx:for="{{brandlist}}"  wx:key="{{index}}" class="item">
+      <view class="title">{{index}}</view>
+      <view class="list">
+        <view wx:for="{{item}}" wx:key="{{index}}" data-item="{{item}}" bindtap="toDetail" data-index="{{index}}" class="{{(index+1)%3==0?'nomargin':''}}">
+          <view>
+            <text wx:if="{{item.hasFactorySeller}}"  class="bgColor mark">驻</text> {{item.brand}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

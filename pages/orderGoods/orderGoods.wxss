@@ -1,7 +1,71 @@
-/* pages/orderGoods/orderGoods.wxss */
+/* pages/spotSpecial/spotSpecial.wxss */
 page{
   height:100%;
 }
+.title{
+  width:100%;
+  display: flex;
+  padding:0 15rpx ;
+}
+.title .left{
+  overflow-x: auto;
+  white-space: nowrap;
+  display:flex;
+  flex:1;
+}
+.title .left view{
+  white-space: nowrap;
+  padding:30rpx 25rpx ;
+}
+.title .left .siderActive{
+  color: #df3f2f;
+}
+.title .right{
+  padding:30rpx 25rpx;
+}
+.coverItem{
+  position: fixed;
+  z-index:1;
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.5);
+  
+}
+.coverItem .list{
+    width:80%;
+    background:#fff;
+    float: right;
+    height:100%;
+    
+  }
+  .coverItem .list .item{
+    display: inline-block;
+    padding:5rpx 25rpx;
+    border:1rpx solid #ddd;
+    border-radius: 3rpx;
+    margin-left:25rpx;
+    margin-top:15rpx;
+    text-align: center;
+    line-height: 40rpx;
+  }
+  .coverItem .list .siderActive{
+    color:#df3f2f;
+    border-color:#df3f2f;
+  }
+  .coverItem .list .item image{
+    width:40rpx;
+    height:40rpx;
+    margin-right: 15rpx;
+    vertical-align: middle;
+  }
+  .coverItem .list .item view{
+    height:40rpx;
+    line-height:40rpx;
+    display:inline-block;
+    vertical-align: middle;
+  }
 .spotSpecial {
   width: 100%;
   display: flex;
@@ -9,8 +73,8 @@ page{
 }
 .Left {
   width: 180rpx;
-  
 }
+
 .Left>text {
   display: block;
   padding: 40rpx 10rpx;
@@ -18,7 +82,6 @@ page{
   /* white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; */
-  font-size:24rpx;
 }
 
 .Left .siderActive {
@@ -27,81 +90,62 @@ page{
 }
 
 .Right {
-  width: calc(100% - 180rpx);
+  /* width: calc(100% - 180rpx); */
+  width:100%;
   background: #fff;
 }
 
 .Right .specialList {
   border-bottom: 2rpx dashed #e6e6e6;
-  padding: 30rpx 20rpx;
+  padding:15rpx 20rpx;
   box-sizing: border-box;
-  height: 225rpx;
   display: flex;
   align-items: center;
 }
-
 .Right .specialList .listLeft {
-  width: 100rpx;
-  height: 100rpx;
-  border: 2rpx solid #f7f7f7;
+  width: 120rpx;
+  height: 120rpx;
+  border: 1px solid #e6e6e6;
   margin-right: 22rpx;
-  padding:10rpx;
 }
-
 .Right .specialList .listLeft>image {
   width: 100%;
   height: 100%;
 }
-
-.Right .specialList .listRight {
-  width: calc(100% - 142rpx);
+.Right .listcenter{
+  flex:1;
+  min-width:0;
 }
+.Right .listcenter .desc {
+  margin-top:8rpx;
 
-.Right .specialList .listRight>text {
-  display: block;
-  overflow: hidden;
+}
+.Right .listcenter .brand{
+  font-size:22rpx;
+  margin-top:8rpx;
+}
+.Right .listcenter .goodsdesc{
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 28rpx;
-  color: #333;
+  font-size:22rpx;
+  margin-top:8rpx;
 }
-
-.Right .specialList .listRight .listContent>view {
-  float: left;
+.Right .listcenter .desc text{
+  padding:0rpx 15rpx;
+  border-radius: 6rpx;
+  margin-right:10rpx;
+  font-size: 20rpx;
 }
-
-.Right .specialList .listRight .listContent>view:nth-of-type(2) {
-  float: right;
+.Right .specialList .listRight{
   text-align: right;
-  margin-top: 35rpx;
+  padding-left:20rpx;
 }
-
-.Right .specialList .listRight .listContent>view>text {
-  display: block;
-  margin-top: 10rpx;
-}
-
-.Right .specialList .listRight .listContent>view>text:nth-of-type(1) {
-  color: #999;
-  font-size: 28rpx;
-}
-
-.Right .specialList .listRight .listContent>view>text:nth-of-type(2) {
-  color: #333;
-  font-size: 24rpx;
-}
-
-/* .Right .specialList .listRight .listContent>view>text:nth-of-type(3) {
-  font-size: 24rpx;
-} */
-
-.Right .specialList .listRight .listContent>view>image {
-  width: 50rpx;
-  height: 50rpx;
-}
-
-.Right .specialList .listRight .listContent>view:nth-of-type(2)>text {
-  color: #e03e31;
-  font-size: 30rpx;
+.Right .specialList .listRight .price{
+  font-size:30rpx;
   font-weight: bold;
+}
+.Right .listRight .tag{
+  font-size:24rpx;
+  margin:5rpx;
 }

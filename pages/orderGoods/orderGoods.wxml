@@ -1,38 +1,64 @@
-<!--pages/orderGoods/orderGoods.wxml-->
+<!--pages/spotSpecial/spotSpecial.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<scroll-view 
-  scroll-y
-  style="height:100%;"
-  bindscrolltolower="getMoreList"
-  scroll-with-animation="{{true}}">
-<view class="spotSpecial">
-  <view class="Left">
-    <text class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</text>
-    <text wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">{{item.name}}</text>
-  </view>
-  <view class="Right">
-    
-    <view class="specialList" wx:for="{{spotList}}" wx:key="index"  bindtap="toDetail" data-item="{{item}}">
-      <view class="listLeft">
-         <image src="{{item.goodsImageUrl?item.goodsImageUrl:errorImg}}"></image>
-      </view>
-      <view class="listRight">
-        <text>{{item.goods_name}}</text>
-        <view class="listContent">
-          <view>
-            <text>品牌：{{item.brandName}}</text>
-           <text>{{filter.goodsTypeFilter(item.goods_type)}} | {{filter.tagFilter(item.tag)}} |  仅剩{{item.goodsStockCount}}</text>
-           <text wx:if="{{item.priceType}}" class="color">起售价:{{item.priceUnit?'$':'￥'}}{{filter.priveLevel(item.priceLevel)}}</text>
-            <text wx:else class="color">一口价:{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
-          </view>
-        </view>
+<view>
+<scroll-view scroll-y style="height:100%;" bindscrolltolower="getMoreList" scroll-with-animation="{{true}}">
+  <view class="title">
+    <view class="left">
+      <view class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</view>
+      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
+        {{item.name}}
       </view>
     </view>
-    <view wx:if="{{spotList.length==0}}" class="prompt">暂无数据</view>
-    <!-- <view class="prompt" wx:if="{{speciaList.length<=0}}">暂无数据</view> -->
+    <text bindtap="showCoverTap" class="right">筛选</text>
   </view>
-   <view class="cu-load load-modal" wx:if="{{loadModal}}">
+  <view class="coverItem" wx:if="{{showCover}}" catchtap="hideCoverTap">
+    <view class="list">
+      <view class="{{siderIndex == 0?'siderActive item':'item'}}" bindtap="siderChange" data-index="{{-1}}">
+        <view>全部</view>
+      </view>
+      <view wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive item':'item'}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
+        <image src="{{item.url}}"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+  
+    <view class="spotSpecial">
+      <!-- <view class="Left">
+        <text class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</text>
+        <text wx:for="{{classList}}" class="{{siderIndex == index+1?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">{{item.name}}</text>
+      </view> -->
+      <view class="Right">
+        <view class="specialList" wx:for="{{spotList}}" wx:key="index" bindtap="toDetail" data-item="{{item}}">
+          <view class="listLeft">
+            <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
+          </view>
+          <view class="listcenter">
+            <view>{{item.goods_name}}</view>
+            <view class="blu brand">品牌：{{item.brandName}}</view>
+            <view class="gray goodsdesc">{{item.goodsDesc}}</view>
+            <view class="desc">
+              <text class="{{item.goods_type?'green borderGreen':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
+               <text class="color borderColor" wx:if="{{item.tag==1}}">{{filter.tagFilter(item.tag)}}</text>
+               <text class="blu borderBlu" wx:if="{{item.tag==2}}">{{filter.tagFilter(item.tag)}}</text>
+               <text class="orange borderOrange" wx:if="{{item.tag==18}}">{{filter.tagFilter(item.tag)}}</text>
+               <text class="borderColor">{{item.diliverPlace}}发货</text>
+               <!-- <text> 仅剩{{item.goodsStockCount}}</text> -->
+            </view>
+          </view>
+          <view class="listRight">
+            <view class="color">
+              <view class="price">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
+              <view class="tag">({{item.priceType?'起售价':'一口价'}})</view>
+            </view>
+            <view class="dot gray">...</view>
+          </view>
+        </view>
+        <view class="prompt" wx:if="{{spotList.length<=0}}">暂无数据</view>
+      </view>
+      <view class="cu-load load-modal" wx:if="{{loadModal}}">
         <view class="gray-text">加载中...</view>
       </view>
+    </view>
+  </scroll-view>
 </view>
-</scroll-view>

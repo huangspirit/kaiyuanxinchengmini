@@ -1,7 +1,4 @@
 /* pages/classCation/classCation.wxss */
-page {
-
-}
 .classCationWarp{
   height: 100%;
   background: #fff;

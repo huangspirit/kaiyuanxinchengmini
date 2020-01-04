@@ -1,0 +1,46 @@
+/* pages/brandlist/brandlist.wxss */
+
+page {
+  background: #fff;
+}
+
+.cont {
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.cont .item .title {
+  background: #f7f7f7;
+  padding:15rpx;
+  font-weight: bolder;
+  font-size: 30rpx;
+}
+.cont .item .list{
+  display:flex;
+  flex-wrap: wrap;
+  padding-top:15rpx;
+}
+.cont .item .list>view{
+  margin-bottom:15rpx;
+  width:33%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 10rpx;
+  box-sizing: border-box;
+}
+.cont .item .list .nomargin{
+  padding-right:0;
+}
+.cont .item .list>view>view{
+  padding:10rpx ;
+  box-sizing: border-box;
+  border:1px solid #f7f7f7;
+  width:100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cont .item .list>view>view .mark{
+  padding:0 5rpx;
+  border-radius: 5rpx;
+  font-size:24rpx;
+}

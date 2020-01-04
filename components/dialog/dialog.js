@@ -26,6 +26,10 @@ Component({
     imgUrl: {
       type: String,
       value: ''
+    },
+    hasConfirm:{
+      type:Boolean,
+      value:true
     }
   },
 

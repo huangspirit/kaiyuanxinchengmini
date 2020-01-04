@@ -20,7 +20,7 @@ Page({
     console.log(val)
     var tag = val.currentTarget.dataset['item']
     let obj = {}
-    obj['documentid'] = tag.id
+    obj['id'] = tag.id
     obj['name'] = tag.brand
     obj['tag'] = tag.tag
     if (tag.tag == 'brand') {

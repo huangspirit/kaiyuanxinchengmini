@@ -27,7 +27,7 @@ Page({
   },
   getProductDetail() {
     api.get('/api-g/gods-anon/searchResult', {
-      id: this.data.productParams.documentid,
+      id: this.data.productParams.id,
       tag: this.data.productParams.tag,
       name: this.data.productParams.name
     }).then(res => {
@@ -323,6 +323,7 @@ Page({
    */
   onLoad: function(options) {
     let reqInfo = JSON.parse(options.params)
+    console.log(reqInfo)
     this.setData({
       productParams: reqInfo
     })
@@ -358,7 +359,6 @@ Page({
     this.setData({
       specialData: specialStorage
     })
-    console.log(specialStorage)
     let time = this.data.specialData.expireTime - this.data.specialData.currentTime
     this.setCountDown(time)
     this.getProductDetail()

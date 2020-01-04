@@ -20,7 +20,7 @@ Page({
     searchList: [],
     classList: [{
         img: "../../img/home/yuan.png",
-        name: '原厂直供'
+        name: '原厂直营'
       },
       {
         img: "../../img/home/xianhuo.png",
@@ -82,7 +82,7 @@ Page({
 
   toDetail(val) {
     var obj = {}
-    obj['documentid'] = val.currentTarget.dataset.item.goods_id
+    obj['id'] = val.currentTarget.dataset.item.goods_id
     obj['tag'] = 'goodsinfo'
     obj['name'] = val.currentTarget.dataset.item.goods_name
     var routerParams = JSON.stringify(obj)
@@ -110,7 +110,8 @@ Page({
     let index = val.currentTarget.dataset.index
     if (index == 0) {
       wx.navigateTo({
-        url: '../factoryDirect/factoryDirect',
+       // url: '../factoryDirect/factoryDirect',
+        url: "../brandlist/brandlist"
       })
     } else if (index == 1) {
       wx.navigateTo({
@@ -134,8 +135,10 @@ Page({
       } else if (index == 7) {
         app.globalData.classType = 2
       }
+      console.log("ll")
       wx.switchTab({
-        url: '../classCation/classCation',
+       url: '../classCation/classCation',
+  
       })
     }
 

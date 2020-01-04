@@ -59,6 +59,8 @@ Page({
         goodslist: res.data.data.map(item => {
           if (item.sellerGoodsImageUrl) {
             item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+          }else{
+            item.sellerGoodsImage = item.goodsImageUrl
           }
           return item;
         })
@@ -90,7 +92,7 @@ Page({
   },
   toDetail(val) {
     var obj = {}
-    obj['documentid'] = val.currentTarget.dataset.item.goods_id
+    obj['id'] = val.currentTarget.dataset.item.goods_id
     obj['tag'] = 'goodsinfo'
     obj['name'] = val.currentTarget.dataset.item.goods_name
     var routerParams = JSON.stringify(obj)
@@ -98,6 +100,33 @@ Page({
     wx: wx.setStorageSync('productDetail', storageItem)
     wx: wx.navigateTo({
       url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  send(val){
+    let obj = {
+      id: val.currentTarget.dataset.item.catergoryId,
+      name: val.currentTarget.dataset.item.catergoryName,
+      brandId:this.data.brand.id
+    }
+    wx: wx.navigateTo({
+      url: '../direct/direct?params=' + JSON.stringify(obj),
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  fistSend(val){
+    console.log(val)
+    let obj = {
+      id: val.currentTarget.dataset.item.catergoryId,
+      name: val.currentTarget.dataset.item.catergoryName,
+      brandId: this.data.brand.id
+    }
+    wx: wx.navigateTo({
+      url: '../undirect/undirect?params=' + JSON.stringify(obj),
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

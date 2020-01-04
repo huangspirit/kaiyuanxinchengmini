@@ -114,9 +114,22 @@ page{
 }
 .Right .listcenter{
   flex:1;
+  min-width:0;
 }
 .Right .listcenter .desc {
-  margin-top:4rpx;
+  margin-top:8rpx;
+
+}
+.Right .listcenter .brand{
+  font-size:22rpx;
+  margin-top:8rpx;
+}
+.Right .listcenter .goodsdesc{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size:22rpx;
+  margin-top:8rpx;
 }
 .Right .listcenter .desc text{
   padding:0rpx 15rpx;
@@ -126,6 +139,7 @@ page{
 }
 .Right .specialList .listRight{
   text-align: right;
+  padding-left:20rpx;
 }
 .Right .specialList .listRight .price{
   font-size:30rpx;

@@ -47,7 +47,7 @@ Page({
   },
   toDetail(val) {
     var obj = {
-      documentid: val.currentTarget.dataset.item.goods_id,
+      id: val.currentTarget.dataset.item.goods_id,
       tag: 'goodsinfo',
       name: val.currentTarget.dataset.item.goods_name
     }
