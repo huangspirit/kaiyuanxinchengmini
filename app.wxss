@@ -13,8 +13,8 @@ page {
   text-align: center;
   line-height: 90rpx;
   background: #fff;
-}
 
+}
 view, text {
   font-family: PingFangSC-Regular;
 }
@@ -43,24 +43,30 @@ view, text {
     background: #fce9e5
   }
    .greenColor{
-     background:#529641;
+     background:#179b16;
      color:#fff;
    }
    .borderGreen{
-      border:1px solid #529641;
+      border:1px solid #179b16;
+   }
+   .borderLightGray{
+     border: 1px solid #d5d5d5;
+   }
+   .borderGray{
+     border:1px solid #999;
    }
    .gray{
      color:#999;
    }
    .green{
-     color:#529641;
+     color:#179b16;
    }
     .color{
         color:#df3f2f;
     }
     .bgColor{
-        background: #df3f2f;
-        color:#fff;
+      background: #df3f2f;
+      color:#fff;
     }
     .borderColor{
       border:1px solid #df3f2f;
@@ -89,12 +95,19 @@ view, text {
         background:#4f4f4f ;
         color:#fff;
     }
+    .lightGray{
+      color:#d5d5d5;
+    }
     .bgLightGray{
         background: #d5d5d5;
         color:#999;
     }
-   
-
+  .fr{
+    float: right;
+  } 
+.fl{
+  float: left;
+}
 .clear:after {
   content: "";
   display: block;

@@ -34,7 +34,7 @@ function tagFilter(val){
     case 3:
       return "商家";
     case 18:
-      return ""
+       return "分销商"
    }
 }
 //商品状态

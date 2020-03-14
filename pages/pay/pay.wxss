@@ -2,64 +2,54 @@
 
 .orderTop {
   width: 100%;
-  height: 160rpx;
   background: #fff;
-  margin-bottom: 20rpx;
   padding: 20rpx;
+  margin:10rpx auto;
 }
-
+.addAddress{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addAddress .mark{
+  width:30rpx;
+  height:40rpx;
+}
 .orderTop .orderUser {
   margin-bottom: 10rpx;
 }
-
 .orderTop .orderUser>text {
   color: #333;
   font-weight: bold;
-  font-size: 28rpx;
-  margin-right: 15rpx;
+  font-size:30rpx;
 }
-
 .orderTop .orderAdress {
   display: flex;
   justify-content: space-between;
+  font-size:24rpx;
 }
 
-.orderTop .orderAdress>view {
-  width: calc(100% - 50rpx);
-  color: #999;
-  font-size: 30rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  padding: 2rpx 0;
-}
-
-.orderTop .orderAdress>view>text {
-  padding: 0 10rpx;
-  border: 1px solid #df3f2f;
-  color: #df3f2f;
-}
-
-.orderTop .orderAdress>image {
+.orderTop .rightArrow {
   width: 14rpx;
   height: 28rpx;
-  margin-top: 8rpx;
+  margin-left:15rpx;
+  vertical-align: middle;
 }
 
 .paylist {
   width: 100%;
   background: #fff;
   margin-bottom: 15rpx;
-  padding: 0 20rpx;
+
 }
 
 .paylist .listTop {
   display: flex;
   height: 90rpx;
   line-height: 90rpx;
-  border-bottom: 2rpx dashed #999;
-  margin-bottom: 20rpx;
+  border-bottom: 1px solid #ddd;
+    padding: 0 20rpx;
+
 }
 
 .paylist .listTop>image {
@@ -79,106 +69,47 @@
 }
 
 .paylist .listContent {
-  padding: 10rpx 0;
+  padding: 20rpx ;
   display: flex;
+  border-bottom:1px dashed #ddd;
 }
 
 .paylist .listContent .listLeft {
-  width: 148rpx;
-  height: 148rpx;
-  border: 2rpx solid #999;
+  width: 118rpx;
+  height: 118rpx;
 }
 
 .paylist .listContent .listLeft>image {
   width: 100%;
   height: 100%;
+  border: 1px solid #ddd;
 }
 
-.paylist .listContent .listRight {
-  width: calc(100% - 150rpx);
+.paylist .listContent .listCenter {
+  flex:1;                                                                               
   padding-left: 20rpx;
+  min-width: 0;
 }
-
-.paylist .listContent .listRight>text:nth-of-type(1) {
-  color: #333;
-  font-weight: 600;
-  font-size: 22rpx;
+.paylist .listContent .listCenter .name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: block;
+  font-size: 30rpx;
 }
-
-.paylist .listContent .listRight>text:nth-of-type(2) {
-  color: #999;
+.paylist .listContent .listCenter .desc {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 22rpx;
   margin: 8rpx 0;
-  display: block;
 }
-
-.paylist .listContent .listRight .listLabel {
-  display: flex;
-  font-size: 18rpx;
-  line-height: 20rpx;
-}
-
-.paylist .listContent .listRight .listLabel>text {
-  color: #333;
-  font-size: 18rpx;
-  margin: 0 15rpx;
-}
-
-.paylist .listContent .listRight .listPrice {
-  display: flex;
-  justify-content: space-between;
-  margin: 8rpx 0;
-}
-
-.paylist .listContent .listRight .listPrice>text:nth-of-type(1) {
-  color: #df3f2f;
-  font-weight: bold;
-  font-size: 22rpx;
-}
-
-.paylist .listContent .listRight .listPrice>text:nth-of-type(2) {
-  color: #333;
-  font-weight: bold;
-  font-size: 22rpx;
-}
-
-.paylist .listContent .listRight .listTax {
-  display: flex;
-}
-
-.paylist .listContent .listRight .listTax>view {
-  margin-right: 55rpx;
-  display: flex;
-}
-
-.paylist .listContent .listRight .listTax>view>text {
+.paylist .listContent .listRight .listPrice{
   font-size: 20rpx;
-  display: block;
+  font-weight: bolder;
 }
-
-.paylist .listContent .listRight .listTax>view>text:nth-of-type(1) {
-  width: 30rpx;
-  height: 30rpx;
-  border-radius: 30rpx;
-  text-align: center;
-  line-height: 30rpx;
-  color: #df3f2f;
-  border: 2rpx solid #df3f2f;
-  margin-right: 15rpx;
+.paylist .listContent .listRight .listPrice .money{
+  font-size:25rpx;
 }
-
-.paylist .listContent .listRight .listTax>view>text:nth-of-type(2) {
-  color: #999;
-  line-height: 38rpx;
-}
-
 .invoice {
   display: flex;
   width: 100%;
@@ -204,21 +135,19 @@
   color: #bbb;
 }
 
-.desc {
+.descrition {
   width: 100%;
   padding: 0 20rpx;
   background: #fff;
   margin-top: 2rpx;
   margin-bottom: 20rpx;
 }
-
-.desc>text {
-  display: block;
-  color: #bbb;
-  line-height: 45rpx;
-  padding: 10rpx 0;
+.descrition>view {
+  padding-top:10rpx;
 }
-
+.descrition>view>view{
+  padding-bottom:10rpx;
+}
 .payDetail {
   width: 100%;
   padding: 50rpx 20rpx 0;

@@ -32,6 +32,10 @@
   <input placeholder="请输入邮政编码" bindinput="postalChange" value="{{adressDetail.postalCode}}"></input>
   <text class="cuIcon-close text-gray"></text>
 </view>
+<view class="cu-form-group">
+    <view class="title">默认状态</view>
+    <switch bindchange="SetShadow" checked="{{adressDetail.isdefault}}" color="#39B54A" size="mini" type="mini"></switch>
+  </view>
 <!-- <view class="cu-form-group">
   <view class="title">地址标签</view>
   <view class="adressLabel">
@@ -41,6 +45,6 @@
   </view>
 </view> -->
 <view class="editFooter">
-  <text bindtap="confirm">确定</text>
-  <text bindtap="confirm" wx:if="{{deleteShow}}" bindtap="deleteAddress">删除</text>
+  <view bindtap="confirm" class="bgColor">确定</view>
+  <view  wx:if="{{deleteShow}}" bindtap="deleteAddress" class="bgLightGray">删除</view>
 </view>

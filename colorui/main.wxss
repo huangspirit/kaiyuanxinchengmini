@@ -158,7 +158,7 @@ switch::before {
 	top: 0%;
 	left: 0rpx;
 	font-size: 26rpx;
-	line-height: 26px;
+	line-height: 40rpx;
 	width: 50%;
 	text-align: center;
 	pointer-events: none;
@@ -166,7 +166,7 @@ switch::before {
 	transition: all 0.3s ease-in-out 0s;
 	z-index: 9;
 	bottom: 0;
-	height: 26px;
+	height: 40rpx;
 	margin: auto;
 }
 
@@ -198,10 +198,11 @@ checkbox::before {
 	position: absolute;
 	color: var(--white) !important;
 	top: 50%;
-	margin-top: -8px;
+  margin-top: -19rpx; 
+  left:10rpx;
 	right: 5px;
 	font-size: 32rpx;
-	line-height: 16px;
+	line-height: 40rpx;
 	pointer-events: none;
 	transform: scale(1, 1);
 	transition: all 0.3s ease-in-out 0s;
@@ -211,8 +212,8 @@ checkbox::before {
 radio .wx-radio-input,
 checkbox .wx-checkbox-input {
 	margin: 0;
-	width: 24px;
-	height: 24px;
+	width: 40rpx;
+	height: 40rpx;
 }
 
 checkbox.round .wx-checkbox-input {
@@ -221,9 +222,9 @@ checkbox.round .wx-checkbox-input {
 
 switch .wx-switch-input {
 	border: none;
-	padding: 0 24px;
-	width: 48px;
-	height: 26px;
+	padding: 0 24rpx;
+	width: 90rpx;
+	height: 40rpx;
 	margin: 0;
 	border-radius: 100rpx;
 }
@@ -234,9 +235,9 @@ switch .wx-switch-input:not([class*="bg-"]) {
 
 switch .wx-switch-input::after {
 	margin: auto;
-	width: 26px;
-	height: 26px;
-	border-radius: 100rpx;
+	width: 40rpx;
+	height: 40rpx;
+	border-radius: 40rpx;
 	left: 0rpx;
 	top: 0rpx;
 	bottom: 0rpx;
@@ -247,7 +248,7 @@ switch .wx-switch-input::after {
 
 switch .wx-switch-input.wx-switch-input-checked::after {
 	margin: auto;
-	left: 22px;
+	right: -42rpx;
 	box-shadow: none;
 	transform: scale(0.9, 0.9);
 }

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "select": "../components/select/select"
+  },
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "入驻",
+  "navigationBarTextStyle": "black"
+  
+}

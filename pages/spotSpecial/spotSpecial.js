@@ -16,9 +16,42 @@ Page({
     loadModal:false,
     showCover:false,
     siderIndex: 0,
+    name:'',
+    sendData:{}
     
   },
-
+  toSearch(val) {
+    this.setData({
+      loadModal: true,
+      currentPage: 1,
+      name: val.detail.value
+    })
+    var index = 0
+    let obj = {
+      start: (this.data.currentPage - 1) * this.data.pageSize,
+      length: this.data.pageSize,
+      status: 1,
+      name: val.detail.value,
+      ...this.data.sendData
+    }
+    if (this.data.siderIndex != 0) {
+      obj.catergory_id = this.data.classList[this.data.siderIndex].id
+    } else {
+      delete obj.catergory_id;
+    }
+    api.get('/api-g/gods-anon/queryDirectGoods', obj).then((res) => {
+      this.setData({
+        spotList: res.data.data.map(item => {
+          if (item.sellerGoodsImageUrl) {
+            item.sellerGoodsImage = this.data.baseURL3 + "/" + item.sellerGoodsImageUrl.split("@")[0];
+          }
+          return item;
+        }),
+        loadModal: false,
+        showCover: false
+      })
+    })
+  },
   showCoverTap(){
     this.setData({
       showCover:true
@@ -38,10 +71,10 @@ Page({
       });
     
     let obj = {
-      goods_type: true,
       start: (this.data.currentPage - 1) * this.data.pageSize,
       length: this.data.pageSize,
       status: 1,
+      ...this.data.sendData
     }
     
     if (this.data.siderIndex != 0) {
@@ -84,7 +117,8 @@ Page({
     api.get('/api-g/gods-anon/queryDirectC', {
       goods_type: true,
       start: 0,
-      length: 100
+      length: 100,
+      ...this.data.sendData
     }).then((res) => {
       console.log(res)
       this.setData({
@@ -99,10 +133,11 @@ Page({
   })
     var index = 0
     let obj={
-      goods_type: true,
+
       start: (this.data.currentPage-1)*this.data.pageSize,
       length: this.data.pageSize,
       status: 1,
+      ...this.data.sendData
     }
     if (val) {
       this.setData({
@@ -132,6 +167,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let obj={}
+    obj[options.tag]=options.value
+    this.setData({
+      sendData:obj
+    })
+    wx.setNavigationBarTitle({
+      title: options.name
+    })
     this.getclassList()
     this.siderChange()
   },

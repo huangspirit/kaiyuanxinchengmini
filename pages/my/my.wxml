@@ -6,8 +6,9 @@
 </view>
 <view class='mayTop'>
   <image src='../../img/image/banner.png'></image>
-  <text wx:if="{{select}}" bindtap="userInfo">我是买家</text>
-  <text wx:if="{{!select}}" bindtap="userInfo">我是卖家</text>
+  <view class="topwrap">
+  <!-- <text wx:if="{{select}}" bindtap="userInfo" class="setbtn">我是买家</text>
+  <text wx:if="{{!select}}" bindtap="userInfo"  class="setbtn">我是卖家</text> -->
   <view class="myDetail">
     <image src='{{userDetail.headImgUrl}}'></image>
     <view class="myInfo">
@@ -20,16 +21,31 @@
         <text>{{filter.tagFilter(userDetail.userTagMap.tag)}}</text>
       </view>
     </view>
+  </view> 
+  <view class="setbtn">
+  <text class="cuIcon-settings"></text>
+  </view>
   </view>
   <view class="moneyDetail">
     <view>
-      <view> 钱包余额：{{userDetail.userTagMap.wallet}} 元 </view>
+      <view> 晶豆：{{userDetail.userTagMap.dou}}  </view>
       <view>
-        <text bindtap="withDraw">提现管理</text> |
-        <text bindtap="walletDetail">明细</text>
+      <text>获取原则及使用方法</text>
+        <!-- <text bindtap="withDraw">提现管理</text> |
+        <text bindtap="walletDetail">明细</text> -->
       </view>
     </view>
   </view>
+  <view class="toplist">
+    <view class="dou">晶豆</view>
+    <view class="yajin">押金</view>
+    <view class="month">月结</view>
+    <view class="money">钱包余额</view>
+  </view>
 </view>
-<my wx:if="{{select}}"></my>
-<mySeller wx:if="{{!select}}" userDetail="{{userDetail}}"></mySeller>
+<view class="classity">
+<view  class="{{isActive==0?'bgBlu one borderRight':'one borderRight'}}" bindtap="chipIdentify" data-active="0"><text class="cuIcon-pay"></text> 我是买家</view>
+<view class="{{isActive==1?'bgBlu one blu':'one blu'}}" bindtap="chipIdentify" data-active="1"><text class="cuIcon-shop"></text> 我是商家</view>
+</view>
+<my wx:if="{{isActive==0}}"></my>
+<mySeller wx:if="{{isActive==1}}" userDetail="{{userDetail}}"></mySeller>

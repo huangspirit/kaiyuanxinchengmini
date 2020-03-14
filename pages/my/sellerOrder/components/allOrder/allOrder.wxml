@@ -9,17 +9,11 @@
       </view>
       <!-- <text>待确认</text> -->
     </view>
-    <view class="listContent" wx:for="{{item.orderInfoList}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
-      <view class="listLeft">
+    <view class="listwrap clear">
+      <view class="listContent fl" wx:for="{{item.orderInfoList}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
         <image src="{{subItem.goods_image}}"></image>
       </view>
-      <view class="listRight">
-        <text>{{subItem.goods_name}}</text>
-        <text>{{subItem.goods_desc}}</text>
-        <view>
-          <text>{{filter.formatDate(subItem.complete_date)[0]}}</text> |
-          <text>{{subItem.diliver_place}}</text>
-        </view>
+      <view>
       </view>
     </view>
     <view class="listFooter">

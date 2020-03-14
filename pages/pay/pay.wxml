@@ -1,14 +1,36 @@
 <!--pages/pay/pay.wxml-->
-<view class="orderTop" bindtap="changeAddress">
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="orderTop" bindtap="changeAddress" wx:if="{{adressList.length}}">
   <view class="orderUser">
-    <text>{{defaultAddress.receivingName}}</text>
-    <text>{{defaultAddress.phone}}</text>
+    <text>{{adressList[addressindex].receivingName}}</text>
+    <text>{{adressList[addressindex].phone}}</text>
   </view>
   <view class="orderAdress">
     <view>
-      <!-- <text>公司</text>  -->
-      {{defaultAddress.address}}{{defaultAddress.detailedAddress}}
+      {{adressList[addressindex].address}}{{adressList[addressindex].detailedAddress}}
     </view>
+    <image src="../../img/image/youjiantouxiao.png" class="rightArrow"></image>
+  </view>
+</view>
+<view wx:if="{{!adressList.length}}" class="orderTop addAddress">
+  <image src="../../img/image/weizhi_hui.png" class="mark"></image>
+  <view>
+    <text bindtap="changeAddress" class="gray">新增地址</text>
+    <image src="../../img/image/youjiantouxiao.png" class="rightArrow"></image>
+  </view>
+
+</view>
+<view class="invoice" bindtap="invoiceInfo">
+  <text>发票类型</text>
+  <view>
+    <text>{{invoiceList[defaultInvoiceIndex].name}}</text>
+    <image src="../../img/image/youjiantouxiao.png"></image>
+  </view>
+</view>
+<view class="invoice" bindtap="invoiceInfo">
+  <text>发票抬头</text>
+  <view>
+    <text>{{invoiceDetailList[defaultInvoiceDetailIndex].corporatename}}</text>
     <image src="../../img/image/youjiantouxiao.png"></image>
   </view>
 </view>
@@ -18,74 +40,84 @@
     <view class="listTop">
       <image src="{{item.list[0].sellerHeader}}"></image>
       <text>{{item.name}}</text>
+      <text wx:if="{{item.tag!=3}}" class="bgColor">{{filter.tagFilter(item.tag)}}</text>
     </view>
     <view class="listContent" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
       <view class="listLeft">
-        <image wx:if="subItem.goodsImage!='-'" src="{{subItem.goodsImage}}"></image>
-        <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        <image src="{{(subItem.goodsImage!='-' && !subItem.goodsImage) ? errorImg:subItem.goodsImage}}"></image>
+      </view>
+      <view class="listCenter">
+        <view class="name color">{{subItem.goods_name}}</view>
+        <view class="gray desc">{{subItem.goodsDesc}}</view>
+        <view class="gray blu">
+          <text wx:if="{{subItem.goods_type}}">下单{{subItem.day_interval*24}}小时内</text>
+          <text>{{subItem.diliver_place}}交货</text>
+        </view>
       </view>
       <view class="listRight">
-        <text>{{subItem.goods_name}}</text>
-        <text>{{subItem.goodsDesc}}</text>
-        <view class="listLabel">
-          <text>订货 </text> |
-          <text wx:if="{{subItem.tag == '1'}}"> 原厂商户</text>
-          <text wx:if="{{subItem.tag == '2'}}"> 代理商</text>
-          <text wx:if="{{subItem.tag == '3'}}"> 商家</text>
-        </view>
         <view class="listPrice">
-          <text>{{subItem.price_unit ? '$' : '￥'}}{{subItem.goods_price}}</text>
-          <text>X {{subItem.goods_count}}</text>
+          <text>{{subItem.goods_count}} x </text>
+          <text class="money color">{{subItem.price_unit ? '$' : '￥'}}{{filter.toFixed(subItem.goods_price,subItem.price_unit?3:2)}}</text>
         </view>
-        <view class="listTax">
-          <view>
-            <text>税</text>
-            <text>{{subItem.guanshuiRate}}%关税</text>
-          </view>
-          <view>
-            <text>交</text>
-            <text>{{subItem.diliver_place}}交货</text>
-          </view>
+
+        <view class="listTax color" wx:if="{{subItem.guanshuiRate}}">
+          <text>关税：￥{{subItem.guanshuiTotal}}</text>
         </view>
       </view>
     </view>
   </block>
 </view>
-
-<view class="invoice" bindtap="invoiceInfo">
-  <text>发票信息</text>
+<view class="gray" style="padding:10rpx;">
+  交易提示：平台目前提供人民币与美元两种报价，取决于卖家的交货地址；但买家目前只能使用人民币付款；
+</view>
+<view class="descrition gray">
   <view>
-    <text>{{invoiceText}}</text>
-    <image src="../../img/image/youjiantouxiao.png"></image>
+    <view>1、关于海关增值税</view>
+    <text>此部分只针对美元交易的产品，此部分随国家政策做相应调整；</text>
   </view>
-</view>
-<view class="invoice">
-  <text>支付方式</text>
   <view>
-    <text>微信支付</text>
+    <view>2.关税与费用多退少补</view>
+    <text>根据国家海关规定：集成电路类的进口免关税，部分非集成电路类的元器件将收取关税。如果您所提交的订单中包含需要缴纳关税的型号，我们在后台做了初步的设置，我们会根据实际发生情况进行多退少补;</text>
   </view>
-</view>
-<view style="padding:20rpx;color:#999;line-heught:40rpx;background:#fff;">
-  目前平台暂不支持用户自行报关或香港交货，国内交货所有货物将折算成人民币价格
-</view>
-<view class="desc">
-  <text>*海关增值税13%；与国内商品销售暂行税率一致</text>
+  <view>
+    <view>
+      3、香港交货报关费补差价情况
+    </view>
+    <text>由于部分型号体积较大或重量较重等原因出现超重情况时，视供应商不同可能需要客户补交超出部分的运费；出现超重情况时，我们客服人员会第一时间与您取得联系，提醒您补交运费事项。</text>
+  </view>
+  <view>
+    <view>4、国内运费</view>
+    <text>从单一供应商购买金额超过500元以上为国内包邮，500元以下为顺丰到付；</text>
+  </view>
+  <view>
+    <view>清关服务费</view>
+    <text>针对美元交易的部分，平台将按总货值的万分之五收到，不足300元时按300收到；合并报关癔味者你此订单所有香港交换会等所有货物收齐后统一报关收一次清关服务费；单独清关，我们将单独为每一个型号报关，将分多次收取清关服务费；</text>
+  </view>
+  <view>
+    <view>6、关于付款问题</view>
+    <text>对公转帐用户将于订单生成后24小时完成支付，月结用户需要收24小时内完成合同回签并使用月结白条支付，逾期未支付订单将被自动取消，库存补自释放；</text>
+  </view>
+  <!-- <text>*海关增值税13%；与国内商品销售暂行税率一致</text>
   <text>*关税：是依据海关公布的产品来对应关税，若发现关税疑问，请联系客服</text>
   <text>*清关服务费：按本批次总货值得0.5%收取，不足300元按300元收取；没报关一次收取，收取一次费用；</text>
-  <text>*运费说明：单一供应商购买金额500元以上为包国内邮费，500元以下为顺丰到付；</text>
+  <text>*运费说明：单一供应商购买金额500元以上为包国内邮费，500元以下为顺丰到付；</text> -->
 </view>
 <view class="payDetail">
   <view>
     <text>人民币共{{unuscount}}种器件，金额小计：</text>
-    <text>￥{{payDetail.rmbtotalPrice}}</text>
+    <text>￥{{filter.toFixed(payDetail.rmbtotalPrice,2)}}</text>
   </view>
   <view>
     <text>美元共{{UScount}}种器件，金额小计：</text>
-    <text>US${{payDetail.usdTotalPrice}}</text>
+    <text>US${{filter.toFixed(payDetail.usdTotalPrice,3)}}</text>
   </view>
   <view>
     <text>今日美元汇率牌价：</text>
     <text>{{payDetail.exchange}}</text>
+  </view>
+  <view>
+    <text>海关增值税13%：</text>
+    <text>￥{{payDetail.needPayBillTotal}}</text>
   </view>
   <view>
     <text>关税</text>
@@ -96,7 +128,7 @@
     <text>￥{{payDetail.GuanshuiService}}</text>
   </view>
   <text>
-    应付总额：{{payDetail.rmbtotalPrice? '￥'+payDetail.rmbtotalPrice:'$'+payDetail.usdTotalPrice}}
+    应付总额：￥{{filter.toFixed(payDetail.totalPrice,2)}}
   </text>
 </view>
 <view class="payFooter">

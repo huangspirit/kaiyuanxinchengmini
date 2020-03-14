@@ -16,7 +16,7 @@
         <text>{{cancelText}}</text>
       </view>
       <view class="btn-footer btn-r-footer" bindtap="_onConfirm" >
-        <text>{{confirmText}}</text>
+        <text >{{confirmText}}</text>
       </view>
     </view>
     <view class="unConfirm" wx:if="{{!hasConfirm}}">

@@ -1,0 +1,22 @@
+<!--pages/pay/adress/adress.wxml-->
+
+<view class="addressList" wx:for="{{addresList}}" wx:key="index"  data-index="{{index}}">
+  <view class="listCentent">
+    <view class="changePic" bindtap="changeAdress" data-index="{{index}}" wx:if="{{routerIndex>-1}}">
+      <image src="{{index==defaultAddressIndex?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
+    </view>
+    <view class="changeContent">
+      <view>
+        <text>{{item.receivingName}}</text>
+        <text>{{item.phone}}</text>
+      </view>
+      <view>{{item.address}}{{item.detailedAddress}}</view>
+    </view>
+    <view>
+    <text class="cuIcon-edit icon color" bindtap="editadress" data-index="{{index}}"></text>
+    </view>
+  </view>
+</view>
+<view class="bgColor bottombtn" bindtap="addAdress">
+<text>添加新地址 </text>
+</view>

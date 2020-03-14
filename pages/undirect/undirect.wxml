@@ -6,7 +6,8 @@
   <view class="left">
     <view class="{{siderIndex == 0?'siderActive':''}}" bindtap="siderChange" data-index="{{-1}}">全部</view>
     <view wx:for="{{categorylist}}" class="{{siderIndex == index+1?'siderActive':''}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
-      {{item.catergoryName}}（{{item.summaryTotal}}）
+      {{item.catergoryName}}
+      <!-- （{{item.summaryTotal}}） -->
     </view>
   </view>
   <text bindtap="showCoverTap" class="right">筛选</text>
@@ -17,7 +18,9 @@
       <view>全部</view>
     </view>
     <view wx:for="{{categorylist}}" class="{{siderIndex == index+1?'siderActive item':'item'}}" catchtap="siderChange" data-index="{{index}}" data-item="{{item}}" wx:key="index">
-      <view>{{item.catergoryName}}（{{item.summaryTotal}}）</view>
+      <view class="{{(index+2)%2==0?'nomargin':''}}">{{item.catergoryName}}
+      <!-- （{{item.summaryTotal}}） -->
+      </view>
     </view>
   </view>
 </view>

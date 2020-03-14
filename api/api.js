@@ -11,11 +11,16 @@ const request = (url, options) => {
         if (request.statusCode === 200) {
           resolve(request.data)
         } else if (request.statusCode === 400){
-          wx.showToast({
-            title: request.data.message,
-            icon: 'none',
-            duration: 2000
-          })
+          if (url =="/api-order/customerCenter/queryOrderInfo"){
+            resolve(request.data)
+          }else{
+            wx.showToast({
+              title: request.data.message,
+              icon: 'none',
+              duration: 2000
+            })
+          }
+          
         } else if (request.statusCode === 401) {
           // 401 说明 token 验证失败
           // 可以直接跳转到登录页面，重新登录获取 token
@@ -59,18 +64,25 @@ const get = (url, options) => {
       }
     })
   }
-
 }
-
-const post = (url, options) => {
+const post = (url, options,header) => {
   if (wx.getStorageSync('token') != "") {
-    return request(url, {
-      method: 'POST',
-      data: options,
-      header: {
+    if(header){
+      header={
+        ...header,
         'Content-Type': 'application/json; charset=UTF-8',
         "Authorization": "Bearer " + wx.getStorageSync('token')
       }
+    }else{
+      header={
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Authorization": "Bearer " + wx.getStorageSync('token')
+      }
+    }
+    return request(url, {
+      method: 'POST',
+      data: options,
+      header: header
     })
   } else {
     return request(url, {
@@ -82,16 +94,25 @@ const post = (url, options) => {
     })
   }
 }
-const postForm = (url, options) => {
+const postForm = (url, options, header) => {
   console.log(options)
   if (wx.getStorageSync('token') != "") {
-    return request(url, {
-      method: 'POST',
-      data: options,
-      header: {
+    if (header) {
+      header = {
+        ...header,
         'Content-Type': 'application/x-www-form-urlencoded',
         "Authorization": "Bearer " + wx.getStorageSync('token')
       }
+    } else {
+      header = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": "Bearer " + wx.getStorageSync('token')
+      }
+    }
+    return request(url, {
+      method: 'POST',
+      data: options,
+      header: header
     })
   } else {
     return request(url, {

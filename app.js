@@ -5,6 +5,15 @@ App({
 
   },
   onLaunch: function(options) {
+    wx.getSystemInfo({
+      success: res => {
+        //导航高度
+        console.log(res.statusBarHeight)
+        this.globalData.navHeight = res.statusBarHeight + 46;
+      }, fail(err) {
+        console.log(err);
+      }
+    })
     // 展示本地存储能力
     wx.setStorageSync('isBuyer', true)
     // // 登录
@@ -108,7 +117,8 @@ App({
     host: 'https://api.113ic.com',
     errorImg: '/img/public/errorImg.png',
     title: '大麦晶城',
-    baseURL3: "http://brand.113ic.com"
+    baseURL3: "http://brand.113ic.com",
+    navHeight: 0
     // errorImg: "http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"
   }
 })

@@ -63,19 +63,30 @@ page {
     background:#fff;
     float: right;
     height:100%;
-    
+    padding:20rpx;
+   box-sizing: border-box;
   }
   .coverItem .list .item{
-    display: inline-block;
+    margin-top:15rpx;
+    text-align: center;
+    width:50%;
+    overflow: hidden;
+    display:inline-block;
+  }
+.coverItem .list .item>view{
     padding:5rpx 25rpx;
     border:1rpx solid #ddd;
     border-radius: 3rpx;
-    margin-left:25rpx;
-    margin-top:15rpx;
-    text-align: center;
-    line-height: 40rpx;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:95%;
   }
-  .coverItem .list .siderActive{
+  .coverItem .list .item .nomargin{
+    width:100%;
+  }
+   /*  .coverItem .list .siderActive{
     color:#df3f2f;
     border-color:#df3f2f;
   }
@@ -90,7 +101,7 @@ page {
     line-height:40rpx;
     display:inline-block;
     vertical-align: middle;
-  }
+  } */
 .productContent .productList {
   background: #fff;
   height: 100%;

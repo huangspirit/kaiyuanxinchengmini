@@ -68,12 +68,17 @@
     "pages/my/agencyQualification/addEditAgency/addEditAgency",
     "pages/my/agencyQualification/chooseBrand/chooseBrand",
     "pages/undirect/undirect",
-    "pages/brandlist/brandlist"
+    "pages/brandlist/brandlist",
+    "pages/settle/settle",
+    "components/select/select",
+    "pages/settleitem/settleitem",
+    "pages/addressList/addressList",
+    "pages/home1/home1"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "大麦晶城",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -88,16 +93,16 @@
         "text": "首页"
       },
       {
-        "selectedIconPath": "./img/home/fenleidianji.png",
-        "iconPath": "./img/home/fenlei.png",
-        "pagePath": "pages/classCation/classCation",
-        "text": "分类"
-      },
-      {
-        "selectedIconPath": "./img/home/zhaotejiadianji.png",
-        "iconPath": "./img/home/zhaotejia.png",
+        "selectedIconPath": "./img/home/specialActive.png",
+        "iconPath": "./img/home/special.png",
         "pagePath": "pages/special/special",
         "text": "特价"
+      },
+      {
+        "selectedIconPath": "./img/home/searchActive.png",
+        "iconPath": "./img/home/search.png",
+        "pagePath": "pages/search/search",
+        "text": "搜索"
       },
       {
         "selectedIconPath": "./img/home/gouwuchedianji.png",

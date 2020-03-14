@@ -155,8 +155,16 @@
   flex-wrap: wrap;
  
 }
-.cateWrap .secondCate view{
-  padding:0 15rpx;
-  margin-right:15rpx;
+.cateWrap .secondCate .borderGreen{
+  padding:5rpx 15rpx;
   margin-bottom:15rpx;
+  width:32%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right:2%;
+  line-height: 1;
+}
+.cateWrap .secondCate .nomargin{
+  margin-right: 0;
 }

@@ -2,10 +2,42 @@
 page{
   height:100%;
 }
+.productSearch {
+  width: 100%;
+  height: 98rpx;
+  border-top: 2rpx solid #f7f7f7;
+  border-bottom: 2rpx solid #f7f7f7;
+  margin-bottom: 20rpx;
+  padding: 16rpx 30rpx;
+  box-sizing: border-box;
+  position: fixed;
+  background:#fff;
+  z-index:1;
+  display:flex;
+  align-items: center;
+}
+.productSearch .cuIcon-search{
+background: #f7f7f7;
+border-top-left-radius: 60rpx;
+  border-bottom-left-radius: 60rpx;
+  height: 100%;
+  line-height: 65rpx;
+  padding-left: 20rpx;
+}
+.productSearch>input {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #f7f7f7;
+  border-top-right-radius: 60rpx;
+  border-bottom-right-radius: 60rpx;
+  padding-left: 20rpx;
+}
 .title{
   width:100%;
   display: flex;
   padding:0 15rpx ;
+  padding-top:98rpx;
 }
 .title .left{
   overflow-x: auto;
@@ -27,7 +59,7 @@ page{
   position: fixed;
   z-index:1;
   bottom:0;
-  top:0;
+  top:98rpx;
   left:0;
   right:0;
   background:rgba(0,0,0,0.5);
@@ -38,17 +70,23 @@ page{
     background:#fff;
     float: right;
     height:100%;
-    
+    padding:0 20rpx;
+    box-sizing: border-box;
   }
   .coverItem .list .item{
     display: inline-block;
     padding:5rpx 25rpx;
     border:1rpx solid #ddd;
     border-radius: 3rpx;
-    margin-left:25rpx;
     margin-top:15rpx;
     text-align: center;
     line-height: 40rpx;
+    width:48.5%;
+    margin-right:3%;
+    box-sizing: border-box;
+  }
+  .coverItem .list .nomargin{
+    margin-right:0;
   }
   .coverItem .list .siderActive{
     color:#df3f2f;
@@ -61,10 +99,9 @@ page{
     vertical-align: middle;
   }
   .coverItem .list .item view{
-    height:40rpx;
-    line-height:40rpx;
     display:inline-block;
     vertical-align: middle;
+    padding:3rpx ;
   }
 .spotSpecial {
   width: 100%;
@@ -115,6 +152,9 @@ page{
 .Right .listcenter{
   flex:1;
   min-width:0;
+}
+.Right .listcenter .name{
+  font-weight: bolder;
 }
 .Right .listcenter .desc {
   margin-top:8rpx;

@@ -57,19 +57,18 @@
   float: left;  
   /*每个item设置宽度是33.33%*/  
   width: 33.33%;  
-  height: 240rpx;  
   text-align: center;  
 }  
 .nav_right .nav_right_items image{  
   /*被图片设置宽高*/  
-  width: 120rpx;  
-  height: 120rpx;  
-  margin-top: 30rpx;  
+  width: 100rpx;  
+  height: 100rpx;  
+  margin-top: 15rpx;  
 }  
 .nav_right .nav_right_items text{  
   /*给text设成块级元素*/  
   display: block;  
-  margin-top: 30rpx;  
+  margin-top: 15rpx;  
   font-size: 28rpx;  
   color: black;
   /*设置文字溢出部分为...*/  

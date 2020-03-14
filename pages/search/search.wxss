@@ -12,12 +12,13 @@ page {
 }
 
 .custom .searchBanner {
-  height: 200rpx;
+  height: 150rpx;
   width: 100%;
   padding: 0 20rpx;
   position: relative;
   overflow: hidden;
   margin-bottom: 20rpx;
+  background:#333;
 }
 
 .custom .searchBanner>image {
@@ -43,7 +44,7 @@ page {
 .custom .searchBanner .searchContent>text:nth-of-type(1) {
   color: #fff;
   font-size: 32rpx;
-  margin-top: 60rpx;
+  margin-top: 35rpx;
   font-weight: bold;
 }
 
@@ -57,7 +58,6 @@ page {
   margin-top: 3rpx;
   width: 100%;
   height: 78rpx;
-  overflow: hidden;
   box-sizing: border-box;
   position: relative;
   background: #fff;
@@ -78,18 +78,25 @@ page {
   margin-right: 36rpx;
   margin-top: 21rpx;
 }
-
+.custom:hover .searchList{
+  display: block;
+}
 .searchList {
-  margin-top: 8rpx;
-  height: calc(100% - 330rpx);
+  /* margin-top: 8rpx; */
+  /* height: calc(100% - 330rpx); */
   width: 100%;
   padding: 0 20rpx 40rpx 20rpx;
-  overflow-y: scroll;
-  position: fixed;
-  top: 330rpx;
+  position: absolute;
+  top: 78rpx;
   left: 0;
   overflow: auto;
-  z-index: 1;
+  box-shadow: 0 0 10rpx 3rpx #ddd;
+  z-index:100;
+  background:#fff;
+  max-height: 650rpx;
+  min-height: 100rpx;
+  overflow-y: auto;
+  display: none;
 }
 
 .searchList>view {
@@ -176,4 +183,19 @@ page {
 
 .oldSearch .oldList>view:nth-child(4n) {
   margin-right: 0;
+}
+.hotSearch .List{
+  display:flex;
+  flex-wrap: wrap;
+}
+.hotSearch .List view{
+  margin-right:0.3%;
+  border:1px solid #ddd;
+  margin-bottom:10rpx;
+  padding:5rpx 10rpx;
+  width:33%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }

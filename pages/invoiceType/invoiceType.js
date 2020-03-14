@@ -8,9 +8,11 @@ Page({
   data: {
     invoiceList: [],
     invoiceDetail: [],
-    defaultInvoice: {},
-    OrderInformation: {},
-    payStorage: {}
+    defaultInvoiceIndex:0,
+    defaultInvoiceDetailIndex:0,
+    routerInvoiceDetailIndex:-1,
+    routerInvoiceIndex:-1
+
   },
   getInvoiceList() {
     api.get('/api-g/goods-b/queryGoodsBillSetOffList', {
@@ -18,14 +20,9 @@ Page({
       start: 0,
       length: 100
     }).then(res => {
-      console.log(res)
-      for (let i = 0; i < res.data.data.length; i++) {
-        res.data.data[i].checked = false
-      }
-      let length = res.data.data.length - 1
-      res.data.data[length].checked = true
       this.setData({
-        invoiceList: res.data.data
+        invoiceList: res.data.data,
+        //defaultInvoiceIndex:0
       })
     })
   },
@@ -34,62 +31,37 @@ Page({
       start: 0,
       length: 100
     }).then(res => {
-      console.log(res)
-      for (var i = 0; i < res.data.data.length; i++) {
-        res.data.data[i]['checked'] = false
-      }
-
-      if (res.data.total == 1) {
-        this.data.defaultInvoice = res.data.data[0]
-        res.data.data[0].checked = true
-      } else if (res.data.total > 1) {
-        let count = 0;
-        res.data.data.forEach(item => {
-          if (item.isdefault) {
-            count++
-          }
-        })
-        this.data.defaultInvoice = res.data.data[count]
-        res.data.data[count].checked = true
-      };
-      this.setData({
-        invoiceDetail: res.data.data,
-        defaultInvoice: this.data.defaultInvoice
+      let count=0;
+      let defaultInvoiceDetailIndex =0
+      let list=res.data.data.map((item,index)=>{
+        if (item.isdefault){
+          count=1;
+          defaultInvoiceDetailIndex=index
+        }
+        return item;
       })
-      console.log(this.data.defaultInvoice)
+      
+      if(this.data.routerInvoiceDetailIndex<0){
+        this.setData({
+          invoiceDetail: list,
+          defaultInvoiceDetailIndex: defaultInvoiceDetailIndex
+        })
+      }else{
+        this.setData({
+          invoiceDetail: list,
+          // defaultInvoiceDetailIndex: defaultInvoiceDetailIndex
+        })
+      }
     })
   },
   invoiceChange(val) {
-    console.log(val)
-    let index = val.currentTarget.dataset.index
-    for (let i = 0; i < this.data.invoiceList.length; i++) {
-      this.data.invoiceList[i].checked = false
-    }
-    this.data.invoiceList[index].checked = true
-    let bill = JSON.parse(this.data.OrderInformation.bill);
-    bill.billtype = this.data.invoiceList[index].id;
-    this.data.OrderInformation.bill = JSON.stringify(bill)
-    this.data.payStorage.obj2 = this.data.OrderInformation
     this.setData({
-      invoiceList: this.data.invoiceList,
-      OrderInformation: this.data.OrderInformation
+      defaultInvoiceIndex: val.currentTarget.dataset.index
     })
   },
   chooseInvoice(val) {
-    console.log(val)
-    let index = val.currentTarget.dataset.index
-    for (let i = 0; i < this.data.invoiceDetail.length; i++) {
-      this.data.invoiceDetail[i].checked = false
-    }
-    this.data.invoiceDetail[index].checked = true
-    let bill = JSON.parse(this.data.OrderInformation.bill);
-    bill.content_id = this.data.invoiceDetail[index].id;
-
-    this.data.OrderInformation.bill = JSON.stringify(bill)
-    this.data.payStorage.obj2 = this.data.OrderInformation
     this.setData({
-      invoiceDetail: this.data.invoiceDetail,
-      OrderInformation: this.data.OrderInformation
+      defaultInvoiceDetailIndex: val.currentTarget.dataset.index,
     })
   },
   addInvoice() {
@@ -98,17 +70,16 @@ Page({
     })
   },
   confirm() {
-    console.log(this.data.OrderInformation, this.data.payStorage)
-    this.data.payStorage.data = JSON.stringify(this.data.payStorage.data)
-    this.data.payStorage.obj2 = JSON.stringify(this.data.payStorage.obj2)
-    this.data.payStorage = JSON.stringify(this.data.payStorage)
-    wx.setStorage({
-      key: 'buyOneGoodsDetail',
-      data: this.data.payStorage
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      defaultInvoiceIndex: this.data.defaultInvoiceIndex,
+      defaultInvoiceDetailIndex: this.data.defaultInvoiceDetailIndex,
+      isback:true
     })
-    wx.navigateTo({
-      url: '../pay/pay',
-    })
+    wx.navigateBack({
+      delta:1
+    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -116,15 +87,22 @@ Page({
   onLoad: function(options) {
     this.getInvoiceList()
     this.getinvoiceDetail()
-    this.data.payStorage = JSON.parse(wx.getStorageSync('buyOneGoodsDetail'))
-    this.data.payStorage.data = JSON.parse(this.data.payStorage.data)
-    this.data.payStorage.obj2 = JSON.parse(this.data.payStorage.obj2)
-    console.log(this.data.payStorage)
-    this.data.OrderInformation = this.data.payStorage.obj2
-    this.setData({
-      OrderInformation: this.data.OrderInformation,
-      payStorage: this.data.payStorage
-    })
+    if (options.defaultInvoiceDetailIndex){
+      this.setData({
+        defaultInvoiceDetailIndex: Number(options.defaultInvoiceDetailIndex),
+        defaultInvoiceIndex: Number(options.defaultInvoiceIndex),
+        routerInvoiceDetailIndex: Number(options.defaultInvoiceDetailIndex),
+        routerInvoiceIndex: Number(options.defaultInvoiceIndex)
+      })
+    }
+    // let obj = JSON.parse(wx.getStorageSync('buyOneGoodsDetail'))
+    // this.setData({
+    //   OrderInformation: JSON.parse(obj.obj2),
+    //   payStorage: {
+    //     data: JSON.parse(obj.data),
+    //     obj2: JSON.parse(obj.obj2)
+    //   }
+    // })
   },
 
   /**

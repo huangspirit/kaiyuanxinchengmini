@@ -162,8 +162,9 @@ Page({
     })
     api.get('/api-g/gods-anon/queryDirectGoods', {
       start: 0,
-      length: 50,
-      seller_id: this.data.seller_id
+      length: 20,
+      seller_id: this.data.seller_id,
+      show_brand:1
     }).then(res => {
       wx.hideLoading()
       this.setData({

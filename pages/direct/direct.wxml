@@ -23,7 +23,7 @@
           <view class="gray">...</view>
         </view>
         <view class="blu brand" catchtap="toBrand" data-item="{{item}}">品牌：{{item.branda}}</view>
-        <view class="gray desc">{{item.productdesc}}</view>
+        <view class="gray desc">描述：{{item.productdesc}}</view>
         <view class="btnwrap">
                 <text class="bgOrange" wx:if="{{item.hasSeller}}" catchtap="specialPrice" data-item="{{item}}">申请特价</text>
                 <text class="bgColor" wx:if="{{item.hasSeller}}" catchtap="addInquiry" data-item="{{item}}">加入询价蓝</text>

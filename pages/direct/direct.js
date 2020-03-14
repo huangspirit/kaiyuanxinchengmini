@@ -88,6 +88,10 @@
           complete: function (res) { },
         })
       } else {
+        wx.navigateTo({
+          url: '../settle/settle',
+        })
+        return;
         this.setData({
           join: true
         })
@@ -252,7 +256,6 @@
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-  console.log(options)
       let UserInforma = wx.getStorageSync('UserInforma')
       let item = JSON.parse(options.params)
       this.setData({

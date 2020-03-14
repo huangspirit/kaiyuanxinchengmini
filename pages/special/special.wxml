@@ -3,53 +3,51 @@
 <view class="custom flex_center">
   <view class='navInput'>
     <text class="cuIcon-search"></text>
-    <input placeholder='搜索你想要的商品' bindtap='toSearch' placeholder-class='none'></input>
+    <input placeholder='搜索你想要的商品' bindconfirm='toSearch' placeholder-class='none'></input>
   </view>
 </view>
 <view class="specialContent">
-  <view class="flex  p-xs margin-bottom-sm mb-sm">
-    <view class="radius specialSider">
-      <text wx:for="{{specialSider}}" class="{{siderIndex == index?'siderActive':''}}" bindtap="siderChange" data-index="{{index}}" wx:key="index">{{item.name}}</text>
-    </view>
-    <view class="flex-twice padding-sm margin-xs radius rightContent">
-      <view class="specialList" wx:for="{{speciaList}}" wx:key="index" bindtap="goodsDetail" data-item="{{item}}">
-        <view class="top clear">
-          <view class="listLeft">
-            <image src="{{item.goodsImageUrl?item.goodsImageUrl:errorImg}}"></image>
-          </view>
-          <view class="listRight">
-          <view class="goodsNameWrap">
-           <text class="goodsName">{{item.goods_name}}</text>
-            <text class="cuIcon-moreandroid"></text>
-          </view>
-           
-            <view class="listContent">
-              <view class="left">
-                <text class="brandName">{{item.brandName}}</text>
-                <text class="goodsDeac">{{item.goodsDesc}}</text>
-                <!-- <text>{{filter.goodsTypeFilter(item.goods_type)}} | {{filter.tagFilter(item.tag)}}</text> -->
-              </view>
-            </view>
-            
-          </view>
-        </view>
-        <view class="bottom saleStatus clear">
-              <view class="right color bolder">
-                <text wx:if="{{item.priceType}}">{{item.priceUnit?'$':'￥'}}{{filter.priveLevel(item.priceLevel)}}起</text>
-                <text wx:else>{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
-              </view>
-            <!-- <text class="color right">剩{{item.goodsStockCount}}</text> -->
-            <view wx:if="{{!item.seller_always && item.expireTime}}" class="left">跟单倒计时：
-              <text class="color">{{item.countDown}}</text>
-            </view>
-              <!-- <text wx:if="{{item.seller_always}}">长期售卖</text> -->
-              
-        </view>
-      </view>
-      <view class="prompt" wx:if="{{speciaList.length<=0}}">暂无数据</view>
-    </view>
+  <view class="specialSider">
+    <view wx:for="{{specialSider}}" class="{{siderIndex == index?'siderActive color one':'one'}}" bindtap="siderChange" data-index="{{index}}" wx:key="index">{{item.name}}</view>
   </view>
-   <view class="cu-load load-modal" wx:if="{{loadModal}}">
-        <view class="gray-text">加载中...</view>
+  <view class="content">
+    <view class="specialList" wx:for="{{speciaList}}" wx:key="index" bindtap="goodsDetail" data-item="{{item}}">
+      <view class="listLeft">
+        <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
       </view>
+      <view class="listRight">
+        <view style="display:flex;">
+          <view class="goodsNamewrap">
+            <view class="goodsName">{{item.goods_name}}</view>
+            <view class="brandName blu">品牌：{{item.brandName}}</view>
+          </view>
+          <view style="text-align:right;">
+            <text class="color bolder " wx:if="{{item.priceType}}">
+            {{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}起</text>
+            <text wx:else class="color bolder">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+            <view class="blu" style="font-size:20rpx;white-space:nowrap;margin-top:10rpx;">({{item.priceUnit?'不含税':'含13%增值税'}})</view>
+          </view>
+        </view>
+        <view class="goodsDeac gray">描述：{{item.goodsDesc}}</view>
+        <view class="wrapbtn">
+          <text class="{{item.goods_type?'green borderGreen':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
+          <text class="color borderColor" wx:if="{{item.tag==1}}">{{filter.tagFilter(item.tag)}}</text>
+          <text class="blu borderBlu" wx:if="{{item.tag==2}}">{{filter.tagFilter(item.tag)}}</text>
+          <text class="orange borderOrange" wx:if="{{item.tag==18}}">{{filter.tagFilter(item.tag)}}</text>
+          <text class="borderColor">{{item.diliverPlace}}发货</text>
+          <view wx:if="{{!item.seller_always && item.expireTime}}" class="timer color">
+            剩余:<text >{{item.countDown}}</text>
+          </view>
+
+        </view>
+      </view>
+
+    </view>
+    <view class="prompt gray" wx:if="{{speciaList.length<=0}}">暂无数据</view>
+    <view class="prompt gray" wx:if="{{speciaList.length==total && speciaList.length!=0}}">已经加载到底了！</view>
+  </view>
+
+  <view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+  </view>
 </view>

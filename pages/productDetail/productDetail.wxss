@@ -2,16 +2,13 @@
 
 .productDetailPic {
   width: 100%;
-  height: 520rpx;
+  height: 320rpx;
+  text-align: center;
+  background: #fff;
 }
-
 .productDetailPic >image {
-  width: 100%;
-  height: 100%;
-}
-
-.brandComponey {
-  margin-bottom: 10rpx;
+  width: 600rpx;
+  height:320rpx;
 }
 .brandComponey .brandTitle {
   width: 100%;
@@ -32,130 +29,75 @@
 
 .brandDetail>text {
   display: block;
-  margin: 20rpx 0;
+  margin-top:8rpx;
   font-size: 28rpx;
-  color: #999;
 }
 
-.brandDetail>text:nth-of-type(1) {
+.brandDetail>.name {
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
 }
-
+.brandDetail>.desc{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .brandDetail .goodsLabel {
   padding: 5rpx 0;
-  height: 85rpx;
-  line-height: 85rpx;
   display: flex;
   justify-content: space-between;
+  align-content: center;
   border-bottom: 2rpx dashed #bcbcbc;
+  margin-top:10rpx;
 }
-
-.brandDetail .goodsLabel>.labelList {
+.brandDetail .goodsLabel .mark{
+  padding-top:10rpx;
+}
+.brandDetail .goodsLabel .mark text{
+  border:1px solid #ddd;
+  padding:2rpx 20rpx;
+  border-radius: 3rpx;
+  margin-right:8rpx;
+}
+.brandDetail .goodsLabel .productFocus{
   display: flex;
-  margin-top: 8rpx;
+  align-items: center;
 }
-
-.brandDetail .goodsLabel>.labelList>text {
-  width: 120rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  text-align: center;
-  margin-right: 20rpx;
-  border-radius: 8rpx;
-  background: #df3f2f;
-  display: block;
-  color: #fff;
+.brandDetail .goodsLabel .productFocus image{
+  height:35rpx;
+  width:35rpx;
+  margin-right:15rpx;
+  vertical-align: middle;
 }
-
-.brandDetail .goodsLabel .productFocus {
-  display: flex;
-  padding: 0 15rpx;
-}
-
-.brandDetail .goodsLabel .productFocus>.focus {
-  margin-right: 52rpx;
-  display: flex;
-  flex-direction: column;
-}
-
-.brandDetail .goodsLabel .productFocus>.focus>image {
-  width: 40rpx;
-  height: 35rpx;
-}
-
-.brandDetail .goodsLabel .productFocus>.focus>text {
-  font-size: 16rpx;
-  color: #333;
-  line-height: 40rpx;
-  text-align: center;
-}
-
-.brandDetail .goodsLabel .productFocus>.share {
-  display: flex;
-  flex-direction: column;
-}
-
-.brandDetail .goodsLabel .productFocus>.share>text {
-  font-size: 16rpx;
-  color: #333;
-  line-height: 32rpx;
-  text-align: center;
+.brandDetail .goodsLabel .productFocus>.share{
+  margin-left:20rpx;
 }
 
 .brandDetail .goodsLabel .productFocus>.share>button {
-  height: 38rpx;
   background: #fff;
   padding: 0;
-  line-height: 45rpx;
   border-radius: 0;
-  font-size: 15rpx;
+  font-size:24rpx;
 }
 
 .brandDetail .goodsLabel .productFocus>.share>button::after {
   border: none;
 }
 
-.brandDetail .goodsLabel .productFocus>.share>button>image {
-  width: 33rpx;
-  height: 34rpx;
-}
-
-.brandDetail .seller1 {
-  height: 65rpx;
-  line-height: 65rpx;
-}
-
-.brandDetail .seller1>text:nth-of-type(1) {
-  font-size: 21rpx;
-  color: #df3d2e;
-}
-
-.brandDetail .seller1>text:nth-of-type(2) {
-  font-size: 21rpx;
-  color: #343434;
-}
-
-.specile {
-}
-
 .specile .specileTitle {
   text-align: center;
-  line-height: 120rpx;
-  font-size: 34rpx;
-  color: #333;
+  font-size: 24rpx;
+  line-height:60rpx;
+  background:#fff;
 }
 
 .specile .specileList {
-  margin-bottom: 15rpx;
+ border-bottom:15rpx solid #fff;
 }
-
 .specile .specileList .listContent {
   display: flex;
   flex-direction: column;
-  padding: 0 20rpx;
-  background: #fff;
+  padding: 10rpx 20rpx;
   margin-bottom: 20rpx;
 }
 
@@ -167,58 +109,42 @@
   border-bottom: 2rpx dashed #bcbcbc;
 }
 
-.specile .specileList .listContent>.listTitle>view {
-  font-size: 28rpx;
-  color: #333;
-}
-
-.specile .specileList .listContent>.listTitle>view>text:nth-of-type(2) {
+.specile .specileList .listContent>.listTitle .tag {
   height: 30rpx;
   line-height: 30rpx;
   padding: 0 13rpx;
-  margin-left: 10rpx;
-  background: #df3f2f;
   border-radius: 8rpx;
-  color: #fff;
+ margin-left:8rpx;
 }
-
-.specile .specileList .listContent>.listTitle>view>image {
+.specile .specileList .listTitle .purchase{
+  padding:2rpx 8rpx;
+  border-radius: 8rpx;
+}
+.specile .specileList .listContent>.listTitle .img {
   width: 50rpx;
   height: 50rpx;
   vertical-align: middle;
   margin-right: 20rpx;
   border-radius: 50rpx;
 }
-
+.specile .specileList .listContent .count{
+  display:flex;
+ justify-content: space-between;
+  align-items: center;
+}
 .specile .specileList .listContent .listDetail {
   display: flex;
   justify-content: space-between;
-  padding:10rpx;
+  align-items: center;
 }
-
 .specile .specileList .listContent .listDetail .listLeft {
   font-size: 26rpx;
-  color: #989898;
   white-space: wrap;
   line-height: 50rpx;
 }
 .specile .specileList .listContent .listDetail .listLeft .right{
   float: right;
 }
-/* .specile .specileList .listContent .listDetail .listLeft>text {
-  color: #e13f32;
-  font-size: 28rpx;
-  display: block;
-} */
-
-.specile .specileList .listContent .listDetail .listRight {
-  display: flex;
-  flex-direction: column;
-  align-content: left;
-  text-align: right;
-  padding: 15rpx 0;
-}
-
 .specile .specileList .listContent .listDetail .listRight .price {
   font-size: 30rpx;
   margin-top:15rpx;
@@ -391,4 +317,20 @@
 .canui-tabbar-bottom {
   padding-bottom: 20rpx;
   min-height: 150rpx;
+}
+.goodsPurchase{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goodsPurchase>text{
+  flex:1;
+  white-space: nowrap;
+  line-height: 0.5;
+  height:50rpx;
+}
+.goodsPurchase .btnwrap{
+  display: flex;
+  flex: 1;
+  line-height: 1;
 }

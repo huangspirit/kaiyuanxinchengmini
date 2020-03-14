@@ -1,18 +1,16 @@
 <!--pages/search/search.wxml-->
 <view class="custom flex_center">
   <view class="searchBanner">
-    <image src="../../img/home/searchBanner.jpg"></image>
+    <!-- <image src="../../img/home/searchBanner.jpg"></image> -->
     <view class='searchContent'>
-      <text>找低价 买特价 开源节流</text>
-      <text>数百家厂商的选择，芯手网值得您信赖</text>
+      <text>电子元器件特价共享交易平台</text>
+      <text>原装正品是底线 跟着特价买才省钱</text>
     </view>
   </view>
   <view class='navInput'>
     <input placeholder='搜索你想要的内容' placeholder-class='none' bindinput='search' placeholder-style='color:#999999;font-size:23rpx;'></input>
     <image src="../../img/image/sousuo.png"></image>
-  </view>
-</view>
-<view class='searchList' wx:if="{{searchList.length>0}}">
+    <view class='searchList' wx:if="{{searchList.length>0}}">
   <view bindtap="toDetail" wx:for="{{searchList}}" data-item="{{item}}" wx:for-item="item" wx:for-index="index" wx:key="index">
     <block wx:for="{{item.nameLight}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
       <text wx:if="{{subItem.key == true}}" style="color:red;">{{subItem.str}}</text>
@@ -20,8 +18,19 @@
     </block>
   </view>
 </view>
+  </view>
+</view>
+
 
 <view class="hotSearch">
+  <view class="hotTitle" wx:if="{{tralist.length>0}}">
+    <text>足迹</text>
+    </view>
+    <view class="List">
+    <view wx:for="{{tralist}}" wx:key="{{index}}"  bindtap="toDetail" data-item="{{item}}">
+      <text>{{item.name}}</text>
+    </view>
+    </view>
   <view class="hotTitle">
     <text>热搜榜</text>
     <!-- <view>

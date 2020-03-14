@@ -1,0 +1,44 @@
+/* pages/pay/adress/adress.wxss */
+
+.addressList .listCentent {
+  background: #fff;
+  display: flex;
+  padding: 20rpx;
+  margin-bottom: 10rpx;
+  align-items: center;
+}
+.addressList .listCentent .icon{
+  font-size:35rpx;
+}
+.addressList .listCentent>.changePic>image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.addressList .listCentent>.changeContent {
+  width: calc(100% - 60rpx);
+}
+
+.addressList .listCentent>.changeContent>view:nth-of-type(1) {
+  margin: 5rpx 0;
+}
+
+.addressList .listCentent>.changeContent>view:nth-of-type(1)>text {
+  color: #333;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+  font-weight: bold;
+}
+.addressList .listCentent>.changeContent>view:nth-of-type(2) {
+  color: #bbb;
+  font-size: 26rpx;
+}
+.bottombtn{
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  width:90%;
+  margin:0 auto;
+  border-radius: 10rpx;
+}

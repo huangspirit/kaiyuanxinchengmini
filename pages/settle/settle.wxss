@@ -1,0 +1,225 @@
+/* pages/settle/settle.wxss */
+.item{
+  display:flex;
+  padding:20rpx;
+  /* align-items: center; */
+  background:#fff;
+  margin-top:10rpx;
+}
+.item .title{
+  width:180rpx;
+}
+.item>view:nth-of-type(2){
+  flex:1;
+}
+.item .right{
+  flex:1;
+}
+.item .right .select-wrap{
+  width:300rpx;
+  font-size:26rpx;
+}
+.selectBrand .alphabetlist{
+  width: 100%;
+  white-space: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.selectBrand .alphabetlist text{
+  margin-right:7rpx;
+  padding:5rpx 13rpx;
+  margin-bottom:15rpx;
+  border-radius: 5rpx;
+  font-size:22rpx;
+}
+.selectBrand .brandListwrap{
+  flex:1;
+  min-height: 0;
+  overflow-y: auto;
+  padding:20rpx 0;
+}
+.selectBrand .brandList{
+  width: 100%;
+  white-space: wrap;
+  display: flex;
+  flex-wrap: wrap;
+}
+.selectBrand .brandList text{
+  margin-right:10rpx;
+  padding:5rpx 13rpx;
+  margin-bottom:15rpx;
+  border-radius: 5rpx;
+  font-size:22rpx;
+
+}
+.selectBrand .result{
+  width: 100%;
+  white-space: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  padding:20rpx;
+  box-shadow: 0 0 5rpx 2rpx #ddd;
+  margin-bottom:20rpx;
+}
+.selectBrand .result .tit{
+  font-size:30rpx;
+  font-weight: bolder;
+  margin-bottom: 20rpx;
+}
+.selectBrand .result .item{
+  margin-right:10rpx;
+  padding:5rpx 13rpx;
+  padding-right:20rpx;
+  margin-bottom:15rpx;
+  border-radius: 5rpx;
+  font-size:22rpx;
+  position: relative;
+}
+.selectBrand .result .icon{
+  position: absolute;
+  right:-10rpx;
+  top: -15rpx;
+  font-size: 30rpx;
+  background:#fff;
+}
+.selectBrand .btnwrap{
+  display: flex;
+  justify-content: space-around;
+}
+.selectBrand .btnwrap button{
+  width:30%;
+  line-height: 1.7;
+  font-size:26rpx;
+  padding:6rpx 0;
+
+}
+.modals-cancel {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bottom-dialog-body {
+  position: absolute;
+  z-index: 10001;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 680rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column
+}
+/*动画前初始位置*/
+.bottom-pos {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  padding:20rpx;
+  box-sizing: border-box;
+}
+.showbrand{
+  font-size:24rpx;
+  margin-top:10rpx;
+}
+.showbrand .oneitem{
+  padding:10rpx 40rpx 10rpx;
+  margin-bottom:10rpx;
+  background:#fff;
+}
+.showbrand .name{
+  margin-bottom:10rpx;
+  font-weight: bolder;
+}
+ .picture{
+  display:flex;
+}
+ .picture .bg-img{
+  width:100rpx;
+  height:100rpx;
+  position:relative;
+  margin-right:20rpx;
+}
+ .picture .bg-img image{
+  height:100%;
+  width:100%;
+  
+}
+.picture .delImage{
+  position: absolute;
+  top:0;
+  right:0;
+  font-size:35rpx;
+  background:#fff;
+}
+.picture .solids{
+
+  height:100rpx;
+  width:100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+ .date{
+  display:flex;
+  align-items: center;
+  margin-bottom:10rpx;
+}
+.date .pickerDate{
+  width:200rpx;
+  border-radius: 5rpx;
+  padding:1rpx 10rpx;
+  position: relative
+  }
+ .date .pickerDate .data{
+  position:absolute;
+  padding-left:10rpx;
+  left:0rpx;
+  top:0;
+  background:#fff;
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+}
+input{
+  flex:1;
+  border:1px solid #ddd;
+  border-radius: 5rpx;
+  padding:0 10rpx;
+}
+textarea{
+  height:100rpx;
+  width:100%;
+  line-height: 1.7;
+  border-radius: 5rpx;
+  border:1px solid #ddd;
+}
+.btn{
+  font-size:22rpx;
+  padding:0 20rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  margin-left:10rpx;
+  border-radius: 5rpx;
+}
+.companyinfo view{
+  margin-top:10rpx;
+}
+.submitbtn{
+  text-align: center;
+  margin:20rpx 0;
+}
+ label{
+  padding:15rpx;
+}
+ checkbox{
+  margin-right:10rpx;
+  line-height: 42rpx;
+}
+.submitbtn button{
+  width:70%;
+  margin:0 auto;
+  margin-top:30rpx;
+}

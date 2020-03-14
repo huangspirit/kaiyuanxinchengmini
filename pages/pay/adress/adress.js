@@ -7,36 +7,66 @@ Page({
    */
   data: {
     addresList: [],
-    defaultAddress: {},
+    defaultAddressIndex:0,
     OrderInformation: {},
     payStorage: {}
+  },
+  addAdress(){
+    wx.setStorageSync('editAdress', "");
+    wx.navigateTo({
+      url: '../../editAdress/editAdress',
+    })
+  },
+  editadress(val) {
+    let item = this.data.addresList[val.currentTarget.dataset.index];
+    wx.setStorageSync('editAdress', JSON.stringify(item));
+    wx.navigateTo({
+      url: '../../editAdress/editAdress',
+    })
   },
   getAdress() {
     api.get('/api-u/address/queryAllReceivingAddress', {
       start: 0,
-      length: 20
+      length: 100
     }).then(res => {
-
       if (res.data) {
-        this.data.defaultAddress = JSON.parse(wx.getStorageSync('chooseAddress'))
-        for (var i = 0; i < res.data.data.length; i++) {
-          res.data.data[i]['checked'] = false
-          if (res.data.data[i].id == this.data.defaultAddress.id) {
-            res.data.data[i]['checked'] = true
+        let index=0;
+        let list=res.data.data.map((item,index0)=>{
+          if(item.isdefault){
+            index=index0
           }
-        }
+          return item;
+        })
         this.setData({
           addresList: res.data.data,
-          defaultAddress: this.data.defaultAddress
+          defaultAddressIndex: index
         })
-        console.log('地址', this.data.addresList)
+        // this.data.defaultAddress = JSON.parse(wx.getStorageSync('chooseAddress'))
+        // for (var i = 0; i < res.data.data.length; i++) {
+        //   res.data.data[i]['checked'] = false
+        //   if (res.data.data[i].id == this.data.defaultAddress.id) {
+        //     res.data.data[i]['checked'] = true
+        //   }
+        // }
+        // this.setData({
+        //   addresList: res.data.data,
+        //   defaultAddress: this.data.defaultAddress
+        // })
+        // console.log('地址', this.data.addresList)
       }
 
     })
   },
+  
   changeAdress(val) {
-    console.log(val)
-    let index = val.currentTarget.dataset.index
+    let index = val.currentTarget.dataset.index;
+    this.setData({
+      defaultAddressIndex: val.currentTarget.dataset.index
+    })
+    wx.navigateBack({
+      delta:1
+    })
+    return;
     for (var i = 0; i < this.data.addresList.length; i++) {
       this.data.addresList[i]['checked'] = false
     }
@@ -60,7 +90,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getAdress()
     this.data.payStorage = JSON.parse(wx.getStorageSync('buyOneGoodsDetail'))
     this.data.payStorage.obj2 = JSON.parse(this.data.payStorage.obj2)
     console.log(this.data.payStorage)
@@ -81,7 +110,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getAdress()
   },
 
   /**

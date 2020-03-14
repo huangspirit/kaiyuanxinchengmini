@@ -36,7 +36,7 @@ Page({
       },
       {
         img: "../../img/home/zhendangqi.png",
-        name: 'MEMS 振荡器'
+        name: 'MEMS振荡器'
       },
       {
         img: "../../img/home/chuanganqi.png",
@@ -66,12 +66,18 @@ Page({
   },
 
   toSearch() {
-    wx: wx.navigateTo({
+    wx: wx.switchTab({
       url: '../search/search',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
+    // wx: wx.navigateTo({
+    //   url: '../search/search',
+    //   success: function(res) {},
+    //   fail: function(res) {},
+    //   complete: function(res) {},
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -86,6 +92,7 @@ Page({
     obj['tag'] = 'goodsinfo'
     obj['name'] = val.currentTarget.dataset.item.goods_name
     var routerParams = JSON.stringify(obj)
+    console.log(routerParams)
     let storageItem = JSON.stringify(val.currentTarget.dataset.item)
     wx: wx.setStorageSync('productDetail', storageItem)
     wx: wx.navigateTo({
@@ -106,7 +113,8 @@ Page({
       url: '../classCation/classCation',
     })
   },
-  classList(val) {
+  toClassList(val) {
+    console.log(val)
     let index = val.currentTarget.dataset.index
     if (index == 0) {
       wx.navigateTo({
@@ -115,31 +123,46 @@ Page({
       })
     } else if (index == 1) {
       wx.navigateTo({
-        url: '../spotSpecial/spotSpecial',
+        url: '../spotSpecial/spotSpecial?tag=is_old_product&value=false&name=特价直通车',
       })
     } else if (index == 2) {
       wx.navigateTo({
-        url: '../orderGoods/orderGoods',
+       // url: '../orderGoods/orderGoods',
+        url: '../spotSpecial/spotSpecial?tag=goods_type&value=false&name=订货跟单',
       })
     } else if (index == 3) {
       wx.navigateTo({
-        url: '../material/material',
+      //url: '../material/material',
+        url: '../spotSpecial/spotSpecial?tag=is_old_product&value=true&name=呆料掘金池',
       })
     } else {
-      if (index == 4) {
-        app.globalData.classType = 1
-      } else if (index == 5) {
-        app.globalData.classType = 4
-      } else if (index == 6) {
-        app.globalData.classType = 3
-      } else if (index == 7) {
-        app.globalData.classType = 2
-      }
-      console.log("ll")
-      wx.switchTab({
-       url: '../classCation/classCation',
-  
+      let name=this.data.classList[index].name;
+      api.get("/api-g/gods-anon/searchIndex",{name:name,length:1,start:0}).then(res=>{
+        console.log(res.data.data[0])
+          let obj={
+            name:res.data.data[0].name,
+            id: res.data.data[0].documentid,
+            tag:res.data.data[0].tag
+          };
+        wx: wx.navigateTo({
+          url: '../undirect/undirect?params=' + JSON.stringify(obj),
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
       })
+      // if (index == 4) {
+      //   app.globalData.classType = 1
+      // } else if (index == 5) {
+      //   app.globalData.classType = 4
+      // } else if (index == 6) {
+      //   app.globalData.classType = 3
+      // } else if (index == 7) {
+      //   app.globalData.classType = 2
+      // }
+      // wx.switchTab({
+      //  url: '../classCation/classCation',
+      // })
     }
 
   },

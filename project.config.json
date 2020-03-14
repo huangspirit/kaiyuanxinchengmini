@@ -49,12 +49,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 44,
 			"list": [
 				{
 					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "首页",
-					"pathName": "pages/home/home",
+					"pathName": "pages/home1/home1",
 					"query": "",
 					"scene": null
 				},
@@ -104,7 +111,7 @@
 					"id": 7,
 					"name": "商品详情有特价",
 					"pathName": "pages/goodsDetail/goodsDetail",
-					"query": "",
+					"query": "params= {\"id\":309228,\"tag\":\"goodsinfo\",\"name\":\"SiT9102AI-132N25E25.000000\"}",
 					"scene": null
 				},
 				{
@@ -129,10 +136,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 11,
 					"name": "商品详情无特价",
 					"pathName": "pages/productDetail/productDetail",
-					"query": "",
+					"query": "params= {\"id\": 619475,\"tag\":\"goodsinfo\",\"name\":\"SiT1618BE-71-18E-7.372800\"}",
 					"scene": null
 				},
 				{
@@ -228,7 +235,7 @@
 				},
 				{
 					"id": 25,
-					"name": "现货直通车",
+					"name": "特价直通车",
 					"pathName": "pages/spotSpecial/spotSpecial",
 					"query": "",
 					"scene": null
@@ -378,6 +385,12 @@
 					"name": "一级类",
 					"pathName": "pages/undirect/undirect",
 					"query": "params= {\"tag\":\"undirect\",\"id\":5,\"name\":\"微控制器\"}",
+					"scene": null
+				},
+				{
+					"id": 47,
+					"name": "入驻",
+					"pathName": "pages/settle/settle",
 					"scene": null
 				}
 			]

@@ -9,6 +9,7 @@ Page({
     select: "",
     tihuoWay: '我是买家',
     userDetail: {},
+    isActive:0
   },
   userInfo() {
     wx.navigateTo({
@@ -16,6 +17,11 @@ Page({
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+  chipIdentify(e){
+    this.setData({
+      isActive: e.currentTarget.dataset.active
     })
   },
   getUsrInfo() {

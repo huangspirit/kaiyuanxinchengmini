@@ -54,6 +54,10 @@ Page({
         complete: function (res) { },
       })
     }else{
+      wx.navigateTo({
+        url: '../settle/settle',
+      })
+      return;
       this.setData({
         join:true
       })
@@ -146,6 +150,7 @@ Page({
     this.setData({
       detailObj: this.data.detailObj
     })
+
     var detailParams = JSON.stringify(this.data.detailObj)
     wx.navigateTo({
       url: '../productDetail/productDetail?params=' + detailParams,

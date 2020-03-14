@@ -20,8 +20,21 @@ Page({
     errorImg:app.globalData.errorImg,
     loadModal: false,
     timerCount:0,
-    getMoreMark:false
+    getMoreMark:false,
+    modalName:'',
+    priceLevel:[],
+    purchaseObj:{},
+    specialData:{},
+    count:0,
+    price:0
   },
+  showdiag(){
+    this.dialog.show()
+  },
+  popupCancel() {
+    this.dialog.hide()
+  },
+  popupConfirm() { },
   getMoreSpecial(){
     this.setData({
       currentPage:this.data.currentPage+1,
@@ -203,8 +216,272 @@ Page({
       url: '../releaseSale/releaseSale?name=' + this.data.productDetail.productno
     })
   },
-  purchase(){
+  purchase(e) {
+    let item = e.currentTarget.dataset.item;
+    this.setData({
+      modalName:e.currentTarget.dataset.target,
+      specialData:item
+    })
+    console.log(item)
+    let obj = {};
+    if (item.priceType) {
+      let levelPrice = item.priceLevel;
+      let arr=[]
+      levelPrice = levelPrice.split('@')
+      this.data.priceLevel = []
+      for (let i = 0; i < levelPrice.length; i++) {
+        let itemPrice = levelPrice[i].split('-')
+        arr.push({
+          value: Number(itemPrice[0]),
+          price: Number(itemPrice[1])
+        })
+      }
+      this.setData({
+        priceLevel: arr
+      })
+      obj = {
+        price: arr[0].price,
+        totalPrice: Number(arr[0].price) * item.moq,
+        goodsNum: item.moq
+      }
+    } else {
+      obj = {
+        price: item.goodsPrice,
+        totalPrice: item.goodsPrice * item.moq,
+        goodsNum: item.moq
+      }
+    }
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      purchaseObj: {
+        ...this.data.purchaseObj,
+        ...obj
+      }
 
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  inputNum(val) {
+    let obj={
+      delbtnShow: false,
+      addbtnShow: false,
+    }
+    let c = Number(val.detail.value);
+    if (this.data.specialData.goodsCount < this.data.specialData.moq) {
+      c = this.data.specialData.goodsCount
+      obj.delbtnShow=true
+      
+    } else {
+      if (c > this.data.specialData.goodsCount) {
+        c = this.data.specialData.goodsCount;
+        obj.addbtnShow=true
+        
+      } else if (c < this.data.specialData.moq) {
+        c = this.data.specialData.moq
+        obj.delbtnShow = true
+      } else {
+        let s = c % this.data.specialData.mpq;
+        let ss = this.data.specialData.mpq / 2;
+        if (s < ss) {
+          c = c - s;
+          obj.delbtnShow = false;
+          obj.addbtnShow = false;
+        } else {
+          if ((c - s + this.data.specialData.mpq) > this.data.specialData.goodsCount) {
+            c = this.data.specialData.goodsCount
+            obj.delbtnShow = false;
+            obj.addbtnShow = true;
+          } else {
+            c = c - s + this.data.specialData.mpq;
+            obj.delbtnShow = false;
+            obj.addbtnShow = false;
+          }
+        }
+      }
+    }
+    let goodsnum = c;
+    let currentPrice = 0;
+    if (this.data.specialData.priceType) {
+      if (this.data.priceLevel.length == 1) {
+        currentPrice = parseFloat(this.data.priceLevel[0].price);
+      } else if (this.data.priceLevel.length == 2) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+        }
+      } else if (this.data.priceLevel.length == 3) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[2].price);
+        }
+      }
+    } else {
+      currentPrice = this.data.specialData.goodsPrice
+    };
+    this.setData({
+      purchaseObj:{
+        ...this.data.purchaseObj,
+        goodsNum: goodsnum,
+        price: currentPrice,
+        totalPrice: currentPrice * goodsnum,
+        ...obj
+      }
+    })
+  },
+  addGoodsNum(e) {
+    let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.moq;
+    let goodsnum = goodsNum > this.data.specialData.goodsStockCount ? this.data.specialData.goodsStockCount : goodsNum;
+    let currentPrice = 0;
+    if (this.data.specialData.priceType) {
+      if (this.data.priceLevel.length == 1) {
+        currentPrice = parseFloat(this.data.priceLevel[0].price);
+      } else if (this.data.priceLevel.length == 2) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+        }
+      } else if (this.data.priceLevel.length == 3) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[2].price);
+        }
+      }
+    } else {
+      currentPrice = this.data.specialData.goodsPrice
+    };
+    if (goodsNum >= this.data.specialData.goodsStockCount) {
+      this.setData({
+        purchaseObj: {
+          ...this.data.purchaseObj,
+          goodsNum: goodsnum,
+          delbtnShow: false,
+          addbtnShow: true,
+          price: currentPrice,
+          totalPrice: currentPrice * goodsnum
+        }
+      })
+    } else {
+      this.setData({
+        purchaseObj: {
+          ...this.data.purchaseObj,
+          goodsNum: goodsnum,
+          delbtnShow: false,
+          price: currentPrice,
+          totalPrice: currentPrice * goodsnum
+        }
+      })
+    }
+  },
+  delGoodsNum(e) {
+    let goodsNum = this.data.purchaseObj.goodsNum - this.data.specialData.mpq;
+    let goodsnum = goodsNum <= this.data.specialData.moq ? this.data.specialData.moq : goodsNum;
+    let currentPrice = 0;
+    if (this.data.specialData.priceType) {
+      if (this.data.priceLevel.length == 1) {
+        currentPrice = parseFloat(this.data.priceLevel[0].price);
+      } else if (this.data.priceLevel.length == 2) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+        }
+      } else if (this.data.priceLevel.length == 3) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[2].price);
+        }
+      }
+    } else {
+      currentPrice = this.data.specialData.goodsPrice
+    };
+    if (goodsNum <= this.data.specialData.moq) {
+      this.setData({
+        purchaseObj: {
+          ...this.data.purchaseObj,
+          goodsNum: goodsnum,
+          delbtnShow: true,
+          addbtnShow: false,
+          price: currentPrice,
+          totalPrice: currentPrice * goodsnum
+        }
+      })
+    } else {
+      this.setData({
+        purchaseObj: {
+          ...this.data.purchaseObj,
+          goodsNum: goodsnum,
+          addbtnShow: false,
+          price: currentPrice,
+          totalPrice: currentPrice * goodsnum
+        }
+      })
+    }
+  },
+  submitpurchase() {
+    let item = this.data.specialData;
+    let orderJson = [];
+    let obj = {
+      goods_id: item.goods_id,
+      goodsDesc: item.goodsDesc,
+      goodsImage: item.goodsImageUrl,
+      goods_name: item.goods_name,
+      diliver_place: item.diliverPlace,
+      seckill_goods_id: item.id,
+      clude_bill: item.includBill,
+      price_unit: item.priceUnit,
+      goods_type: item.goods_type,
+      sellerName: item.sellerName,
+      sellerHeader: item.userImgeUrl,
+      seller_id: item.sellerId,
+      tag: item.tag,
+      goods_count: this.data.purchaseObj.goodsNum,
+      goods_price: this.data.purchaseObj.price,
+      order_channe: 1,
+      pay_channe: 1,//微信转账
+    }
+    orderJson.push(obj)
+    console.log(obj)
+    let billObj = {
+      billtype: "1",
+      content_id: "1"
+    };
+    // 生成bill对象
+    let obj2 = {
+      bill: JSON.stringify(billObj),
+      dilivertype: "0",
+      order: JSON.stringify(orderJson),
+      add_id: 1,
+      type: 0,
+      orderSource: 1,
+      togetherPay:false
+    };
+    api.post('/api-g/goods-b/orderCheck', obj2).then((res) => {
+      wx.setStorageSync('buyOneGoodsDetail', JSON.stringify({
+        data: JSON.stringify(res),
+        obj2: JSON.stringify(obj2)
+      }))
+      wx.navigateTo({
+        url: '../pay/pay',
+      })
+    })
   },
   toDetail(val) {
     var currentItem = this.data.specialList[val.currentTarget.dataset.index];
@@ -236,7 +513,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.getProductDetail()
+    this.getProductDetail();
+    this.dialog = this.selectComponent('#dialog')
   },
 
   /**

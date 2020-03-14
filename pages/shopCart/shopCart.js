@@ -9,52 +9,20 @@ Page({
   data: {
     cartList: [],
     allChecked: false,
-    goodsAllPrice: 0,
-    goodsAlltypePrice: 0,
+    unAllPrice: 0,
+    usAllPrice: 0,
     goodsAllNum: 0,
     editgoodsShow: false,
-    editText: '编辑商品',
+    editText: '管理',
     deleteId: "",
     catergoryId: "",
     goodsId: "",
     sendData: {},
-    adressList: [],
-    addressindex: 0,
     payBtnShow: false,
-    errorImg:app.globalData.errorImg
-  },
-  bindPickerChange: function(e) {
-    this.setData({
-      addressindex: e.detail.value
-    })
-    let address = JSON.stringify(this.data.adressList[e.detail.value])
-    wx.setStorageSync('chooseAddress', address)
-  },
-  getAdress() {
-    api.get("/api-u/address/queryAllReceivingAddress", {
-      start: 0,
-      length: 100
-    }).then(res => {
-      if (res.data != null) {
-        this.setData({
-          adressList: res.data.data
-        })
-        for (let i = 0; i < this.data.adressList.length; i++) {
-          if (this.data.adressList[i].isdefault) {
-            let address = JSON.stringify(this.data.adressList[i])
-            wx.setStorageSync('chooseAddress', address)
-          } else {
-            let address = JSON.stringify(this.data.adressList[0])
-            wx.setStorageSync('chooseAddress', address)
-          }
-        }
-      } else {
-        this.setData({
-          adressList: []
-        })
-      }
-
-    })
+    errorImg:app.globalData.errorImg,
+    start:0,
+    length:5,
+    showDeclareType:false,//选择报关方式
   },
   getShopList() {
     api.get("/api-g/sc/queryShoppingCarList", {
@@ -62,45 +30,47 @@ Page({
       length: 100,
       source: 1
     }).then(res => {
-
       if (res.resultCode == "200") {
-        
-        for (let k = 0; k < res.data.data.length; k++) {
-          res.data.data[k]['checked'] = false
-          res.data.data[k]['isenable'] = false
-          var subisenable = false
-          for (let i = 0; i < res.data.data[k].list.length; i++) {
-            res.data.data[k].list[i]['checked'] = false
-            res.data.data[k].list[i]['goodsNum'] = res.data.data[k].list[i].moq
-            res.data.data[k].list[i]['delbtnShow'] = true
-            res.data.data[k].list[i]['addbtnShow'] = false
-            res.data.data[k].list[i]['goodsCount'] = 1
-            if (res.data.data[k].list[i].isenable) {
-              res.data.data[k]['isenable'] = true
+        let list0 = res.data.data.map((item0,index0)=>{
+          item0.checked = false;
+          let list=item0.list.map((item,index)=>{
+            item.checked=false;
+            if (item.goodsStockCount<=item.moq){
+              item.delbtnShow=true;
+              item.addbtnShow=false;
+              item.goodsNum = item.goodsStockCount;
+            } else if (item.goodsStockCount > item.moq && (item.goodsStockCount<item.moq+item.mpq)){
+              item.delbtnShow = true;
+              item.addbtnShow = true;
+              item.goodsNum = item.goodsStockCount;
+            }else{
+              item.delbtnShow = true;
+              item.addbtnShow = false;
+              item.goodsNum = item.moq;
+            };
+            if (item.priceType){
+              let arr = item.priceLevel.split("@");
+              for (var i = arr.length-1 ;i>=0;i--){
+                let arr0 = arr[i].split("-");
+                if(i==0){
+                  item.goodsPrice = Number(arr0[1]);
+                  return;
+                }
+                if (item.goodsNum > Number(arr0[0])){
+                  item.goodsPrice = Number(arr0[1]);
+                  return;
+                }
+              }
             }
-          }
-        }
-        for (var k = 0; k < res.data.data.length; k++) {
-          for (var i = 0; i < res.data.data[k].list.length; i++) {
-            if (res.data.data[k].list[i].priceType) {
-              var price = res.data.data[k].list[i].priceLevel
-              var priceLength = price.split('@').length - 1
-              res.data.data[k].list[i]['minPrice'] = price.split('@')[priceLength].split('-')[1]
-            } else {
-
-            }
-          }
-        }
-
-        this.setData({
-          cartList: res.data.data,
-          goodsAllPrice: 0,
-          goodsAllNum: 0,
-          goodsAlltypePrice: 0,
-          allChecked: false
+            return item;
+          })
+          return item0;
         })
-        wx.stopPullDownRefresh();
-      }
+        this.setData({
+          cartList: list0,
+          allChecked:false
+        })
+        }
     })
   },
   editGoods() {
@@ -114,23 +84,22 @@ Page({
     if (this.data.editgoodsShow) {
       this.data.editText = '完成'
     } else {
-      this.data.editText = '编辑商品'
+      this.data.editText = '管理'
     }
     this.setData({
       editgoodsShow: this.data.editgoodsShow,
       cartList: this.data.cartList,
       allChecked: false,
       editText: this.data.editText,
-      goodsAllPrice: 0,
       goodsAllNum: 0,
-      goodsAlltypePrice: 0
+      unAllPrice: 0,
+      usAllPrice: 0,
     })
   },
   delete() {
     for (let k = 0; k < this.data.cartList.length; k++) {
       for (let i = 0; i < this.data.cartList[k].list.length; i++) {
         if (this.data.cartList[k].list[i].checked) {
-          console.log(this.data.cartList[k].list[i])
           this.data.deleteId = this.data.cartList[k].list[i].id
         }
       }
@@ -138,7 +107,7 @@ Page({
     api.get("/api-g/sc/deleteSigletonShoppingCar", {
       id: this.data.deleteId
     }).then(res => {
-      console.log(res)
+    
       if (res.resultCode == "200") {
         wx.showToast({
           title: '删除成功',
@@ -159,7 +128,7 @@ Page({
     for (let k = 0; k < this.data.cartList.length; k++) {
       for (let i = 0; i < this.data.cartList[k].list.length; i++) {
         if (this.data.cartList[k].list[i].checked && this.data.cartList[k].list[i].isenable) {
-          console.log(this.data.cartList[k].list[i])
+         
           this.data.catergoryId = this.data.cartList[k].list[i].catergoryId
           this.data.goodsId = this.data.cartList[k].list[i].goods_id
         }
@@ -171,7 +140,7 @@ Page({
       catergory_id: this.data.goodsId,
       favour_type: "1"
     }).then(res => {
-      console.log(res)
+    
       if (res.resultCode == '200') {
         wx: wx.showToast({
           title: '收藏成功',
@@ -192,146 +161,89 @@ Page({
   },
   sonChecked(val) {
     let index = val.currentTarget.dataset.index
-    let k = val.currentTarget.dataset.k
-    this.data.cartList[index].list[k].checked = !this.data.cartList[index].list[k].checked
-    if (this.data.cartList[index].list[k].checked) {
-      if (this.data.cartList[index].list[k].priceType) {
-        this.data.goodsAllPrice += this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].minPrice
-      } else {
-        this.data.goodsAllPrice += this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].goodsPrice
-      }
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-      this.data.goodsAllNum += this.data.cartList[index].list[k].goodsNum
-    } else {
-      if (this.data.cartList[index].list[k].priceType) {
-        this.data.goodsAllPrice -= this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].minPrice
-      } else {
-        this.data.goodsAllPrice -= this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].goodsPrice
-      }
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-      this.data.goodsAllNum -= this.data.cartList[index].list[k].goodsNum
-    }
-    let subCheckedShow = true
-    for (let k = 0; k < this.data.cartList[index].list.length; k++) {
-      if (this.data.cartList[index].list[k].checked == false) {
-        subCheckedShow = false
-      }
-    }
-    if (subCheckedShow) {
-      this.data.cartList[index].checked = true
-    } else {
-      this.data.cartList[index].checked = false
-    }
-
-    let allCheckedShow = true
-    for (let k = 0; k < this.data.cartList.length; k++) {
-      if (this.data.cartList[k].checked == false) {
-        allCheckedShow = false
-      }
-    }
-    if (allCheckedShow) {
-      this.data.allChecked = true
-    } else {
-      this.data.allChecked = false
-    }
-    this.setData({
-      cartList: this.data.cartList,
-      allChecked: this.data.allChecked,
-      goodsAllPrice: this.data.goodsAllPrice,
-      goodsAllNum: this.data.goodsAllNum,
-      goodsAlltypePrice: this.data.goodsAlltypePrice
-    })
-    this.payBtn()
-  },
-
-
-  subChecked(val) {
-    let index = val.currentTarget.dataset.index
-    this.data.cartList[index].checked = !this.data.cartList[index].checked
-    if (this.data.cartList[index].checked == true) {
-      for (let k = 0; k < this.data.cartList[index].list.length; k++) {
-        this.data.cartList[index].list[k].checked = true
-        if (this.data.cartList[index].list[k].priceType) {
-          this.data.goodsAllPrice += this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].minPrice
-
-        } else {
-          this.data.goodsAllPrice += this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].goodsPrice
-
-        }
-        this.data.goodsAllNum += this.data.cartList[index].list[k].goodsNum
-      }
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-    } else {
-      for (let k = 0; k < this.data.cartList[index].list.length; k++) {
-        this.data.cartList[index].list[k].checked = false
-        if (this.data.cartList[index].list[k].priceType) {
-          this.data.goodsAllPrice -= this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].minPrice
-        } else {
-          this.data.goodsAllPrice -= this.data.cartList[index].list[k].goodsNum * this.data.cartList[index].list[k].goodsPrice
-        }
-        this.data.goodsAllNum -= this.data.cartList[index].list[k].goodsNum
-      }
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-    }
-
-    let allCheckedShow = true
-    for (let k = 0; k < this.data.cartList.length; k++) {
-      if (this.data.cartList[k].checked == false) {
-        allCheckedShow = false
-      }
-    }
-    if (allCheckedShow) {
-      this.data.allChecked = true
-    } else {
-      this.data.allChecked = false
-    }
-    this.setData({
-      cartList: this.data.cartList,
-      allChecked: this.data.allChecked,
-      goodsAllPrice: this.data.goodsAllPrice,
-      goodsAllNum: this.data.goodsAllNum,
-      goodsAlltypePrice: this.data.goodsAlltypePrice
-    })
-    this.payBtn()
-  },
-
-
-  allChecked() {
-    this.data.allChecked = !this.data.allChecked
-    if (this.data.allChecked) {
-      this.data.goodsAllPrice = 0
-      for (let k = 0; k < this.data.cartList.length; k++) {
-        this.data.cartList[k].checked = true
-        for (let i = 0; i < this.data.cartList[k].list.length; i++) {
-          this.data.cartList[k].list[i].checked = true
-          if (this.data.cartList[k].list[i].priceType) {
-            this.data.goodsAllPrice += this.data.cartList[k].list[i].goodsNum * this.data.cartList[k].list[i].minPrice
-          } else {
-            this.data.goodsAllPrice += this.data.cartList[k].list[i].goodsNum * this.data.cartList[k].list[i].goodsPrice
+    let k = val.currentTarget.dataset.k;
+    let item = this.data.cartList[index].list[k];
+    item.checked = !item.checked;
+    let subuncount = 0
+    let cartlist = this.data.cartList.map((item0, index0) => {
+      let uncheckCount=0;
+      let list = item0.list.map((item1, index1) => {
+        if (index0 == index){
+          if (index1 == k) {
+            if(!item.checked){
+              uncheckCount++;
+            }
+            return item;
+          }else{
+            if (!item1.checked) {
+              uncheckCount++;
+            }
+            return item1;
           }
-          this.data.goodsAllNum += this.data.cartList[k].list[i].goodsNum
+        }else{
+          if (!item1.checked) {
+            uncheckCount++;
+          }
+          return item1
         }
+      })
+      item0.checked = uncheckCount?false:true;
+      if (!item0.checked){
+        subuncount++
       }
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-    } else {
-      this.data.goodsAllPrice = 0
-      this.data.goodsAllNum = 0
-      this.data.goodsAlltypePrice = 0
-      for (let k = 0; k < this.data.cartList.length; k++) {
-        this.data.cartList[k].checked = false
-        for (let i = 0; i < this.data.cartList[k].list.length; i++) {
-          this.data.cartList[k].list[i].checked = false
-        }
-      }
-    }
-    this.setData({
-      cartList: this.data.cartList,
-      allChecked: this.data.allChecked,
-      goodsAllPrice: this.data.goodsAllPrice,
-      goodsAllNum: this.data.goodsAllNum,
-      goodsAlltypePrice: this.data.goodsAlltypePrice
+      item0.list = list;
+      return item0;
     })
-    this.payBtn()
+    this.setData({
+      cartList: cartlist,
+      allChecked: subuncount?false:true
+    })
+    this.sum();
+    this.payBtn();
+  },
+  subChecked(val) {
+    let index = val.currentTarget.dataset.index;
+    let checked = !this.data.cartList[index].checked;
+    let uncheckCount=0
+    let cartList = this.data.cartList.map((item0,index0)=>{
+      if(index0==index){
+        item0.checked=checked;
+        let list = item0.list.map(item=>{
+          item.checked = checked;
+          return item;
+        })
+        item0.list=list
+      }
+      if (!item0.checked) {
+        uncheckCount++;
+      }
+      return item0;
+    })
+    console.log(uncheckCount)
+    this.setData({
+      cartList: cartList,
+      allChecked: uncheckCount>0?false:true
+    });
+    this.sum();
+    this.payBtn();
+  },
+  allChecked() {
+    let allChecked = !this.data.allChecked
+    let cartlist = this.data.cartList.map((item0) => {
+      item0.checked=allChecked
+      let list = item0.list.map((item1) => {
+        item1.checked = allChecked;
+        return item1;
+      })
+      item0.list = list;
+      return item0;
+    })
+    this.setData({
+      cartList: cartlist,
+      allChecked: allChecked
+    })
+    this.sum();
+    this.payBtn();
   },
   payBtn() {
     let payShow = false
@@ -351,83 +263,204 @@ Page({
       payBtnShow: this.data.payBtnShow
     })
   },
+  inputNum(val) {
+    let index = val.currentTarget.dataset.index
+    let k = val.currentTarget.dataset.k
+    let item = this.data.cartList[index].list[k];
+    let c = Number(val.detail.value);
+    if (item.goodsStockCount < item.moq) {
+      c = item.goodsStockCount
+      item.delbtnShow = true
+      item.addbtnShow = true;
+    } else {
+      if (c >= item.goodsStockCount) {
+        c = item.goodsStockCount;
+        item.addbtnShow = true;
+        item.delbtnShow = false
+
+      } else if (c <= item.moq) {
+        c = item.moq
+        item.addbtnShow = false;
+        item.delbtnShow = true
+      } else {
+        let s = c % item.mpq;
+        let ss = item.mpq / 2;
+        if (s < ss) {
+          c = c - s;
+          item.delbtnShow = false;
+          item.addbtnShow = false;
+        } else {
+          if ((c - s + item.mpq) > item.goodsStockCount) {
+            c = item.goodsStockCount
+            item.delbtnShow = false;
+            item.addbtnShow = true;
+          } else {
+            c = c - s + item.mpq;
+            item.delbtnShow = false;
+            item.addbtnShow = false;
+          }
+        }
+      }
+    }
+    item.goodsNum = c;
+    if (item.priceType){
+      let arr = item.priceLevel.split("@");
+      for (var i = arr.length - 1; i >= 0; i--) {
+        let arr0 = arr[i].split("-");
+        if (i == 0) {
+          console.log(1)
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
+       
+        if (item.goodsNum > Number(arr0[0])) {
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
+      }
+    }
+    let cartlist = this.data.cartList.map((item0, index0) => {
+      if (index0 == index) {
+        let list = item0.list.map((item1, index1) => {
+          if (index1 == k) {
+            return item;
+          } else {
+            return item1
+          }
+        })
+        item0.list = list;
+      }
+      return item0;
+    })
+    this.setData({
+      cartList: cartlist
+    })
+    this.sum()
+  },
   addGoodsNum(val) {
     let index = val.currentTarget.dataset.index
     let k = val.currentTarget.dataset.k
-    console.log(this.data.cartList[index].list[k], val)
-    this.data.cartList[index].list[k].goodsCount++
-      this.data.cartList[index].list[k].goodsNum = this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].goodsCount
-    if (this.data.cartList[index].list[k].goodsNum >= this.data.cartList[index].list[k].goodsStockCount) {
-      this.data.cartList[index].list[k].addbtnShow = true
-      this.data.cartList[index].list[k].delbtnShow = false
-    } else if (this.data.cartList[index].list[k].goodsNum <= this.data.cartList[index].list[k].moq) {
-      this.data.cartList[index].list[k].addbtnShow = false
-      this.data.cartList[index].list[k].delbtnShow = true
-    } else {
-      this.data.cartList[index].list[k].addbtnShow = false
-      this.data.cartList[index].list[k].delbtnShow = false
+    let item = this.data.cartList[index].list[k];
+    if (item.goodsNum + item.mpq > item.goodsStockCount){
+      item.goodsNum = item.goodsStockCount;
+      item.addbtnShow=true;
+      item.delbtnShow=false;
+    }else{
+      item.goodsNum = item.goodsNum + item.mpq;
+      item.addbtnShow = false;
+      item.delbtnShow = false;
     }
-    if (this.data.cartList[index].list[k].checked) {
-      if (this.data.cartList[index].list[k].priceType) {
-        this.data.goodsAllPrice += this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].minPrice
-      } else {
-        this.data.goodsAllPrice += this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].goodsPrice
+    if (item.priceType){
+      let arr = item.priceLevel.split('@')
+      for(var i = arr.length-1;i>0;i--){
+        let arr0 = arr[i].split('-')
+        if (i == 0) {
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
+        if (item.goodsNum > Number(arr0[0])){
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
       }
-      this.data.goodsAllNum += this.data.cartList[index].list[k].moq
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-      this.setData({
-        goodsAllNum: this.data.goodsAllNum,
-        goodsAlltypePrice: this.data.goodsAlltypePrice
-      })
     }
-    this.setData({
-      cartList: this.data.cartList
+    let cartlist = this.data.cartList.map((item0,index0)=>{
+      if (index0 == index){
+        let list = item0.list.map((item1, index1) => {
+          if(index1==k){
+            return item;
+          }else{
+            return item1
+          }
+        })
+        item0.list=list;
+      }
+      return item0;
     })
+    this.setData({
+      cartList: cartlist
+    })
+    this.sum()
   },
   delGoodsNum(val) {
     let index = val.currentTarget.dataset.index
     let k = val.currentTarget.dataset.k
-    this.data.cartList[index].list[k].goodsCount--
-      this.data.cartList[index].list[k].goodsNum = this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].goodsCount
-    if (this.data.cartList[index].list[k].goodsNum >= this.data.cartList[index].list[k].goodsStockCount) {
-      this.data.cartList[index].list[k].addbtnShow = true
-      this.data.cartList[index].list[k].delbtnShow = false
-    } else if (this.data.cartList[index].list[k].goodsNum <= this.data.cartList[index].list[k].moq) {
-      this.data.cartList[index].list[k].addbtnShow = false
-      this.data.cartList[index].list[k].delbtnShow = true
+    let item = this.data.cartList[index].list[k];
+    if (item.goodsNum - item.mpq <= item.moq) {
+      item.goodsNum = item.moq;
+      item.addbtnShow = false
+      item.delbtnShow = true;
     } else {
-      this.data.cartList[index].list[k].addbtnShow = false
-      this.data.cartList[index].list[k].delbtnShow = false
+      item.goodsNum = item.goodsNum - item.mpq;
+      item.addbtnShow = false;
+      item.delbtnShow = false;
     }
-    if (this.data.cartList[index].list[k].checked) {
-      if (this.data.cartList[index].list[k].priceType) {
-        this.data.goodsAllPrice -= this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].minPrice
-      } else {
-        this.data.goodsAllPrice -= this.data.cartList[index].list[k].moq * this.data.cartList[index].list[k].goodsPrice
+    if (item.priceType) {
+      let arr = item.priceLevel.split('@')
+      for (var i = arr.length - 1; i > 0; i--) {
+        let arr0 = arr[i].split('-')
+        if (i == 0) {
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
+        if (item.goodsNum > Number(arr0[0])) {
+          item.goodsPrice = Number(arr0[1]);
+          break;
+        }
       }
-      this.data.goodsAllNum -= this.data.cartList[index].list[k].moq
-      this.data.goodsAlltypePrice = this.data.goodsAllPrice.toFixed(2)
-      this.setData({
-        goodsAllNum: this.data.goodsAllNum,
-        goodsAlltypePrice: this.data.goodsAlltypePrice
-      })
     }
+    let cartlist = this.data.cartList.map((item0, index0) => {
+      if (index0 == index) {
+        let list = item0.list.map((item1, index1) => {
+          if (index1 == k) {
+            return item;
+          } else {
+            return item1
+          }
+        })
+        item0.list = list;
+      }
+      return item0;
+    })
     this.setData({
-      cartList: this.data.cartList
+      cartList: cartlist
+    })
+    this.sum()
+  },
+  sum(){
+    console.log("求和")
+    let goodsAllNum=0
+    let unAllPrice=0;
+    let usAllPrice=0
+    this.data.cartList.forEach(item0=>{
+      item0.list.forEach(item=>{
+        if(item.checked && item.isenable){
+          goodsAllNum+=item.goodsNum;
+          if (item.priceUnit){
+            usAllPrice += item.goodsPrice * item.goodsNum
+          }else{
+            unAllPrice += item.goodsPrice * item.goodsNum
+          }
+        }
+      })
+    })
+    this.setData({
+      goodsAllNum: goodsAllNum,
+      unAllPrice: unAllPrice,
+      usAllPrice: usAllPrice
     })
   },
   toPay() {
-    if (this.data.adressList.length <= 0) {
-      wx.showToast({
-        title: '请选择收货地址',
-        icon: 'none'
-      })
-    }
-    console.log(this.data.cartList)
+    // if (this.data.adressList.length <= 0) {
+    //   wx.showToast({
+    //     title: '请选择收货地址',
+    //     icon: 'none'
+    //   })
+    // }
     //去结算
     let orderJson = [];
     //计算有多少个美元产品
-    let count = 0
+    let count = 0;
     this.data.cartList.forEach(item0 => {
       item0.list.forEach(item => {
         if (item.checked && item.isenable) {
@@ -451,7 +484,8 @@ Page({
             tag: item0.sellerTag,
             goodsDesc: item.goodsDesc,
             goodsImage: item.goodsImageUrl,
-            diliver_place: item.diliverPlace
+            diliver_place: item.diliverPlace,
+            sellerGoodsImageUrl: item.sellerGoodsImageUrl
           };
           if (!item.goods_type) {
             //标识期货
@@ -478,7 +512,7 @@ Page({
     // 生成bill对象
     this.data.sendData = {
       bill: JSON.stringify(billObj),
-      dilivertype: "1",
+      dilivertype: "0",//到付
       order: JSON.stringify(orderJson),
       add_id: 1,
       type: 0,
@@ -486,13 +520,10 @@ Page({
     };
     if (count > 1) {
       //用户确认报关方式
-      this.declareTypeCount = count;
-      this.showDeclareType = true;
-      this.declareType = true;
+      this.dialog.show()
     } else {
-      this.data.sendData['payWay'] = false
+      this.data.sendData['togetherPay'] = false
       api.post('/api-g/goods-b/orderCheck', this.data.sendData).then((res) => {
-        console.log(res)
         wx.setStorageSync('buyOneGoodsDetail', JSON.stringify({
           data: JSON.stringify(res),
           obj2: JSON.stringify(this.data.sendData)
@@ -502,27 +533,54 @@ Page({
         })
       })
     }
-
     // api.get('/api-order/wechat/getWechatSamrtPay', { message_id: 'JY-74201909161391', type:0}).then((res) => {
     //   console.log(res)
     // })
     
   },
+  popupCancel() {
+    this.dialog.hide();
+    this.data.sendData['togetherPay'] = false
+    console.log(this.data.sendData);
+    api.post('/api-g/goods-b/orderCheck', this.data.sendData).then((res) => {
+      wx.setStorageSync('buyOneGoodsDetail', JSON.stringify({
+        data: JSON.stringify(res),
+        obj2: JSON.stringify(this.data.sendData)
+      }))
+      wx.navigateTo({
+        url: '../pay/pay',
+      })
+    })
+  },
+  popupConfirm() {
+    this.dialog.hide();
+    this.data.sendData['togetherPay'] = true
+    console.log(this.data.sendData)
+    api.post('/api-g/goods-b/orderCheck', this.data.sendData).then((res) => {
+      wx.setStorageSync('buyOneGoodsDetail', JSON.stringify({
+        data: JSON.stringify(res),
+        obj2: JSON.stringify(this.data.sendData)
+      }))
+      wx.navigateTo({
+        url: '../pay/pay',
+      })
+    })
+   },
   tohome() {
     wx.switchTab({
       url: '../home/home',
     })
   },
-  addAdress() {
-    wx.navigateTo({
-      url: '../editAdress/editAdress',
-    })
-  },
+  // addAdress() {
+  //   wx.navigateTo({
+  //     url: '../editAdress/editAdress',
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载 
    */
   onLoad: function(options) {
-    
+    this.dialog = this.selectComponent('#dialog')
   },
 
   /**
@@ -537,7 +595,6 @@ Page({
    */
   onShow: function() {
     this.getShopList()
-    this.getAdress()
   },
 
   /**

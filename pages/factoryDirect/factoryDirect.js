@@ -11,6 +11,10 @@ Page({
     brandData: []
   },
   toIn() {
+    wx.navigateTo({
+      url: '../settle/settle',
+    })
+    return;
     wx.showToast({
       title: '请移步网站入驻',
       icon: "none"

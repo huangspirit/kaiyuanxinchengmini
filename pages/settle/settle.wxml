@@ -1,0 +1,193 @@
+<!--pages/settle/settle.wxml-->
+
+<view class="cont">
+  <view class="item">
+    <view class="title">入驻类型：</view>
+    <view class="wrap right" bindtap="close">
+      <view class="select-wrap" wx:if="{{options.length>0}}">
+        <select id="select" options="{{options}}" defaultOption="{{defaultOption}}" key="id" text="name" bind:change="change"></select>
+      </view>
+    </view>
+  </view>
+  <view class="item" wx:if="{{form.residencetype!=3}}">
+    <view class="title">选择品牌：</view>
+    <view class="right clear">
+      <view class="gray" style="text-align:right;" bindtap="showModal">></view>
+    </view>
+  </view>
+  <view class="showbrand" wx:if="{{formBrandlist.length}}">
+    <view wx:for="{{formBrandlist}}" wx:key="{{item.id}}" data-item="{{item}}" class="oneitem">
+      <view class="name color">{{item.branda}} (品牌)</view>
+      <view class="date" wx:if="{{form.residencetype!=18}}">有效期：
+        <picker mode="date" value="{{value}}" end="" catchchange="bindDateChange" data-index="{{index}}" data-tag="startDate">
+          <view class="picker pickerDate borderLightGray">
+            <text class="placeholder lightGray">开始时间</text>
+            <text class="data" wx:if="{{item.startDate}}">{{item.startDate}}</text>
+          </view>
+        </picker>
+        <view style="margin:0 20rpx;">至</view>
+        <picker mode="date" value="{{value}}" end="" bindchange="bindDateChange" data-index="{{index}}" data-tag="endDate">
+          <view class="picker pickerDate borderLightGray">
+            <text class="placeholder lightGray">失效时间</text>
+            <text class="data" wx:if="{{item.endDate}}">{{item.endDate}}</text>
+          </view>
+        </picker>
+      </view>
+      <view class="picture" wx:if="{{form.residencetype!=18}}">资质图：
+        <view class="bg-img" wx:if="{{item.url}}">
+          <image src="{{item.url}}" mode="aspectFill"></image>
+        </view>
+        <view class="solids" bindtap="ChooseImage" data-index="{{index}}">
+          <text class='cuIcon-cameraadd'></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">联系人姓名：</view>
+    <view>
+      <input class="weui-input" placeholder="" value="{{form.contactname}}" bindinput="setvalue" data-tag="contactname" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">联系人职位：</view>
+    <view>
+      <input class="weui-input" placeholder="" value="{{form.position}}" bindinput="setvalue" data-tag="position" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">联系人电话：</view>
+    <view>
+      <input class="weui-input" placeholder="" value="{{form.contactphone}}" type="number" maxlength="11" bindinput="setvalue" data-tag="contactphone" />
+    </view>
+  </view>
+  <view class="item" wx:if="{{form.residencetype!=3}}">
+    <view class="title">统一社会信用代码：</view>
+    <view>
+      <view style="display:flex;">
+        <input class="weui-input" placeholder="" value="{{form.creditcode}}" type="number" maxlength="18" bindinput="setvalue" data-tag="creditcode" />
+        <button class="btn greenColor" wx:if="{{form.creditcode.length==18 && !form.companyname}}" bindtap="getCompanyInfo">校验</button>
+        <button class="btn greenColor cuIcon-check" wx:if="{{form.companyname}}"></button>
+      </view>
+      <view class="companyinfo" wx:if="{{form.companyname}}">
+        <view>公司名称：{{form.companyname}}</view>
+        <view>公司地址：{{form.companydetailaddress}}</view>
+        <view>成立日期：{{form.establishmenttime}}</view>
+        <view>营业期限：{{form.businesslicensestarttime}} 至 {{form.businesslicenseendtime}}</view>
+        <view>法定代表：{{form.legalagent}}</view>
+        <view>注册资本：{{form.registeredcapital}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="item " wx:if="{{form.residencetype!=3}}">
+    <view class="title">营业执照：</view>
+    <view class="picture">
+      <view class="bg-img" wx:if="{{previewImage.qualificationmapimg}}">
+        <image src="{{previewImage.qualificationmapimg}}" mode="aspectFill"></image>
+      </view>
+      <view class="solids" bindtap="ChooseImage" data-tag="qualificationmapimg">
+        <text class='cuIcon-cameraadd'></text>
+      </view>
+    </view>
+  </view>
+  <view class="item" wx:if="{{form.residencetype!=3}}">
+    <view class="title">企业官网：</view>
+    <view>
+      <input class="weui-input" placeholder="" value="{{form.website}}" bindinput="setvalue" data-tag="website" />
+    </view>
+  </view>
+  <view class="item" wx:if="{{form.residencetype!=3}}">
+    <view class="title">经营产品：</view>
+    <view>
+      <textarea placeholder="" value="{{form.product}}" cols="3" bindinput="setvalue" data-tag="product" />
+    </view>
+  </view>
+  <view class="item showbrand" wx:if="{{form.residencetype!=3}}">
+    <view class="title">上传一般纳税人资格证明：</view>
+    <view class="picture">
+      <view class="bg-img" wx:if="{{previewImage.taxpayerimg}}" wx:for="{{previewImage.taxpayerimg}}" wx:key="{{item}}">
+        <image src="{{item}}" mode="aspectFill"></image>
+        <view class="color cuIcon-roundclosefill delImage" bindtap="delImage" data-index="{{index}}"></view>
+      </view>
+      <view class="solids" bindtap="ChooseImage" data-tag="taxpayerimg" type="arr">
+        <text class='cuIcon-cameraadd'></text>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="title">平台运营者身份证号：</view>
+    <view>
+      <input class="weui-input" placeholder="" value="{{form.enterpriseplatformidentity}}" type="number" maxlength="18" bindinput="setvalue" data-tag="enterpriseplatformidentity" />
+    </view>
+  </view>
+  <view class="item showbrand">
+    <view class="title">身份证正面照：</view>
+    <view class="picture">
+      <view class="bg-img" wx:if="{{previewImage.identityposimg}}">
+        <image src="{{previewImage.identityposimg}}" mode="aspectFill"></image>
+      </view>
+      <view class="solids" bindtap="ChooseImage" data-tag="identityposimg">
+        <text class='cuIcon-cameraadd'></text>
+      </view>
+    </view>
+  </view>
+  <view class="item showbrand">
+    <view class="title">身份证背面照：</view>
+    <view class="picture">
+      <view class="bg-img" wx:if="{{previewImage.identitynegimg}}">
+        <image src="{{previewImage.identitynegimg}}" mode="aspectFill"></image>
+      </view>
+      <view class="solids" bindtap="ChooseImage" data-tag="identitynegimg">
+        <text class='cuIcon-cameraadd'></text>
+      </view>
+    </view>
+  </view>
+  <view class="item showbrand">
+    <view class="title">手持身份证正面照：</view>
+    <view class="picture">
+      <view class="bg-img" wx:if="{{previewImage.handimage}}">
+        <image src="{{previewImage.handimage}}" mode="aspectFill"></image>
+      </view>
+      <view class="solids" bindtap="ChooseImage" data-tag="handimage">
+        <text class='cuIcon-cameraadd'></text>
+      </view>
+    </view>
+  </view>
+  <view class="submitbtn">
+    <view style="display:flex;justify-content: center;  align-items: center;">
+      <checkbox value="{{hasCheck}}" checked="{{hasCheck}}" size="mini" bindtap="setHasCheck"/>
+      <view>
+        我已阅读并接受
+        <text class="blu" bindtap="showItem">《大麦晶城供应商申请入驻协议》</text>
+      </view>
+    </view>
+    <view>
+      <button type="primary" size="mini" bindtap="subjoin">提交申请</button>
+    </view>
+  </view>
+</view>
+<view class="modals modals-bottom-dialog selectBrand" hidden="{{hideModal}}">
+  <view class="modals-cancel" bindtap="hideModal"></view>
+  <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+    <view class="alphabetlist">
+      <text data-item="{{'china'}}" bindtap="tabAlphbet" class="{{currenAlphabet=='china'?'bgColor':'bgBlu'}}">中国芯</text>
+      <text wx:for="{{alphabet}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tabAlphbet" class="{{currenAlphabet==item?'bgColor':'bgBlu'}}">{{item}}</text>
+    </view>
+    <view class="brandListwrap">
+      <view class="brandList">
+        <text wx:for="{{oneitemlist}}" wx:key="{{index}}" data-item="{{item}}" bindtap="selectedBrand" class="{{item.hasFactorySeller?'borderOrange bgLightGray':'borderOrange'}}">{{item.branda}}</text>
+      </view>
+    </view>
+    <view class="result" wx:if="{{selectedbrandArr.length>0}}">
+      <view class="tit">选择品牌：</view>
+      <view class="borderGreen item" wx:for="{{selectedbrandArr}}" wx:key="{{item.branda}}" data-item="{{item}}">{{item.branda}}
+        <text class="cuIcon-roundclosefill color icon" bindtap="delRes" data-index="{{index}}"></text>
+      </view>
+    </view>
+    <view class="btnwrap" wx:if="{{selectedbrandArr.length>0}}">
+      <button class="yuyue" bindtap="canclesubscribe">取消</button>
+      <button class="bgBlu" bindtap="subscribe">确定</button>
+    </view>
+  </view>
+</view>

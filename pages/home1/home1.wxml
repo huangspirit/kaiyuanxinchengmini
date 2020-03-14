@@ -1,0 +1,36 @@
+<!--pages/home/home.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view>
+  <view class='nav' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+    <view class='nav-title'>
+      <view class="left">
+       <image src="/img/public/home.png"></image>
+      </view>
+      <view class="center">大麦晶城</view>
+      
+      <!-- <image src='../../images/back.png' mode='aspectFit' class='back' bindtap='navBack'></image>  -->
+    </view>
+  </view>
+  <scroll-view class='bg-gray overflow' style='height:calc(100vh - {{navH}}px)' scroll-y >
+    <view class='hidden'>
+      <image src='../../img/home1/home_banner.png'></image>
+    </view>
+  </scroll-view>
+</view>
+<view class='homeTop'>
+  <view class="swiperPic">
+    <image src='../../img/home1/home_banner.png'></image>
+    <view class='hometopContent'>
+      <text>电子元器件特价共享交易平台</text>
+      <text>原装正品是底线 跟着特价买才省钱</text>
+      <view class='homeInput' bindtap='toSearch'>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="classlist">
+  <view class="subClassList" wx:for="{{classList}}" wx:key="{{index}}" bindtap="toClassList" data-index="{{index}}">
+    <image src="{{item.img}}"></image>
+    <text>{{item.name}}</text>
+  </view>
+</view>

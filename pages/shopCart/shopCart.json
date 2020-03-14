@@ -3,5 +3,8 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "购物车",
   "navigationBarTextStyle": "black",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "dialog": "../../components/dialog/dialog"
+  }
 }

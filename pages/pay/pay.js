@@ -1,23 +1,59 @@
 // pages/pay/pay.js
 import api from '../../api/api'
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    errorImg: app.globalData.errorImg,
     listData: [],
-    defaultAddress: "",
-    allAddress: [],
-    invoiceList: [],
     payDetail: {},
     OrderInformation: {},
     UScount: 0,
     unuscount: 0,
-    invoiceText: "",
     payStorage: {},
     timer: "",
-    loadModal:false
+    loadModal:false,
+    adressList: [],
+    invoiceList: [],
+    invoiceDetailList: [],
+    addressindex: 0,
+    defaultInvoiceIndex:0,
+    defaultInvoiceDetailIndex:0,
+    isback:false,
+    adressIsBack:false
+  },
+  getAdress() {
+    api.get("/api-u/address/queryAllReceivingAddress", {
+      start: 0,
+      length: 100
+    }).then(res => {
+      if (res.data != null) {
+        if (this.data.adressIsBack){
+          this.setData({
+            adressList:res.data.data,
+          })
+        }else{
+        let index0=0
+        let list = res.data.data.map((item,index)=>{
+          if(item.isdefault){
+            index0=index
+          }
+          return item;
+        })
+        this.setData({
+          adressList: list,
+          addressindex:index0
+        })
+      }
+      } else {
+        this.setData({
+          adressList: []
+        })
+      }
+    })
   },
   getInvoiceList() {
     api.get('/api-g/goods-b/queryGoodsBillSetOffList', {
@@ -25,60 +61,81 @@ Page({
       start: 0,
       length: 100
     }).then(res => {
-      console.log('发票列表', res)
-      for (let i = 0; i < res.data.data.length; i++) {
-        res.data.data[i].checked = false
-      }
-      let length = res.data.data.length - 1
-      res.data.data[length].checked = true
       this.setData({
-        invoiceList: res.data.data
+        invoiceList: res.data.data,
       })
-
-      let bill = JSON.parse(this.data.OrderInformation.bill)
-      console.log(this.data.invoiceList, bill)
-      for (let i = 0; i < this.data.invoiceList.length; i++) {
-
-        if (this.data.invoiceList[i].id == bill.billtype) {
-          this.setData({
-            invoiceText: this.data.invoiceList[i].name
-          })
-        }
+      // let bill = JSON.parse(this.data.OrderInformation.bill)
+      // for (let i = 0; i < this.data.invoiceList.length; i++) {
+      //   if (this.data.invoiceList[i].id == bill.billtype) {
+      //     this.setData({
+      //       invoiceText: this.data.invoiceList[i].name
+      //     })
+      //   }
+      // }
+    })
+  },
+  getinvoiceDetail() {
+    api.get('/api-u/userBill/queryUserBill?', {
+      start: 0,
+      length: 100
+    }).then(res => {
+      if(this.data.isback){
+        this.setData({
+          invoiceDetailList: res.data.data,
+        })
+      }else{
+        let defaultInvoiceDetailIndex = 0
+        let list = res.data.data.map((item, index) => {
+          if (item.isdefault) {
+            defaultInvoiceDetailIndex = index
+          }
+          return item;
+        })
+        this.setData({
+          invoiceDetailList: list,
+          defaultInvoiceDetailIndex: defaultInvoiceDetailIndex
+        })
       }
+      
     })
   },
   invoiceInfo() {
     wx.navigateTo({
-      url: '../invoiceType/invoiceType',
+      url: '../invoiceType/invoiceType?defaultInvoiceDetailIndex=' + this.data.defaultInvoiceDetailIndex + "&defaultInvoiceIndex=" + this.data.defaultInvoiceIndex,
     })
   },
   changeAddress() {
     wx.navigateTo({
-      url: './adress/adress',
+      url: '../addressList/addressList?addressindex=' + this.data.addressindex,
     })
   },
   payMoney() {
-    console.log(this.data.OrderInformation)
     this.setData({
       loadModal: true
     })
+    this.data.OrderInformation.payWay = false;
     this.data.OrderInformation.type = "1";
-    api.post('/api-g/goods-b/orderCreater', this.data.OrderInformation).then((res) => {
-      console.log(res)
-      if (res.resultCode == '200') {
-        this.getorderInfo(res)
-      }
+    this.data.OrderInformation.add_id = this.data.adressList[this.data.addressindex].id;
+    this.data.OrderInformation.bill=JSON.stringify({
+      billtype : this.data.invoiceList[this.data.defaultInvoiceIndex].id,
+      content_id : this.data.invoiceDetailList[this.data.defaultInvoiceDetailIndex].id
     })
+    api.get("/api-g/gods-b/getToken").then(res=>{
+      api.post('/api-g/goods-b/orderCreater', this.data.OrderInformation, { token: res.data }).then((res) => {
+        if (res.resultCode == '200') {
+          this.getorderInfo(res)
+        }
+      })
+    })
+   
   },
   getorderInfo(res) {
-    let token = wx.getStorageSync('token')
     var value = res
-    console.log(value)
     api.get('/api-order/customerCenter/queryOrderInfo', {
       orderNo: res.data,
-      access_token: token
-    }).then((response) => {
-      console.log(response)
+    }).
+    then((response) => {
+      console.log("response:", response)
       if (response.resultCode == '200') {
         clearTimeout(this.data.timer)
         api.get('/api-order/wechat/getWechatSamrtPay', {
@@ -120,11 +177,15 @@ Page({
           }
         })
         return
+      } else if (respon.resultCode == '400'){
+        var that = this
+        this.data.timer = setTimeout(() => {
+          that.getorderInfo(value)
+        }, 1000)
       }
     }).catch((err) => {
       var that = this
       this.data.timer = setTimeout(() => {
-        console.log('33333333', value)
         that.getorderInfo(value)
       }, 1000)
     })
@@ -134,17 +195,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getInvoiceList()
-    this.data.payStorage = JSON.parse(wx.getStorageSync('buyOneGoodsDetail'))
-    this.data.defaultAddress = JSON.parse(wx.getStorageSync('chooseAddress'))
-    this.data.payStorage.data = JSON.parse(this.data.payStorage.data)
-    this.data.payStorage.obj2 = JSON.parse(this.data.payStorage.obj2)
-    console.log(this.data.payStorage)
-    this.data.listData = this.data.payStorage.data.data.deatil
-    this.data.payDetail = this.data.payStorage.data.data
-    this.data.OrderInformation = this.data.payStorage.obj2
-
-    console.log(this.data.payStorage, this.data.listData)
+    this.getAdress();
+    this.getInvoiceList();
+    this.getinvoiceDetail();
+    let obj = JSON.parse(wx.getStorageSync('buyOneGoodsDetail'))
+    obj.data = JSON.parse(obj.data)
+    obj.obj2 = JSON.parse(obj.obj2)
+    this.data.listData = obj.data.data.deatil
+    this.data.payDetail = obj.data.data
+    this.data.OrderInformation = obj.obj2
+    console.log(obj)
     var data = []
     for (let key in this.data.listData) {
       this.data.listData[key].forEach(item => {
@@ -156,21 +216,17 @@ Page({
           this.data.unuscount++;
         }
       })
-      console.log(key)
-
       data.push({
         name: key,
         list: this.data.listData[key]
       });
     }
-    console.log(data)
     this.setData({
       listData: data,
       payDetail: this.data.payDetail,
       unuscount: this.data.unuscount,
       UScount: this.data.UScount,
       OrderInformation: this.data.OrderInformation,
-      defaultAddress: this.data.defaultAddress
     })
   },
 
@@ -185,7 +241,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getAdress();
+    this.getInvoiceList();
+    this.getinvoiceDetail();
   },
 
   /**

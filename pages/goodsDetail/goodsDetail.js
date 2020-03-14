@@ -110,7 +110,7 @@ Page({
         id: this.data.specialData.brandId,
         name: this.data.specialData.brandName
       }
-      wx: wx.redirectTo({
+      wx: wx.navigateTo({
         url: '../orSeller/orSeller?params=' + JSON.stringify(obj),
         success: function (res) { },
         fail: function (res) { },
@@ -168,23 +168,96 @@ Page({
       modalName: null
     })
   },
+  inputNum(val) {
+    let obj = {
+      delbtnShow: false,
+      addbtnShow: false,
+    }
+    let c = Number(val.detail.value);
+    if (this.data.specialData.goodsCount < this.data.specialData.moq) {
+      c = this.data.specialData.goodsCount
+      obj.delbtnShow = true
+
+    } else {
+      if (c > this.data.specialData.goodsCount) {
+        c = this.data.specialData.goodsCount;
+        obj.addbtnShow = true
+
+      } else if (c < this.data.specialData.moq) {
+        c = this.data.specialData.moq
+        obj.delbtnShow = true
+      } else {
+        let s = c % this.data.specialData.mpq;
+        let ss = this.data.specialData.mpq / 2;
+        if (s < ss) {
+          c = c - s;
+          obj.delbtnShow = false;
+          obj.addbtnShow = false;
+        } else {
+          if ((c - s + this.data.specialData.mpq) > this.data.specialData.goodsCount) {
+            c = this.data.specialData.goodsCount
+            obj.delbtnShow = false;
+            obj.addbtnShow = true;
+          } else {
+            c = c - s + this.data.specialData.mpq;
+            obj.delbtnShow = false;
+            obj.addbtnShow = false;
+          }
+        }
+      }
+    }
+    let goodsnum = c;
+    let currentPrice = 0;
+    if (this.data.specialData.priceType) {
+      if (this.data.priceLevel.length == 1) {
+        currentPrice = parseFloat(this.data.priceLevel[0].price);
+      } else if (this.data.priceLevel.length == 2) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+        }
+      } else if (this.data.priceLevel.length == 3) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[0].price);
+        } else if (goodsnum <= Number(this.data.priceLevel[2].value)) {
+          currentPrice = parseFloat(this.data.priceLevel[1].price);
+        } else {
+          currentPrice = parseFloat(this.data.priceLevel[2].price);
+        }
+      }
+    } else {
+      currentPrice = this.data.specialData.goodsPrice
+    };
+    this.setData({
+      purchaseObj:{
+        ...this.data.purchaseObj,
+        goodsNum: goodsnum,
+        price: currentPrice,
+        totalPrice: currentPrice * goodsnum,
+        ...obj
+      }
+      
+    })
+    console.log()
+  },
   addGoodsNum(e){
-    let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.moq;
+    let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.mpq;
     let goodsnum = goodsNum > this.data.specialData.goodsStockCount ? this.data.specialData.goodsStockCount:goodsNum ;
     let currentPrice = 0;
     if (this.data.specialData.priceType) {
       if (this.data.priceLevel.length == 1) {
         currentPrice = parseFloat(this.data.priceLevel[0].price);
       } else if (this.data.priceLevel.length == 2) {
-        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
         } else {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
         }
       } else if (this.data.priceLevel.length == 3) {
-        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
-        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
+        } else if (goodsnum <= Number(this.data.priceLevel[2].value)) {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
 
         } else {
@@ -218,24 +291,23 @@ Page({
     }
   },
   delGoodsNum(e) {
-    let goodsNum = this.data.purchaseObj.goodsNum - this.data.specialData.moq;
+    let goodsNum = this.data.purchaseObj.goodsNum - this.data.specialData.mpq;
     let goodsnum = goodsNum <= this.data.specialData.moq?this.data.specialData.moq:goodsNum;
     let currentPrice = 0;
     if (this.data.specialData.priceType) {
       if (this.data.priceLevel.length == 1) {
         currentPrice = parseFloat(this.data.priceLevel[0].price);
       } else if (this.data.priceLevel.length == 2) {
-        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
         } else {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
         }
       } else if (this.data.priceLevel.length == 3) {
-        if (goodsnum < Number(this.data.priceLevel[1].value)) {
+        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
-        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
+        } else if (goodsnum <= Number(this.data.priceLevel[2].value)) {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
-
         } else {
           currentPrice = parseFloat(this.data.priceLevel[2].price);
         }
@@ -265,29 +337,30 @@ Page({
       })
     }
   },
-  submitpurchase(){
-    let item = this.data.specialData
+  submitpurchase() {
+    let item = this.data.specialData;
     let orderJson = [];
     let obj = {
       goods_id: item.goods_id,
       goodsDesc: item.goodsDesc,
-      goodsImage: item.goodsImage,
+      goodsImage: item.goodsImageUrl,
       goods_name: item.goods_name,
-      diliver_place: item.diliver_place,
-      seckill_goods_id: item.seckill_goods_id,
-      clude_bill: item.clude_bill,
-      price_unit: item.price_unit,
+      diliver_place: item.diliverPlace,
+      seckill_goods_id: item.id,
+      clude_bill: item.includBill,
+      price_unit: item.priceUnit,
       goods_type: item.goods_type,
       sellerName: item.sellerName,
-      sellerHeader: item.sellerHeader,
-      seller_id: item.seller_id,
+      sellerHeader: item.userImgeUrl,
+      seller_id: item.sellerId,
       tag: item.tag,
-      goods_count: this.count,
-      goods_price: this.price,
+      goods_count: this.data.purchaseObj.goodsNum,
+      goods_price: this.data.purchaseObj.price,
       order_channe: 1,
-      pay_channe: 1,//微信转账
+      pay_channe: 1,//微信转
     }
     orderJson.push(obj)
+    console.log(obj)
     let billObj = {
       billtype: "1",
       content_id: "1"
@@ -295,13 +368,60 @@ Page({
     // 生成bill对象
     let obj2 = {
       bill: JSON.stringify(billObj),
-      dilivertype: "1",
+      dilivertype: "0",
       order: JSON.stringify(orderJson),
       add_id: 1,
       type: 0,
-      orderSource: 1
+      orderSource: 1,
+      togetherPay: false
     };
+    api.post('/api-g/goods-b/orderCheck', obj2).then((res) => {
+      wx.setStorageSync('buyOneGoodsDetail', JSON.stringify({
+        data: JSON.stringify(res),
+        obj2: JSON.stringify(obj2)
+      }))
+      wx.navigateTo({
+        url: '../pay/pay',
+      })
+    })
   },
+  // submitpurchase(){
+  //   let item = this.data.specialData
+  //   let orderJson = [];
+  //   let obj = {
+  //     goods_id: item.goods_id,
+  //     goodsDesc: item.goodsDesc,
+  //     goodsImage: item.goodsImage,
+  //     goods_name: item.goods_name,
+  //     diliver_place: item.diliver_place,
+  //     seckill_goods_id: item.seckill_goods_id,
+  //     clude_bill: item.clude_bill,
+  //     price_unit: item.price_unit,
+  //     goods_type: item.goods_type,
+  //     sellerName: item.sellerName,
+  //     sellerHeader: item.sellerHeader,
+  //     seller_id: item.seller_id,
+  //     tag: item.tag,
+  //     goods_count: this.count,
+  //     goods_price: this.price,
+  //     order_channe: 1,
+  //     pay_channe: 1,//微信转账
+  //   }
+  //   orderJson.push(obj)
+  //   let billObj = {
+  //     billtype: "1",
+  //     content_id: "1"
+  //   };
+  //   // 生成bill对象
+  //   let obj2 = {
+  //     bill: JSON.stringify(billObj),
+  //     dilivertype: "1",
+  //     order: JSON.stringify(orderJson),
+  //     add_id: 1,
+  //     type: 0,
+  //     orderSource: 1
+  //   };
+  // },
   setCountDown(val) {
     let time = 1000
 
@@ -328,6 +448,7 @@ Page({
       productParams: reqInfo
     })
     let specialStorage = JSON.parse(wx.getStorageSync('productDetail'))
+    console.log(specialStorage)
     if (specialStorage.priceType) {
       let levelPrice = specialStorage.priceLevel
           levelPrice = levelPrice.split('@')

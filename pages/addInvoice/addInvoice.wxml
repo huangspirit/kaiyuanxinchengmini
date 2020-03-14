@@ -6,23 +6,23 @@
     <text class='cuIcon-close text-gray'></text>
   </view>
   <view class="cu-form-group">
-    <view class="title">税号/统一信用代码证号</view>
-    <input placeholder="请输入税号"  bindinput="billno" value="{{invoiceDetail.billno}}" name="input"></input>
+    <view class="title">社会统一信用代码</view>
+    <input placeholder="请输入税号"  bindinput="billno" value="{{invoiceDetail.billno}}" name="input" maxlength="18"></input>
     <text class='cuIcon-close text-gray'></text>
   </view>
   <view class="cu-form-group">
     <view class="title">开户银行</view>
-    <input placeholder="请输入开户银行"  bindinput="openingbank" value="{{invoiceDetail.openingbank}}" name="input"></input>
+    <input placeholder="请输入开户银行"  bindinput="openingbank" value="{{invoiceDetail.openingbank}}" name="input" ></input>
     <text class='cuIcon-close text-gray'></text>
   </view>
   <view class="cu-form-group">
     <view class="title">银行账号</view>
-    <input placeholder="请输入银行账号"  bindinput="bankaccount" value="{{invoiceDetail.bankaccount}}" name="input"></input>
+    <input placeholder="请输入银行账号"  bindinput="bankaccount" value="{{invoiceDetail.bankaccount}}" name="input" type="number"></input>
     <text class='cuIcon-close text-gray'></text>
   </view>
   <view class="cu-form-group">
     <view class="title">开票电话</view>
-    <input placeholder="请输入开票电话"  bindinput="registeredphone" value="{{invoiceDetail.registeredphone}}" name="input"></input>
+    <input placeholder="请输入开票电话"  bindinput="registeredphone" value="{{invoiceDetail.registeredphone}}" name="input" ></input>
     <text class='cuIcon-close text-gray'></text>
   </view>
   <view class="cu-form-group">

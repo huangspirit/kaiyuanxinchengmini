@@ -12,10 +12,10 @@
       </view>
       <view class="editRight" bindtap="myOrder" data-index="4">
         <image src="../../../../img/my/quanbudingdan.png"></image>
-        <text>全部订单</text>
+        <text>我的订单</text>
       </view>
     </view>
-    <view class="myeditList">
+    <!-- <view class="myeditList">
       <view class="editLeft1">
         <view wx:for="{{orderList1}}" wx:key="index" bindtap="myInquiry" data-index="{{index}}">
           <view>
@@ -29,9 +29,8 @@
         <text>我的询价</text>
         <text>1</text>
       </view>
-    </view>
+    </view> -->
   </view>
-
   <swiper class="delivery" vertical="true" autoplay="true" circular="true" interval="3000">
   <block wx:for="{{3}}" wx:key="{{index}}">
     <swiper-item>

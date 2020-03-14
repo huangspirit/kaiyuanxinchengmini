@@ -2,57 +2,41 @@
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="shoppingCart" wx:if="{{cartList.length>0}}">
   <view class="cartTop">
-    <view>
-      <image src="../../img/image/weizhi_hui.png"></image>
-      <picker wx:if="{{adressList.length>0}}" bindchange="bindPickerChange" value="{{addressindex}}" range="{{adressList}}" range-key="{{'address'}}">
-        <view class="picker">
-          {{adressList[addressindex].address}}
-        </view>
-      </picker>
-      <text wx:if="{{adressList.length<=0}}" bindtap="addAdress">新增地址</text>
-    </view>
+    <view><image src="../../img/home/gouwuchedianji.png"></image></view>
     <text bindtap="editGoods">{{editText}}</text>
   </view>
 
   <view class="shopList">
     <view class="listContent {{!item.isenable?'listNosell':''}}" wx:for="{{cartList}}" wx:key="index" wx:for-item="item" wx:for-index="index">
       <view class="shopSeller">
-        <view wx:if="{{item.isenable}}" class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
-          <image wx:if="{{item.checked}}" src="../../img/image/xuanzhong.png"></image>
-          <image wx:else src="../../img/image/weixuanzhong.png"></image>
-        </view>
-        <view wx:if="{{!item.isenable}}" class='action-checkbox'>
-          <image src="../../img/image/weixuanzhong.png"></image>
+        <view class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
+          <image  src="{{item.checked?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
         </view>
         <view class="cu-avatar lg round margin-left margin-right">
           <image style="width:100%;height:100%;border-radius:100%;" src="{{item.sellerUrl}}"></image>
         </view>
         <text>{{item.sellerName}}</text>
       </view>
-      <view class="sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
-        <view wx:if="{{subItem.isenable}}" class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
-          <image wx:if="{{subItem.checked}}" src="../../img/image/xuanzhong.png"></image>
-          <image wx:else src="../../img/image/weixuanzhong.png"></image>
+      <view class="{{subItem.isenable?'':''}}sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
+        <view class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
+          <image  wx:if="{{subItem.isenable}}" src="{{subItem.checked ?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
+          <image  wx:if="{{!subItem.isenable}}" src="../../img/image/weixuanzhong.png"></image>
         </view>
-        <view wx:if="{{!subItem.isenable}}" class='action-checkbox'>
-          <image src="../../img/image/weixuanzhong.png"></image>
-      </view>
       <view class="listDetail">
         <view class="listLeft">
           <image src="{{subItem.goodsImageUrl?subItem.goodsImageUrl:errorImg}}"></image>
         </view>
         <view class="listRight">
-          <text>{{subItem.goods_name}}</text>
-          <text>{{subItem.goodsDesc}}</text>
-          <text>{{subItem.diliverPlace}}</text>
-          <view class="goodsPrice">
+          <view class="name color">{{subItem.goods_name}}</view>
+          <view class="desc gray">{{subItem.goodsDesc}}</view>
+          <view class="mark">{{subItem.diliverPlace}}发货</view>
+          <view class="goodsPrice color">
             <text>
-                {{subItem.priceUnit?'$':'￥'}} {{subItem.priceType?subItem.minPrice:subItem.goodsPrice}}
-              </text>
-
+              {{subItem.priceUnit?'$':'￥'}} {{filter.toFixed(subItem.goodsPrice,subItem.priceUnit?3:2)}}
+            </text>
             <view>
               <button class='cu-btn' disabled="{{subItem.delbtnShow}}" bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
-              <input class='ca-sum' name='input' value="{{subItem.goodsNum}} "></input>
+              <input class='ca-sum' name='input' value="{{subItem.goodsNum}} " bindblur="inputNum"  data-index="{{index}}" data-k="{{k}}"></input>
               <button class='cu-btn' disabled="{{subItem.addbtnShow}}" bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
             </view>
           </view>
@@ -66,18 +50,13 @@
   <view class="footerLeft">
     <view>
       <view class='action-checkbox'>
-        <image bindtap="allChecked" wx:if="{{allChecked}}" src="../../img/image/xuanzhong.png"></image>
-        <image bindtap="allChecked" wx:else src="../../img/image/weixuanzhong.png"></image>
+        <image bindtap="allChecked" src="{{allChecked?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
       </view>
       全选
     </view>
-    <text>总计：￥{{goodsAlltypePrice}}</text>
+    <text>总计：￥{{filter.toFixed(unAllPrice,2)}}+${{filter.toFixed(usAllPrice,3)}}</text>
   </view>
-  <view wx:if="{{payBtnShow}}" class="footerRight" bindtap="toPay">
-    <text>结算</text>
-    <text>({{goodsAllNum}}件)</text>
-  </view>
-  <view wx:if="{{!payBtnShow}}" class="footerRightsub">
+  <view class="{{payBtnShow?'footerRight':'footerRightsub'}}" bindtap="{{payBtnShow?'toPay':''}}">
     <text>结算</text>
     <text>({{goodsAllNum}}件)</text>
   </view>
@@ -102,23 +81,10 @@
   <view>购物车空空如也，
     <text bindtap="tohome">去逛逛</text>吧 ~
   </view>
-  <!-- <view class="wantTitle">
-    <image src="../../img/image/gouwuchexian.png"></image>
-    <text>可能你想要</text>
-  </view>
-  <view class="wantList">
-    <view class="listDetail" wx:for="{{3}}" wx:key="index">
-      <view class="listLeft">
-        <image src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
-      </view>
-      <view class="listRight">
-        <text>商品名称</text>
-        <text>商品描述</text>
-        <text>商品地址</text>
-        <view class="goodsPrice">
-          <text>￥2.330</text>
-        </view>
-      </view>
-    </view>
-  </view> -->
+  
 </view>
+<dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="不需要" confirmText="合并报关" hasConfirm="{{true}}" title="提示">
+    <view slot="content" class="section">
+     <text>由于您选择了多种美元商品，是否需要合并报关？</text>
+    </view>
+  </dialog>

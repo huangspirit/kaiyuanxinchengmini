@@ -1,4 +1,7 @@
 {
+  "usingComponents": {
+    "dialog": "../../components/dialog/dialog"
+  },
   "navigationBarTitleText": "商品详情",
   "backgroundTextStyle": "light",
   "navigationBarTextStyle": "black",

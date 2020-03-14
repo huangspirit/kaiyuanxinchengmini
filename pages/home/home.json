@@ -1,8 +1,6 @@
 {
-  "backgroundTextStyle": "dark",
+  "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "首页",
-  "navigationBarTextStyle": "black",
-  "enablePullDownRefresh": true,
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "大麦晶城",
+  "navigationBarTextStyle": "black"
 }

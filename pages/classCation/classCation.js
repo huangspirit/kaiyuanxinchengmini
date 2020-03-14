@@ -16,34 +16,23 @@ Page({
     errorImg:app.globalData.errorImg
   },
   getSubClassList(val) {
-    var cateInfo = ""
-    if (val.id) {
-      cateInfo = val.id
-    } else {
-      cateInfo = val.currentTarget.dataset.item.id
+  
+    if(val){
       this.setData({
         calssIndex: val.currentTarget.dataset.index
       })
     }
-    api.get("/api-g/gods-anon/queryCatergoryHomePage", {
-      catergory_id: cateInfo,
-      flag: false
-    }).then(res => {
-      if (res.resultCode == "200") {
-        this.setData({
-          subClassList: res.data,
-          loadModal: false
-        })
-      }
+    this.setData({
+      subClassList: this.data.classList[this.data.calssIndex].childernList,
+      loadModal: false
     })
-
   },
   subClssRouter(val) {
     this.data.directObj = {}
-    this.data.directObj['brandId'] = null
+  //  this.data.directObj['brandId'] = null
     this.data.directObj['tag'] = 'direct'
     this.data.directObj['name'] = val.currentTarget.dataset.item.name
-    this.data.directObj['documentid'] = val.currentTarget.dataset.item.id
+    this.data.directObj['id'] = val.currentTarget.dataset.item.id
     this.setData({
       directObj: this.data.directObj
     })
@@ -63,12 +52,18 @@ Page({
 
   },
   toSearch() {
-    wx: wx.navigateTo({
+    wx: wx.switchTab({
       url: '../search/search',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
+    // wx: wx.navigateTo({
+    //   url: '../search/search',
+    //   success: function(res) {},
+    //   fail: function(res) {},
+    //   complete: function(res) {},
+    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -94,7 +89,8 @@ Page({
           classList: res.data,
           calssIndex: app.globalData.classType
         })
-        this.getSubClassList(res.data[this.data.calssIndex])
+        this.getSubClassList()
+       // this.getSubClassList(res.data[this.data.calssIndex])
       }
     })
   },

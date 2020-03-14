@@ -15,7 +15,8 @@ Page({
       telAreaCode: "010",
       postalCode: "",
       detailedAddress: "",
-      isEnable: 1
+      isEnable: 1,
+      isdefault:false
     },
     deleteShow: false
   },
@@ -56,6 +57,16 @@ Page({
       adressDetail: this.data.adressDetail
     })
   },
+  SetShadow(val){
+    console.log(val)
+    this.setData({
+      adressDetail:{
+        ...this.data.adressDetail,
+        isdefault: val.detail.value
+      }
+    })
+
+  },
   confirm() {
     if (this.data.adressDetail.receivingName == '') {
       wx.showToast({
@@ -82,23 +93,22 @@ Page({
       return
     }
     this.data.adressDetail.address = this.data.adressDetail.address.join('/')
-    console.log(this.data.adressDetail)
     if (this.data.adressDetail.id) {
+      
       api.post('/api-u/address/updateReceivingAddress', this.data.adressDetail).then(res => {
-        console.log('编辑地址', res)
         if (res.resultCode == '200') {
           wx.showToast({
             title: '成功',
             icon: "success",
             duration: 1000
           })
-          wx.navigateTo({
-            url: '../address/address',
+          wx.navigateBack({
+            delta: 1
           })
         }
       })
     } else {
-      api.post('/api-u/address/saveReceivingAddress', this.data.adressDetail).then(res => {
+      api.post('/api-u/address/saveReceivingAddress', {...this.data.adressDetail}).then(res => {
         console.log('新增地址', res)
         if (res.resultCode == '200') {
           wx.showToast({
@@ -106,13 +116,13 @@ Page({
             icon: "success",
             duration: 1000
           })
-          wx.navigateTo({
-            url: '../address/address',
+          wx.navigateBack({
+            delta: 1
           })
         }
       })
     }
-
+   
   },
   deleteAddress() {
     api.post('/api-u/address/deleteReceivingAddressById?id=' + this.data.adressDetail.id, {
@@ -125,9 +135,12 @@ Page({
           icon: "success",
           duration: 1000
         })
-        wx.navigateTo({
-          url: '../address/address',
+        wx.navigateBack({
+          delta:1
         })
+        // wx.navigateTo({
+        //   url: '../addressList/addressList',
+        // })
       }
     })
   },
@@ -136,6 +149,7 @@ Page({
    */
   onLoad: function(options) {
     console.log(wx.getStorageSync('editAdress'))
+    console.log(options)
     if (wx.getStorageSync('editAdress')) {
       this.data.adressDetail = JSON.parse(wx.getStorageSync('editAdress'))
       this.data.adressDetail.address = this.data.adressDetail.address.split('/')
@@ -144,7 +158,6 @@ Page({
         deleteShow: true
       })
     } else {
-      console.log('222')
       this.setData({
         adressDetail: {
           address: ['北京市', '北京市', '东城区'],

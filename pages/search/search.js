@@ -9,11 +9,20 @@ Page({
    */
   data: {
     searchList: [],
+    tralist:[],
     textData: [],
     brandTotal: "",
     catergoryTotal: "",
     productTotal: "",
     specialList: []
+  },
+  gettralist(){
+    api.get("/api-g/goods/queryUserHotSearch",{start:0,length:18}).then(res=>{
+      console.log(res)
+      this.setData({
+        tralist:res.data.data
+      })
+    })
   },
   search(val) {
     if (val.detail.value == '') {
@@ -43,15 +52,16 @@ Page({
   },
 
   toDetail(val) {
+    console.log(val)
     var tag = val.currentTarget.dataset['item']
     let obj = {}
    // obj['documentid'] = tag.documentid
     obj['name'] = tag.name
     obj['tag'] = tag.tag
-    obj.id = tag.documentid;
+    obj.id = tag.documentid ? tag.documentid : tag.searchId;
     obj = JSON.stringify(obj)
+    console.log(obj)
     if (tag.tag == 'brand') {
-     
       wx: wx.navigateTo({
         url: "../orSeller/orSeller?params=" + obj,
         success: function(res) {},
@@ -109,7 +119,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.gettralist()
   },
 
   /**

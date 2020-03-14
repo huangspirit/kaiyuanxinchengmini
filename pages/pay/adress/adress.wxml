@@ -1,10 +1,16 @@
 <!--pages/pay/adress/adress.wxml-->
+<view class="top gray" bindtap="addAdress">
+<text></text>
+<view>
+<text>添加新地址 </text>
+<image src="../../../img/image/youjiantouxiao.png" class="rightArrow"></image>
+</view>
 
-<view class="addressList" wx:for="{{addresList}}" wx:key="index" bindtap="changeAdress" data-index="{{index}}">
+</view>
+<view class="addressList" wx:for="{{addresList}}" wx:key="index"  data-index="{{index}}">
   <view class="listCentent">
-    <view class="changePic">
-      <image wx:if="{{item.checked}}" src="../../../img/image/xuanzhong.png"></image>
-      <image wx:if="{{!item.checked}}" src="../../../img/image/weixuanzhong.png"></image>
+    <view class="changePic" bindtap="changeAdress" data-index="{{index}}">
+      <image src="{{index==defaultAddressIndex?'../../../img/image/xuanzhong.png':'../../../img/image/weixuanzhong.png'}}"></image>
     </view>
     <view class="changeContent">
       <view>
@@ -13,6 +19,8 @@
       </view>
       <view>{{item.address}}{{item.detailedAddress}}</view>
     </view>
-
+    <view>
+    <text class="cuIcon-edit icon color" bindtap="editadress" data-index="{{index}}"></text>
+    </view>
   </view>
 </view>

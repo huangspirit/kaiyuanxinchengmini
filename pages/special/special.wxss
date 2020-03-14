@@ -51,105 +51,80 @@ page {
   margin-top: 110rpx;
 }
 
-.specialContent .specialSider {
+.specialSider {
   background: #f8f8f8;
-  box-sizing: border-box;
-  white-space: nowrap;
+  display: flex;
 }
 
-.specialContent .specialSider>text {
-  display: block;
-  line-height: 80rpx;
-  margin-bottom: 40rpx;
-   padding: 0 40rpx;
+.specialSider>.one {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
 }
-.specialContent .specialSider .siderActive{
-  color: #e03e31;
+
+.specialSider .siderActive {
   background: #fff;
 }
-.specialContent .rightContent {
-  height: 100%;
-}
-.specialContent .specialList {
+
+.specialList {
+  display: flex;
   border-bottom: 2rpx dashed #e6e6e6;
-  padding: 30rpx 0;
+  padding: 20rpx;
   box-sizing: border-box;
 }
-.specialContent .specialList .top{
+
+.specialList .listLeft {
   display: flex;
   align-items: center;
 }
-.specialContent .specialList .listLeft {
-  width: 120rpx;
-  height: 120rpx;
-  border: 2rpx solid #e6e6e6;
-  margin-right: 22rpx;
-  float: left;
+
+.specialList .listLeft image {
+  width: 150rpx;
+  height: 150rpx;
+  border: 1px solid #ddd;
+  margin-right: 10rpx;
 }
-.specialContent .specialList .listLeft>image {
-  width: 100%;
-  height: 100%;
+
+.specialList .listRight {
+  min-width: 0;
+  flex: 1;
 }
-.specialContent .specialList .listRight{
-  width: calc(100% - 142rpx);
-  float: left;
+
+.specialList .listRight .goodsNamewrap {
+  flex: 1;
 }
-.specialContent .specialList .listRight .goodsNameWrap{
-  display: flex;
-  justify-content: space-between;
+.specialList .listRight .brandName {
+  font-size:24rpx;
 }
-.specialContent .specialList .listRight .goodsName {
-  display: block;
-  overflow: hidden;
+.specialList .listRight .goodsName {
+  font-weight: bolder;
+  margin-bottom: 8rpx;
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 26rpx;
 }
-.specialContent .specialList .listRight .listContent{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5rpx;
-}
-.specialContent .specialList .listRight .listContent .left{
-flex:1;
-}
-.specialContent .specialList .listRight .listContent .right{
-text-align: right;
-}
-.specialContent .specialList .listRight .listContent>view>text{
-display: block;
-margin-top: 10rpx;
-}
-.specialContent .specialList .listRight .listContent .brandName {
-  color: #999999;
-  font-size: 24rpx
-}
-.specialContent .specialList .listRight .listContent .goodsDeac {
-  color: #333333;
+
+.specialList .listRight .goodsDeac {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 8rpx;
   font-size: 22rpx;
 }
-.specialContent .specialList .listRight .listContent>view>text:nth-of-type(3) {
-  color: #333333;
-  font-size: 24rpx;
-}
-.specialContent .specialList .listRight .listContent>view>image {
-  width: 50rpx;
-  height: 50rpx;
-}
-.specialContent .specialList .saleStatus{
-   font-size:24rpx;
-   margin-top:12rpx;
-}
-.specialContent .specialList .saleStatus .left{
+
+.specialList .listRight .wrapbtn {
+  margin-top: 10rpx;
   display:flex;
 }
-.specialContent .specialList .saleStatus .right{
-  float: right;
-  font-size:26rpx;
+
+.specialList .listRight .wrapbtn>text {
+  padding: 0rpx 15rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+  font-size: 20rpx;
 }
-/* .specialContent .specialList .listRight .saleStatus>text:nth-of-type(1) {
-  color: #e03e31;
+.specialList .listRight .wrapbtn .timer{
+  flex:1;
+  text-align: right;
+  font-size:22rpx;
 }
-.specialContent .specialList .listRight .saleStatus>text:nth-of-type(2) {
-  color: #e5e5e5;
-} */

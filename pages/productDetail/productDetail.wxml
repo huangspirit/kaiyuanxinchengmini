@@ -1,14 +1,18 @@
 <!--pages/productDetail/productDetail.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="productDetailPic">
-  <image  src='{{productDetail.imageUrl?productDetail.imageUrl:errorImg}}'></image>
+  <image src='{{productDetail.imageUrl?productDetail.imageUrl:errorImg}}'></image>
 </view>
 <view class="brandComponey">
   <view wx:if="{{productDetail.productno}}" class="brandDetail">
-    <text>{{productDetail.productno}}</text>
-    <text>{{productDetail.productdesc}}</text>
-    <text>品牌：{{productDetail.branda}}</text>
+    <text class="name">{{productDetail.productno}}</text>
+    <text class="blu">品牌：{{productDetail.branda}}</text>
+    <text class="gray desc">描述：{{productDetail.productdesc}}</text>
     <view class="goodsLabel">
+      <view class="mark">
+        <text>原厂</text>
+        <text>500包邮</text>
+      </view>
       <view class="productFocus">
         <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
           <image src="../../img/image/guanzhu.png"></image>
@@ -18,56 +22,55 @@
           <image src="../../img/image/yiguanzhu.png"></image>
           <text>已关注</text>
         </view>
-
         <view class="share">
           <button open-type="share">
-            <image src="../../img/image/fenxiang.png"></image>
+            <image src="../../img/image/fenxiang.png"></image> 分享
           </button>
-          <text>分享</text>
         </view>
-
       </view>
     </view>
-    <view class="seller1">
-      <text>原装正品</text> |
-      <text>供应商负责发货&售后。不支持七天无理由退款。满1000包邮</text>
-    </view>
   </view>
-  <view class="prompt" wx:else>暂无详情</view>
 </view>
 <view class="specile">
-  <view class="specileTitle">可共享的特价</view>
+  <view class="specileTitle orange">他们正在共享特价，均可直接下单哦</view>
   <view class="specileList" wx:if="{{specialList.length>0}}">
     <view class="listContent" wx:for="{{specialList}}" wx:key="{{index}}" data-index="{{index}}" bindtap="toDetail">
       <view class="listTitle">
         <view catchtap="toseller" data-item="{{item}}">
-          <image src="{{item.userImgeUrl}}"></image>
-          <text>{{item.sellerName}}</text>
-          <text>{{filter.tagFilter(item.tag)}}</text>
+          <image src="{{item.userImgeUrl}}" class="img"></image>
+          <text class="name">{{item.sellerName}}</text>
+          <text class="tag bgColor">{{filter.tagFilter(item.tag)}}</text>
         </view>
-        <!-- <view>查看商品图</view> -->
+        <view>
+          <text catchtap="purchase" class="bgGray purchase" data-target="bottomModal" data-item="{{item}}">下单</text>
+        </view>
       </view>
       <view class="listDetail">
         <view class="listLeft">
-          <text> | 批号 {{item.base_no}}</text>
-          <text wx:if="{{item.deliverTime}}"> | 预计于{{filter.formatDate(item.deliverTime)[0]}}</text>
-          <text> | {{item.diliverPlace}}发货</text>
+          <view class="{{item.seller_always?'green':'orange'}}">
+            <text> {{filter.goodsTypeFilter(item.goods_type)}}</text>
+            <text wx:if="{{item.seller_always}}"> | {{item.day_interval*24}}小时内可发货</text>
+            <text wx:if="{{!item.seller_always}}"> | 预计于{{filter.formatDate(item.deliverTime)[0]}}</text>
+            <text> | {{item.diliverPlace}}发货</text>
+          </view>
           <view>
-           <text> | {{filter.goodsTypeFilter(item.goods_type)}}</text>
-           <text> | 起订量：{{item.moq}}只</text>
-           <text> | 剩余：{{item.goodsStockCount}}</text>
+            <text>数量：{{item.goodsStockCount}}</text>
+            <text class="blu" style="margin-left:30rpx;">MOQ：{{item.moq}}</text>
           </view>
-          <view wx:if="{{!item.seller_always && item.expireTime}}">跟单倒计时：
-            <text  class="color">{{item.countDown}}</text>
-          </view>
-          <!-- <text wx:if="{{item.seller_always}}">长期售卖</text> -->
+
         </view>
+
         <view class="listRight">
-          <!-- <text class="cuIcon-moreandroid"></text> -->
-          <text wx:if="{{!item.priceType}}" class="price bolder color">{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
-          <text wx:if="{{item.priceType}}" class="price bolder color">{{item.priceUnit?'$':'￥'}}{{item.goodsPrice}}</text>
-          <text wx:if="{{!item.priceUnit}}" class="bill blu">{{item.priceUnit?'不含税':'含13%增值税'}}</text>
-          <!-- <text bindtap="purchase" class="bgColor bolder">购买</text> -->
+          <text wx:if="{{item.priceType}}" class="price bolder color">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+          <!-- <text wx:if="{{!item.priceUnit}}" class="bill blu">{{item.priceUnit?'不含税':'含13%增值税'}}</text> -->
+
+        </view>
+      </view>
+      <view class="count">
+        <text class="gray">批号： {{item.base_no}}</text>
+        <view>
+          <text class="color">{{item.countDown}}</text>
+          <text wx:if="{{item.sellerCount>0}}" >成交量：{{item.sellerCount}}</text>
         </view>
       </view>
     </view>
@@ -91,7 +94,11 @@
     <text>{{item.value}}</text>
   </view>
 </view>
-
+<dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="朕知道了" confirmText="立即入驻" hasConfirm="{{false}}" title="提示">
+    <view slot="content" class="section">
+       <text>请移步网站(<text space="ensp" selectable='true'>https://www.icmap.cn</text>)登录后方可申请特价</text> 
+    </view>
+  </dialog>
 <view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
   <button class="action text-grey" bindtap="toHome">
     <view class='cuIcon-home text-red'></view> 首页
@@ -104,10 +111,35 @@
     <!-- <view class='cuIcon-shop'></view> 店铺 -->
   </view>
   <view class='btn-group'>
-    <button class='cu-btn bg-orange round shadow-blur'>申请特价</button>
+    <button class='cu-btn bg-orange round shadow-blur'bindtap="showdiag">申请特价</button>
     <button class='cu-btn bg-red round shadow-blur' bindtap="releaseSale">发布特价</button>
   </view>
-   <view class="cu-load load-modal" wx:if="{{loadModal}}">
-      <view class="gray-text">加载中...</view>
+  <view class="cu-load load-modal" wx:if="{{loadModal}}">
+    <view class="gray-text">加载中...</view>
+  </view>
+  
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-blue" bindtap="hideModal" >取消</view>
+       <view class="action text-green" bindtap="submitpurchase">提交</view>
+        <!-- <view class="action text-green" bindtap="submitpurchase">购买</view> -->
     </view>
+    <view class="padding-xl">
+      <view class="goodsPurchase">
+            <text class="color">
+               单价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.price,specialData.priceUnit?3:2)}}
+            </text>
+            <text class="color">
+                总价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.totalPrice,specialData.priceUnit?3:2)}}
+            </text>
+            <view class="btnwrap">
+              <button class='cu-btn' disabled="{{purchaseObj.delbtnShow}}" bindtap="delGoodsNum">-</button>
+              <input class='ca-sum' name='input' value="{{purchaseObj.goodsNum}} "readonly="readonly" type="number" bindblur="inputNum"></input>
+              <button class='cu-btn' disabled="{{purchaseObj.addbtnShow}}" bindtap="addGoodsNum">+</button>
+            </view>
+      </view>
+    </view>
+  </view>
 </view>

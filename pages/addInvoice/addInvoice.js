@@ -19,12 +19,14 @@ Page({
       registeredphone: "",
     }
   },
-  SetShadow() {
-    this.data.invoiceDetail.isdefault = !this.data.invoiceDetail.isdefault
+  SetShadow(val) {
     this.setData({
-      invoiceDetail: this.data.invoiceDetail
+      invoiceDetail: {
+        ...this.data.invoiceDetail,
+        isdefault:val.detail.value
+        }
     })
-    console.log(this.data.invoiceDetail)
+  
   },
   corporatename(val) {
     console.log(val)

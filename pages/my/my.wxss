@@ -29,31 +29,31 @@
   overflow: hidden;
   margin-top: 130rpx;
 }
-
-.mayTop>image {
+.mayTop .topwrap{
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-  height: 260rpx;
+  top:0;
+  left:0;
+  width:100%;
+  height:264rpx;
+  z-index:1;
+  display: flex;
 }
-
-.mayTop>text {
-  float: right;
-  padding: 15rpx 20rpx 0;
-  text-align: right;
-  color: #fff;
-  font-size: 27rpx;
+.mayTop>image {
+  width:100%;
+  height: 264rpx;
 }
-
-.mayTop>.myDetail {
+.mayTop .setbtn text{
+  color:#fff;
+  font-size:30rpx;
+}
+.mayTop .topwrap .myDetail {
   padding: 0 40rpx;
   display: flex;
   margin: 30rpx 0 20rpx 0;
+  flex:1;
 }
 
-.mayTop>.myDetail>image {
+.mayTop .topwrap .myDetail>image {
   width: 120rpx;
   height: 120rpx;
   border-radius: 60rpx;
@@ -61,27 +61,26 @@
   background: #fff;
 }
 
-.mayTop>.myDetail .myInfo {
+.mayTop .topwrap .myDetail .myInfo {
   color: #fff;
   padding: 25rpx 0;
 }
 
-.mayTop>.myDetail .myInfo .myName {
+.mayTop .topwrap  .myInfo .myName {
   display: flex;
 }
-
-.mayTop>.myDetail .myInfo .myName>text {
+.mayTop .topwrap .myInfo .myName>text {
   margin-right: 10rpx;
 }
 
-.mayTop>.myDetail .myInfo .myName>image {
+.mayTop .topwrap  .myInfo .myName>image {
   width: 23rpx;
   height: 24rpx;
   margin-top: 9rpx;
   vertical-align: middle;
 }
 
-.mayTop>.myDetail .myInfo .myName>view {
+.mayTop .topwrap  .myInfo .myName>view {
   width: 80rpx;
   background: #bf4c3a;
   margin-left: 10rpx;
@@ -90,18 +89,18 @@
   border-radius: 30rpx;
 }
 
-.mayTop>.myDetail .myInfo .myName>view>text {
+.mayTop .topwrap  .myInfo .myName>view>text {
   font-size: 17rpx;
 }
 
-.mayTop>.myDetail .myInfo .myName>view>image {
+.mayTop .topwrap  .myInfo .myName>view>image {
   width: 17rpx;
   height: 17rpx;
   vertical-align: middle;
   margin-right: 5rpx;
 }
 
-.mayTop>.myDetail .myInfo>.myPosition>text {
+.mayTop .topwrap  .myInfo>.myPosition>text {
   padding: 7rpx 10rpx;
   height: 30rpx;
   background: #bf4c3a;
@@ -111,7 +110,12 @@
   border-radius: 30rpx;
   margin-right: 10rpx;
 }
-
+.mayTop .toplist{
+  display: flex;
+}
+.mayTop .toplist>view{
+  flex:1;
+}
 .mayTop .moneyDetail {
   padding: 0 20rpx;
   height: 90rpx;
@@ -138,4 +142,19 @@
 .mayTop .moneyDetail>view>view {
   color: #ffea00;
   font-size: 28rpx;
+}
+.classity{
+  display: flex;
+  margin:0 20rpx;
+  margin-top:20rpx;
+  background:#fff;
+  border:1px solid #eee;
+}
+.classity .one{
+  flex:1;
+  text-align:center;
+  height:150rpx;
+  line-height: 150rpx;
+  font-size:30rpx;
+  
 }

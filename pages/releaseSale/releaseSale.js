@@ -74,7 +74,6 @@ Page({
     }
   },
   numBlur(e) {
-    console.log(e)
     let index = e.currentTarget.dataset.index
     if (index != 0) {
       console.log(e.detail.value < this.data.SteppedPriceListobj['num' + (index - 1)])
@@ -128,7 +127,6 @@ Page({
         title: '最多添加三个阶梯价',
       })
     } else {
-      console.log(this.data.SteppedPriceListobj)
       if (this.data.SteppedPriceListobj['num' + index] && this.data.SteppedPriceListobj['num' + index] != 0 && this.data.SteppedPriceListobj['price' + index] && this.data.SteppedPriceListobj['price' + index] != 0) {
         this.data.SteppedPriceListobj['placeholderprice' + (index + 1)] = '小于' + this.data.SteppedPriceListobj['price' + index]
         this.data.SteppedPriceListobj['placeholdernum' + (index + 1)] = '大于' + this.data.SteppedPriceListobj['num' + index]
@@ -239,7 +237,6 @@ Page({
     })
   },
   moqblur(e){
-    console.log(e)
     if (this.data.price_type) {
       console.log(this.data.SteppedPriceListobj)
       if (Number(e.detail.value)> this.data.SteppedPriceListobj.num0) {
@@ -267,7 +264,6 @@ Page({
         stock_count: this.data.moq
       })
     }
-
   },
   selleralwaysChange(e) {
     if (e.detail.value == 'false'){
@@ -305,7 +301,6 @@ Page({
         completeStart:dateTimeP
       });
   },
-  
   changeCompleteDateTime(e) {
     this.setData({
       complete_date: e.detail.value
@@ -399,7 +394,6 @@ Page({
             } else {
               _this.data.image_urls = _this.data.image_urls + "@" + img
             }
-
             _this.setData({
               image_urls: _this.data.image_urls
             })
@@ -451,6 +445,24 @@ Page({
         return;
       }
     }
+    if (this.data.moq < 1) {
+      wx.showToast({
+        title: '请填写最小订购量',
+      })
+      return;
+    }
+    if (this.data.mpq < 1) {
+      wx.showToast({
+        title: '请填写最小增量',
+      })
+      return;
+    }
+    if (this.data.stock_count < 1) {
+      wx.showToast({
+        title: '请填写可卖数量',
+      })
+      return;
+    }
     let obj = {
       goods_name: this.data.goods_name,
       goods_id: this.data.goods_id,
@@ -469,6 +481,7 @@ Page({
       image_urls: this.data.image_urls,
       brand_id: this.data.brand_id,
     }
+    
     if (this.data.UserInforma.userTagMap.tag==1) {
       obj.brand = this.data.UserInforma.userTagMap.brand
     }
@@ -477,12 +490,16 @@ Page({
       obj.is_old_product= this.data.is_old_product;
       if (this.data.base_no){
         obj.base_no= this.data.base_no;
+      }else{
+          wx.showToast({
+            title: '请填写批号',
+          })
+          return;
       }
     }else{
       obj.complete_date = this.data.complete_date.split("-").join("/")
     }
     if (this.data.price_type) {
-      console.log(this.data.SteppedPriceListobj);
       if (this.data.SteppedPriceListlength < 2) {
         wx.showToast({
           title: '阶梯价格至少有两组!',
@@ -498,17 +515,26 @@ Page({
       }
       obj.price_level = arr.join("@")
     } else {
-      obj.seckil_price = this.data.seckil_price
+      if (this.data.seckil_price){
+        obj.seckil_price = this.data.seckil_price
+      }else{
+        wx.showToast({
+          title: '请填写一口价',
+        })
+        return;
+      }
+      
     };
     if (this.data.seller_always) {
       obj.day_interval = this.data.day_interval
     } else {
-     
       obj.start_date = startTimeP
       obj.end_date = dateTimeP
     }
     var _this=this;
-    api.postForm("/api-g/goods-b/publish",obj).then(res=>{
+    api.get("/api-g/gods-b/getToken").then(res => {
+      api.postForm("/api-g/goods-b/publish", obj, { token: res.data }).then(res=>
+    {
       if (res.resultCode == "200") {
         wx.showModal({
           title: '提示',
@@ -540,6 +566,7 @@ Page({
         // })
 
       }
+    })
     })
   },
   getAdress() {

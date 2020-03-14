@@ -5,8 +5,7 @@
 <view class="invoiceType">
   <text>发票类型</text>
   <view wx:for="{{invoiceList}}" wx:key="index" bindtap="invoiceChange" data-index="{{index}}" data-id="{{item.id}}">
-    <image wx:if="{{item.checked}}" src="../../img/image/xuanzhong.png"></image>
-    <image wx:if="{{!item.checked}}" src="../../img/image/weixuanzhong.png"></image>
+    <image src="{{index==defaultInvoiceIndex ? '../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
     <text>{{item.name}}</text>
   </view>
 </view>
@@ -16,9 +15,9 @@
     <text>发票信息</text>
     <text bindtap="addInvoice">添加发票信息</text>
   </view>
-  <view class="listContent {{item.checked?'changeInvoice':''}}" wx:for="{{invoiceDetail}}" bindtap="chooseInvoice" data-index="{{index}}" wx:key="index">
-    <view wx:if="{{item.checked}}" class="useInvoice">
-      <text>当前使用</text>
+  <view class="listContent {{index==defaultInvoiceDetailIndex?'changeInvoice':''}}" wx:for="{{invoiceDetail}}" bindtap="chooseInvoice" data-index="{{index}}" wx:key="index">
+    <view wx:if="{{index==defaultInvoiceDetailIndex}}" class="useInvoice">
+      <text class="bgColor">当前使用</text>
     </view>
     <view>
       <text>公司名称</text>
