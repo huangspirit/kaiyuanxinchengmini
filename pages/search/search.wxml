@@ -1,7 +1,15 @@
 <!--pages/search/search.wxml-->
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <!-- <view class="left">
+      <image src="/img/public/home.png" bindtap="toHome"></image>
+    </view> -->
+    <view class="center">搜索</view>
+  </view>
+</view>
+<view style='padding-top:{{navH}}px'></view>
 <view class="custom flex_center">
   <view class="searchBanner">
-    <!-- <image src="../../img/home/searchBanner.jpg"></image> -->
     <view class='searchContent'>
       <text>电子元器件特价共享交易平台</text>
       <text>原装正品是底线 跟着特价买才省钱</text>

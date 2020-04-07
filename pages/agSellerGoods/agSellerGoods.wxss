@@ -1,0 +1,60 @@
+/* pages/agSellerGoods/agSellerGoods.wxss */
+.list .listwrap {
+  padding: 20rpx;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  background: #fff;
+}
+
+.list .listwrap .left {
+  width: 200rpx;
+  height: 150rpx;
+  background: #f7f7f7;
+  margin-right: 25rpx;
+  position: relative;
+}
+
+.list .listwrap .left .mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 45rpx;
+  height: 45rpx;
+  z-index: 1;
+}
+
+.list .listwrap .left .goodsImg {
+  height: 100%;
+  width: 100%;
+}
+
+.list .listwrap .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list .listwrap .right .goodsName {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.list .listwrap .right .desc {
+  font-size: 24rpx;
+}
+
+.list .listwrap .right .num {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.list .listwrap .right .num .price {
+  color: #ff6200;
+  font-size: 30rpx;
+  float: right;
+}
+.nomore{
+  text-align: center;
+  line-height: 80rpx;
+}

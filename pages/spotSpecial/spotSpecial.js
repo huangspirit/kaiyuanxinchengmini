@@ -98,16 +98,8 @@ Page({
     }
   },
   toDetail(val) {
-    var obj = {
-      id:val.currentTarget.dataset.item.goods_id,
-      tag:'goodsinfo',
-      name:val.currentTarget.dataset.item.goods_name
-    }
-    var routerParams = JSON.stringify(obj)
-    let storageItem = JSON.stringify(val.currentTarget.dataset.item)
-    wx: wx.setStorageSync('productDetail', storageItem)
     wx: wx.navigateTo({
-      url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      url: '../goodsDetail/goodsDetail?seller_goods_id=' + val.currentTarget.dataset.item.id,
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

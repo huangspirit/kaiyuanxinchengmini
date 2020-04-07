@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    notshowDetail:true,
+    navH:0,
     errorImg: app.globalData.errorImg,
     listData: [],
     payDetail: {},
@@ -24,6 +26,24 @@ Page({
     defaultInvoiceDetailIndex:0,
     isback:false,
     adressIsBack:false
+  },
+  goback() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  toHome() {
+    wx: wx.switchTab({
+      url: '../home/home',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  setshowdetail(){
+    this.setData({
+      notshowDetail:!this.data.notshowDetail
+    })
   },
   getAdress() {
     api.get("/api-u/address/queryAllReceivingAddress", {
@@ -106,7 +126,7 @@ Page({
   },
   changeAddress() {
     wx.navigateTo({
-      url: '../addressList/addressList?addressindex=' + this.data.addressindex,
+      url: '/pages/center/buyer/addressList/addressList?addressindex=' + this.data.addressindex,
     })
   },
   payMoney() {
@@ -155,22 +175,20 @@ Page({
               paySign: respon.data.paySign,
               'success': function(res) {
                 console.log(res)
-
                 wx.navigateTo({
-                  url: '../my/sellerOrder/sellerOrder',
+                  url: '/pages/center/buyer/buyerOrder/buyerOrder',
                 })
 
               },
               'fail': function(res) {
                 console.log(res)
                 wx.navigateTo({
-                  url: '../my/sellerOrder/sellerOrder',
+                  url: '/pages/center/buyer/buyerOrder/buyerOrder',
                 })
               },
               'complete': function(res) {
-                console.log(res)
                 wx.navigateTo({
-                  url: '../my/sellerOrder/sellerOrder',
+                  url: '/pages/center/buyer/buyerOrder/buyerOrder',
                 })
               }
             })
@@ -195,6 +213,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      navH: app.globalData.navHeight
+    })
     this.getAdress();
     this.getInvoiceList();
     this.getinvoiceDetail();

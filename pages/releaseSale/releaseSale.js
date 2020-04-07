@@ -377,7 +377,7 @@ Page({
           imgList: _this.data.imgList
         })
         wx.uploadFile({
-          url: _this.data.host+'/api-f/files/uploadWithCloud?access_token=' + wx.getStorageSync('token') + '&fileSource=QINIUYUN&type=1&id=1',
+          url: _this.data.host+'/api-g/files/uploadWithCloud?access_token=' + wx.getStorageSync('token') + '&fileSource=QINIUYUN&type=1&id=1',
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -409,8 +409,9 @@ Page({
     })
   },
   submit() {
+    var startTimeP,dateTimeP;
     if (!this.data.seller_always) {
-      let startTimeP =
+      startTimeP =
         this.data.startTimeArray[0][this.data.startTime[0]] + '/'
         + this.data.startTimeArray[1][this.data.startTime[1]] + '/'
         + this.data.startTimeArray[2][this.data.startTime[2]] + ' '
@@ -418,7 +419,7 @@ Page({
         + this.data.startTimeArray[4][this.data.startTime[4]] + ':'
         + this.data.startTimeArray[5][this.data.startTime[5]]
 
-      let dateTimeP =
+       dateTimeP =
         this.data.dateTimeArray[0][this.data.dateTime[0]] + '/'
         + this.data.dateTimeArray[1][this.data.dateTime[1]] + '/'
         + this.data.dateTimeArray[2][this.data.dateTime[2]] + ' '

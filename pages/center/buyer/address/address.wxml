@@ -1,0 +1,32 @@
+
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">收货地址</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="addressList" wx:for="{{addressList}}" wx:key="index">
+  <view class="listContent">
+    <view>
+      <text>{{item.receivingName}}</text>
+      <text>{{item.phone}}</text>
+    </view>
+    <view>
+      <!-- <text>标签</text> -->
+      {{item.address}} {{item.detailedAddress}}
+    </view>
+  </view>
+  <view class="btnEdit" bindtap="btnEdit" data-item="{{item}}">编辑</view>
+</view>
+<view class="addAdress">
+  <text bindtap="addNewAdress">新增收货地址</text>
+</view>

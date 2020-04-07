@@ -1,5 +1,18 @@
 <!--pages/pay/pay.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+    <view class="btn">
+      <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+      <text></text>
+      <image src="/img/public/home.png" bindtap="toHome"></image>
+    </view>
+    </view>
+    <view class="center">订单结算</view>
+  </view>
+</view>
+<view style='padding-top:{{navH}}px'></view>
 <view class="orderTop" bindtap="changeAddress" wx:if="{{adressList.length}}">
   <view class="orderUser">
     <text>{{adressList[addressindex].receivingName}}</text>
@@ -70,10 +83,10 @@
 <view class="gray" style="padding:10rpx;">
   交易提示：平台目前提供人民币与美元两种报价，取决于卖家的交货地址；但买家目前只能使用人民币付款；
 </view>
-<view class="descrition gray">
+<view class="{{notshowDetail?'descrition gray notmore':'descrition gray'}}">
   <view>
     <view>1、关于海关增值税</view>
-    <text>此部分只针对美元交易的产品，此部分随国家政策做相应调整；</text>
+    <view class="over">此部分只针对美元交易的产品，此部分随国家政策做相应调整；</view>
   </view>
   <view>
     <view>2.关税与费用多退少补</view>
@@ -102,6 +115,7 @@
   <text>*清关服务费：按本批次总货值得0.5%收取，不足300元按300元收取；没报关一次收取，收取一次费用；</text>
   <text>*运费说明：单一供应商购买金额500元以上为包国内邮费，500元以下为顺丰到付；</text> -->
 </view>
+<view class="showmorebtn blu" bindtap="setshowdetail">{{notshowDetail?'更多>>':'收起'}}</view>
 <view class="payDetail">
   <view>
     <text>人民币共{{unuscount}}种器件，金额小计：</text>

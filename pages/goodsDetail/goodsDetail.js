@@ -8,13 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTopNav:false,
+    navH:app.globalData.navHeight,
     baseURL3:app.globalData.baseURL3,
     showimgList:[],
-    productParams: "",
     productDetail: {},
     specialData: {},
     priceLevel: [],
-    TabbarBot: app.globalData.tabbar_bottom,
+    // TabbarBot: app.globalData.tabbar_bottom,
     timer: "",
     errorImg: app.globalData.errorImg,
     purchaseObj:{
@@ -27,16 +28,14 @@ Page({
   },
   getProductDetail() {
     api.get('/api-g/gods-anon/searchResult', {
-      id: this.data.productParams.id,
-      tag: this.data.productParams.tag,
-      name: this.data.productParams.name
+      id: this.data.specialData.goods_id,
+      tag: "goodsinfo",
+      name: this.data.specialData.goods_name
     }).then(res => {
-      console.log('商品详情', res)
       if (res.resultCode == "200") {
         this.setData({
           productDetail: res.data.goodsinfo,
-        })
-        
+        })  
       }
     })
   },
@@ -85,7 +84,6 @@ Page({
     })
   },
   onShareAppMessage: function(res) {
-
     if (res.from === 'button') {}
     return {
       title: '分享',
@@ -95,12 +93,37 @@ Page({
       }
     }
   },
+  downpdf() {
+    wx.showLoading({
+      title: '下载中...',
+    })
+    var _this = this;
+    wx.downloadFile({
+      url: _this.data.productDetail.datasheet,
+      success: function (res) {
+        console.log(res)
+        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+        wx.openDocument({
+          filePath: Path,
+          success: function (res) {
+            wx.hideLoading()
+            console.log('打开文档成功')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
+  },
   toHome() {
-    wx: wx.switchTab({
-      url: '../home/home',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+    this.setData({
+      showTopNav:!this.data.showTopNav
+    })
+  },
+  goback() {
+    wx.navigateBack({
+      delta: 1
     })
   },
   intoShopping(){
@@ -212,15 +235,15 @@ Page({
       if (this.data.priceLevel.length == 1) {
         currentPrice = parseFloat(this.data.priceLevel[0].price);
       } else if (this.data.priceLevel.length == 2) {
-        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
         } else {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
         }
       } else if (this.data.priceLevel.length == 3) {
-        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
-        } else if (goodsnum <= Number(this.data.priceLevel[2].value)) {
+        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
         } else {
           currentPrice = parseFloat(this.data.priceLevel[2].price);
@@ -239,7 +262,6 @@ Page({
       }
       
     })
-    console.log()
   },
   addGoodsNum(e){
     let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.mpq;
@@ -249,15 +271,15 @@ Page({
       if (this.data.priceLevel.length == 1) {
         currentPrice = parseFloat(this.data.priceLevel[0].price);
       } else if (this.data.priceLevel.length == 2) {
-        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
         } else {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
         }
       } else if (this.data.priceLevel.length == 3) {
-        if (goodsnum <= Number(this.data.priceLevel[1].value)) {
+        if (goodsnum < Number(this.data.priceLevel[1].value)) {
           currentPrice = parseFloat(this.data.priceLevel[0].price);
-        } else if (goodsnum <= Number(this.data.priceLevel[2].value)) {
+        } else if (goodsnum < Number(this.data.priceLevel[2].value)) {
           currentPrice = parseFloat(this.data.priceLevel[1].price);
 
         } else {
@@ -438,19 +460,16 @@ Page({
       this.setCountDown(val)
     }, time)
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    let reqInfo = JSON.parse(options.params)
-    console.log(reqInfo)
-    this.setData({
-      productParams: reqInfo
-    })
-    let specialStorage = JSON.parse(wx.getStorageSync('productDetail'))
-    console.log(specialStorage)
-    if (specialStorage.priceType) {
-      let levelPrice = specialStorage.priceLevel
+  getSellerGoodDetail(seller_goods_id){
+    api.get('/api-g/gods-anon/queryDirectGoodsDetail', {
+      length:1,
+      seller_goods_id:seller_goods_id,
+      start:0,
+    }).then(res => {
+      if (res.resultCode == "200") {
+        let obj=res.data;
+        if (obj.priceType) {
+          let levelPrice = obj.priceLevel
           levelPrice = levelPrice.split('@')
           this.data.priceLevel = []
           for (let i = 0; i < levelPrice.length; i++) {
@@ -464,25 +483,77 @@ Page({
             priceLevel: this.data.priceLevel
           })
         };
-    if (specialStorage.sellerGoodsImageUrl){
-      let arr=[];
-      arr=specialStorage.sellerGoodsImageUrl.split("@").map(item=>{
-        return this.data.baseURL3+"/"+item
-      })
-      this.setData({
-        showimgList: arr
-      })
-    }else{
-      this.setData({
-        showimgList: [specialStorage.goodsImageUrl]
-      })
-    }
-    this.setData({
-      specialData: specialStorage
+        if (obj.sellerGoodsImageUrl) {
+          let arr = [];
+          arr = obj.sellerGoodsImageUrl.split("@").map(item => {
+            return this.data.baseURL3 + "/" + item
+          })
+          this.setData({
+            showimgList: arr
+          })
+        } else {
+          this.setData({
+            showimgList: [obj.goodsImageUrl]
+          })
+        }
+        let time =obj.expireTime - obj.currentTime
+        this.setCountDown(time)
+        this.setData({
+          specialData: obj,
+        })
+        this.getProductDetail()
+      }
     })
-    let time = this.data.specialData.expireTime - this.data.specialData.currentTime
-    this.setCountDown(time)
-    this.getProductDetail()
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    this.setData({
+      navH: app.globalData.navHeight
+    })
+    this.getSellerGoodDetail(options.seller_goods_id)
+    // let reqInfo = JSON.parse(options.params)
+    // console.log(reqInfo)
+    // this.setData({
+    //   productParams: reqInfo
+    // })
+    // let specialStorage = JSON.parse(wx.getStorageSync('productDetail'))
+    // console.log(specialStorage)
+    // if (specialStorage.priceType) {
+    //   let levelPrice = specialStorage.priceLevel
+    //       levelPrice = levelPrice.split('@')
+    //       this.data.priceLevel = []
+    //       for (let i = 0; i < levelPrice.length; i++) {
+    //         let itemPrice = levelPrice[i].split('-')
+    //         this.data.priceLevel.push({
+    //           value: Number(itemPrice[0]),
+    //           price: Number(itemPrice[1])
+    //         })
+    //       }
+    //       this.setData({
+    //         priceLevel: this.data.priceLevel
+    //       })
+    //     };
+    // if (specialStorage.sellerGoodsImageUrl){
+    //   let arr=[];
+    //   arr=specialStorage.sellerGoodsImageUrl.split("@").map(item=>{
+    //     return this.data.baseURL3+"/"+item
+    //   })
+    //   this.setData({
+    //     showimgList: arr
+    //   })
+    // }else{
+    //   this.setData({
+    //     showimgList: [specialStorage.goodsImageUrl]
+    //   })
+    // }
+    // this.setData({
+    //   specialData: specialStorage
+    // })
+    // let time = this.data.specialData.expireTime - this.data.specialData.currentTime
+    // this.setCountDown(time)
+    // this.getProductDetail()
   },
 
   /**

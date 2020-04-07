@@ -1,35 +1,89 @@
-/* pages/goodsDeatil/goodsDetail.wxss */
-/* pages/productDetail/productDetail.wxss */
+
 .productDetailPic {
   width: 100%;
   text-align: center;
-  height:320rpx;
-  background:#fff;
   position: relative;
-}
-.productDetailPic swiper{
-  height:100%;
   
 }
+.productDetailPic swiper{
+  height:480rpx;
+  background: #fff;
+}
 .productDetailPic .swiperitem{
-  line-height: 320rpx;
+  line-height: 480rpx;
 }
 .productDetailPic .swiperitem image{
-  height:300rpx;
-  width:300rpx;
+  height:480rpx;
+  width:600rpx;
 }
-.productDetailPic .saleTime{
-  position:absolute;
-  bottom: 0;
-  text-align: left;
-  line-height: 50rpx;
-  padding-left:20rpx;
-  background: rgba(255,255,255,0.5);
-  width:100%;
+ .saleTime{
   font-weight: bolder;
   font-size:30rpx;
 }
-.priceStyle {
+.sellerDesc{
+  color:#fff;
+  display: flex;
+  padding-bottom:20rpx;
+  background: #f2f2f2;
+}
+.sellerDesc .left{
+  padding:20rpx;
+  flex:1;
+  background: linear-gradient(90deg,rgba(248,82,0,1) 0%,rgba(255,12,0,1) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size:30rpx;
+}
+.sellerDesc .left .levLeft .num{
+  width:100rpx;
+  display: inline-block;
+}
+.sellerDesc .middle{
+  border-left:none;
+  border-right:20rpx solid #f2f2f2;
+  border-top:90rpx solid #FF0C00;
+  border-bottom:90rpx solid #FF0C00;
+}
+.sellerDesc .right{
+  width:300rpx;
+  background: #f2f2f2;
+  display: flex;
+  color:#000;
+  text-align: center;
+}
+.sellerDesc .right .top{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.sellerDesc .right image{
+  width:30rpx;
+  height:30rpx;
+}
+.goodsName{
+  background: #fff;
+  line-height: 116rpx;
+  font-size:30rpx;
+  color:#333;
+  border-bottom:1px solid #ddd;
+  padding:0 20rpx;
+  font-weight: bold;
+}
+.goodsName .isAgent{
+  background: #FFBD00;
+  color:#000;
+  height:35rpx;
+  line-height: 35rpx;
+  width:60rpx;
+  text-align: center;
+  display: inline-block;
+  border-radius: 5rpx;
+  font-size: 20rpx;
+  margin-right: 15rpx;
+  font-weight: normal;
+}
+/* .priceStyle {
   height: 140rpx;
   display: flex;
   background: #fff;
@@ -39,8 +93,6 @@
   text-align: right;
 }
 .priceStyle .priceType {
-  /* color: #fff;
-  background: linear-gradient(#fc4097, #f92057); */
   display: flex;
   flex-direction: column;
   padding: 20rpx;
@@ -53,8 +105,7 @@
   font-weight: bold;
 }
 .priceStyle .levLeft {
-  /* color: #fff;
-  background: linear-gradient(#fc4097, #f92057); */
+  
   display: flex;
   padding: 20rpx;
   width: 60%;
@@ -66,8 +117,6 @@
   display:inline-block;
 }
 .priceStyle .sellerStatus {
-  /* color: #fb2e6f;
-  background: #fefd4b; */
   display: flex;
   flex-direction: column;
   padding: 20rpx;
@@ -76,7 +125,7 @@
   height: 120rpx;
   margin-top: 20rpx;
   justify-content: space-around;
-}
+} */
 .brandComponey {
   margin-bottom: 10rpx;
 }
@@ -84,31 +133,34 @@
   width: 100%;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 40rpx;
+  font-size: 30rpx;
   font-weight: bold;
   padding: 0 20rpx;
   background: #fff;
-  margin-bottom: 2rpx;
-  text-align: center;
+  margin:20rpx 0;
 }
 .brandDetail {
   background: #fff;
-  padding: 10rpx 20rpx;
+  padding: 35rpx 20rpx 0;
 }
-.brandDetail .name{
-  font-size:34rpx;
+.brandDetail .brandName{
+  font-size:30rpx;
   font-weight: bolder;
-  margin-bottom:8rpx;
 }
-.brandDetail .brand{
-  line-height: 55rpx;
+.brandDetail .mark{
+  font-size:20rpx;
+  margin-left:20rpx;
+  padding:0 14rpx;
+  border-radius: 5rpx;
 }
 .brandDetail .desc{
   margin-top:8rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size:24rpx;
 }
+
 .brandDetail .productFocus{
   display: flex;
   align-items: center;
@@ -133,71 +185,93 @@
 .brandDetail .productFocus>.share>button::after {
   border: none;
 }
-
-
-.brandDetail .goodsDesc {
-margin-top:20rpx;
-margin-bottom:15rpx;
+ .goodsDesc {
+   line-height: 96rpx;
+   padding:0 20rpx;
+   color:#000;
+   font-size: 30rpx;
 }
-
-.brandDetail .goodsDesc>text {
-  color: #343434;
-  font-size: 24rpx;
+ .goodsDesc text{
+  margin-right:30rpx;
 }
-.brandDetail .dataset .item{
+ .count {
+  display:flex;
+  justify-content: space-between;
+  line-height: 95rpx;
+}
+.dataset{
+  background:#fff;
+  padding:20rpx;
+}
+ .dataset .item{
   display:flex;
   height:70rpx;
   line-height: 70rpx;
   text-align: center;
-  color:#333;
+  color:#000;
+  border-bottom:1px dashed #999;
+  font-size: 24rpx;
 }
-.brandDetail .dataset .item .left{
-  width:40%;
-  border-right:1px solid #ddd;
+ .dataset .item .left{
+  width:190rpx;
+  text-align: left;
 }
-.brandDetail .dataset .item .right{
+ .dataset .item .right{
   flex:1;
   text-align: left;
-  margin-left:10%;
+  
 }
-.brandDetail .seller {
-  padding-top:20rpx;
-}
-.brandDetail .seller .userHead{
-  display:flex;
-  align-items: center;
-  margin-top:15rpx;
+ .seller {
+  margin-top:18rpx;
+  background: #FDF6DB;
+  color:#000;
+  display: flex;
   padding:15rpx;
 }
-.brandDetail .seller .userHead>image {
-  width: 100rpx;
-  height: 100rpx;
+ .seller .userHead{
+  display:flex;
+}
+ .seller .userHead .imgwrap {
+  width: 120rpx;
+  height: 120rpx;
   margin: 0 15rpx;
-  border-radius: 100%;
-  vertical-align: middle;
+  border-radius: 120rpx;
+  overflow: hidden;
+  line-height: 120rpx;
+  text-align: center;
 }
-
-.brandDetail .seller .userHead .name {
+.seller .userHead .imgwrap image{
+  width:100%;
+  height:100%;
+}
+.seller .userHead .info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+ .seller .userHead .name {
   font-size: 30rpx;
+  font-weight: 500;
 }
-.brandDetail .seller .userHead .tag {
+ .seller .userHead .tag {
   font-size: 22rpx;
-  padding:2rpx 8rpx;
-  border-radius: 8rpx;
+  padding:0 8rpx;
+  border-radius: 5rpx;
   margin-top:10rpx;
   line-height: 1;
 }
-.brandDetail .seller .userHead .scoreonewrap{
-  flex:1;
-}
-.brandDetail .seller .userHead .scoreone{
-  display:flex;
+.seller .btnwrap{
+  flex: 1;
   text-align: right;
-  justify-content:flex-end;
-  font-size:22rpx;
 }
-.brandDetail .seller .userHead .scoreone view{
-  display:inline-block;
+.seller .btnwrap .button{
+  border-radius: 60rpx;
+  line-height: 60rpx;
+  padding:0 24rpx;
+  background:linear-gradient(90deg,rgba(255,208,0,1) 0%,rgba(255,189,0,1) 100%);
+  color:#000;
+  display: inline-block;
+  margin-top:30rpx;
 }
 .productParams {
   display: flex;
@@ -215,36 +289,47 @@ margin-bottom:15rpx;
   border-bottom: 1px solid #ebeef5;
   padding:20rpx;
 }
-
-.cu-bar.tabbar.shop .action {
-  width: 100rpx;
+.downpdf{
+  width:80%;
+  margin:20rpx auto;
+  background: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size:28rpx;
 }
-
-.cu-bar.tabbar .action {
-  font-size: 20rpx;
-}
-
-.cu-bar.tabbar .action [class*="icon"] {
-  width: 38rpx;
-}
-
-.canui-xzwz {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-
-.canui-foor-fixed {
+.shop{
+  display: flex;
   position: fixed;
-  bottom: 0;
-  width: 100%;
+  bottom:0;
+  left:0;
+  background:#fff;
+  width:100%;
+  height:90rpx;
+  line-height: 90rpx;
+  border-top:1px solid #ddd;
 }
-
-.canui-tabbar-bottom {
-  padding-bottom: 20rpx;
-  min-height: 150rpx;
+.shop view{
+  flex:1;
+  text-align: center;
+  font-size:30rpx;
+}
+.shop view .cuIcon-home{
+  font-size:40rpx;
+}
+.shop view .cuIcon-cart{
+  font-size:40rpx;
+}
+.shop .shoper{
+  background:#f2f2f2;
+}
+.shop .car{
+  background: #FF5301;
+  color:#fff;
+}
+.shop .pur{
+  background: #FFCA00;
+  color:#fff;
 }
 .goodsPurchase{
   display: flex;

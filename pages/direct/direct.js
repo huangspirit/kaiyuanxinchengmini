@@ -8,6 +8,8 @@
      * 页面的初始数据
      */
     data: {
+      showTopNav:false,
+      navH:app.globalData.navHeight,
       UserInforma: {},
       directList: {},
       detailObj: {},
@@ -55,6 +57,16 @@
       errorImg: app.globalData.errorImg,
       name:"",
       join:false
+    },
+    toHome() {
+      this.setData({
+        showTopNav:!this.data.showTopNav
+      })
+    },
+    goback() {
+      wx.navigateBack({
+        delta: 1
+      })
     },
     //加入询价蓝
     addInquiry(val) {

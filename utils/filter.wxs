@@ -24,6 +24,16 @@ function formatDate(number) {
   var timeDate = [year, month, day].join('-') + " " + [hour, minute, second].join(':')
   return [time1,timeDate]
 }
+//紧急过滤
+
+function level(val){
+  switch (val){
+    case 0:
+     return '一般';
+   case 1:
+     return "紧急";
+  }
+}
 //身份过滤器
 function tagFilter(val){
    switch (val){
@@ -86,6 +96,40 @@ function bankType(val) {
     return '支付宝'
   }
 }
+function orderStatus(val){
+  switch (val) {
+    case 0:
+      return "未支付";
+    case 1:
+      return "已完成支付";
+    case 2:
+      return "取消中";
+    case 3:
+      return "已取消";
+    case 4:
+      return "已交货";
+    // case 5:
+    //   return "已付预付款";
+    case 5:
+      return "待付尾款";
+    case 6:
+      return "已发货到质检中心";
+    case 7:
+      return "已从质检中心发出";
+  }
+}
+function payTay(val){
+  switch (val) {
+    case 1:
+      return "微信支付";
+    case 2:
+      return "支付宝支付";
+    case 3:
+      return "对公支付";
+    case 4:
+      return "白条支付";
+  }
+}
 module.exports = {
   formatDate: formatDate,
   priveLevel: priveLevel,
@@ -93,5 +137,8 @@ module.exports = {
   tagFilter: tagFilter,
   goodsTypeFilter: goodsTypeFilter,
   priceTypeFilter: priceTypeFilter,
-  toFixed:toFixed
+  toFixed:toFixed,
+  orderStatus: orderStatus,
+  payTay: payTay,
+  level:level
 }

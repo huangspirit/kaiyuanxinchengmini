@@ -1,231 +1,282 @@
-.top{
-  display:flex;
-  align-items: center;
-  padding:10rpx;
+.fright {
+  float: right;
 }
-.top image{
-  width:150rpx;
-  height:150rpx;
+
+.top {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: linear-gradient(90deg, rgba(255, 208, 0, 1) 0%, rgba(255, 189, 0, 1) 100%);
+}
+
+.top image {
+  width: 120rpx;
+  height: 120rpx;
   overflow: hidden;
   border-radius: 150rpx;
 }
-.top .cont{
-  flex:1;
-  height:100%;
-  padding:20rpx;
-}
-.top .cont .name{
-  font-size:30rpx;
-  margin-bottom:20rpx;
-}
-.top .cont .name>.time{
-  font-size:22rpx;
-  margin-left:15rpx;
-}
-.top .cont .scoreone view{
-  display:inline-block;
-}
-.goodslist{
-  padding:20rpx 0;
+
+.top .cont {
+  height:180rpx;
+  flex: 1;
+  padding: 20rpx;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around
+  }
+
+.top .cont .name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #000;
 }
 
-.goodslist .title{
-  font-size:30rpx;
-  font-weight: bolder;
-  background:#fff;
-  padding:10rpx;
-  border-bottom:1px solid #ddd;
+.top .cont .name>.time {
+  font-size: 22rpx;
+  margin-left: 15rpx;
 }
-.goodslist .brand{
+.top .cont .score .star{
+  margin-right:5rpx;
+  font-size:32rpx;
+}
+.top .cont .score .score0{
+  margin-left:20rpx;
+}
+.top .cont .indity{
+  display:flex;
+}
+.top .cont .indity view{
+  margin-right:30rpx;
+}
+.top .cont .indity image{
+  height:40rpx;
+  width:40rpx;
+  vertical-align: middle;
+  margin-right:5rpx;
+}
+.goodslist {
+  margin-top: 25rpx;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.brandlist {
+  margin-top: 0;
+}
+
+.goodslist .title {
+  font-size: 30rpx;
+  font-weight: bolder;
+  line-height: 90rpx;
+}
+
+.brandlist .brand {
   display: flex;
   flex-wrap: wrap;
+  background: #fff;
+  padding: 0 20rpx;
+  justify-content: space-between;
+  height:120rpx;
+  overflow: hidden;
+
 }
-.goodslist .brand>view{
-  width:50%;
-  padding:20rpx;
+.brandlist .mordebrandlist{
+  height:auto;
+  overflow: auto;
+}
+.brandlist .brand>view {
+  width: 32.5%;
   box-sizing: border-box;
-}
-.goodslist .brand>view image{
-  height: 167rpx;
-}
-.goodslist > .list{
-  display:flex;
-  flex-wrap: wrap;
-  padding:20rpx;
-}
-.goodslist .list .oneitem{
-  width:48.5%;
-  margin-right:3%;
-  background:#fff;
-  margin-bottom:3%;
-  padding:20rpx;
-  box-sizing: border-box;
-  border-radius: 10rpx;
-  position: relative;
-  box-shadow: 0 0 10rpx 3rpx #ddd;
-}
-.goodslist .list .oneitem:nth-of-type(even){
-  margin-right:0;
-}
-.goodslist .list .oneitem .imgWrap{
+  border: 1rpx solid #ccc;
   text-align: center;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+
+.brandlist .brand>view image {
+  height: 70rpx;
+  width: 190rpx;
+  vertical-align: middle;
+}
+
+.catelist > .list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  justify-content: space-between;
+  height: 400rpx;
+  overflow: hidden;
+}
+.catelist > .list.morderlist{
+  height: auto;
+}
+.catelist .oneitem {
+  width: 32%;
+  margin-bottom: 20rpx;
+  border:1px solid #fff;
+}
+.catelist .oneitem.borderColor{
+  border-color: #ff6200;
+}
+.catelist .oneitem image {
+  height: 130rpx;
+  width: 100%;
   
 }
-.goodslist .list .oneitem .imgWrap image{
-  height:250rpx;
-  width:250rpx;
-}
-.goodslist .list .oneitem .name{
-  font-size:28rpx;
-}
-.goodslist .list .oneitem .desc{
-  font-size:20rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  margin:10rpx 0;
-}
-.goodslist .list .oneitem .mark{
-  font-size:20rpx;
-  margin-left:10rpx;
-}
-.goodslist .list .oneitem .price{
-  font-weight: bolder;
-}
-.goodslist .list .oneitem .goodsTypeMark{
-  position: absolute;
-  left:0;
-  top:0;
-  padding:0 10rpx;
-  border-radius: 10rpx;
-  font-size: 22rpx;
-}
-.goodslist .commitlist .nocommit{
-  text-align: center;
-  line-height: 100rpx;
-}
-.goodslist .commitlist .oneitem{
-  display:flex;
-  margin-top:20rpx;
-  background: #fff;
-  padding:10rpx;
-}
-.goodslist .commitlist .oneitem .header image{
-  width:70rpx;
-  height: 70rpx;
-  border-radius: 70rpx;
- 
+
+.catelist .oneitem .desc {
+  display: flex;
+  font-size: 24rpx;
+  justify-content: center;
 }
 
-.goodslist .commitlist .oneitem .list{
-  margin-left:20rpx;
-  flex:1;
+.catelist .oneitem .desc .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.goodslist .commitlist .oneitem .list .tit{
-  margin-bottom:10rpx;
-}
-.goodslist .commitlist .oneitem .tit .time{
-  font-size:22rpx;
-  margin-left:10rpx;
-}
-.goodslist .commitlist .oneitem .list .img{
-  width:30%;
-  height:180rpx;
-  margin-top:10rpx;
-  margin-right:10rpx;
-}
-.goodslist .commitlist .oneitem .list .reply{
-  padding:10rpx;
-  margin-top:20rpx;
-}
-.goodslist .commitlist .oneitem .list .reply .tit{
-  margin-bottom:10rpx;
-}
-.selectitem .tit{
+
+.list .listwrap {
+  padding: 30rpx 0;
+  border-bottom: 1px solid #ddd;
   display: flex;
 }
-.selectitem .name{
-  flex:1;
-}
-.selectitem .btn{
-  width:80rpx;
-}
-.selectitem .allitem{
-  position: fixed;
-  z-index: 1;
-  left:0;
-  right:0;
-  top:0;
-  bottom:0;
-  background: rgba(0,0,0,0.5);
-}
-.selectitem .allitem .cont{
-  background:#fff;
-  width:90%;
-  margin-left:10%;
-  margin-top:1px;
-  height:100%;
-  }
-  .selectitem .allitem .cont .item{
-    padding:20rpx;
-  }
-  .selectitem .allitem .cont .titl{
-    font-weight: bolder;
-    margin-bottom:25rpx;
-  }
-  .selectitem .allitem .cont .list{
-    width:100%;
-    box-sizing: border-box;
-  }
-  .selectitem .allitem .cont .list>view{
-    width:30%;
 
-    margin-right:3%;
-    display: inline-block;
-    text-align: center;
-    font-weight: normal;
-    font-size:26rpx;
-    margin-bottom:10rpx;
-   
-  }
-  .selectitem .allitem .cont .list>view>text{
-      border:1px solid #f7f7f7;
-      display: inline-block;
-      width: 100%;
-      box-sizing: border-box;
-      height:60rpx;
-      line-height: 60rpx;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-  }
-  .selectitem .allitem .cont .list .nomargin{
-    margin-right:0;
-  }
-  .selectitem .allitem .bottom{
-    display:flex;
-    justify-content: center;
-    margin-top:20rpx;
-    padding:20rpx;
-    border-top:1px solid #f7f7f7;
-  }
-  .selectitem .allitem .bottom view{
-      width:35%;
-      text-align: center;
-      border-radius: 55rpx;
-      height:55rpx;
-      line-height: 55rpx;
-      border: 1px solid #f7f7f7;
-      margin-right:20rpx;
-  }
-  .selectitem .allitem .item input{
-    border:1px solid #f7f7f7;
-    height:40rpx;
-    line-height: 40rpx;
-    width:80%;
-    padding:0 15rpx;
-  }
-  .borderColor{
-    border-color:#df3f2f!important;
-  }
+.list .listwrap .left {
+  width: 200rpx;
+  height: 150rpx;
+  background: #f7f7f7;
+  margin-right: 25rpx;
+  position: relative;
+}
+
+.list .listwrap .left .mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 45rpx;
+  height: 45rpx;
+  z-index: 1;
+}
+
+.list .listwrap .left .goodsImg {
+  height: 100%;
+  width: 100%;
+}
+
+.list .listwrap .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list .listwrap .right .goodsName {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.list .listwrap .right .desc {
+  font-size: 24rpx;
+}
+
+.list .listwrap .right .num {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.list .listwrap .right .num .price {
+  color: #ff6200;
+  font-size: 30rpx;
+  float: right;
+}
+.selectitem .tit {
+  display: flex;
+}
+
+.selectitem .name {
+  flex: 1;
+}
+
+.selectitem .btn {
+  width: 80rpx;
+}
+
+.nocommit {
+  text-align: center;
+}
+
+.commentlist .oneitem {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.commentlist .oneitem .header image {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100rpx;
+  overflow: hidden;
+}
+
+.commentlist .oneitem .list {
+  flex: 1;
+}
+
+.commentlist .oneitem .list .imgwrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+
+.commentlist .oneitem .list .imgwrap>view {
+  width: 32%;
+  margin-bottom: 10rpx;
+}
+
+.commentlist .oneitem .list .imgwrap .img {
+  width: 100%;
+  background: #000;
+  height: 125rpx;
+}
+
+.commentlist .oneitem .list .name {
+  color: #000;
+  font-size: 28rpx;
+  margin-top: 5rpx;
+}
+
+.commentlist .oneitem .list .content {
+  background: #f5f5f5;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+
+.getmorecomment {
+  text-align: center;
+  line-height: 140rpx;
+  background: #fff;
+}
+.getmorecomment view {
+  padding: 0 26rpx;
+  border-radius: 60rpx;
+  line-height: 60rpx;
+  white-space: nowrap;
+  display: inline-block
+}
+.footer{
+  position: fixed;
+  bottom:0;
+  left:0;
+  line-height: 90rpx;
+  display: flex;
+  width:100%;
+  z-index: 99;
+}
+.footer>view{
+  flex:1;
+  text-align: center;
+  font-size:30rpx;
+}

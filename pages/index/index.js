@@ -21,8 +21,6 @@ Page({
     this.setData({
       loadModal: true
     })
-
-
     api.get('/api-u/wechat/smart/smartback', app.globalData.usercode).then(res => {
       console.log(res)
       this.setData({

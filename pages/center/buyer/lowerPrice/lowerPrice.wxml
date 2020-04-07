@@ -1,0 +1,51 @@
+<!--pages/center/buyer/lowerPrice/lowerPrice.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">降价提醒</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="custom flex_center clear" style='top:{{navH}}px'>
+  <view class='navInput'>
+    <text class="cuIcon-search"></text>
+    <input placeholder='搜索你想要的商品' bindconfirm='toSearch' placeholder-class='none' confirm-type="search"></input>
+  </view>
+  <view class="desc gray">只显示已关注产品的降价动态，若需要提醒，请先关注零件！</view>
+</view>
+<view style="height:120rpx"></view>
+<view class="nomore gray" wx:if="{{total==0}}">空空如也</view>
+<view class="oneitem" wx:for="{{list}}" wx:key bindtap="toDetail" data-item="{{item}}">
+  <view class="left">
+    <view class="name">{{item.goods_name}}</view>
+    <view class="desc gray">
+      <text>{{item.brandName}}</text> |
+      <text>{{item.goods_type?'现货':'订货'}}</text> |
+      <text>{{item.delivery_place}}交货</text> |
+      <text>MOQ:{{item.moq}}</text>
+    </view>
+    <view class="price">
+        <text class="cu-tag line-red radius sm"wx:if="{{item.tag==1}}">{{filter.tagFilter(item.tag)}}</text>
+        <text class="tag borderBlu" wx:if="{{item.tag==2 && item.isAgent}}">{{filter.tagFilter(item.tag)}}</text>
+        <text class="tag borderBlu" wx:if="{{item.isSelf}}">自营</text>
+        <text class="blu">历史最低价：{{item.historyPriceUnit?'$':"￥"}}{{item.historyLowestPrice}}</text>
+    </view>
+  </view>
+    <view class="right">
+    <view class="color price">{{item.newPriceUnit?'$':"￥"}}{{item.newPrice}}</view>
+    <view class="desc color">最新价</view>
+    <view style="padding-top:18rpx;">
+    <!-- <text class="line-grey sm gray" catchtap="cancle" style="padding-right:15rpx;" data-goodsid="{{item.id}}">取消关注</text> -->
+    <text class="line-grey sm gray" catchtap="del" data-id="{{item.id}}">删除</text>
+    </view>
+  </view>
+</view>

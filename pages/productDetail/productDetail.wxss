@@ -1,280 +1,183 @@
 /* pages/productDetail/productDetail.wxss */
 
-.productDetailPic {
+.wrap {
+  padding: 20rpx;
+  background: #fff;
+}
+.detail {
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  min-height: 0;
+  padding-bottom:20rpx;
+}
+.detail .left {
+  width: 230rpx;
+  height: 150rpx;
+  margin-right:27rpx;
+}
+
+.detail .left image {
+  height: 100%;
   width: 100%;
-  height: 320rpx;
-  text-align: center;
-  background: #fff;
-}
-.productDetailPic >image {
-  width: 600rpx;
-  height:320rpx;
-}
-.brandComponey .brandTitle {
-  width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  font-size: 40rpx;
-  font-weight: bold;
-  padding: 0 20rpx;
-  background: #fff;
-  margin-bottom: 2rpx;
-  text-align: center;
 }
 
-.brandDetail {
-  background: #fff;
-  padding: 10rpx 20rpx;
+.detail .right {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 24rpx;
+  width: 0;
 }
 
-.brandDetail>text {
-  display: block;
-  margin-top:8rpx;
-  font-size: 28rpx;
-}
-
-.brandDetail>.name {
-  font-size: 32rpx;
-  font-weight: bold;
-}
-.brandDetail>.desc{
+.detail .right .name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.brandDetail .goodsLabel {
-  padding: 5rpx 0;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  border-bottom: 2rpx dashed #bcbcbc;
-  margin-top:10rpx;
-}
-.brandDetail .goodsLabel .mark{
-  padding-top:10rpx;
-}
-.brandDetail .goodsLabel .mark text{
-  border:1px solid #ddd;
-  padding:2rpx 20rpx;
-  border-radius: 3rpx;
-  margin-right:8rpx;
-}
-.brandDetail .goodsLabel .productFocus{
-  display: flex;
-  align-items: center;
-}
-.brandDetail .goodsLabel .productFocus image{
-  height:35rpx;
-  width:35rpx;
-  margin-right:15rpx;
-  vertical-align: middle;
-}
-.brandDetail .goodsLabel .productFocus>.share{
-  margin-left:20rpx;
+  width: 100%;
+  min-height: 0;
+  font-size: 30rpx;
+  color: #000;
 }
 
-.brandDetail .goodsLabel .productFocus>.share>button {
+.detail .right .desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+ .productFocus {
+  display: flex;
+  align-items: center;
+  line-height: 109rpx;
+}
+.productFocus image {
+  height: 35rpx;
+  width: 35rpx;
+  margin-right: 15rpx;
+  vertical-align: middle;
+}
+
+ .productFocus .share {
+  margin-left: 20rpx;
+}
+
+.productFocus .share>button {
   background: #fff;
   padding: 0;
   border-radius: 0;
-  font-size:24rpx;
+  font-size: 24rpx;
 }
 
-.brandDetail .goodsLabel .productFocus>.share>button::after {
+.productFocus .share>button::after {
   border: none;
 }
-
+.productFocus .notice{
+  flex: 1;
+  text-align: right;
+}
 .specile .specileTitle {
   text-align: center;
-  font-size: 24rpx;
-  line-height:60rpx;
-  background:#fff;
+  font-size: 30rpx;
+  line-height: 90rpx;
+  display: flex;
+  margin-top:18rpx;
+}
+.specile .specileTitle .active{
+  background:linear-gradient(90deg,rgba(255,208,0,1) 0%,rgba(255,189,0,1) 100%);
+}
+.specile .specileTitle view{
+  background: #eee;
+  flex:1;
+}
+.specile .specileList {
+  border-bottom: 15rpx solid #fff;
 }
 
-.specile .specileList {
- border-bottom:15rpx solid #fff;
-}
 .specile .specileList .listContent {
   display: flex;
   flex-direction: column;
   padding: 10rpx 20rpx;
-  margin-bottom: 20rpx;
+  background: #fff;
 }
 
 .specile .specileList .listContent>.listTitle {
   display: flex;
-  justify-content: space-between;
   height: 90rpx;
   line-height: 90rpx;
-  border-bottom: 2rpx dashed #bcbcbc;
+  border-bottom: 2rpx solid #bcbcbc;
 }
-
+.specile .specileList .listContent>.listTitle .price{
+  font-size:36rpx;
+  font-weight: bolder;
+}
+.specile .specileList .listContent>.listTitle .tagWrap{
+  flex:1;
+  text-align: left;
+}
 .specile .specileList .listContent>.listTitle .tag {
-  height: 30rpx;
-  line-height: 30rpx;
   padding: 0 13rpx;
   border-radius: 8rpx;
- margin-left:8rpx;
+  margin-left: 8rpx;
+  font-size:20rpx;
 }
-.specile .specileList .listTitle .purchase{
-  padding:2rpx 8rpx;
+.specile .specileList .listContent>.listTitle .isSelf{
+  background:linear-gradient(90deg,rgba(252,219,0,1) 0%,rgba(247,181,0,1) 100%);
+  color:#fff;
+}
+.specile .specileList .listTitle .purchase {
+  padding: 2rpx 8rpx;
   border-radius: 8rpx;
 }
-.specile .specileList .listContent>.listTitle .img {
-  width: 50rpx;
-  height: 50rpx;
-  vertical-align: middle;
-  margin-right: 20rpx;
-  border-radius: 50rpx;
+.specile .specileList .listContent>.listTitle .name{
+  font-size:28rpx;
+  color:#000;
 }
-.specile .specileList .listContent .count{
-  display:flex;
- justify-content: space-between;
-  align-items: center;
+.specile .specileList .listContent>.listTitle .img {
+  width: 70rpx;
+  height: 70rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+  border-radius: 70rpx;
 }
 .specile .specileList .listContent .listDetail {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
-.specile .specileList .listContent .listDetail .listLeft {
-  font-size: 26rpx;
-  white-space: wrap;
-  line-height: 50rpx;
+.specile .specileList .listContent .listDetail {
+  padding:20rpx 0;
 }
-.specile .specileList .listContent .listDetail .listLeft .right{
-  float: right;
+.specile .specileList .listContent .listDetail .listLeft .one{
+  font-size:30rpx;
+  color:#000;
+  font-weight: bolder;
+  margin-bottom:10rpx;
 }
-.specile .specileList .listContent .listDetail .listRight .price {
-  font-size: 30rpx;
-  margin-top:15rpx;
-}
-
-.specile .specileList .listContent .listDetail .listRight .bill {
-  font-size: 18rpx;
-  margin: 5rpx 0 15rpx 0;
+.specile .specileList .listContent .listDetail .listLeft .two{
+  font-size:24rpx;
 }
 
-/* .specile .specileList .listContent .listDetail .listRight>text:nth-of-type(3) {
-  width: 150rpx;
-  height: 50rpx;
+.specile .specileList .listContent .listDetail .listRight .purchase {
+  height:60rpx;
+  line-height: 60rpx;
+  width:150rpx;
   text-align: center;
-  line-height: 50rpx;
-  border-radius: 8rpx;
-  font-size:26rpx;
-} */
-.specile .specileList .listMore {
-  height: 120rpx;
-  line-height: 120rpx;
-  width: 100%;
-  font-size: 28rpx;
-  color: #999;
-  overflow: hidden;
+  margin-bottom:10rpx;
+  display: inline-block;
+  border-radius: 5rpx;
 }
-.specile .specileList .listMore>view {
-   width: 305rpx;
-   height: 3rpx;
-   background: #999;
-   margin:67rpx auto;
-   position: relative;
+.specile .specileList .listContent .listDetail .listRight .isSelf{
+  background:linear-gradient(90deg,rgba(255,208,0,1) 0%,rgba(255,189,0,1) 100%);
 }
-.specile .specileList .listMore>view>text {
-  position: absolute;
-  top: -55rpx;
-  left: 48rpx;
-  width: 209rpx;
-  background: #f5f5f5;
-  text-align: center;
-}
-.specile  .listNone {
-  width: 100%;
-  height: 90rpx;
-  line-height: 90rpx;
-  text-align: center;
-  background: #fff;
-  margin-bottom: 15rpx;
-}
-
-.merChantList {
-  width: 100%;
-  background: #fff;
-}
-
-.merChantList .merchantTitle {
-  width: 100%;
-  height: 90rpx;
-  line-height: 90rpx;
-  padding: 0 20rpx;
-  background: #d5d5d5;
-}
-
-.merChantList .merchantTitle>image {
-  width: 80rpx;
-  height: 80rpx;
-  margin: 5rpx 20rpx 0 0;
-  float: left;
-  border-radius: 50%;
-}
-
-.merChantList .merchantTitle>text:nth-child(2) {
-  float: left;
-}
-
-.merChantList .merchantTitle>text:nth-child(3) {
-  float: right;
-  background: #f40;
-  color: #fff;
-  font-size: 25rpx;
-  padding: 4rpx 15rpx;
-  border-radius: 10rpx;
-  height: 45rpx;
-  line-height: 45rpx;
-  margin-top: 21rpx;
-}
-
-.merChantList .merchantDetail {
-  display: flex;
-  justify-content: space-between;
-}
-
-.merChantList .merchantDetail:nth-child(2n) {
-  background: #fafafa;
-}
-
-.merChantList .merchantDetail>text {
-  width: 50%;
-  border-left: 1px solid #ebeef5;
-  border-bottom: 1px solid #ebeef5;
-  min-height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 20rpx;
-}
-
-.merChantList .merchantDetail>view {
-  width: 50%;
-  border-left: 1px solid #ebeef5;
-  border-bottom: 1px solid #ebeef5;
-  min-height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 20rpx;
-}
-
-.merChantList .merchantDetail>view .productEdit {
-  background: #4a5a6a;
-  color: #fff;
-  font-size: 24rpx;
-  cursor: pointer;
-  padding: 10rpx 10rpx;
-  border-radius: 10rpx;
-  margin-right: 20rpx;
-}
-
 .productParams {
   display: flex;
   justify-content: space-between;
   background: #fff;
 }
-
 .productParams:nth-child(2n) {
   background: #fafafa;
 }
@@ -287,49 +190,46 @@
   line-height: 80rpx;
   padding: 0 20rpx;
 }
-
-.cu-bar.tabbar.shop .action {
-  width: 100rpx;
+.downpdf{
+  width:80%;
+  margin:20rpx auto;
+  background: #fff;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size:28rpx;
 }
-
-.cu-bar.tabbar .action {
-  font-size: 20rpx;
-}
-
-.cu-bar.tabbar .action [class*="icon"] {
-  width: 38rpx;
-}
-
-.canui-xzwz {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-
-.canui-foor-fixed {
+.footer{
   position: fixed;
-  bottom: 0;
-  width: 100%;
+  bottom:0;
+  left:#fff;
+  width:100%;
+  display: flex;
+  line-height: 90rpx;
 }
-
-.canui-tabbar-bottom {
-  padding-bottom: 20rpx;
-  min-height: 150rpx;
+.footer>view{
+  flex:1;
+  text-align: center;
+  color:#fff;
+  font-size:30rpx;
 }
-.goodsPurchase{
+.footer .yellow{
+  background:#FFCA00;
+}
+.goodsPurchase {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.goodsPurchase>text{
-  flex:1;
+
+.goodsPurchase>text {
+  flex: 1;
   white-space: nowrap;
   line-height: 0.5;
-  height:50rpx;
+  height: 50rpx;
 }
-.goodsPurchase .btnwrap{
+
+.goodsPurchase .btnwrap {
   display: flex;
   flex: 1;
   line-height: 1;

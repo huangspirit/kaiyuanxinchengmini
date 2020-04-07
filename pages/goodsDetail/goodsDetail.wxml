@@ -1,52 +1,76 @@
-<!--pages/goodsDeatil/goodsDetail.wxml-->
-<!--pages/productDetail/productDetail.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<view class="productDetailPic">
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">商品详情</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="productDetailPic" >
   <swiper indicator-dots='true' indicator-color='red' indicator-active-color='yellow' autoplay='true' interval="3000" circular="true">
     <swiper-item wx:for="{{showimgList}}" wx:key="{{item}}" data-item="{{item}}" class="swiperitem">
       <image src='{{item}}'></image>
     </swiper-item>
   </swiper>
-  <view class="saleTime blu" wx:if="{{!specialData.seller_always && specialData.expireTime}}">剩余：{{specialData.countDown}}</view>
 </view>
-<view class="priceStyle">
-  <!-- 一口价 -->
-  <view wx:if="{{!specialData.priceType}}" class="priceType bgColor">
-    <view class="price">{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(specialData.goodsPrice,specialData.priceUnit?3:2)}}</view>
-    <view class="cludebill">({{specialData.priceUnit?'不含税':'含13%增值税'}}) </view>
-    <!-- 订货 -->
-    <!-- <text wx:if="{{!specialData.goods_type}}"> 预计交期 {{filter.formatDate(specialData.deliverTime)[0]}}</text> -->
-  </view>
-  <!-- 阶梯价 -->
-  <view class="levLeft bgColor" wx:if="{{specialData.priceType}}">
-    <view class="levLeftLeft">
-      <view wx:for="{{priceLevel}}" wx:key="index">
-        <text class="num">{{item.value}}+</text>
-        <text>{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(item.price,specialData.priceUnit?3:2)}}</text>
+<view class="sellerDesc">
+  <view class="left">
+    <view wx:if="{{!specialData.priceType}}" class="priceType">
+      <view class="price">{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(specialData.goodsPrice,specialData.priceUnit?3:2)}}</view>
+    </view>
+    <view class="levLeft" wx:if="{{specialData.priceType}}">
+      <view class="levLeftLeft">
+        <view wx:for="{{priceLevel}}" wx:key="index">
+          <text class="num">{{item.value}}+</text>
+          <text>{{specialData.priceUnit?'$':'￥'}} {{filter.toFixed(item.price,specialData.priceUnit?3:2)}}</text>
+        </view>
       </view>
     </view>
-    <view class="levLeftRight cludebill">
-      <text>({{specialData.priceUnit?'不含税':'含13%增值税'}}) </text>
+    <text>({{specialData.priceUnit?'不含税':'含13%增值税'}}) </text>
+  </view>
+  <view class="right" wx:if="{{!specialData.seller_always && specialData.expireTime}}">
+    <view class="middle">
+    </view>
+    <view class="top">
+      <view style="color:#FF0000;font-size:30rpx;">剩余</view>
+      <view class="saleTime blu">{{specialData.countDown}}</view>
+      <view style="font-size:28rpx;">
+        <image src="/img/home/ico-tx01.png"></image>
+        降价提醒
+      </view>
     </view>
   </view>
+</view>
+<view class="goodsName">
+  <text wx:if="{{specialData.tag==2 && specialData.isSelf}}" class="isAgent">自营</text>{{specialData.goods_name}}
+</view>
+<!-- <view class="priceStyle">
   <view class="sellerStatus bgGray">
     <view>{{specialData.goods_type?'现 货':'订 货'}}</view>
     <view wx:if="{{specialData.goods_type}}">下单{{specialData.day_interval*24}}小时内发货</view>
     <view wx:if="{{!specialData.goods_type}}">预计交期 {{filter.formatDate(specialData.deliverTime)[0]}}</view>
   </view>
-</view>
-
+</view> -->
 <view class="brandComponey">
-  <view wx:if="{{productDetail.productno}}" class="brandDetail">
-    <view class="name">{{productDetail.productno}}</view>
+  <view class="brandDetail">
     <view class="clear" class="brand">
-      <text class="blu" bindtap="intoShopping">品牌：{{productDetail.branda}}</text>
+      <text class="brandName" bindtap="intoShopping">品牌：{{specialData.brandName}}</text>
+      <text class="mark blu borderBlu" wx:if="{{specialData.tag==1}}">原厂</text>
+      <text class="mark blu borderBlu" wx:if="{{specialData.isAgent}}">代理商</text>
       <view class="fr productFocus">
-        <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
+        <view wx:if="{{!specialData.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
           <image src="../../img/image/guanzhu.png"></image>
           <text>关注</text>
         </view>
-        <view wx:if="{{productDetail.focus}}" class="focus">
+        <view wx:if="{{specialData.focus}}" class="focus">
           <image src="../../img/image/yiguanzhu.png"></image>
           <text>已关注</text>
         </view>
@@ -55,146 +79,103 @@
             <image src="../../img/image/fenxiang.png"></image>
             <text>分享</text>
           </button>
-
         </view>
       </view>
     </view>
-    <view class="desc gray">描述：{{productDetail.productdesc}}</view>
-    <view class="goodsDesc gray">原装正品 供应商发货&售后 不支持七天无理由退货 满500包邮</view>
-    <view class="dataset">
-      <view class="item peruBg">
-        <view class="left ">数量</view>
-        <view class="right">{{specialData.goodsCount}}</view>
-      </view>
-      <view class="item bgLightGray">
-        <view class="left">交货地点</view>
-        <view class="right"> {{specialData.diliverPlace}}交货</view>
-      </view>
-      <view class="item peruBg">
-        <view class="left ">起订量</view>
-        <view class="right">{{specialData.moq}}</view>
-      </view>
-      <view class="item bgLightGray">
-        <view class="left">批号</view>
-        <view class="right"> {{specialData.base_no}}交货</view>
-      </view>
+    <view class="desc gray">描述：{{specialData.goodsDesc}}</view>
+    <view class="count">
+      <text class="blu">当前库存：{{specialData.goodsCount}}</text>
+      <text class="gray">已售出：{{specialData.sellerCount}}只</text>
     </view>
+
     <!-- <view class="goodsDesc">
       <text>批号：{{specialData.base_no}} | 起订量：{{specialData.moq}}只 | {{specialData.diliverPlace}}交货 | {{specialData.priceUnit?'不含税':'含13%增值税'}}</text>
     </view> -->
-    <view class="seller">
-      <view>此器件由以下供应商发货并提供售后：</view>
-      <view class="userHead peruBg" bindtap="intoShopping">
-        <image src="{{specialData.userImgeUrl}}"></image>
-        <view>
-          <text class="name blu">{{specialData.sellerName}}</text>
-          <view>
-            <text class="bgColor tag">{{filter.tagFilter(specialData.tag)}}</text>
-          </view>
-        </view>
-        <view class="scoreonewrap">
-          <view class="scoreone">
-            <view>产品质量：</view>
-            <view class="color" wx:if="{{specialData.mapComment.profileA>specialData.mapComment.profileB}}">
-              <view>{{filter.toFixed(specialData.mapComment.profileA,1)}}</view>
-              <view class="el-icon-top" style="padding:0 5rpx;">↑</view>
-              <view>高于平均值{{filter.toFixed(specialData.mapComment.profileB ,1)}}</view>
-            </view>
-            <view class="green" wx:if="{{specialData.mapComment.profileA<specialData.mapComment.profileB}}">
-              <view>{{filter.toFixed(specialData.mapComment.profileA,1)}}</view>
 
-              <view class="el-icon-bottom" style="padding:0 5rpx;">↓</view>
-              <view>低于平均值{{filter.toFixed(specialData.mapComment.profileB,1)}}</view>
-            </view>
-            <view wx:if="{{specialData.mapComment.profileA==specialData.mapComment.profileB}}">
-              <view>{{filter.toFixed(specialData.mapComment.profileA ,1)}}</view>
-              <view style="padding:0 5rpx;">~</view>
-              <view>等于平均值{{filter.toFixed(specialData.mapComment.profileB,1)}}</view>
-            </view>
-          </view>
-          <view class="scoreone">
-            <view>发货速度：</view>
-            <view class="color" wx:if="{{specialData.mapComment.deliverA>specialData.mapComment.deliverB}}">
-              <view>{{filter.toFixed(specialData.mapComment.deliverA,1)}}</view>
-              <view class="el-icon-top" style="padding:0 5rpx;">↑</view>
-              <view>高于平均值{{filter.toFixed(specialData.mapComment.deliverB,1)}}</view>
-            </view>
-            <view class="green" wx:if="{{specialData.mapComment.deliverA<specialData.mapComment.deliverB}}">
-              <view>{{filter.toFixed(specialData.mapComment.deliverA ,1)}}</view>
-
-              <view class="el-icon-bottom" style="padding:0 5rpx;">↓</view>
-              <view>低于平均值{{filter.toFixed(specialData.mapComment.deliverB,1)}}</view>
-            </view>
-            <view wx:if="{{specialData.mapComment.deliverA==specialData.mapComment.deliverB}}">
-              <view>{{filter.toFixed(specialData.mapComment.deliverA,1)}}</view>
-              <view style="padding:0 5rpx;">~</view>
-              <view>等于平均值{{filter.toFixed(specialData.mapComment.deliverB ,1)}}</view>
-            </view>
-          </view>
-          <view class="scoreone">
-            <view>服务支持：</view>
-            <view class="color" wx:if="{{specialData.mapComment.serviceA>specialData.mapComment.serviceB}}">
-              <view>{{filter.toFixed(specialData.mapComment.serviceA,1)}}</view>
-              <view class="el-icon-top" style="padding:0 5rpx;">↑ </view>
-              <view>高于平均值{{filter.toFixed(specialData.mapComment.serviceB,1)}}</view>
-            </view>
-            <view class="green" wx:if="{{specialData.mapComment.serviceA<specialData.mapComment.serviceB}}">
-              <view>{{filter.toFixed(specialData.mapComment.serviceA ,1)}}</view>
-              <view class="el-icon-bottom" style="padding:0 5rpx;">↓</view>
-              <view>低于平均值{{filter.toFixed(specialData.mapComment.serviceB ,1)}}</view>
-            </view>
-            <view wx:if="{{specialData.mapComment.serviceA==specialData.mapComment.serviceB}}">
-              <view>{{filter.toFixed(specialData.mapComment.serviceA ,1)}}</view>
-              <view style="padding:0 5rpx;">~</view>
-              <view>等于平均值{{filter.toFixed(specialData.mapComment.serviceB,1)}}</view>
-            </view>
-          </view>
-        </view>
-
-      </view>
-    </view>
     <!-- <view class="seller1">
       <text>原装正品</text> |
       <text>供应商负责发货&售后。不支持七天无理由退款。满1000包邮</text>
     </view> -->
   </view>
-  <view class="prompt" wx:else>暂无详情</view>
 </view>
-<view class="brandComponey" style="padding-bottom:100rpx;">
-  <view class="brandTitle">技术参数</view>
+<view class="goodsDesc">
+  <text>500元包邮</text>本商品不支持七天无理由退货
+</view>
+
+<view class="dataset">
+  <view class="item">
+    <view class="left ">交货时间：</view>
+     <view wx:if="{{specialData.goods_type}}"  class="right orange">下单后{{specialData.day_interval*24}}小时内发货</view>
+    <view wx:if="{{!specialData.goods_type}}"  class="right orange">预计 {{filter.formatDate(specialData.deliverTime)[0]}}</view>
+  </view>
+  <view class="item ">
+    <view class="left">交货地点：</view>
+    <view class="right"> {{specialData.diliverPlace}}交货</view>
+  </view>
+
+  <view class="item">
+    <view class="left ">起订量MOQ：</view>
+    <view class="right orange">{{specialData.moq}}</view>
+  </view>
+
+  <view class="item">
+    <view class="left ">增 量MPQ：</view>
+    <view class="right">{{specialData.mpq}}</view>
+  </view>
+  <view class="item" style="border:none">
+    <view class="left">批 号：</view>
+    <view class="right orange"> {{specialData.base_no?specialData.base_no:'暂无'}}</view>
+  </view>
+</view>
+<view class="seller" bindtap="intoShopping">
+  <view class="userHead">
+    <view class="imgwrap">
+      <image src="{{specialData.userImgeUrl}}"></image>
+    </view>
+    <view class="info">
+      <text class="name">{{specialData.sellerName}}</text>
+      <view>
+        <text class="borderBlu tag blu" wx:if="{{specialData.tag==1}}">{{filter.tagFilter(specialData.tag)}}</text>
+        <text class="borderBlu tag blu" wx:if="{{specialData.tag==2 && specialData.isAgent}}">{{filter.tagFilter(specialData.tag)}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="btnwrap">
+    <text class="button orange">进入店铺</text>
+  </view>
+</view>
+<view class="brandComponey">
+  <view class="brandTitle">规格参数</view>
   <view class="productParams">
-    <text style="font-weight:bold;">性能指标</text>
-    <text style="font-weight:bold;">参数</text>
+    <text style="font-weight:bold;">名称</text>
+    <text style="font-weight:bold;">参数值</text>
   </view>
   <view class="productParams" wx:for="{{productDetail.list}}" wx:key="index">
     <text wx:if="{{item.value}}">{{item.name}}</text>
     <text wx:if="{{item.value}}">{{item.value}}</text>
   </view>
 </view>
-
-<view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
-  <button class="action text-grey" bindtap="toHome">
+<view bindtap="downpdf" wx:if="{{productDetail.datasheet}}" class="downpdf orange">查看数据手册DataSheet</view>
+<view style="height:90rpx;"></view>
+<!-- <view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}"> -->
+<view  class="shop">
+  <!-- <button class="action text-grey" bindtap="toHome">
     <view class='cuIcon-home text-red'></view> 首页
-  </button>
-
+  </button> -->
+  <view class="action text-grey shoper" bindtap="intoShopping">
+    <text class='cuIcon-home text-grey'></text> 进店
+  </view>
   <view class="action text-grey" bindtap="toCart">
-    <view class='cuIcon-cart'></view> 购物车
+    <text class='cuIcon-cart'></text> 购物车
   </view>
-  <view class="action text-grey">
-    <!-- <view class='cuIcon-shop'></view> 店铺  -->
-  </view>
-  <view class='btn-group'>
-    <button class='cu-btn bg-red round shadow-blur' bindtap="purchase" data-target="bottomModal">立即购买</button>
-    <button class='cu-btn bg-orange round shadow-blur' bindtap="addCart">加入购物车</button>
-    <!-- <button class='cu-btn bg-red round shadow-blur' bindtap="releaseSale">我有特价</button> -->
-  </view>
+  <view class='car' bindtap="addCart">加入购物车</view>
+  <view class='pur' bindtap="purchase" data-target="bottomModal">立即结算</view>
 </view>
 <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white">
       <view class="action text-blue" bindtap="hideModal">取消</view>
       <view class="action text-green" bindtap="submitpurchase">提交</view>
-      <!-- <view class="action text-green" bindtap="submitpurchase">购买</view> -->
     </view>
     <view class="padding-xl">
       <view class="goodsPurchase">
@@ -210,7 +191,6 @@
           <button class='cu-btn' disabled="{{purchaseObj.addbtnShow}}" bindtap="addGoodsNum">+</button>
         </view>
       </view>
-
     </view>
   </view>
 </view>

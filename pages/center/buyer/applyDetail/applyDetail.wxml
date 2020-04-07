@@ -1,0 +1,42 @@
+<!--pages/center/buyer/applyDetail/applyDetail.wxml-->
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">申请进度</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="wrap">
+  <view class="oneitem" wx:for="{{list}}" wx:key="id">
+    <view class="top">
+      <view >申报类型： <text class="green"> {{item.type}}</text>
+      </view>
+       <text>{{item.applyTime}}</text>
+    </view>
+    <view class="one">
+      <view class="left">
+        <text class="cuIcon-profile icon orange"></text>
+        <text>{{item.contactName}}</text>
+      </view>
+      <view>
+        <text class="cuIcon-phone icon orange"></text>
+        <text>{{item.contactPhone}}</text>
+      </view>
+    </view>
+    <view class="one" wx:if="{{item.mark}}">
+      审核备注：{{item.mark}}
+    </view>
+     <view class="time">
+     <text>{{item.status}}</text>
+      <!-- <text class="cu-tag line-blue radius icon">申请详情</text> -->
+    </view>
+  </view>
+</view>

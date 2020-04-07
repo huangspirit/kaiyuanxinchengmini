@@ -1,0 +1,56 @@
+<!--pages/center/buyer/myInquiry/myInquiry.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">我的询价</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation >
+  <view class="cu-item {{item.id==TabCur?'text-green cur':''}}" wx:for="{{navList}}" wx:key="index" bindtap="tabSelect" data-index="{{index}}">
+    {{item.name}}
+  </view>
+</scroll-view>
+<view wx:for="{{list}}" wx:key="index" class="allInquiry">
+ <view wx:for="{{item.list}}" bindtap="allInquiryDetail" data-item="{{subItem}}" wx:for-item="subItem" wx:for-index="k" wx:key="k" class="allList ">
+      <view class="listTitle">
+        <view class="titleLeft">
+          申请编号：{{subItem.inquirySheetNo}}
+        </view>
+        <view class="titleRight">
+          <text wx:if="{{subItem.sheetEffective == true&&subItem.replayStates == false}}" class="waitStatus">待批复</text>
+          <text wx:if="{{subItem.sheetEffective == false}}" class="alredyAdv">已失效</text>
+          <text wx:if="{{subItem.sheetEffective == true&&subItem.replayStates == true}}" class="alredyStatus">已批复</text>
+        </view>
+      </view>
+      <view class="listContent">
+        <view class="listLeft">
+          <image wx:if="{{subItem.goodsImage!='-'}}" src="{{subItem.goodsImage}}"></image>
+          <image wx:else src="http://brand.113ic.com/6cb875d1fc454665a3e78b5ac675e391.jpg"></image>
+        </view>
+        <view class="listRight">
+          <view class="rightRight">
+            <text>申请人：{{subItem.contactName}}</text>
+            <text>{{subItem.goodsName}}</text>
+            <text>品牌：{{subItem.brandName}}</text>
+            <!-- <text>距离结束时间：265天08时24分23秒</text> -->
+          </view>
+          <view class="rightLeft">
+            <text>申请价格</text>
+            <text>{{subItem.acceptUnit?'$':'￥'}}{{subItem.acceptPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+</view>
+<view wx:if="{{total==list.length}}" class="nomore">加载到底了</view>
+

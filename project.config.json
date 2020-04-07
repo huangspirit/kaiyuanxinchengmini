@@ -49,8 +49,43 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 44,
+			"current": 50,
 			"list": [
+				{
+					"id": -1,
+					"name": "申请进度",
+					"pathName": "pages/center/buyer/applyDetail/applyDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "反馈",
+					"pathName": "pages/center/buyer/feedBack/feedBack",
+					"query": "orderNo=JY202003291462",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "降价提醒",
+					"pathName": "pages/center/buyer/lowerPrice/lowerPrice",
+					"query": "orderNo=JY202003291462",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "买家订单详情",
+					"pathName": "pages/center/buyer/oneOrderDetail/oneOrderDetail",
+					"query": "orderNo=JY202003291462",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "买家订单中心",
+					"pathName": "pages/center/buyer/buyerOrder/buyerOrder",
+					"query": "type=0",
+					"scene": null
+				},
 				{
 					"id": -1,
 					"name": "我的",
@@ -61,7 +96,7 @@
 				{
 					"id": -1,
 					"name": "首页",
-					"pathName": "pages/home1/home1",
+					"pathName": "pages/home/home",
 					"query": "",
 					"scene": null
 				},
@@ -73,9 +108,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "个人中心",
-					"pathName": "pages/my/my",
+					"pathName": "pages/center/center",
 					"query": "",
 					"scene": null
 				},
@@ -108,10 +143,10 @@
 					"scene": null
 				},
 				{
-					"id": 7,
+					"id": 8,
 					"name": "商品详情有特价",
 					"pathName": "pages/goodsDetail/goodsDetail",
-					"query": "params= {\"id\":309228,\"tag\":\"goodsinfo\",\"name\":\"SiT9102AI-132N25E25.000000\"}",
+					"query": "seller_goods_id=213753",
 					"scene": null
 				},
 				{
@@ -136,10 +171,10 @@
 					"scene": null
 				},
 				{
-					"id": 11,
+					"id": 12,
 					"name": "商品详情无特价",
 					"pathName": "pages/productDetail/productDetail",
-					"query": "params= {\"id\": 619475,\"tag\":\"goodsinfo\",\"name\":\"SiT1618BE-71-18E-7.372800\"}",
+					"query": "params= {\"id\": 12372,\"tag\":\"goodsinfo\",\"name\":\"XC5VLX30T-2FFG665I\"}",
 					"scene": null
 				},
 				{
@@ -347,13 +382,6 @@
 				},
 				{
 					"id": -1,
-					"name": "发票管理",
-					"pathName": "pages/my/invoiceManage/invoiceManage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "代理资质",
 					"pathName": "pages/my/agencyQualification/agencyQualification",
 					"query": "",
@@ -374,10 +402,10 @@
 					"scene": null
 				},
 				{
-					"id": 45,
+					"id": 46,
 					"name": "pages/agSeller/agSeller",
 					"pathName": "pages/agSeller/agSeller",
-					"query": "seller_id=63&name=金源电子",
+					"query": "seller_id=94",
 					"scene": null
 				},
 				{
@@ -391,6 +419,14 @@
 					"id": 47,
 					"name": "入驻",
 					"pathName": "pages/settle/settle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 50,
+					"name": "我的询价",
+					"pathName": "pages/center/buyer/myInquiry/myInquiry",
+					"query": "orderNo=JY202003291462",
 					"scene": null
 				}
 			]

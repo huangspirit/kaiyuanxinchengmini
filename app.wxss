@@ -5,9 +5,68 @@
 page {
   min-height: 100%;
   box-sizing: border-box;
-  background: #f7f7f7;
+  background: #f2f2f2;
+  color:#333;
 }
-
+.nav0{
+  background:linear-gradient(90deg,rgba(253,208,2,1) 0%,rgba(254,190,2,1) 100%);
+  position: fixed;
+  z-index: 99;
+  left:0;
+  width:100%;
+}
+.nav0 .nav-title{
+  padding:0 20rpx;
+  position: relative;
+  height: 46px;
+  line-height: 46px;
+}
+.nav0 .nav-title .left{
+  height:100%;
+  position: absolute;
+  left:20rpx;
+  z-index:1;
+}
+.nav0 .nav-title .left .back{
+  width:36rpx;
+  height:36rpx;
+}
+.nav0 .nav-title .left image{
+  width:42rpx;
+  height:42rpx;
+  vertical-align: middle;
+}
+.nav0 .nav-title .two .btn{
+  background:rgba(255,255,255,0.5);
+  padding:0 24rpx;
+  display:inline-block;
+  line-height: 30px;
+  border-radius: 30px;
+}
+.nav0 .nav-title .two .btn .line{
+  border-right:1px solid #f2f2f2;
+  display:inline-block;
+  height:36rpx;
+  vertical-align: middle;
+  margin:0 10rpx;
+}
+.nav0 .nav-title .two .btn .close{
+  color:#333 ;
+  font-size:45rpx;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bolder;
+}
+.nav0 .nav-title .center{
+  position: absolute;
+  left:0;
+  top:0;
+  text-align: center;
+  width:100%;
+  font-size:34rpx;
+  line-height: 46px;
+  color:#000;
+}
 .prompt {
   width: 100%;
   text-align: center;
@@ -82,17 +141,17 @@ view, text {
       border:1px solid #007efe;
     }
     .orange{
-      color:rgb(161, 106, 2);
+      color:#FF6200;
     }
     .bgOrange{
-      background: rgb(161, 106, 2);
+      background: #FF6200;
       color:#fff;
     }
     .borderOrange{
-      border:1px solid rgb(161, 106, 2);
+      border:1px solid #FF6200;
     }
     .bgGray{
-        background:#4f4f4f ;
+        background:#f2f2f2 ;
         color:#fff;
     }
     .lightGray{

@@ -1,6 +1,10 @@
 {
+  "usingComponents": {
+    "topNav":"../../components/topNav/topNav"
+  },
   "navigationBarBackgroundColor": "#fff",
   "backgroundTextStyle": "light",
   "navigationBarTitleText": "原厂旗舰店",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "navigationStyle":"custom"
 }

@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTopNav:false,
+    navH:app.globalData.navHeight,
     UserInforma:{},
     params: {},
     detailObj: {},
@@ -21,6 +23,16 @@ Page({
     siderIndex: 0,
     join:false,
     name:''
+  },
+  toHome() {
+    this.setData({
+      showTopNav:!this.data.showTopNav
+    })
+  },
+  goback() {
+    wx.navigateBack({
+      delta: 1
+    })
   },
   //加入询价蓝
   addInquiry(val){

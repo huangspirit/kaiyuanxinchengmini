@@ -2018,7 +2018,7 @@ button.icon.lg {
 }
 
 .cu-timeline .cu-time {
-	width: 120rpx;
+	width: 150rpx;
 	text-align: center;
 	padding: 20rpx 0;
 	font-size: 26rpx;
@@ -2468,6 +2468,7 @@ button.icon.lg {
 	background: rgba(0, 0, 0, 0.6);
 	transition: all 0.3s ease-in-out 0s;
 	pointer-events: none;
+	display: none;
 }
 
 .cu-modal::before {
@@ -2485,6 +2486,7 @@ button.icon.lg {
 	overflow-x: hidden;
 	overflow-y: auto;
 	pointer-events: auto;
+	display: block;
 }
 
 .cu-dialog {

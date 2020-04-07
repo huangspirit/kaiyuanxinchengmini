@@ -1,0 +1,72 @@
+/* pages/address/address.wxss */
+
+.addressList {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  background: #fff;
+  margin-bottom: 2rpx;
+}
+
+.addressList .listContent {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 100rpx);
+}
+
+.addressList .listContent>view:nth-of-type(1) {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.addressList .listContent>view:nth-of-type(1)>text {
+  margin-right: 15rpx;
+  color: #333;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+
+.addressList .listContent>view:nth-of-type(2) {
+  font-size: 30rpx;
+  color: #999;
+  line-height: 50rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.addressList .listContent>view:nth-of-type(2)>text {
+  color: #df3f2f;
+  border: 2rpx solid #df3f2f;
+  padding: 5rpx 10rpx;
+  font-weight: 400;
+  font-size: 20rpx;
+  margin-right: 10rpx;
+}
+
+.addressList>.btnEdit {
+  text-align: right;
+  color: #df3f2f;
+  width: 100rpx;
+  font-size: 30rpx;
+  height: 100%;
+  line-height: 100%;
+  display: block;
+  padding: 60rpx 0 0 0;
+}
+
+.addAdress {
+  width: 100%;
+  position: fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background:linear-gradient(90deg,rgba(255,208,0,1) 0%,rgba(255,189,0,1) 100%);
+  text-align: center;
+}

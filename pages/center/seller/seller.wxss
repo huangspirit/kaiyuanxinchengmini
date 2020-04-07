@@ -1,0 +1,221 @@
+/* pages/center/seller/seller.wxss */
+
+/* pages/center/buyer/buyer.wxss */
+
+.buyer {
+  color: #000;
+}
+
+.buyer .top {
+  background: linear-gradient(90deg, rgba(23, 57, 146, 1) 0%, rgba(8, 65, 146, 1) 100%);
+  padding: 0 45rpx 30rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.top .left {
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.top .left image {
+  width: 124rpx;
+  height: 124rpx;
+}
+
+.top .right {
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top .right .name {
+  font-size: 34rpx;
+  font-weight: bolder;
+  margin-bottom: 20rpx;
+}
+
+.top .right .level {
+  margin-bottom: 30rpx;
+}
+
+.top .right .level .tag {
+  background: #f5a623;
+  padding: 2rpx 20rpx;
+  margin-right: 30rpx;
+  border-radius: 30rpx;
+  font-size: 22rpx;
+}
+
+.top .right .number text {
+  margin-right: 30rpx;
+  font-size: 28rpx;
+}
+
+.top .right .number image {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+}
+
+.two {
+  display: flex;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.two>view {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220rpx;
+}
+
+.two .left {
+  background: #fdf3f4;
+}
+
+.two .left .color {
+  color: #fa0019;
+  font-size: 36rpx;
+}
+.two .left .name {
+  margin-bottom: 20rpx;
+}
+
+.two .right {
+  background: #f2f5fc;
+  margin-left: 10rpx;
+}
+
+.two .right .blu {
+  color: #4e77f2;
+  font-size: 36rpx;
+}
+
+.two .right .name {
+  margin-bottom: 20rpx;
+}
+
+.two .right .oper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom:5rpx;
+}
+
+.two .right .oper text {
+  font-size: 24rpx;
+}
+
+.two .right .gray {
+  color: #999;
+  font-size:24rpx;
+}
+
+.myorder {
+  padding: 20rpx;
+  margin: 20rpx 0;
+  background: #fff;
+}
+
+.myorder .list {
+  display: flex;
+  text-align: center;
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.myorder .list .one {
+  flex: 1;
+}
+
+.myorder .list .lastone {
+  border-left: 1rpx solid #dedede;
+}
+
+.myorder .list .one image {
+  width: 46rpx;
+  height: 46rpx;
+  margin-bottom: 29rpx;
+}
+
+.orderlist {
+  display: flex;
+  padding: 20rpx;
+  background: #fff;
+  align-items: center;
+  margin-bottom: 20rpx;
+  background:linear-gradient(90deg,rgba(23,57,146,1) 0%,rgba(8,65,146,1) 100%);
+}
+.orderlist .left{
+  color:#fff;
+  font-size: 30rpx;
+  position: relative;
+}
+.orderlist .left .deliverNum{
+  position: absolute;
+  left:5rpx;
+  top:-3rpx;
+  display: block;
+  height:32rpx;
+  min-width:32rpx;
+  text-align: center;
+  line-height: 32rpx;
+  border-radius: 32rpx;
+  background: #fff;
+  overflow: hidden;
+  color:#000;
+  font-size:20rpx;
+}
+.orderlist .left image {
+  width: 45rpx;
+  height: 45rpx;
+  vertical-align: middle;
+}
+.orderlist .left text{
+  display:inline-block;
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+.orderlist .right  {
+  font-size: 30rpx;
+  color:#fff;
+  text-align: right;
+  flex:1;
+}
+
+.btnwrap {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom: 20rpx;
+}
+
+.btnwrap .one {
+  width: 25%;
+  text-align: center;
+  font-size:24rpx;
+}
+
+.btnwrap .one image {
+  width: 52rpx;
+  height: 52rpx;
+  display: block;
+  margin: 20rpx auto;
+}
+.banner{
+  margin:20rpx 0;
+}
+.banner image{
+  width:100%;
+  height:190rpx;
+}

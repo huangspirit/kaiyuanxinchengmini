@@ -40,8 +40,8 @@
             <view class="desc">
               <text class="{{item.goods_type?'green borderGreen':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
                <text class="color borderColor" wx:if="{{item.tag==1}}">{{filter.tagFilter(item.tag)}}</text>
-               <text class="blu borderBlu" wx:if="{{item.tag==2}}">{{filter.tagFilter(item.tag)}}</text>
-               <text class="orange borderOrange" wx:if="{{item.tag==18}}">{{filter.tagFilter(item.tag)}}</text>
+               <text class="blu borderBlu" wx:if="{{item.tag==2 && item.isAgent}}">{{filter.tagFilter(item.tag)}}</text>
+               <!-- <text class="orange borderOrange" wx:if="{{item.tag==18}}">{{filter.tagFilter(item.tag)}}</text> -->
                <text class="borderColor">{{item.diliverPlace}}发货</text>
                <!-- <text> 仅剩{{item.goodsStockCount}}</text> -->
             </view>

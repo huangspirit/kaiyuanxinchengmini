@@ -1,0 +1,33 @@
+<!--pages/center/buyer/focusSeller/focusSeller.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">关注的商家</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="wrap">
+  <view class="oneitem" wx:for="{{list}}" wx:key="item.id">
+  <view class="top">
+  <view bindtap="toShop" data-target="{{item}}">
+    <text class="cu-avatar round margin-right" style="background-image:url({{item.headUrl}});"></text>
+    <text>{{item.sellerName}}</text>
+  </view>
+    <view class="cu-tag line-grey radius" bindtap="cancleFocus" data-target="{{item}}">取消关注</view>
+  </view>
+  <view class="wrapAvatar">
+    <!-- <view class="title orange">在售商品</view> -->
+    <view class="cu-avatar round margin-right xl avatar" style="background-image:url({{subItem.goodsImageUrl}});" wx:for-item="subItem" wx:for="{{item.goodsListBySeller.data}}" bindtap="godetail" data-sellerGoodsId="{{subItem.id}}"></view>
+    <view class="blu more" bindtap="getmore" data-sellerId="{{item.seller_id}}">更多商品>></view>
+  </view>
+  </view>
+</view>

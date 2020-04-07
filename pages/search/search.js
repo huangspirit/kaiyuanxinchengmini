@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navH:0,
     searchList: [],
     tralist:[],
     textData: [],
@@ -15,6 +16,14 @@ Page({
     catergoryTotal: "",
     productTotal: "",
     specialList: []
+  },
+  toHome() {
+    wx: wx.switchTab({
+      url: '../home/home',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
   gettralist(){
     api.get("/api-g/goods/queryUserHotSearch",{start:0,length:18}).then(res=>{
@@ -97,6 +106,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      navH:app.globalData.navHeight
+    })
     // 统计厂商产品总数的接口
     api.get("/api-g/gods-anon/querySummaryHome").then(res => {
       this.setData({

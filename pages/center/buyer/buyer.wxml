@@ -1,0 +1,165 @@
+<!--pages/center/buyer/buyer.wxml-->
+<wxs src="../../../utils/filter.wxs" module="filter" />
+<view class="buyer">
+  <view class="top">
+    <view class="left">
+      <image src="{{userInforma.headImgUrl}}"></image>
+    </view>
+    <view class="right">
+      <view class="name">{{userInforma.nickname}}</view>
+      <view class="level">
+        <text class="tag">信用等级：{{userInforma.userTagMap.userLevel}}</text>
+        <text class="tag">{{filter.tagFilter(userInforma.userTagMap.tag)}}</text>
+      </view>
+      <view class="number">
+        <image src="/img/center/wallet.png"></image>
+        <text> 余额:￥{{filter.toFixed(userInforma.userTagMap.wallet,2)}}</text>
+        <image src="/img/center/dou.png"></image>
+        <text>晶豆:{{userInforma.userTagMap.dou}}粒</text>
+      </view>
+    </view>
+  </view>
+  <view class="two">
+    <view class="left peruBg">
+      <view class="color">￥{{month}}</view>
+      <view class="name">本月采购额</view>
+      <view>本年采购额：￥{{year}}</view>
+      <view>历史采购额：￥{{history}}</view>
+    </view>
+    <view class="right">
+      <view class="blu ">
+        ￥{{filter.toFixed(userInforma.userTagMap["credit-vip"],2)}}
+      </view>
+      <view class="name">
+        月结额度
+      </view>
+      <view>周期：{{userInforma.userTagMap.day}}天</view>
+      <!-- <view class="blu">如何提升额度？</view> -->
+    </view>
+  </view>
+  <view class="myorder">
+    <view class="tit">我的订单</view>
+    <view class="list">
+      <view class="one" bindtap="goOrderlist" data-status="2">
+        <image src="/img/center/yonghuzhongixn_order_icon1.png"></image>
+        <view>待支付</view>
+      </view>
+      <view class="one" bindtap="goOrderlist" data-status="3">
+        <image src="/img/center/yonghuzhongixn_order_icon2.png"></image>
+        <view>待确认</view>
+      </view>
+      <view class="one" bindtap="goOrderlist" data-status="4">
+        <image src="/img/center/yonghuzhongixn_order_icon3.png"></image>
+        <view>待收货</view>
+      </view>
+      <view class="one" bindtap="goOrderlist" data-status="6">
+        <image src="/img/center/yonghuzhongixn_order_icon4.png"></image>
+        <view>售后/异常</view>
+      </view>
+      <view class="one lastone" bindtap="goOrderlist" data-status="0">
+        <image src="/img/center/yonghuzhongixn_order_icon5.png"></image>
+        <view>全部订单</view>
+      </view>
+    </view>
+  </view>
+  <view class="orderlist" wx:if="slowerlist.length">
+    <swiper class="screen-swiper "  circular="true" autoplay="true" interval="5000" duration="500" vertical="true" style="width:100%;height:150rpx">
+      <swiper-item wx:for="{{slowerlist}}" wx:key="orderno" class="orderlistone" bindtap="toDetail" data-orderno="{{item.orderno}}">
+        <view class="right">
+          <view>
+            <text class="name">订单：{{item.orderno}}</text>
+          </view>
+           <view class="gray">{{item.ordesc}}</view> 
+        </view>
+      </swiper-item>
+    </swiper>
+
+  </view>
+  <view class="count">
+
+    <view class="one"  bindtap="toMangeDetail" data-target="focusGoods">
+      <view class="num">{{customerCenterSummary.fgoods?customerCenterSummary.fgoods:0}}</view>
+      <text>关注的零件</text>
+    </view>
+    <view class="one"  bindtap="toMangeDetail" data-target="focusSeller">
+      <view class="num">{{customerCenterSummary.fsller?customerCenterSummary.fsller:0}}</view>
+      <text>关注的商家</text>
+    </view>
+    <view class="one last" bindtap="toLowerPrice">
+      <view>
+        <text class="mark" wx:if="{{PriceNotisfyCount}}">{{PriceNotisfyCount}}</text>
+        <image src="/img/center/yonghuzhongxin_notice.png"></image>
+      </view>
+      <text>低价提醒</text>
+    </view>
+  </view>
+  <view class="btnwrap">
+    <view class="one" bindtap="toMangeDetail" data-target="inquery">
+      <image src="/img/center/yonghuzhongxin_icon1.png"></image>
+      我的询价
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="invoiceMange">
+      <image src="/img/center/yonghuzhongxin_icon2.png"></image>
+      发票管理
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="invoiceInformationManagement">
+      <image src="/img/center/yonghuzhongxin_icon3.png"></image>
+      开票信息
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="addressList">
+      <image src="/img/center/yonghuzhongxin_icon4.png"></image>
+      收货地址
+    </view>
+    <view class="one" bindtap="setPassword">
+      <image src="/img/center/yonghuzhongxin_icon5.png"></image>
+      管理密码
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="feedBack">
+      <image src="/img/center/yonghuzhongxin_icon6.png"></image>
+      我的反馈
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="afterMark">
+      <image src="/img/center/yonghuzhongxin_icon7.png"></image>
+      我的售后
+    </view>
+    <view class="one" bindtap="toMangeDetail" data-target="applyDetail">
+      <image src="/img/center/yonghuzhongxin_icon8.png"></image>
+      申请进度
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='savePassword'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">设置提现密码</view>
+    </view>
+    <view class="padding-xl">
+      <input bindinput="bindinput" placeholder="请输入密码"></input>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmsave">确定</button>
+
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='saveRePassword'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">重置提现密码</view>
+    </view>
+    <view class="padding-xl">
+      <input bindinput="bindoldinput" placeholder="请输入原密码"></input>
+      <input bindinput="bindnewinput" placeholder="请输入新密码"></input>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmsetsave">确定</button>
+
+      </view>
+    </view>
+  </view>
+</view>

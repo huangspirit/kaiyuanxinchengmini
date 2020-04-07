@@ -1,0 +1,65 @@
+<!--pages/editAdress/editAdress.wxml-->
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <!-- <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text> -->
+      </view>
+    </view>
+    <view class="center">开票信息</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="cu-form-group">
+  <view class="title">收货人</view>
+  <input placeholder="请输入名称" bindinput="nameChange" value="{{adressDetail.receivingName}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">联系方式</view>
+  <input placeholder="请输入联系方式" bindinput="phoneChange" value="{{adressDetail.phone}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">固定电话</view>
+  <input placeholder="请输入联系方式" bindinput="telChange" value="{{adressDetail.tel}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">所在地区</view>
+  <picker mode="region" bindchange="bindRegionChange" value="{{adressDetail.address}}" custom-item="{{customItem}}">
+    <view class="picker">
+      {{adressDetail.address[0]}}/{{adressDetail.address[1]}}/{{adressDetail.address[2]}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">详细地址</view>
+  <input placeholder="请输入详细地址" bindinput="adressChange" value="{{adressDetail.detailedAddress}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+  <view class="title">邮政编码</view>
+  <input placeholder="请输入邮政编码" bindinput="postalChange" value="{{adressDetail.postalCode}}"></input>
+  <text class="cuIcon-close text-gray"></text>
+</view>
+<view class="cu-form-group">
+    <view class="title">默认状态</view>
+    <switch bindchange="SetShadow" checked="{{adressDetail.isdefault}}" color="#39B54A" size="mini" type="mini"></switch>
+  </view>
+<!-- <view class="cu-form-group">
+  <view class="title">地址标签</view>
+  <view class="adressLabel">
+    <text>222</text>
+    <text>333</text>
+    <text>444</text>
+  </view>
+</view> -->
+<view class="editFooter">
+  <view bindtap="confirm">确定</view>
+  <!-- <view  wx:if="{{deleteShow}}" bindtap="deleteAddress">删除</view> -->
+</view>

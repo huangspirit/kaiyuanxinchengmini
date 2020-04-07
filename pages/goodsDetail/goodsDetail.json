@@ -1,6 +1,10 @@
 {
+  "usingComponents": {
+    "topNav":"../../components/topNav/topNav"
+  },
   "navigationBarTitleText": "商品详情",
   "backgroundTextStyle": "light",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff"
+  "navigationBarBackgroundColor": "#fff",
+  "navigationStyle": "custom"
 }

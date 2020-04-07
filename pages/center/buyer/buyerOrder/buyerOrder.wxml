@@ -1,0 +1,102 @@
+<!--pages/center/buyer/buyerOrder/buyerOrder.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">订单中心</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="timelist">
+  <view wx:for="{{timelist}}" wx:key="{{item.day}}" data-day="{{item.day}}" class="{{currentday==item.day?'one active':'one'}}" bindtap="settime">
+    <text>{{item.name}}</text>
+  </view>
+</view>
+<view class="typelist">
+  <view wx:for="{{typelist}}" wx:key="{{item.type}}" data-type="{{item.type}}" class="{{type==item.type?'one active0':'one'}}" bindtap="settype">
+    <text>{{item.name}}</text>
+  </view>
+</view>
+<view class="orderlist">
+  <view wx:for="{{orderlist}}" wx:key="{{item.id}}" class="bigone">
+    <view class="tit" bindtap="todetail" data-item="{{item}}">
+      <text>{{filter.formatDate(item.orderCreateTime)[1]}}</text>
+      <text wx:if="{{type!=0}}">订单号：{{item.orderVo.order_no}}</text>
+      <text class="{{item.orderVo.isMonth?'month':'nomonth'}}" wx:if="{{type==0}}">{{item.orderVo.isMonth?'月结订单':'现结订单'}}</text>
+      <text class="status orange">{{filter.orderStatus(item.orderVo.order_status)}}</text>
+    </view>
+    <view style="padding:20rpx;"  bindtap="todetail"  data-item="{{item}}">
+      <view class="process">
+        <view class="left">
+          <image src="/img/center/dingdanxiangqing-ico02.png"></image>
+        </view>
+        <view class="right">
+          <view class="desc gray">{{item.orderVo.opList[0].ordesc}}</view>
+          <view class="gray">{{filter.formatDate(item.orderVo.opList[0].createtime)[1]}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="infodetail"  bindtap="todetail"  data-item="{{item}}">
+      <view class="left">
+        <view wx:for="{{item.orderInfoList}}" wx:key="{{item.id}}" class="wrap">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+      </view>
+      <view class="right">
+        <view>共{{item.orderInfoList.length}}种器件{{item.ncount}}只</view>
+        <view class="">合计:
+          <text wx:if="{{item.rcount}}">￥{{item.rcount}}</text>
+          <text wx:if="{{item.rcount && item.ucount}}">+</text>
+          <text wx:if="{{item.ucount}}">${{item.ucount}}</text>
+        </view>
+        <view class="totalPrice orange" wx:if="{{item.orderVo.shouldPay}}">当前应付：￥{{item.orderVo.shouldPay}}</view>
+      </view>
+    </view>
+    <view class="btnwrap">
+      <!-- <button class="cu-btn bg-green" wx:if="{{item.orderVo.download}}" bindtap="downsys" data-item="{{item.orderVo}}">下载合同(系统)</button>
+      <button class="cu-btn bg-olive" wx:if="{{item.orderVo.customerContractUrl}}" bindtap="downperson" data-item="{{item.orderVo}}">下载合同(个人)</button> -->
+      <button class="cu-btn line-blue" wx:if="{{item.orderVo.order_status != 3 && item.orderVo.download}}" bindtap="uphetong" data-item="{{item.orderVo}}">上传合同</button>
+      <button class="cu-btn line-yellow" wx:if="{{item.orderVo.isMonth && item.orderVo.payButton}}" data-item="{{item.orderVo}}" bindtap="monthpay">白条支付</button>
+      <!-- 预付款 -->
+      <button class="cu-btn line-yellow" wx:if="{{item.orderVo.prePayButton}}" bindtap="pay" data-item="{{item.orderVo}}">去支付</button>
+      <!-- 全款 -->
+      <button class="cu-btn line-yellow" wx:if="{{!item.orderVo.isMonth && !item.orderVo.need_pre_pay && item.orderVo.payButton}}" bindtap="pay" data-item="{{item.orderVo}}">去支付</button>
+      <!-- <button class="orange borderOrange">去评价</button> -->
+      <button class="cu-btn line-grey"  bindtap="showModal" data-target="DialogModal1" data-item="{{item}}" wx:if="{{ item.orderVo.cancleButton}}">取消订单</button>
+      <!-- <button class="bgGray">申请售后</button> -->
+    </view>
+  </view>
+</view>
+<view wx:if="{{orderlist.length==total}}" class="nomore">加载到底了</view>
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">取消订单</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl" style="text-align:left;">
+      <view>
+        <view class="cu-form-group">
+          <textarea bindinput="textareaAInput" placeholder="输入取消订单的原因" value="{{canclereason}}"></textarea>
+        </view>
+      </view>
+      <view>取消后已支付订单款项会在下一个结账日按原路返回，结账日为每月15日</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">不取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmCancel">确认取消</button>
+      </view>
+    </view>
+  </view>
+</view>

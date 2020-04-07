@@ -1,0 +1,38 @@
+/* pages/center/buyer/focusGoods/focusGoods.wxss */
+.oneitem{
+  display: flex;
+  margin-bottom: 20rpx;
+  padding:20rpx;
+  background: #fff;
+}
+.oneitem .left{
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+.oneitem .left image{
+  width:230rpx;
+  height: 160rpx;
+}
+.oneitem .right{
+  margin-left:15rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  width: 0;
+}
+.oneitem .right .name{
+  font-size: 32rpx;
+  font-weight: bold;
+  overflow: hidden;
+  width:100%;
+  text-overflow: ellipsis;
+}
+.oneitem .right .desc{
+  overflow: hidden;
+  width:100%;
+  text-overflow: ellipsis;
+}
+.oneitem .right .btnwrap{
+  text-align: right;
+}

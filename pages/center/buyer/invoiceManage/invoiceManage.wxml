@@ -1,0 +1,23 @@
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">发票管理</view>
+  </view>
+   <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view>
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="0">
+  <view class="cu-item {{item.id==billStates?'text-green cur':''}}" wx:for="{{tablist}}" wx:key bindtap="tabSelect" data-id="{{item.id}}">
+    {{item.name}}
+  </view>
+</scroll-view>
+</view>

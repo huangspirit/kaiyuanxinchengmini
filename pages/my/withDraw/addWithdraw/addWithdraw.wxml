@@ -1,5 +1,4 @@
 <!--pages/my/withDraw/addWithdraw/addWithdraw.wxml-->
-<!--pages/editAdress/editAdress.wxml-->
 <view class="cu-form-group">
   <view class="title">开户银行</view>
   <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'name'}}">

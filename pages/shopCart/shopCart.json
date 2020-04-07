@@ -6,5 +6,6 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "dialog": "../../components/dialog/dialog"
-  }
+  },
+  "navigationStyle":"custom"
 }

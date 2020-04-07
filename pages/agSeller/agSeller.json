@@ -1,6 +1,6 @@
 {
-  "navigationBarBackgroundColor": "#fff",
-  "backgroundTextStyle": "light",
-  "navigationBarTitleText": "代理旗舰店",
-  "navigationBarTextStyle": "black"
+  "usingComponents": {
+    "topNav":"../../components/topNav/topNav"
+  },
+  "navigationStyle":"custom"
 }

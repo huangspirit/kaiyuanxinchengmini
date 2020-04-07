@@ -1,0 +1,33 @@
+<!--pages/center/buyer/focusGoods/focusGoods.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">关注的零件</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="wrap">
+<view wx:for="{{list}}" wx:key="{{id}}" class="oneitem">
+  <view class="left">
+    <image src="{{item.goodsBase.imageUrl}}" wx:if="{{item.goodsBase.imageUrl!='-'}}"></image>
+    <image src="{{errorImg}}" wx:if="{{item.goodsBase.imageUrl=='-'}}"></image>
+  </view>
+  <view class="right">
+    <view class="name">{{item.goodsBase.productno}}</view>
+    <view>{{item.goodsBase.brand}}</view>
+    <view class="gray desc">{{item.goodsBase.productdesc}}</view>
+    <view class="btnwrap">
+      <text class="cu-tag line-grey radius" bindtap="cancleGoods" data-id="{{item.id}}">取消关注</text>
+    </view>
+  </view>
+</view>
+</view>

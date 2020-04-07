@@ -8,6 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTopNav:false,
+    navH:app.globalData.navHeight,
+    defaultAct:1,
+    UserInforma:{},
     productParams: "",
     productDetail: {},
     TabbarBot: app.globalData.tabbar_bottom,
@@ -20,13 +24,24 @@ Page({
     errorImg:app.globalData.errorImg,
     loadModal: false,
     timerCount:0,
-    getMoreMark:false,
     modalName:'',
     priceLevel:[],
     purchaseObj:{},
     specialData:{},
     count:0,
     price:0
+  },
+  goback(){
+    wx.navigateBack({
+      delta:1
+    })
+  },
+  setdefaultAct(val){
+    console.log(val.currentTarget.dataset.defaulta)
+    this.setData({
+      defaultAct: Number(val.currentTarget.dataset.defaulta)
+    })
+    console.log(this.data)
   },
   showdiag(){
     this.dialog.show()
@@ -35,16 +50,32 @@ Page({
     this.dialog.hide()
   },
   popupConfirm() { },
-  getMoreSpecial(){
-    this.setData({
-      currentPage:this.data.currentPage+1,
-      loadModal:true
+  downpdf(){
+    wx.showLoading({
+      title: '下载中...',
     })
-    this.getSpecialList()
+    var _this=this;
+    wx.downloadFile({
+      url: _this.data.productDetail.datasheet,
+      success: function (res) {
+        console.log(res)
+        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+        wx.openDocument({
+          filePath: Path,
+          success: function (res) {
+            wx.hideLoading()
+            console.log('打开文档成功')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
   },
-  getSpecialList(){
+  getSpecialList(isFirst){
     //器件售卖商家列表
-    api.get("/api-g/gods-anon/queryDirectGoods", {
+    api.get("/api-g/gods-anon/queryDirectGoods2", {
       start: this.data.pageSize * (this.data.currentPage - 1),
       length: this.data.pageSize,
       goods_id: this.data.productDetail.id,
@@ -56,10 +87,19 @@ Page({
           loadModal: false,
           total: res.data.total
         })
-        if (res.data.data.length > 0) {
+        if(isFirst){
+          if (res.data.total) {
             this.setData({
-              getMoreMark: res.data.data.length == this.data.pageSize?true:false
+              defaultAct: 1
             })
+          } else {
+            this.setData({
+              defaultAct: 2
+            })
+          }
+        }
+        
+        if (res.data.data.length > 0) {
           let specialList = res.data.data.map(item => {
             if (item.expireTime) {
               let countdownTime = item.expireTime - item.currentTime;
@@ -68,7 +108,7 @@ Page({
             }
             return item;
           })
-          if(this.data.currentPage==1){
+          if (isFirst) {
             this.setData({
               specialList: specialList
             })
@@ -77,12 +117,6 @@ Page({
               specialList: this.data.specialList.concat(specialList),
             })
           }
-          
-        } else {
-          this.setData({
-            speciaList: [],
-            getMoreMark:false
-          })
         }
         this.setCountDown()
       }
@@ -101,7 +135,7 @@ Page({
         this.setData({
           productDetail: res.data.goodsinfo,
         })
-        this.getSpecialList()
+        this.getSpecialList(true)
       }
     })
   },
@@ -162,22 +196,14 @@ Page({
       }
     })
   },
-  onShareAppMessage: function(res) {
-    if (res.from === 'button') {}
-    return {
-      title: '分享',
-      path: '/pages/productDetail/productDetail',
-      success: function(res) {
-        console.log('成功', res)
-      }
-    }
-  },
   toHome() {
-    wx: wx.switchTab({
-      url: '../home/home',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+    this.setData({
+      showTopNav:!this.data.showTopNav
+    })
+  },
+  goback() {
+    wx.navigateBack({
+      delta: 1
     })
   },
   toCart() {
@@ -257,7 +283,6 @@ Page({
         ...this.data.purchaseObj,
         ...obj
       }
-
     })
   },
   hideModal(e) {
@@ -338,7 +363,7 @@ Page({
     })
   },
   addGoodsNum(e) {
-    let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.moq;
+    let goodsNum = this.data.purchaseObj.goodsNum + this.data.specialData.mpq;
     let goodsnum = goodsNum > this.data.specialData.goodsStockCount ? this.data.specialData.goodsStockCount : goodsNum;
     let currentPrice = 0;
     if (this.data.specialData.priceType) {
@@ -485,16 +510,8 @@ Page({
   },
   toDetail(val) {
     var currentItem = this.data.specialList[val.currentTarget.dataset.index];
-    console.log(currentItem)
-    var obj = {}
-    obj['id'] = currentItem.goods_id
-    obj['tag'] = 'goodsinfo'
-    obj['name'] = currentItem.goods_name
-    var routerParams = JSON.stringify(obj)
-    let storageItem = JSON.stringify(currentItem)
-    wx: wx.setStorageSync('productDetail', storageItem)
     wx: wx.navigateTo({
-      url: '../goodsDetail/goodsDetail?params=' + routerParams,
+      url: '../goodsDetail/goodsDetail?seller_goods_id=' + currentItem.id,
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
@@ -504,9 +521,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
     let reqInfo = JSON.parse(options.params)
+    let UserInforma = JSON.parse(wx.getStorageSync('UserInforma'))
     this.setData({
-      productParams: reqInfo
+      productParams: reqInfo,
+      navH:app.globalData.navHeight,
+      UserInforma: UserInforma
     })
   },
   /**
@@ -548,13 +569,34 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if(this.data.defaultAct==1){
+      if (this.data.currentPage * this.data.pageSize==this.data.total){
+        this.setData({
+          currentPage:this.data.currentPage+1
+        })
+        this.getSpecialList(false)
+      }else{
+        wx.showToast({
+          title: '已全部加载',
+          duration: 1000,
+          icon:"none"
+        })
+      }
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') { }
+    return {
+      title: this.data.productParams.name,
+      imageUrl:this.data.productDetail.imageUrl,
+      path: "pages/productDetail/productDetail?params= {'id': " + this.data.productParams.id+ ",'tag':'goodsinfo','name':" + this.data.productParams.name+"}",
+      success: function (res) {
+        console.log('成功', res)
+      }
+    }
   }
 })

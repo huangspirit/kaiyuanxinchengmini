@@ -1,9 +1,11 @@
 {
   "usingComponents": {
-    "dialog": "../../components/dialog/dialog"
+    "dialog": "../../components/dialog/dialog",
+    "topNav":"../../components/topNav/topNav"
   },
   "navigationBarTitleText": "商品详情",
   "backgroundTextStyle": "light",
   "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#fff"
+  "navigationBarBackgroundColor": "#fff",
+  "navigationStyle":"custom"
 }

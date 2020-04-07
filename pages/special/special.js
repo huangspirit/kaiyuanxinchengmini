@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTopNav:false,
+    navH:app.globalData.navHeight,
     baseURL3: app.globalData.baseURL3,
     errorImg: app.globalData.errorImg,
     specialSider: [{

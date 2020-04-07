@@ -1,0 +1,87 @@
+/* pages/center/buyer/lowerPrice/lowerPrice.wxss */
+.nomore{
+  line-height: 300rpx;
+  text-align: center
+  ;
+  font-size: 35rpx;
+}
+.custom {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  height: 120rpx;
+  z-index: 1;
+  background: #fff;
+  padding: 0 20rpx;
+  border-bottom: 2rpx solid #e5e5e5;
+}
+
+.custom .navInput {
+
+  margin:20rpx auto 8rpx;
+  width: 90%;
+  height: 58rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  background: #eee;
+  border-radius: 40rpx;
+  display: flex;
+}
+
+.custom .navInput>text {
+  float: left;
+  line-height: 58rpx;
+}
+
+.custom .navInput input {
+  margin-left: 15rpx;
+  float: left;
+  width: 100%;
+  height: 58rpx;
+  background: #f1f1f1;
+  font-size: 28rpx;
+  color: #979797;
+}
+.custom .desc{
+  font-size:20rpx;
+  text-align: center;
+}
+.oneitem{
+  display:flex;
+  padding:20rpx;
+  margin-bottom:20rpx;
+  background: #fff;
+}
+.oneitem .left{
+  flex: 1;
+}
+.oneitem .left .name{
+  font-weight: bold;
+  font-size:34rpx;
+}
+.oneitem .left .desc{
+  margin:10rpx 0;
+  font-size:24rpx;
+}
+.oneitem .left .price{
+  font-size:24rpx;
+  margin-top:20rpx;
+}
+.oneitem .left .price text{
+  padding:0 8rpx;
+  margin-right:20rpx;
+  border-radius: 5rpx;
+}
+.oneitem .right{
+  text-align: right;
+  font-size:24rpx
+}
+.oneitem .right .price{
+  font-size:36rpx;
+  font-weight: bolder;
+  margin-bottom:8rpx;
+}
+.oneitem .right .cu-btn{
+  margin-top:10rpx;
+}

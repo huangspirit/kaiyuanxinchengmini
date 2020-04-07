@@ -1,9 +1,11 @@
 {
   "usingComponents": {
-    "dialog": "../../components/dialog/dialog"
+    "dialog": "../../components/dialog/dialog",
+    "topNav":"../../components/topNav/topNav"
   },
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTitleText": "一级类",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "navigationStyle":"custom"
 }

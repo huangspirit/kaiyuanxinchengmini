@@ -1,0 +1,45 @@
+<!--components/topNav/topNav.wxml-->
+<view class="wrap">
+  <view class="item"  bindtap="todetail" data-target="home">
+    <image src="/img/public/nav-ico01.png"></image>
+    <text>首页</text>
+    <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+  <view  class="item"  bindtap="todetail" data-target="search">
+    <image src="/img/public/nav-ico02.png"></image>
+    <text>搜索</text>
+    <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+  <view  class="item"  bindtap="todetail" data-target="shopCart">
+    <image src="/img/public/nav-ico03.png"></image>
+    <text>购物车</text>
+   <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+  <view  class="item"  bindtap="todetail" data-target="buyerOrder">
+    <image src="/img/public/nav-ico04.png"></image>
+    <text>买家订单</text>
+   <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+  <view  class="item" wx:if="{{UserInforma.userTagMap.seller}}"  bindtap="todetail" data-target="push">
+    <image src="/img/public/nav-ico05.png"></image>
+    <text>发布特价</text>
+   <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+  <view  class="item" wx:if="{{!UserInforma.userTagMap.seller}}" bindtap="todetail" data-target="join">
+    <image src="/img/public/nav-ico05.png"></image>
+    <text>商家入驻</text>
+    <view class="right ">
+      <image src="/img/public/woshimaijia_arrow.png"></image>
+    </view>
+  </view>
+</view>

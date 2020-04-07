@@ -1,0 +1,24 @@
+.item{
+  padding:20rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+}
+.item .top{
+  line-height:90rpx;
+  border-bottom: 1rpx solid #ddd;
+  display:flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.middle{
+  padding:15rpx 0 0;
+}
+.cont{
+  display:flex;
+  margin-bottom:15rpx;
+}
+.cont image{
+  width:150rpx;
+  height:100rpx;
+}

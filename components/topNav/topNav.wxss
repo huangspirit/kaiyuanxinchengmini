@@ -1,0 +1,29 @@
+/* components/topNav/topNav.wxss */
+.wrap{
+  background: rgba(0,0,0,0.7);
+  padding:0 25rpx;
+}
+.wrap image{
+  width:40rpx;
+  height:40rpx;
+  vertical-align: middle;
+  margin-right:22rpx;
+}
+.wrap .item{
+  height:100rpx;
+  line-height: 100rpx;
+  border-bottom:1rpx solid #fff;
+  padding-left: 10rpx;
+  color:#fff;
+  display: flex;
+  align-items: center;
+}
+.wrap .item .right{
+  flex:1;
+  text-align: right;
+  
+}
+.wrap .item .right image{
+  width:14rpx;
+  height:25rpx;
+}

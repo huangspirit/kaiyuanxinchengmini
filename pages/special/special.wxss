@@ -9,7 +9,6 @@ page {
 .custom {
   position: fixed;
   width: 100%;
-  top: 0;
   left: 0;
   height: 100rpx;
   z-index: 999;

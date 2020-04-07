@@ -1,144 +1,153 @@
 <!--pages/productDetail/productDetail.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<view class="productDetailPic">
-  <image src='{{productDetail.imageUrl?productDetail.imageUrl:errorImg}}'></image>
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">器件详情</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
 </view>
-<view class="brandComponey">
-  <view wx:if="{{productDetail.productno}}" class="brandDetail">
-    <text class="name">{{productDetail.productno}}</text>
-    <text class="blu">品牌：{{productDetail.branda}}</text>
-    <text class="gray desc">描述：{{productDetail.productdesc}}</text>
-    <view class="goodsLabel">
-      <view class="mark">
-        <text>原厂</text>
-        <text>500包邮</text>
-      </view>
-      <view class="productFocus">
-        <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
-          <image src="../../img/image/guanzhu.png"></image>
-          <text>关注</text>
-        </view>
-        <view wx:if="{{productDetail.focus}}" class="focus">
-          <image src="../../img/image/yiguanzhu.png"></image>
-          <text>已关注</text>
-        </view>
-        <view class="share">
-          <button open-type="share">
-            <image src="../../img/image/fenxiang.png"></image> 分享
-          </button>
-        </view>
-      </view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="wrap">
+  <view class="detail">
+    <view class="left">
+      <image src='{{productDetail.imageUrl?productDetail.imageUrl:errorImg}}'></image>
+    </view>
+    <view class="right">
+      <view class="name">{{productDetail.productno}}</view>
+      <view class="gray">品牌：{{productDetail.branda}}</view>
+      <view class="gray">类别：{{productDetail.classification}}</view>
+      <view class="gray desc">描述：{{productDetail.productdesc}}</view>
+    </view>
+  </view>
+  <view class="productFocus">
+    <view wx:if="{{!productDetail.focus}}" bindtap="addFocus" data-item="{{productDetail}}" class="focus">
+      <image src="../../img/image/guanzhu.png"></image>
+      <text>关注</text>
+    </view>
+    <view wx:if="{{productDetail.focus}}" class="focus">
+      <image src="../../img/image/yiguanzhu.png"></image>
+      <text>已关注</text>
+    </view>
+    <view class="share">
+      <button open-type="share">
+        <image src="../../img/image/fenxiang.png"></image> 分享
+      </button>
+    </view>
+    <view class="notice">
+      <image src="../../img/image/notice.png"></image>
+      <text>降价提醒</text>
     </view>
   </view>
 </view>
 <view class="specile">
-  <view class="specileTitle orange">他们正在共享特价，均可直接下单哦</view>
-  <view class="specileList" wx:if="{{specialList.length>0}}">
+  <view class="specileTitle">
+    <view class="{{defaultAct==1? 'active':''}}" wx:if="{{total}}" bindtap="setdefaultAct" data-defaulta="1">
+      价格展示</view>
+    <view class="{{defaultAct==2? 'active':''}}" bindtap="setdefaultAct" data-defaulta="2">
+      规格参数</view>
+  </view>
+  <view class="specileList" wx:if="{{defaultAct==1}}">
     <view class="listContent" wx:for="{{specialList}}" wx:key="{{index}}" data-index="{{index}}" bindtap="toDetail">
       <view class="listTitle">
+        <text class="{{item.isSelf?'price orange':'price green'}}">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+        <view class="tagWrap">
+        <text class="tag blu borderBlu" wx:if="{{item.tag==1 }}">{{filter.tagFilter(item.tag)}}</text>
+        <text class="tag blu borderBlu" wx:if="{{item.tag==2 && item.isAgent}}">{{filter.tagFilter(item.tag)}}</text>
+        <text class="tag isSelf" wx:if="{{item.isSelf}}">自营</text>
+        </view>
         <view catchtap="toseller" data-item="{{item}}">
           <image src="{{item.userImgeUrl}}" class="img"></image>
           <text class="name">{{item.sellerName}}</text>
-          <text class="tag bgColor">{{filter.tagFilter(item.tag)}}</text>
         </view>
-        <view>
-          <text catchtap="purchase" class="bgGray purchase" data-target="bottomModal" data-item="{{item}}">下单</text>
-        </view>
+
       </view>
       <view class="listDetail">
         <view class="listLeft">
-          <view class="{{item.seller_always?'green':'orange'}}">
+          <view class="one">
             <text> {{filter.goodsTypeFilter(item.goods_type)}}</text>
             <text wx:if="{{item.seller_always}}"> | {{item.day_interval*24}}小时内可发货</text>
             <text wx:if="{{!item.seller_always}}"> | 预计于{{filter.formatDate(item.deliverTime)[0]}}</text>
             <text> | {{item.diliverPlace}}发货</text>
           </view>
-          <view>
-            <text>数量：{{item.goodsStockCount}}</text>
-            <text class="blu" style="margin-left:30rpx;">MOQ：{{item.moq}}</text>
+          <view class="two gray">
+            <text style="margin-right:30rpx;">MOQ：{{item.moq}}</text>|
+            <text>批号：{{item.base_no?item.base_no:'暂无'}}</text>
           </view>
-
         </view>
-
         <view class="listRight">
-          <text wx:if="{{item.priceType}}" class="price bolder color">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
-          <!-- <text wx:if="{{!item.priceUnit}}" class="bill blu">{{item.priceUnit?'不含税':'含13%增值税'}}</text> -->
-
+          <view>
+            <text catchtap="purchase" class="{{item.isSelf?'isSelf purchase':'greenColor purchase'}}" data-target="bottomModal" data-item="{{item}}">下单</text>
+          </view>
+          <text>库存：{{item.goodsCount}}只</text>
         </view>
       </view>
-      <view class="count">
-        <text class="gray">批号： {{item.base_no}}</text>
-        <view>
-          <text class="color">{{item.countDown}}</text>
-          <text wx:if="{{item.sellerCount>0}}" >成交量：{{item.sellerCount}}</text>
-        </view>
+      <view class="orange" wx:if="{{!item.seller_always}}">
+          限时拼：<text>{{item.countDown}}</text>
       </view>
     </view>
-    <view class="listMore" wx:if="{{getMoreMark}}" bindtap="getMoreSpecial">
-      <view>
-        <text>查看更多特价</text>
-      </view>
-    </view>
+    
   </view>
-  <view wx:if="{{specialList.length<=0}}" class="listNone">暂无供应商发布特价，抢先去发布吧</view>
 </view>
-
-<view class="brandComponey" style="padding-bottom:100rpx;">
-  <view class="brandTitle">技术参数</view>
+<view class="brandComponey" wx:if="{{defaultAct==2}}">
   <view class="productParams">
-    <text style="font-weight:bold;">性能指标</text>
-    <text style="font-weight:bold;">参数</text>
+    <text style="font-weight:bold;">名称</text>
+    <text style="font-weight:bold;">参数值</text>
   </view>
   <view class="productParams" wx:for="{{productDetail.list}}" wx:key="index">
     <text>{{item.name}}</text>
     <text>{{item.value}}</text>
   </view>
+  <view bindtap="downpdf" wx:if="{{productDetail.datasheet}}" class="downpdf orange">查看数据手册DataSheet</view>
+</view>
+<view style="padding:20rpx;font-size:24rpx;" class="gray">
+  本站声明：所有价格均于商家发布，人民币价格为含13%增值税价格，美元价格为香港交货价格
 </view>
 <dialog id="dialog" bind:cancelEvent="popupCancel" bind:confirmEvent="popupConfirm" cancelText="朕知道了" confirmText="立即入驻" hasConfirm="{{false}}" title="提示">
-    <view slot="content" class="section">
-       <text>请移步网站(<text space="ensp" selectable='true'>https://www.icmap.cn</text>)登录后方可申请特价</text> 
-    </view>
-  </dialog>
-<view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
-  <button class="action text-grey" bindtap="toHome">
-    <view class='cuIcon-home text-red'></view> 首页
-  </button>
-
-  <view class="action text-grey" bindtap="toCart">
-    <view class='cuIcon-cart'></view> 购物车
+  <view slot="content" class="section">
+    <text>请移步网站(<text space="ensp" selectable='true'>https://www.icmap.cn</text>)登录后方可申请特价</text>
   </view>
-  <view class="action text-grey">
-    <!-- <view class='cuIcon-shop'></view> 店铺 -->
+</dialog>
+<view style="height:90rpx;"></view>
+<view class="footer">
+  <view class='bgOrange' bindtap="releaseSale">
+    <!-- <button class='cu-btn bg-orange round shadow-blur' bindtap="showdiag">申请特价</button> -->
+    <text class="cuIcon-roundadd"></text>发布特价
   </view>
-  <view class='btn-group'>
-    <button class='cu-btn bg-orange round shadow-blur'bindtap="showdiag">申请特价</button>
-    <button class='cu-btn bg-red round shadow-blur' bindtap="releaseSale">发布特价</button>
+  <view class="yellow" bindtap="toCart">
+    <text class='cuIcon-cart'></text> 购物车({{UserInforma.shoppingCarMap[1]}})
   </view>
-  <view class="cu-load load-modal" wx:if="{{loadModal}}">
+</view>
+<view class="cu-load load-modal" wx:if="{{loadModal}}">
     <view class="gray-text">加载中...</view>
   </view>
-  
-</view>
 <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white">
-      <view class="action text-blue" bindtap="hideModal" >取消</view>
-       <view class="action text-green" bindtap="submitpurchase">提交</view>
-        <!-- <view class="action text-green" bindtap="submitpurchase">购买</view> -->
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+      <view class="action text-green" bindtap="submitpurchase">提交</view>
+      <!-- <view class="action text-green" bindtap="submitpurchase">购买</view> -->
     </view>
     <view class="padding-xl">
       <view class="goodsPurchase">
-            <text class="color">
+        <text class="color">
                单价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.price,specialData.priceUnit?3:2)}}
             </text>
-            <text class="color">
+        <text class="color">
                 总价:{{specialData.priceUnit?'$':'￥'}}{{filter.toFixed(purchaseObj.totalPrice,specialData.priceUnit?3:2)}}
             </text>
-            <view class="btnwrap">
-              <button class='cu-btn' disabled="{{purchaseObj.delbtnShow}}" bindtap="delGoodsNum">-</button>
-              <input class='ca-sum' name='input' value="{{purchaseObj.goodsNum}} "readonly="readonly" type="number" bindblur="inputNum"></input>
-              <button class='cu-btn' disabled="{{purchaseObj.addbtnShow}}" bindtap="addGoodsNum">+</button>
-            </view>
+        <view class="btnwrap">
+          <button class='cu-btn' disabled="{{purchaseObj.delbtnShow}}" bindtap="delGoodsNum">-</button>
+          <input class='ca-sum' name='input' value="{{purchaseObj.goodsNum}} " readonly="readonly" type="number" bindblur="inputNum"></input>
+          <button class='cu-btn' disabled="{{purchaseObj.addbtnShow}}" bindtap="addGoodsNum">+</button>
+        </view>
       </view>
     </view>
   </view>

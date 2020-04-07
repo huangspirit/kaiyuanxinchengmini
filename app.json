@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/logs/logs",
     "pages/home/home",
     "pages/my/my",
     "pages/index/index",
@@ -73,7 +72,23 @@
     "components/select/select",
     "pages/settleitem/settleitem",
     "pages/addressList/addressList",
-    "pages/home1/home1"
+    "pages/agSellerGoods/agSellerGoods",
+    "pages/center/center",
+    "pages/center/seller/sellerOrder/sellerOrder",
+    "pages/center/buyer/buyerOrder/buyerOrder",
+    "pages/center/buyer/oneOrderDetail/oneOrderDetail",
+    "pages/center/buyer/invoiceManage/invoiceManage",
+    "pages/center/buyer/invoicelist/invoicelist",
+    "pages/center/buyer/feedBack/feedBack",
+    "pages/center/buyer/afterMark/afterMark",
+    "pages/center/buyer/applyDetail/applyDetail",
+    "pages/center/buyer/myInquiry/myInquiry",
+    "pages/center/buyer/lowerPrice/lowerPrice",
+    "pages/center/buyer/addressList/addressList",
+    "pages/center/buyer/address/address",
+    "pages/center/buyer/editAdress/editAdress",
+    "pages/center/buyer/focusGoods/focusGoods",
+    "pages/center/buyer/focusSeller/focusSeller"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -82,38 +97,38 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#E42D25",
+    "color": "#333",
+    "selectedColor": "#333",
     "borderStyle": "black",
     "list": [
       {
-        "selectedIconPath": "./img/home/homedianji.png",
-        "iconPath": "./img/home/home.png",
+        "selectedIconPath": "./img/home/icon1_on.png",
+        "iconPath": "./img/home/icon1.png",
         "pagePath": "pages/home/home",
         "text": "首页"
       },
       {
-        "selectedIconPath": "./img/home/specialActive.png",
-        "iconPath": "./img/home/special.png",
+        "selectedIconPath": "./img/home/icon2_on.png",
+        "iconPath": "./img/home/icon2.png",
         "pagePath": "pages/special/special",
         "text": "特价"
       },
       {
-        "selectedIconPath": "./img/home/searchActive.png",
-        "iconPath": "./img/home/search.png",
+        "selectedIconPath": "./img/home/icon4_on.png",
+        "iconPath": "./img/home/icon3.png",
         "pagePath": "pages/search/search",
         "text": "搜索"
       },
       {
-        "selectedIconPath": "./img/home/gouwuchedianji.png",
-        "iconPath": "./img/home/gouwuche.png",
+        "selectedIconPath": "./img/home/icon3_on.png",
+        "iconPath": "./img/home/icon4.png",
         "pagePath": "pages/shopCart/shopCart",
         "text": "购物车"
       },
       {
-        "selectedIconPath": "./img/home/wdedianji.png",
-        "iconPath": "./img/home/wde.png",
-        "pagePath": "pages/my/my",
+        "selectedIconPath": "./img/home/icon5_on.png",
+        "iconPath": "./img/home/icon5.png",
+        "pagePath": "pages/center/center",
         "text": "我的"
       }
     ]

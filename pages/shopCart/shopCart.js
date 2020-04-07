@@ -1,5 +1,6 @@
 // pages/shopCart/shopCart.js
 import api from '../../api/api'
+import utils from '../../utils/util.js'
 const app = getApp();
 Page({
 
@@ -7,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navH:app.globalData.navHeight,
     cartList: [],
     allChecked: false,
     unAllPrice: 0,
@@ -23,6 +25,26 @@ Page({
     start:0,
     length:5,
     showDeclareType:false,//选择报关方式
+  },
+  setCountDown: function() {
+    var _this = this;
+    let time = 100;
+    let list0 = this.data.cartList.map((item0)=>{
+      let list=item0.list.map((v, i) => {
+        if (v.remainTime <= 0) {
+          v.remainTime = 0;
+        }
+        let formatTime = utils.getFormat(v.remainTime);
+        v.remainTime -= time;
+        v.countDown = formatTime;
+        return v;})
+        item0.list=list
+      return item0;
+    })
+    this.setData({
+      cartList: list0,
+      timer: setTimeout(_this.setCountDown, time)
+    });
   },
   getShopList() {
     api.get("/api-g/sc/queryShoppingCarList", {
@@ -62,6 +84,11 @@ Page({
                 }
               }
             }
+            if (item.expireTime) {
+              let countdownTime = item.expireTime - item.currentTime;
+              item.remainTime = countdownTime;
+              item.countDown = ""
+            }
             return item;
           })
           return item0;
@@ -70,6 +97,7 @@ Page({
           cartList: list0,
           allChecked:false
         })
+         this.setCountDown()
         }
     })
   },
@@ -96,18 +124,19 @@ Page({
       usAllPrice: 0,
     })
   },
-  delete() {
+  deleteCart() {
+    let arr = [];
     for (let k = 0; k < this.data.cartList.length; k++) {
       for (let i = 0; i < this.data.cartList[k].list.length; i++) {
         if (this.data.cartList[k].list[i].checked) {
-          this.data.deleteId = this.data.cartList[k].list[i].id
+          arr.push(this.data.cartList[k].list[i].id)
         }
       }
     }
-    api.get("/api-g/sc/deleteSigletonShoppingCar", {
-      id: this.data.deleteId
-    }).then(res => {
-    
+    let obj = {
+        ids: arr.join("@")
+      };
+    api.get("/api-g/sc/deleteBatchShoppingCar", obj).then(res => {
       if (res.resultCode == "200") {
         wx.showToast({
           title: '删除成功',
@@ -263,6 +292,7 @@ Page({
       payBtnShow: this.data.payBtnShow
     })
   },
+  
   inputNum(val) {
     let index = val.currentTarget.dataset.index
     let k = val.currentTarget.dataset.k
@@ -566,7 +596,7 @@ Page({
       })
     })
    },
-  tohome() {
+   toHome() {
     wx.switchTab({
       url: '../home/home',
     })

@@ -134,16 +134,32 @@
   margin-right: 15rpx;
   color: #bbb;
 }
-
+.showmorebtn{
+  text-align: right;
+  background:#fff;
+  margin-bottom: 20rpx;
+  padding:0 20rpx 20rpx;
+}
 .descrition {
   width: 100%;
   padding: 0 20rpx;
   background: #fff;
   margin-top: 2rpx;
-  margin-bottom: 20rpx;
+  
+}
+.descrition.notmore{
+  height:100rpx;
+  overflow: hidden;
+}
+.descrition.notmore>view .over{
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
 }
 .descrition>view {
   padding-top:10rpx;
+  width:100%;
+  box-sizing: border-box;
 }
 .descrition>view>view{
   padding-bottom:10rpx;

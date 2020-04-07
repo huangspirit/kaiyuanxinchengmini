@@ -1,0 +1,146 @@
+<!--pages/center/seller/seller.wxml-->
+<!--pages/center/buyer/buyer.wxml-->
+<wxs src="../../../utils/filter.wxs" module="filter" />
+<view class="buyer">
+  <view class="top">
+    <view class="left">
+      <image src="{{userInforma.headImgUrl}}"></image>
+    </view>
+    <view class="right">
+      <view class="name">{{userInforma.nickname}}</view>
+      <view class="level">
+        <text class="tag">信用等级：{{userInforma.userTagMap.userLevel}}</text>
+        <text class="tag">{{filter.tagFilter(userInforma.userTagMap.tag)}}</text>
+      </view>
+      <view class="number">
+        <image src="/img/center/woshimaijia_loan.png"></image>
+        <text> 余额:￥{{filter.toFixed(userInforma.userTagMap.wallet,2)}}</text>
+        <image src="/img/center/woshimaijia_bean.png"></image>
+        <text>晶豆:{{userInforma.userTagMap.dou}}粒</text>
+      </view>
+    </view>
+  </view>
+  <view class="two">
+    <view class="left peruBg">
+      <view>
+        <text>人民币：</text>
+        <text class="color">￥{{filter.toFixed(rmb,2)}}</text>
+      </view>
+      <view>
+        <text>美元：</text>
+        <text class="green">${{filter.toFixed(usd,3)}}</text>
+      </view>
+      <view class="name">历史累计销售额
+      </view>
+    </view>
+    <view class="right">
+      <view class="blu " wx:if="{{userInforma.userTagMap['restcredit-seller']}}">
+        ￥{{filter.toFixed(userInforma.userTagMap["restcredit-seller"],2)}}
+      </view>
+      <view class="blu " wx:if="{{!userInforma.userTagMap['restcredit-seller']}}">
+        ￥0.00
+      </view>
+      <view class="name">
+        售卖额度
+      </view>
+      <view class="oper">
+        <text class="blu">提升额度</text>
+        <text class="blu">使用明细</text>
+      </view>
+      <view class="gray">保证金：￥{{userInforma.userTagMap.deposit}}</view>
+    </view>
+  </view>
+  <view class="myorder">
+    <view class="tit">订单管理</view>
+    <view class="list">
+      <view class="one">
+        <image src="/img/center/woshimaijia_order_icon1.png"></image>
+        <view>待发货</view>
+      </view>
+      <view class="one">
+        <image src="/img/center/woshimaijia_order_icon2.png"></image>
+        <view>待付款</view>
+      </view>
+      <view class="one">
+        <image src="/img/center/woshimaijia_order_icon3.png"></image>
+        <view>已延误</view>
+      </view>
+      <view class="one">
+        <image src="/img/center/woshimaijia_order_icon4.png"></image>
+        <view>已取消</view>
+      </view>
+      <view class="one lastone">
+        <image src="/img/center/woshimaijia_order_icon5.png"></image>
+        <view>全部订单</view>
+      </view>
+    </view>
+  </view>
+  <view class="orderlist">
+    <view class="left">
+      <image src="/img/center/woshimaijia_deliver_goods.png"></image>
+      <text>发货框</text>
+      <text class="deliverNum">{{deliverNum}}</text>
+    </view>
+    <view class="right">
+      去发货 >
+    </view>
+  </view>
+  <view class="btnwrap">
+    <view class="one" bindtap="toDetail" data-target="public">
+      <image src="/img/center/woshimaijia_icon1.png" ></image>
+      发布特价
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon2.png"></image>
+      在售商品
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon3.png"></image>
+      已下架商品
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon4.png"></image>
+      询价管理
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon5.png"></image>
+      开票管理
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon6.png"></image>
+      新增产品
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon7.png"></image>
+      产品管理
+    </view>
+    <view class="one">
+      <image src="/img/center/woshimaijia_icon8.png"></image>
+      评价管理
+    </view>
+  </view>
+  <view class="banner">
+    <image src="/img/center/woshimaijia_banner.png" class="center"></image>
+  </view>
+  <view class="list" wx:if="{{list.length}}">
+    <view class="tit">待发货零件</view>
+    <view>
+      <view wx:for="{{list}}" wx:key="{{item.id}}" class="one">
+        <view>
+          <view class="left">
+            <image src=""></image>
+          </view>
+          <view class="right">
+            <view>下单时间：2020-03-05 12:12:13</view>
+            <view class="name">asdmue</view>
+            <view>数量：1000</view>
+          </view>
+        </view>
+        <view>
+          <text>国内交货</text>
+          <button>加入发货框</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

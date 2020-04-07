@@ -1,147 +1,59 @@
 <!--pages/home/home.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
-<view class='homeTop'>
-  <view class="swiperPic">
-    <!-- <image src='../../img/home/banner.png'></image> -->
-    <view class='hometopContent'>
-      <text>电子元器件特价共享交易平台</text>
-      <text>原装正品是底线 跟着特价买才省钱</text>
-      <view class='homeInput' bindtap='toSearch'>
-      </view>
-    </view>
-  </view>
-</view>
-<view class="classlist">
-  <view class="subClassList" wx:for="{{classList}}" wx:key="{{index}}" bindtap="toClassList" data-index="{{index}}">
-    <image src="{{item.img}}"></image>
-    <text>{{item.name}}</text>
-  </view>
-</view>
 <view>
-  <view class='specialList'>
-    <view class='listHead'>
-      <text>今日特价</text>
-      <view bindtap="toClassList" class="more" data-index="{{1}}">
-        <text>更多</text>
-        <image src="../../img/image/youjiantouxiao.png"></image>
+  <view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+    <view class='nav-title'>
+      <view class="left">
+        <image src="/img/public/home.png"></image>
       </view>
+      <view class="center">{{title}}</view>
     </view>
-    <view class='faclistContent' wx:for="{{specialList}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}" wx:if="{{specialList.length>0}}">
-      <view class='list_left'>
-        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}'></image>
-      </view>
-      <view class='list_right'>
-        <view class='speciStatus'>
-          <view class="color name">{{item.goods_name}}</view>
-          <view class="blu">{{item.brandName}}</view>
-          <!-- <view class="desc gray">{{item.goodsDesc}}</view> -->
-          <view class="mark">
-            <text class="{{item.goods_type?'borderGreen green':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
-            <text class="borderColor">{{item.diliverPlace}}发货</text>
-            <text class="borderBlu" :class="item.seller_always?'':'color'">{{item.seller_always?'长期特价':'限时抢购'}}</text>
-          </view>
-        </view>
-        <view class="price color">
-
-          <view class="num ">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
-          <!-- <view>{{filter.priceTypeFilter(item.priceType)}}</view> -->
-        </view>
-      </view>
-    </view>
-    <!-- <view wx:if="{{specialList.length>0}}" scroll-x="true" class='listContent'>
-      <view class='list_left' wx:for="{{specialList}}" bindtap="toDetail" data-item="{{item}}" wx:key="{{id}}">
-        <image src="{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
-        <view class="name">{{item.goods_name}}</view>
-        <view class="desc gray">{{item.goodsDesc}}</view>
-        <view class="mark">
-          <text class="{{item.goods_type?'borderGreen green':'borderColor color'}}">{{item.goods_type?'现货':'订货'}}</text>
-          <text class="borderColor">{{item.diliverPlace}}交货</text>
-          <text class="borderBlu" :class="item.seller_always?'':'color'">{{item.seller_always?'长期特价':'限时抢购'}}</text>
-        </view>
-        <view class="color desc">
-        {{item.priceType?'起售价':'一口价'}}{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
-      
-      </view>
-    </view> -->
-    <view class="prompt" wx:if="{{specialList.length<=0}}">暂无特价</view>
   </view>
-  <view class='specialList'>
-    <view class='listHead'>
-      <text>原厂直供</text>
-      <view bindtap="toClassList" data-index="{{0}}" class="more">
-        <text>更多</text>
-        <image src="../../img/image/youjiantouxiao.png"></image>
-      </view>
-    </view>
-    <view class='faclistContent' wx:for="{{facdirect}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
-      <view class='list_left'>
-        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}'></image>
-      </view>
-      <view class='list_right'>
-        <view class='speciStatus'>
-          <view class="color name">{{item.goods_name}}</view>
-          <view class="blu">{{item.brandName}}</view>
-          <!-- <view class="desc gray">{{item.goodsDesc}}</view> -->
-          <view class="mark">
-            <text class="{{item.goods_type?'borderGreen green':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
-            <text class="borderColor">{{item.diliverPlace}}发货</text>
-          </view>
-        </view>
-        <view class="price color">
-
-          <view class="num ">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
-          <!-- <view>{{filter.priceTypeFilter(item.priceType)}}</view> -->
-        </view>
-      </view>
-    </view>
-    <view class="prompt" wx:if="{{facdirect.length<=0}}">暂无原厂直供商品</view>
-  </view>
-  <view class='specialList goodslist'>
-    <view class='listHead'>
-      <text>呆料掘金</text>
-      <view bindtap="toClassList" data-index="{{3}}" class="more">
-        <text>更多</text>
-        <image src="../../img/image/youjiantouxiao.png"></image>
-      </view>
-    </view>
-    <view class='faclistContent' wx:for="{{material}}" wx:key="{{id}}" bindtap="toDetail" data-item="{{item}}">
-      <view class='list_left'>
-        <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}'></image>
-      </view>
-      <view class='list_right'>
-        <view class='speciStatus'>
-          <view class="color name">{{item.goods_name}}</view>
-          <view class="blu">{{item.brandName}}</view>
-          <view class="mark">
-            <text class="{{item.goods_type?'borderGreen green':'color borderColor'}}">{{filter.goodsTypeFilter(item.goods_type)}}</text>
-            <text class="borderColor">{{item.diliverPlace}}发货</text>
-          </view>
-        </view>
-        <view class="price color">
-          <view class="num ">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</view>
-        </view>
-      </view>
-    </view>
-    <!-- <view class="list">
-      <view class="oneitem" wx:for="{{material}}" wx:key="{{item.id}}" bindtap="toDetail" data-item="{{item}}">
-        <view class="imgWrap">
-          <image src="{{item.sellerGoodsImage?item.sellerGoodsImage:item.goodsImageUrl}}"></image>
-        </view>
-        <view>
-      
-          <view class="name color">{{item.goods_name}}</view>
-          <view>
-            <text class="blu">{{item.brandName}}</text>
-          
-          </view>
-          <view class="desc gray">{{item.goodsDesc}}</view>
-          <view class="price">
-            <text class="num color">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
-              <text>（{{item.diliverPlace}}发货）</text>
+  <!-- <scroll-view class='bg-white overflow' style='height:calc(100vh - {{navH}}px)' scroll-y> -->
+    <view class='hidden homeContent'  style='padding-top:{{navH}}px'>
+      <view class="top">
+        <image src='../../img/home/home_banner.png'></image>
+        <view class='hometopContent'>
+          <text class="desc">电子元器件特价共享交易平台</text>
+          <view class='navInput'>
+            <text class="cuIcon-search"></text>
+            <input placeholder='请输入器件型号、类型或品牌' bindtap='toSearch' placeholder-class='none'></input>
           </view>
         </view>
       </view>
-    </view> -->
-    <view class="prompt" wx:if="{{material.length==0}}">暂无呆料</view>
-  </view>
+    </view>
+    <view class="classlist">
+      <view class="subClassList" wx:for="{{classList}}" wx:key="index" bindtap="toClassList" data-index="{{index}}">
+        <image src="{{item.img}}"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+    <view class="bg"></view>
+    <view class="list">
+      <view class="tit">最新特价</view>
+      <view class="listwrap" wx:for="{{specialList}}" wx:key="index" bindtap="toDetail" data-item="{{item}}" wx:if="{{specialList.length>0}}">
+        <view class="left">
+          <image class="mark" src="/img/home/home_present.png" wx:if="{{item.goods_type}}"></image>
+          <image class="mark" src="/img/home/home_order.png" wx:if="{{!item.goods_type}}"></image>
+          <image src='{{item.sellerGoodsImageUrl?item.sellerGoodsImage:item.goodsImageUrl}}' class="goodsImg"></image>
+        </view>
+        <view class="right">
+          <view class="goodsName">
+            {{item.goods_name}}
+          </view>
+          <view class="desc">
+            <text class="brandName">{{item.brandName}}</text> | 
+            <text>{{item.goods_type?'现货':'订货'}}</text> | 
+            <text>{{item.diliverPlace}}发货</text> | 
+            <text>MOQ：{{item.moq}}</text>
+          </view>
+          <view class="num">
+            <text>库存：{{item.goodsCount}}</text>
+            <text class="price">{{item.priceUnit?'$':'￥'}}{{filter.toFixed(item.goodsPrice,item.priceUnit?3:2)}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{total!=0 && specialList.length==total}}" class="nomore">已加载到底部</view>
+  <!-- </scroll-view> -->
 </view>

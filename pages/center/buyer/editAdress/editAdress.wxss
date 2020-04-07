@@ -1,0 +1,28 @@
+/* pages/editAdress/editAdress.wxss */
+.cu-form-group .title {
+  width: 155rpx;
+}
+.cu-form-group picker .picker {
+  text-align: left;
+}
+.cu-form-group .adressLabel{
+   display: flex;
+   width: calc(100% - 155rpx)
+}
+.cu-form-group .adressLabel>text {
+  padding: 5rpx 10rpx;
+  border: 2rpx solid #bbb;
+  margin-right: 10rpx;
+  border-radius: 8rpx;
+}
+.editFooter {
+  padding: 20rpx;
+}
+.editFooter view{
+   height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+   border-radius: 8rpx;
+   margin-bottom:10rpx;
+   background:linear-gradient(90deg,rgba(255,208,0,1) 0%,rgba(255,189,0,1) 100%);
+}

@@ -1,5 +1,14 @@
 <!--pages/special/special.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <!-- <view class="left">
+      <image src="/img/public/home.png" bindtap="toHome"></image>
+    </view> -->
+    <view class="center">特价搜索</view>
+  </view>
+</view>
+<view style='padding-top:{{navH}}px'></view>
 <view class="custom flex_center">
   <view class='navInput'>
     <text class="cuIcon-search"></text>

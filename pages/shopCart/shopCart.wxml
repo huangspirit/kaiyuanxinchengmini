@@ -1,85 +1,109 @@
 <!--pages/shopCart/shopCart.wxml-->
 <wxs src="../../utils/filter.wxs" module="filter" />
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <!-- <view class="left">
+      <image src="/img/public/home.png" bindtap="toHome"></image>
+    </view> -->
+    <view class="center">购物车</view>
+  </view>
+</view>
+<view style='padding-top:{{navH}}px'></view>
 <view class="shoppingCart" wx:if="{{cartList.length>0}}">
   <view class="cartTop">
     <view><image src="../../img/home/gouwuchedianji.png"></image></view>
     <text bindtap="editGoods">{{editText}}</text>
   </view>
-
   <view class="shopList">
     <view class="listContent {{!item.isenable?'listNosell':''}}" wx:for="{{cartList}}" wx:key="index" wx:for-item="item" wx:for-index="index">
       <view class="shopSeller">
         <view class='action-checkbox' bindtap="subChecked" data-index="{{index}}">
-          <image  src="{{item.checked?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
+          <text class="cuIcon-roundcheck  gray selecticon"  wx:if="{{!item.checked}}"></text>
+          <text class="cuIcon-roundcheckfill  selectedicon selecticon"  wx:if="{{item.checked}}"></text>
         </view>
-        <view class="cu-avatar lg round margin-left margin-right">
-          <image style="width:100%;height:100%;border-radius:100%;" src="{{item.sellerUrl}}"></image>
-        </view>
+        <view class="cu-avatar  round margin-left" style="background-image:url({{item.sellerUrl}});"></view>
         <text>{{item.sellerName}}</text>
       </view>
       <view class="{{subItem.isenable?'':''}}sellerList" wx:for="{{item.list}}" wx:for-item="subItem" wx:for-index="k" wx:key="k">
-        <view class='action-checkbox' bindtap="sonChecked" data-k="{{k}}" data-index="{{index}}">
-          <image  wx:if="{{subItem.isenable}}" src="{{subItem.checked ?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
-          <image  wx:if="{{!subItem.isenable}}" src="../../img/image/weixuanzhong.png"></image>
-        </view>
-      <view class="listDetail">
-        <view class="listLeft">
-          <image src="{{subItem.goodsImageUrl?subItem.goodsImageUrl:errorImg}}"></image>
-        </view>
-        <view class="listRight">
-          <view class="name color">{{subItem.goods_name}}</view>
-          <view class="desc gray">{{subItem.goodsDesc}}</view>
-          <view class="mark">{{subItem.diliverPlace}}发货</view>
-          <view class="goodsPrice color">
-            <text>
-              {{subItem.priceUnit?'$':'￥'}} {{filter.toFixed(subItem.goodsPrice,subItem.priceUnit?3:2)}}
-            </text>
-            <view>
-              <button class='cu-btn' disabled="{{subItem.delbtnShow}}" bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
-              <input class='ca-sum' name='input' value="{{subItem.goodsNum}} " bindblur="inputNum"  data-index="{{index}}" data-k="{{k}}"></input>
-              <button class='cu-btn' disabled="{{subItem.addbtnShow}}" bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
+        <view class="listDetail">
+          <view class='action-checkbox' bindtap="{{subItem.isenable?'sonChecked':''}}" data-k="{{k}}" data-index="{{index}}">
+            <text class="cuIcon-roundcheck  gray selecticon"  wx:if="{{!subItem.checked}}"></text>
+            <text class="cuIcon-roundcheckfill  selectedicon selecticon"  wx:if="{{subItem.checked}}"></text>
+          </view>
+          <view class="listLeft">
+            <image src="{{subItem.goodsImageUrl?subItem.goodsImageUrl:errorImg}}"></image>
+          </view>
+          <view class="listRight">
+            <view class="name">{{subItem.goods_name}}</view>
+            <!-- <view class="desc gray">{{subItem.goodsDesc}}</view> -->
+            <view class="gray">
+              <text>{{subItem.brandName}}</text> |
+              <text>{{subItem.goods_type?'现货':'订货'}}</text> |
+              <text wx:if="{{!subItem.goods_type}}">交期：{{filter.formatDate(subItem.deliverTime)[0]}}</text>
+              <text wx:if="{{subItem.goods_type}}">交期：下单后{{subItem.day_interval*24}}小时内</text>
+            </view>
+            <view class="goodsPrice">
+              <text class="orange">
+                {{subItem.priceUnit?'$':'￥'}}{{filter.toFixed(subItem.goodsPrice,subItem.priceUnit?3:2)}}
+              </text>
+              <view>
+                <button class='cu-btn' disabled="{{subItem.delbtnShow}}" bindtap="delGoodsNum" data-index="{{index}}" data-k="{{k}}">-</button>
+                <input class='ca-sum' name='input' value="{{subItem.goodsNum}} " bindblur="inputNum" data-index="{{index}}" data-k="{{k}}" type="number"></input>
+                <button class='cu-btn' disabled="{{subItem.addbtnShow}}" bindtap="addGoodsNum" data-index="{{index}}" data-k="{{k}}">+</button>
+              </view>
             </view>
           </view>
         </view>
-      </view>
+        <view class="countime gray">
+        <text  wx:if="{{!subItem.isenable || subItem.goods_type}}"></text>
+          <text wx:if="{{subItem.isenable && !subItem.goods_type}}" class="orange">限时：{{subItem.countDown}}</text>
+          <text>MOQ:{{subItem.moq}}</text>
+        </view>
+        <view class="wrapbtn">
+          <text class="orange" wx:if="{{!subItem.isenable}}">限时已结束</text>
+          <text>库存：{{subItem.goodsStockCount}}只</text>
+          <text>金额：{{subItem.priceUnit?'$':'￥'}}{{filter.toFixed(subItem.goodsPrice * subItem.goodsNum,subItem.priceUnit?3:2)}}</text>
+        </view>
     </view>
   </view>
 </view>
 </view>
-<view class="shopFooter " wx:if="{{cartList.length>0&&!editgoodsShow}}">
-  <view class="footerLeft">
+<view style="height:100rpx;"></view>
+<view class="shopFooter " wx:if="{{cartList.length && !editgoodsShow}}">
+  <view class="footerLeft" wx:if="{{cartList.length}}">
     <view>
-      <view class='action-checkbox'>
-        <image bindtap="allChecked" src="{{allChecked?'../../img/image/xuanzhong.png':'../../img/image/weixuanzhong.png'}}"></image>
+      <view class='action-checkbox' bindtap="allChecked" >
+        <text class="cuIcon-roundcheck  gray selecticon"  wx:if="{{!allChecked}}"></text>
+        <text class="cuIcon-roundcheckfill  selectedicon selecticon"  wx:if="{{allChecked}}"></text>
       </view>
       全选
     </view>
-    <text>总计：￥{{filter.toFixed(unAllPrice,2)}}+${{filter.toFixed(usAllPrice,3)}}</text>
+    <text wx-if="{{unAllPrice || usAllPrice}}">合计：<text class="orange">￥{{filter.toFixed(unAllPrice,2)}}+${{filter.toFixed(usAllPrice,3)}}</text></text>
   </view>
-  <view class="{{payBtnShow?'footerRight':'footerRightsub'}}" bindtap="{{payBtnShow?'toPay':''}}">
-    <text>结算</text>
-    <text>({{goodsAllNum}}件)</text>
+  <view class="{{payBtnShow?'footerRight':'footerRightsub'}}" bindtap="{{payBtnShow?'toPay':''}}" wx:if="{{payBtnShow}}">
+    <text>去结算</text>
+    <!-- <text>({{goodsAllNum}}件)</text> -->
   </view>
 </view>
 <view class="shopFooter1" wx:if="{{editgoodsShow}}">
   <view class="footerLeft">
     <view>
-      <view class='action-checkbox'>
-        <image bindtap="allChecked" wx:if="{{allChecked}}" src="../../img/image/xuanzhong.png"></image>
-        <image bindtap="allChecked" wx:else src="../../img/image/weixuanzhong.png"></image>
+      <view class='action-checkbox'  bindtap="allChecked">
+        <text class="cuIcon-roundcheck  gray selecticon"  wx:if="{{!allChecked}}"></text>
+        <text class="cuIcon-roundcheckfill  selectedicon selecticon"  wx:if="{{allChecked}}"></text>
       </view>
       全选
     </view>
   </view>
   <view class="footerRight">
-    <text bindtap="delete">删除</text>
-    <text bindtap="addFocus">移至收藏</text>
+  <button bindtap="deleteCart" class="cu-btn bg-grey">删除</button>
+    <!-- <text bindtap="addFocus">移至收藏</text> -->
   </view>
 </view>
 <view class="shopingCarEmpty" wx:if="{{cartList.length<=0}}">
   <image src="../../img/image/gouwuchekong.png"></image>
   <view>购物车空空如也，
-    <text bindtap="tohome">去逛逛</text>吧 ~
+    <text bindtap="toHome">去逛逛</text>吧 ~
   </view>
   
 </view>

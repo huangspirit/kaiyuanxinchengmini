@@ -1,4 +1,19 @@
 <!--pages/direct/direct.wxml-->
+<view class='nav0' style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">{{params.name}}</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
 <view class="productSearch">
   <input placeholder="搜索你想要的商品" bindconfirm='toSearch' placeholder-style="color:#979797;font-size:30rpx;" value="{{name}}"></input>
 </view>
@@ -36,7 +51,7 @@
             {{item.map.minPrice}}
             <text wx:if="{{item.map.minPrice!=item.map.maxPrice}}">-{{item.map.maxPrice}}</text>
           </view>
-          <view class="num gray">共有<text class="color" style="font-weight:bolder;">{{item.map.totalSeller}}</text>家供应商报价</view>
+          <!-- <view class="num gray">共有<text class="color" style="font-weight:bolder;">{{item.map.totalSeller}}</text>家供应商报价</view> -->
         </view>
       </view>
     </view>

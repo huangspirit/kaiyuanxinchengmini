@@ -6,12 +6,24 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTopNav:false,
+    navH:app.globalData.navHeight,
     baseURL3: app.globalData.baseURL3,
     brand:{},
     seller_id:'',
     goodslist: [], 
     descHeight: true,
     descText: "查看更多",
+  },
+  toHome() {
+    this.setData({
+      showTopNav:!this.data.showTopNav
+    })
+  },
+  goback() {
+    wx.navigateBack({
+      delta: 1
+    })
   },
   /**
    * 生命周期函数--监听页面加载

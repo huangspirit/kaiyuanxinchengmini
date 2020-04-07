@@ -1,0 +1,213 @@
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">订单详情</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view class="process">
+  <view wx:for="{{processlist}}" wx:key="{{item.id}}">
+    {{item.ordesc}}
+  </view>
+</view>
+<view class="order">
+  <view wx:for="{{orderobj}}" wx:key="{{item}}" class="one">
+    <view class="top">
+      <view class="headerImg">
+        <image src="{{item.headImgUrl}}"></image>
+      </view>
+      <text>{{item.username}}</text>
+    </view>
+    <view wx:for="{{item.list}}" wx:key="{{item}}" class="listone">
+      <view class="wrap">
+        <view class="left">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+        <view class="right">
+          <view>{{item.goods_name}}</view>
+          <view class="gray">
+            <text>{{item.goods_type?'现货':'订货'}}</text> |
+            <text wx:if="{{item.goods_type}}">下单后{{item.day_interval*24}}小时内 | </text>
+            <text wx:if="{{!item.goods_type}}">预计 {{filter.formatDate(item.complete_date)[0]}} | </text>
+            <text>{{item.diliver_place}}发货</text>
+          </view>
+          <view class="gray">批号：{{item.base_no?item.base_no:'暂无'}}</view>
+          <view class="price">
+            <text class="blu">{{item.priceunit?'$':'￥'}}{{filter.toFixed(item.good_price,item.priceunit?3:2)}} X {{item.goods_count}}</text>
+            <text style="float:right" class="orange">{{item.priceunit?'$':'￥'}}{{filter.toFixed(item.total_price,item.priceunit?3:2)}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="bottom btn">
+        <!-- <button class="cu-btn line-cyan sm" wx:if="{{item.confirmChangeDiliverTimeButton}}" data-item="{{item}}">确认新交期</button> -->
+        <button class="cu-btn line-grey sm" wx:if="{{item.cancleButton}}" data-item="{{item}}" bindtap="showModal" data-target="cancleGoods">取消零件</button>
+        <button class="cu-btn line-purple sm" wx:if="{{item.commentButton}}" data-item="{{item}}" bindtap="comment">去评价</button>
+        <button class="cu-btn line-red sm" wx:if="{{item.order_status==4}}" data-item="{{item}}" bindtap="rebuy">再次购买</button>
+        <button class="cu-btn line-orange sm" wx:if="{{item.aftersalesButton}}" data-item="{{item}}" bindtap="service">申请售后</button>
+        <button class="cu-btn line-olive sm" wx:if="{{item.confirmRecieveGoods}}" data-item="{{item}}" bindtap="confirmRecieveGoods">确认收货</button>
+        <button class="cu-btn line-pink sm" wx:if="{{item.payFinalButton}}" data-item="{{item}}" bindtap="payfinal">付尾款</button>
+        <button class="cu-btn line-blue sm" wx:if="{{item.trans_no}}" data-item="{{item}}" bindtap="getDelivery" data-target="DrawerModalL">查看物流</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="conact">联系客服</view>
+<view class="detail">
+  <view>
+    <text class="gray">订单编号：</text>
+    <view>{{orderDetail.orderVo.order_no}}</view>
+  </view>
+  <view>
+    <text class="gray">下单时间：</text>
+    <view>{{filter.formatDate(orderDetail.orderCreateTime)[1]}}</view>
+  </view>
+  <view wx:if="{{orderDetail.payDetailList && orderDetail.payDetailList[0].prePayChannel}}">
+    <text class="gray">支付详情：</text>
+    <view class="paytype">
+      <text>{{filter.formatDate(orderDetail.payDetailList[0].prePayTime)[0]}}</text>
+      <text>{{filter.payTay(orderDetail.payDetailList[0].prePayChannel)}}</text>
+      <text wx:if="{{orderDetail.orderVo.need_pre_pay}}">￥{{filter.toFixed(orderDetail.orderVo.order_prepay,2)}}</text>
+      <text wx:if="{{!orderDetail.orderVo.need_pre_pay}}">￥{{filter.toFixed(orderDetail.orderVo.order_amount,2)}}</text>
+    </view>
+  </view>
+</view>
+<view class="bill" wx:if="{{orderDetail.orderVo.billType}}" bindtap="toBill">
+  <text>我的发票</text>
+  <text style="float:right;">详情>></text>
+</view>
+<view class="total">
+  <view class="top">
+    <text>合计人民币金额：</text>
+    <text class="orange">￥{{filter.toFixed(orderDetail.orderVo.order_amount,2)}}</text>
+  </view>
+  <view class="middle ">
+    <view class="item">
+      <text class="left gray">美元金额：</text>
+      <text class="right">${{filter.toFixed(countObj.usd,3)}}</text>
+    </view>
+    <view class="item">
+      <text class="left gray">人民币金额：</text>
+      <text class="right">${{filter.toFixed(countObj.ren,3)}}</text>
+    </view>
+    <view class="item">
+      <text class="left gray">今日汇率：</text>
+      <text class="right">{{orderDetail.orderVo.today_exchange}}</text>
+    </view>
+    <view class="item">
+      <text class="left gray">清关费：</text>
+      <text class="right">￥{{filter.toFixed(orderDetail.orderVo.guanshui_service,2)}}</text>
+    </view>
+    <view class="item">
+      <text class="left gray">关税：</text>
+      <text class="right">￥{{filter.toFixed(orderDetail.orderVo.guanshui_total,2)}}</text>
+    </view>
+    <view class="item">
+      <text class="left gray">海关增值税13%：</text>
+      <text class="right">￥{{filter.toFixed(orderDetail.orderVo.order_bill,2)}}</text>
+    </view>
+  </view>
+</view>
+<view class="gray footerDesc">本站声明：所有价格均于商家发布，人民币价格为含13%增值税价格；美元价格为香港交货的价格</view>
+<view style="height:90rpx;"></view>
+<view class="footer">
+  <!-- <button class="cu-btn bg-green" wx:if="{{orderDetail.orderVo.download}}" bindtap="downsys" data-item="{{orderDetail.orderVo}}">下载合同(系统)</button>
+  <button class="cu-btn bg-olive" wx:if="{{orderDetail.orderVo.customerContractUrl}}" bindtap="downperson" data-item="{{orderDetail.orderVo}}">下载合同(个人)</button> -->
+  <button class="cu-btn bg-blue" wx:if="{{orderDetail.orderVo.order_status != 3 && orderDetail.orderVo.download}}" bindtap="uphetong" data-item="{{orderDetail.orderVo}}">上传合同</button>
+  <button class="cu-btn bg-yellow" wx:if="{{orderDetail.orderVo.isMonth && orderDetail.orderVo.payButton}}" data-item="{{orderDetail.orderVo}}" bindtap="monthpay">白条支付</button>
+  <!-- 预付款 -->
+  <button class="cu-btn bg-yellow" wx:if="{{orderDetail.orderVo.prePayButton}}" bindtap="pay" data-item="{{orderDetail.orderVo}}">去支付</button>
+  <!-- 全款 -->
+  <button class="cu-btn bg-yellow" wx:if="{{!orderDetail.orderVo.isMonth && !orderDetail.orderVo.need_pre_pay && orderDetail.orderVo.payButton}}" bindtap="pay" data-item="{{orderDetail.orderVo}}">去支付</button>
+  <button class="cu-btn bg-grey" wx:if="{{orderDetail.orderVo.cancelButton}}" bindtap="showModal" data-target="cancleOrder" data-item="{{orderDetail}}">取消订单</button>
+</view>
+<view class="cu-modal {{modalName=='cancleOrder'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">取消订单</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl" style="text-align:left;">
+      <view>
+        <view class="cu-form-group">
+          <textarea bindinput="textareaAInput" placeholder="输入取消订单的原因" value="{{canclereason}}"></textarea>
+        </view>
+      </view>
+      <view>取消后已支付订单款项会在下一个结账日按原路返回，结账日为每月15日</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">不取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmCancelOrder">确认取消</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='cancleGoods'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">取消零件</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl" style="text-align:left;">
+      <view>
+        <view class="cu-form-group">
+          <textarea bindinput="textareaAInput" placeholder="输入取消零件的原因" value="{{canclereason}}"></textarea>
+        </view>
+      </view>
+      <view>取消后已支付订单款项会在下一个结账日按原路返回，结账日为每月15日</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">不取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmCancelGoods">确认取消</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='confirmRecieveGoods'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">确认收货</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl" style="text-align:left;">
+      <view>请确认您已收到货品</view>
+      <view>确认后系统将会放款给卖家</view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="ConfirmReceipt">确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap style="top:{{navH}}px;height:calc(100vh - {{navH}}px);overflow-y:auto;width:80%;">
+    <view class="cu-list menu text-left">
+      <view class="cu-timeline" wx:for="{{express}}" wx:key>
+        <view class="cu-time">{{item.datetime}}</view>
+        <view class="cu-item cur cuIcon-noticefill">
+          <view class="content bg-green shadow-blur">
+            {{item.remark}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

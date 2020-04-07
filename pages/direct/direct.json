@@ -1,9 +1,11 @@
 {
   "usingComponents": {
-    "dialog": "../../components/dialog/dialog"
+    "dialog": "../../components/dialog/dialog",
+    "topNav":"../../components/topNav/topNav"
   },
   "navigationBarBackgroundColor": "#fff",
   "backgroundTextStyle": "light",
   "navigationBarTitleText": "二级类商品",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "navigationStyle":"custom"
 }

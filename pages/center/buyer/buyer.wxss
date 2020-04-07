@@ -1,0 +1,328 @@
+/* pages/center/buyer/buyer.wxss */
+.cu-modal .content{
+  font-size:30rpx;
+  line-height: 90rpx;
+  text-align: left;
+}
+.cu-dialog input{
+  border: 1rpx solid #ddd;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-bottom:20rpx;
+  border-radius: 5rpx;
+}
+.cu-dialog .action{
+  text-align: right;
+  border-top:1rpx solid #ddd;
+  padding-top:20rpx;
+}
+.cu-dialog .action button{
+  width:150rpx;
+  font-size:30rpx;
+  line-height: 60rpx;
+  display:inline-block ;
+  margin-left:20rpx;
+}
+.cu-dialog .action .bg-green{
+  background:#3a8ee6;
+  color:#fff;
+}
+.cu-modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1110;
+	opacity: 0;
+	outline: 0;
+	text-align: center;
+	-ms-transform: scale(1.185);
+	transform: scale(1.185);
+	backface-visibility: hidden;
+	perspective: 2000rpx;
+	background: rgba(0, 0, 0, 0.6);
+	transition: all 0.3s ease-in-out 0s;
+	pointer-events: none;
+	display: none;
+}
+
+.cu-modal::before {
+	content: "\200B";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.cu-modal.show {
+	opacity: 1;
+	transition-duration: 0.3s;
+	-ms-transform: scale(1);
+	transform: scale(1);
+	overflow-x: hidden;
+	overflow-y: auto;
+	pointer-events: auto;
+	display: block;
+}
+
+.cu-dialog {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	width: 680rpx;
+	max-width: 100%;
+	background-color: #f8f8f8;
+	border-radius: 10rpx;
+  overflow: hidden;
+  padding:20rpx;
+}
+
+.cu-modal.bottom-modal::before {
+	vertical-align: bottom;
+}
+
+.cu-modal.bottom-modal .cu-dialog {
+	width: 100%;
+	border-radius: 0;
+}
+
+.cu-modal.bottom-modal {
+	margin-bottom: -1000rpx;
+}
+
+.cu-modal.bottom-modal.show {
+	margin-bottom: 0;
+}
+
+.cu-modal.drawer-modal {
+	transform: scale(1);
+	display: flex;
+}
+
+.cu-modal.drawer-modal .cu-dialog {
+	height: 100%;
+	min-width: 200rpx;
+	border-radius: 0;
+	margin: initial;
+	transition-duration: 0.3s;
+}
+
+.cu-modal.drawer-modal.justify-start .cu-dialog {
+	transform: translateX(-100%);
+}
+
+.cu-modal.drawer-modal.justify-end .cu-dialog {
+	transform: translateX(100%);
+}
+
+.cu-modal.drawer-modal.show .cu-dialog {
+	transform: translateX(0%);
+}
+.cu-modal .cu-dialog>.cu-bar:first-child .action{
+  min-width: 100rpx;
+  margin-right: 0;
+  min-height: 100rpx;
+}
+.buyer {
+  color: #000;
+}
+
+.buyer .top {
+  background: linear-gradient(90deg, rgba(255, 208, 0, 1) 0%, rgba(255, 189, 0, 1) 100%);
+  padding: 0 45rpx 30rpx;
+  display: flex;
+  align-items: center;
+}
+.top .left{
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  background:#fff;
+}
+.top .left image {
+  width: 124rpx;
+  height: 124rpx;
+}
+
+.top .right {
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.top .right .name{
+  font-size: 34rpx;
+  font-weight: bolder;
+  margin-bottom:20rpx;
+}
+.top .right .level{
+  margin-bottom:30rpx;
+}
+.top .right .level .tag{
+  background: #F5A623;
+  padding:2rpx 20rpx;
+  margin-right:30rpx;
+  border-radius: 30rpx;
+  font-size:22rpx;
+}
+.top .right .number text{
+  margin-right:30rpx;
+  font-size: 28rpx;
+}
+.top .right .number image{
+  width:30rpx;
+  height:30rpx;
+  vertical-align: middle;
+}
+.two{
+  display: flex;
+  padding:20rpx;
+  background: #fff;
+}
+.two>view{
+  flex: 1;
+  text-align: center;
+  padding:20rpx;
+  white-space: nowrap;
+  display:flex;
+  flex-direction: column;
+ justify-content: space-between;
+ min-height: 220rpx;
+}
+.two .left{
+  background:#FDF3F4;
+}
+.two .left .color{
+  color:#FA0019;
+  font-size: 36rpx;
+}
+.two .left .name{
+  margin-bottom:20rpx;
+}
+.two .right {
+  background: #F2F5FC;
+  margin-left:10rpx;
+}
+.two .right .blu{
+  color:#4E77F2;
+  font-size: 36rpx; 
+}
+.two .right .name{
+  margin-bottom:20rpx;
+}
+.myorder {
+  padding:20rpx;
+  margin:20rpx 0;
+  background: #fff;
+}
+.myorder .list{
+  display: flex;
+  text-align: center;
+  width:100%;
+  padding:20rpx 0;
+}
+.myorder .list .one{
+  flex:1;
+}
+.myorder .list .lastone{
+  border-left:1rpx solid #dedede;
+}
+.myorder .list .one image{
+    width:46rpx;
+    height:46rpx;
+    margin-bottom:29rpx;
+}
+.orderlist {
+  padding:0 20rpx;
+  background: #fff;
+  margin-bottom:20rpx;
+}
+.orderlist .orderlistone{
+  display: flex;
+  align-items: center;
+}
+.orderlist .orderlistone .left image{
+  width:145rpx;
+  height:94rpx;
+}
+.orderlist .orderlistone .right{
+  flex:1;
+  width:0;
+}
+.orderlist .orderlistone .right .name{
+  font-size:30rpx;
+  font-weight: bolder;
+  padding-bottom:15rpx;
+  display:block;
+
+}
+.orderlist .orderlistone .right .status{
+  color:#FF5754;
+  margin-left:5rpx;
+}
+.orderlist .orderlistone .right .gray{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.count {
+  display: flex;
+  background: #fff;
+  padding:20rpx 0;
+  margin-bottom:20rpx;
+}
+.count .one{
+  flex:1;
+  text-align:center;
+  padding:0 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.count .one .num{
+  font-size: 42rpx;
+  margin-bottom:16rpx;
+}
+.count .last image{
+  width:38rpx;
+  height:44rpx;
+}
+.count .last{
+  position: relative;
+  border-left:1rpx solid #dedede;
+}
+.count .last .mark{
+  position: absolute;
+  border:1rpx solid #FFBD00;
+  font-size:24rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  border-radius: 35rpx;
+  overflow: hidden;
+  display:block;
+  min-width: 35rpx;
+  left:52%;
+  top:10rpx;
+  background: #fff;
+  z-index:1;
+}
+.btnwrap{
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding-bottom:20rpx;
+}
+.btnwrap .one{
+  width:25%;
+  text-align: center;
+   font-size:24rpx;
+}
+.btnwrap .one image{
+  width:52rpx;
+  height:52rpx;
+  display: block;
+  margin:20rpx auto;
+}

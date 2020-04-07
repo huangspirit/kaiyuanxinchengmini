@@ -1,0 +1,34 @@
+<wxs src="../../../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text class="line"></text>
+        <image src="/img/public/home.png" bindtap="toHome" wx:if="{{!showTopNav}}"></image>
+        <text class="cuIcon-close close"  bindtap="toHome" wx:if="{{showTopNav}}"></text>
+      </view>
+    </view>
+    <view class="center">我的反馈</view>
+  </view>
+  <topNav wx:if="{{showTopNav}}"></topNav>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+<view wx:for="{{list}}" wx:key="id" class="item">
+<view class="top"><text>反馈类型：{{item.title}}</text> <view>紧急程度：<text class="orange">{{filter.level(item.level)}}</text> </view> </view>
+<view class="middle">
+  <view wx:if="{{item.content}}" class="cont">
+    <view class="blu">内容：</view>
+    <text>{{item.content}}</text>
+  </view>
+  <view wx:if="{{item.replyContent}}" class="cont">
+    <view class="gray">回复：</view>{{item.replyContent}}
+  </view>
+  <view class="cont">
+      <view class="gray">附件：</view>
+      <image src="{{item.url}}" wx:if="{{item.imgBtn}}" src="{{item.url}}"></image>
+      <text wx:if="{{item.docBtn}}" data-target="{{item.url}}" bindtap="downdoc" class="cu-tag radius line-blue sm">下载文件</text>
+  </view>
+  <view><text class="gray">反馈时间：</text> {{filter.formatDate(item.createTime)[1]}}</view>
+</view>
+</view>

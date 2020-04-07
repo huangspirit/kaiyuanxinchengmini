@@ -1,0 +1,22 @@
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="{{isbuyer?'nav0':'nav0 seller'}}" style='height:{{navH}}px;padding-top:{{navH-46}}px'>
+  <view class='nav-title'>
+    <!-- <view class="left two">
+      <view class="btn">
+        <image src="/img/public/back.png" class="back" bindtap="goback"></image>
+        <text></text>
+        <image src="/img/public/home.png" bindtap="toHome"></image>
+      </view>
+    </view> -->
+    <view class="center">用户中心</view>
+  </view>
+</view>
+<view style='padding-top:{{navH}}px'></view>
+ <buyer userInforma="{{userInforma}}" wx:if="{{userInforma.id && isbuyer}}"></buyer> 
+ <seller userInforma="{{userInforma}}" wx:if="{{userInforma.id && !isbuyer}}"></seller>
+ <!-- <view style="height:90rpx;"></view>
+<view class="footer">
+<view class="{{isbuyer?'one active':'one'}}" bindtap="setBuyer" data-k="1">我是买家</view>
+<view class="{{!isbuyer?'two active':'two'}}" bindtap="setBuyer" data-k="0">我是卖家</view>
+</view> -->
+
